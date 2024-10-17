@@ -1,3 +1,5 @@
+from termcolor import colored
+
 class CircularListNode:
     def __init__(self, value=0, next=None):
         # Initialize a node with a given value and a reference to the next node
@@ -70,7 +72,7 @@ head = CircularListNode(1)
 # Create a circular linked list: 1 -> 2 -> 3 -> 4 -> 1 (loop)
 head.next = CircularListNode(2, CircularListNode(3, CircularListNode(4, head)))
 # Print the string representation of the circular linked list
-print(traverse_circular_linked_list(head))  # Output: '1 -> 2 -> 3 -> 4 -> 1 (loop)'
+print(colored(traverse_circular_linked_list(head), 'cyan', attrs=['bold']))  # Output: '1 -> 2 -> 3 -> 4 -> 1 (loop)'
 
 # Print the string representation of the head node, which will show the entire list
-print(head)
+print(colored(repr(head), 'cyan', attrs=['bold']))

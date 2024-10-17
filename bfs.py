@@ -1,4 +1,5 @@
 from collections import deque
+from termcolor import colored
 
 class Graph:
     def __init__(self, adjacency_list):
@@ -57,7 +58,7 @@ class Graph:
         while queue:
             vertex = queue.popleft()
             if vertex not in visited:
-                print(vertex, end=" ")
+                print(colored(vertex, 'green'), end=" ")
                 visited.add(vertex)
                 queue.extend([neighbor for neighbor in self.graph[vertex] if neighbor not in visited])
 
@@ -75,5 +76,7 @@ graph = {
 }
 
 g = Graph(graph)
-print("\nBFS Traversal:")
+print(colored("\nGraph Structure:", 'magenta'))
+print(colored(repr(g), 'cyan'))
+print(colored("\nBFS Traversal:", 'magenta'))
 g.bfs('A')  # Output: A B C D E F

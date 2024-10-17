@@ -1,7 +1,12 @@
+from termcolor import colored
+
 class ListNode:
     def __init__(self, value=0, next=None):
         self.value = value
         self.next = next
+
+    def __repr__(self):
+        return f"ListNode(value={self.value})"
 
 def traverse_linked_list(head):
     """
@@ -26,9 +31,9 @@ def traverse_linked_list(head):
     """
     current = head
     while current:
-        print(current.value, end=" -> ")
+        print(colored(current.value, 'cyan'), end=colored(" -> ", 'yellow'))
         current = current.next
-    print("None")
+    print(colored("None", 'red'))
 
 # Example usage:
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4))))

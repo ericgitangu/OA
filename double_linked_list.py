@@ -1,8 +1,13 @@
+from termcolor import colored
+
 class DoublyListNode:
     def __init__(self, value=0, next=None, prev=None):
         self.value = value
         self.next = next
         self.prev = prev
+
+    def __repr__(self):
+        return f"DoublyListNode(value={self.value})"
 
 def traverse_doubly_linked_list(head):
     """
@@ -23,9 +28,9 @@ def traverse_doubly_linked_list(head):
     """
     current = head
     while current:
-        print(current.value, end=" <-> ")
+        print(colored(current.value, 'cyan'), end=colored(" <-> ", 'yellow'))
         current = current.next
-    print("None")
+    print(colored("None", 'red'))
 
 # Example usage:
 head = DoublyListNode(1, DoublyListNode(2, DoublyListNode(3, DoublyListNode(4))))

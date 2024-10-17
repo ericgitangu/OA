@@ -1,3 +1,6 @@
+from termcolor import colored
+import time
+
 class UniquePaths:
     """
     Problem Type: Dynamic Programming, Memoization
@@ -37,7 +40,7 @@ class UniquePaths:
 
     def unique_paths(self, m, n):
         """
-        Calculate the number of unique paths from the top-left to the bottom-right corner of the grid.
+        Calculate the number of unique paths from the top-left to the bottom-right corner of the grid using memoization.
         
         Parameters:
         m (int): Number of rows in the grid.
@@ -55,12 +58,47 @@ class UniquePaths:
         self.memo[(m, n)] = self.unique_paths(m - 1, n) + self.unique_paths(m, n - 1)
         return self.memo[(m, n)]
 
+    def unique_paths_no_memo(self, m, n):
+        """
+        Calculate the number of unique paths from the top-left to the bottom-right corner of the grid without using memoization.
+        
+        Parameters:
+        m (int): Number of rows in the grid.
+        n (int): Number of columns in the grid.
+        
+        Returns:
+        int: The number of unique paths from the top-left to the bottom-right corner of the grid.
+        """
+        if m == 1 or n == 1:
+            return 1
+        
+        return self.unique_paths_no_memo(m - 1, n) + self.unique_paths_no_memo(m, n - 1)
+
     def __repr__(self):
-        return f"UniquePaths(memo={self.memo})"
+        print(colored('-' * 100, 'red'))
+        memo_repr = "\n".join([f"{key}: {value}" for key, value in self.memo.items()])
+        return f"UniquePaths(memo={{\n{memo_repr}\n}})"
+
+def benchmark_function(func, *args):
+    start_time = time.time()
+    result = func(*args)
+    end_time = time.time()
+    duration = end_time - start_time
+    return result, duration
 
 # Example usage:
 unique_paths = UniquePaths()
-print("Unique Paths for a 3x7 grid:", unique_paths(3, 7))  # Output: 28
-print("Unique Paths for a 3x2 grid:", unique_paths(3, 2))  # Output: 3
-print("Unique Paths for a 7x3 grid:", unique_paths(7, 3))  # Output: 28
-print("Unique Paths for a 3x3 grid:", unique_paths(3, 3))  # Output: 6
+
+# Benchmark with memoization
+result_memo, duration_memo = benchmark_function(unique_paths, 10, 10)
+print(colored("Unique Paths for a 10x10 grid with memoization:", 'blue'), colored(result_memo, 'green'))
+print(colored(f"Time taken with memoization: {duration_memo:.6f} seconds", 'yellow'))
+
+print('-' * 100)
+
+# Benchmark without memoization
+result_no_memo, duration_no_memo = benchmark_function(unique_paths.unique_paths_no_memo, 10, 10)
+print(colored("Unique Paths for a 10x10 grid without memoization:", 'blue'), colored(result_no_memo, 'green'))
+print(colored(f"Time taken without memoization: {duration_no_memo:.6f} seconds", 'yellow'))
+
+print(colored(repr(unique_paths), 'magenta'))

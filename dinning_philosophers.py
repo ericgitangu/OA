@@ -1,5 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import threading
+from termcolor import colored
+
 class DiningPhilosophers:
     """
     Problem Type: Synchronization, Dining Philosophers Problem
@@ -38,6 +40,9 @@ class DiningPhilosophers:
         self.n = n
         self.forks = [threading.Lock() for _ in range(n)]
 
+    def __repr__(self):
+        return f'DiningPhilosophers(n={self.n})'
+
     def wants_to_eat(self, philosopher, pick_left_fork, pick_right_fork, eat, put_left_fork, put_right_fork):
         left_fork = philosopher
         right_fork = (philosopher + 1) % self.n
@@ -55,25 +60,23 @@ class DiningPhilosophers:
 
 # Example usage:
 def pick_left_fork():
-    print("Picked up left fork")
+    print(colored("Picked up left fork", "green"))
 
 def pick_right_fork():
-    print("Picked up right fork")
+    print(colored("Picked up right fork", "green"))
 
 def eat():
-    print("Eating")
+    print(colored("Eating", "yellow"))
 
 def put_left_fork():
-    print("Put down left fork")
+    print(colored("Put down left fork", "red"))
 
 def put_right_fork():
-    print("Put down right fork")
+    print(colored("Put down right fork", "red"))
 
 philosophers = DiningPhilosophers(5)
+print(philosophers)
 with ThreadPoolExecutor(max_workers=5) as executor:
     for i in range(5):
         executor.submit(philosophers.wants_to_eat, i, pick_left_fork, pick_right_fork, eat, put_left_fork, put_right_fork)
-
-
-
 

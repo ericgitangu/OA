@@ -1,5 +1,6 @@
 import collections
 import itertools
+from termcolor import colored
 
 class NetworkGraph:
     """
@@ -136,6 +137,8 @@ network['A'] = 'C'
 network['C'] = 'D'
 
 # Find and print the shortest path from A to D
-print("Shortest path from A to D:", network('A', 'D'))  # Output: ['A', 'C', 'D']
+print(colored("Shortest path from A to D:", 'blue'), colored(network('A', 'D'), 'green'))  # Output: ['A', 'C', 'D']
 # Find and print all possible paths from A to D
-print("All paths from A to D:", network.all_paths('A', 'D'))  # Output: All possible paths from A to D
+print(colored("All paths from A to D:", 'blue'), colored(network.all_paths('A', 'D'), 'green'))  # Output: All possible paths from A to D
+# Print the representation of the NetworkGraph instance
+print(colored(repr(network), 'magenta'))

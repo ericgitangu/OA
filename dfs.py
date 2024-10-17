@@ -1,3 +1,5 @@
+from termcolor import colored
+
 class DFS:
     """
     Problem Type: Graph Traversal, Depth-First Search (DFS)
@@ -66,7 +68,7 @@ class DFS:
         """
         self.start = start
         for node in self:
-            print(node, end=",", sep=",", flush=True)
+            print(colored(node, 'blue'), end=",", sep=",", flush=True)
     
     def __repr__(self):
         return f"DFS(graph={self.graph}, visited={self.visited})"
