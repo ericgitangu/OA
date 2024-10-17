@@ -76,7 +76,7 @@ This project is licensed under the MIT License.
 
 ## Author
 
-Created with ❤️ by Eric Gitangu - [Deveric](https://developer.ericgitangu.com). A code-blooded Software Engineer a pythonista with an array of various stack and techs. Intetests ML, CyberSecurity (MLSecOps), experience Full Stack developer 8+ years with various techs. **LinkedIn** [https://linkedin.com/in/ericgitangu], let's connect and feel free to contribute, I will continue building on this repo, pruning the grind leetcode type questions to patterns once you crack you will ready for any OA interview or just brush up on rusty concepts. Happy coding! 
+Created with ❤️ by Eric Gitangu - [Deveric](https://developer.ericgitangu.com). A code-blooded Software Engineer a pythonista with an array of various stack and techs. Intetests ML, CyberSecurity (MLSecOps), experience Full Stack developer 8+ years with various techs. **LinkedIn** [https://linkedin.com/in/ericgitangu](https://linkedin.com/in/ericgitangu), let's connect and feel free to contribute, I will continue building on this repo, pruning the grind leetcode type questions to patterns once you crack you will ready for any OA interview or just brush up on rusty concepts. Happy coding! 
 
 ## PR and Bug Reports
 
