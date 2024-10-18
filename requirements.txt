@@ -1,0 +1,4 @@
+termcolor # For just fancy console output
+# Ideally this is meant to use Python's standards lib, I am using Python@3.11 but >Python@3.8 should be fine if you experience issues with missing modules, use pip to install them.
+# It is good hygiene to isolate your work in a virtual environment to isolate and pin your requirements, you can do simply by running python -m venv venv, the later being your 
+# virtual environment, you need to run source venv/bin/activate to use your virtual environment and deactive to exit your venv shell.
