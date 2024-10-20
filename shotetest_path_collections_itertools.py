@@ -145,8 +145,8 @@ connections = {
 add_network(network, connections)
 
 # Find and print the shortest path from A to D
-print(colored("Shortest path from A to D:", 'blue'), colored(network('A', 'D'), 'green'))  # Output: ['A', 'C', 'D']
+print(colored("Shortest path from A to D:", 'green'), colored(network('A', 'D'), 'green'))  # Output: ['A', 'C', 'D']
 # Find and print all possible paths from A to D
-print(colored("All paths from A to D:", 'blue'), colored(network.all_paths('A', 'D'), 'green'))  # Output: All possible paths from A to D
+print(colored("All paths from A to D:", 'red'), colored(network.all_paths('A', 'D'), 'green'))  # Output: All possible paths from A to D
 # Print the representation of the NetworkGraph instance
 print(colored(repr(network), 'magenta'))
