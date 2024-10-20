@@ -27,9 +27,9 @@ class NetworkGraph:
     Diagram:
     
         A
-       / \
-      B   C
-       \ /
+       /|\
+      B-|-C
+       \|/
         D
     """
     
@@ -118,10 +118,10 @@ class NetworkGraph:
         for r in range(1, len(nodes) + 1):
             for combination in itertools.combinations(nodes, r):
                 if start in combination and end in combination:
-                    path = list(combination)
-                    if path[0] == start and path[-1] == end:
-                        all_possible_paths.append(path)
-        return all_possible_paths
+                    subgraph = {node: self.graph[node] for node in combination}
+                    paths = find_paths(subgraph, start, end)
+                    all_possible_paths.extend(paths)
+        return list(map(list, set(map(tuple, all_possible_paths))))
 
     def __repr__(self):
         # Return a string representation of the NetworkGraph instance
@@ -129,12 +129,19 @@ class NetworkGraph:
 
 # Example usage:
 network = NetworkGraph()
-# Add connections between nodes
+# Add connections between nodes A, B, C, D
 network['A'] = 'B'
-network['B'] = 'C'
 network['A'] = 'C'
-# Add a connection from node 'C' to node 'D'
+network['A'] = 'D'
+network['B'] = 'A'
+network['B'] = 'C'
+network['B'] = 'D'  
+network['C'] = 'A'
+network['C'] = 'B'
 network['C'] = 'D'
+network['D'] = 'A'
+network['D'] = 'B'
+network['D'] = 'C'
 
 # Find and print the shortest path from A to D
 print(colored("Shortest path from A to D:", 'blue'), colored(network('A', 'D'), 'green'))  # Output: ['A', 'C', 'D']
