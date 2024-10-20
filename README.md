@@ -58,7 +58,11 @@ Each script can be run independently. For example:
 
 10. **longest_palidromic_string.py**: Finds the longest palindromic substring in a given string.
 
-11. **circular_linked_lists.py**: Implements and traverses a circular linked list.
+11. **linked_lists.py**:  Implements and traverses a linked-list
+
+12. **double_linked_list.py**: Implements and traverses a doubly-linked list.
+
+13. **circular_linked_lists.py**: Implements and traverses a circular linked list.
 
 ## Contributing
 

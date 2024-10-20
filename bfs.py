@@ -15,6 +15,8 @@ class Graph:
           B   C
          / \   \
         D   E   F
+             \
+              G
         
         Can be represented as:
         
@@ -23,7 +25,7 @@ class Graph:
             'B': ['D', 'E'],
             'C': ['F'],
             'D': [],
-            'E': ['F'],
+            'E': ['G'],
             'F': []
         }
         """
@@ -58,10 +60,11 @@ class Graph:
         while queue:
             vertex = queue.popleft()
             if vertex not in visited:
-                print(colored(vertex, 'green'), end=" ")
+                print(colored(vertex, 'green'), end=", ", sep="", flush=True)
                 visited.add(vertex)
                 queue.extend([neighbor for neighbor in self.graph[vertex] if neighbor not in visited])
-
+        print(f"\nTraversal Complete: {visited} \n")
+        
     def __repr__(self):
         return f"Graph(adjacency_list={self.graph})"
 
@@ -71,12 +74,13 @@ graph = {
     'B': ['D', 'E'],
     'C': ['F'],
     'D': [],
-    'E': ['F'],
-    'F': []
+    'E': ['G'],
+    'F': [],
+    'G': []
 }
 
 g = Graph(graph)
 print(colored("\nGraph Structure:", 'magenta'))
 print(colored(repr(g), 'cyan'))
 print(colored("\nBFS Traversal:", 'magenta'))
-g.bfs('A')  # Output: A B C D E F
+g.bfs('B')  # Output: B D E G

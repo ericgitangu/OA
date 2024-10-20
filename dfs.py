@@ -21,7 +21,7 @@ class DFS:
         'B': ['D', 'E'],
         'C': ['F'],
         'D': [],
-        'E': ['F'],
+        'E': ['G'],
         'F': []
     }
     dfs = DFS(graph)
@@ -35,7 +35,7 @@ class DFS:
      / \   \
     D   E   F
          \
-          F
+          G
     """
     
     def __init__(self, graph):
@@ -79,11 +79,12 @@ graph = {
     'B': ['D', 'E'],
     'C': ['F'],
     'D': [],
-    'E': ['F'],
-    'F': []
+    'E': ['G'],
+    'F': [],
+    'G': []
 }
 
 print("DFS Traversal:")
 dfs = DFS(graph)
-dfs.dfs('A')
+dfs.dfs('B')
 print(f"\nRepresentation: {dfs}")
