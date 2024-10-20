@@ -130,18 +130,19 @@ class NetworkGraph:
 # Example usage:
 network = NetworkGraph()
 # Add connections between nodes A, B, C, D
-network['A'] = 'B'
-network['A'] = 'C'
-network['A'] = 'D'
-network['B'] = 'A'
-network['B'] = 'C'
-network['B'] = 'D'  
-network['C'] = 'A'
-network['C'] = 'B'
-network['C'] = 'D'
-network['D'] = 'A'
-network['D'] = 'B'
-network['D'] = 'C'
+def add_network(network, connections):
+    for node, neighbors in connections.items():
+        for neighbor in neighbors:
+            network[node] = neighbor
+
+connections = {
+    'A': ['B', 'C', 'D'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A', 'B', 'D'],
+    'D': ['A', 'B', 'C']
+}
+
+add_network(network, connections)
 
 # Find and print the shortest path from A to D
 print(colored("Shortest path from A to D:", 'blue'), colored(network('A', 'D'), 'green'))  # Output: ['A', 'C', 'D']
