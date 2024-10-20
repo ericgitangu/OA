@@ -45,7 +45,7 @@ class LongestPalindromicSubstring:
         return self.s[start:start + max_length]
 
     def __repr__(self):
-        return f"LongestPalindromicSubstring(s='{self.s}', longest_palindrome='{self.longest_palindrome}')"
+        return f"LongestPalindromicSubstring(s='{self.s}', longest_palindrome='{self.longest_palindrome}', length={len(self.longest_palindrome)})"
 
     def __contains__(self, item):
         return item in self.longest_palindrome
@@ -80,10 +80,7 @@ if __name__ == "__main__":
     for test_string in test_strings:
         lps = LongestPalindromicSubstring(test_string)
         print(colored(f"The longest palindromic substring of '{test_string}' is '{lps.longest_palindrome}'", 'green'))
-        substrings_to_check = ["bab", "aba", "racecar", "noon", "level"]
-        for substring in substrings_to_check:
-            print(colored(f"Is '{substring}' in the longest palindromic substring? {substring in lps}", 'yellow'))
-        print(colored(f"Length of the longest palindromic substring: {len(lps)}", 'blue'))
+        print(colored(repr(lps), 'blue'))
         print()
 
 

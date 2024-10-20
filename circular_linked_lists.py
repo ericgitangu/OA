@@ -72,7 +72,4 @@ head = CircularListNode(1)
 # Create a circular linked list: 1 -> 2 -> 3 -> 4 -> 1 (loop)
 head.next = CircularListNode(2, CircularListNode(3, CircularListNode(4, head)))
 # Print the string representation of the circular linked list
-print(colored(traverse_circular_linked_list(head), 'cyan', attrs=['bold']))  # Output: '1 -> 2 -> 3 -> 4 -> 1 (loop)'
-
-# Print the string representation of the head node, which will show the entire list
-print(colored(repr(head), 'cyan', attrs=['bold']))
+print(colored(traverse_circular_linked_list(head), 'green', attrs=['bold']))  # Output: '1 -> 2 -> 3 -> 4 -> 1 (loop)'

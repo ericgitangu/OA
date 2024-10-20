@@ -1,3 +1,5 @@
+from termcolor import colored
+
 class TravellingSalesman:
     """
     Problem Type: Graph, Travelling Salesman Problem (TSP)
@@ -119,8 +121,12 @@ graph = [
     [20, 25, 30, 0]
 ]
 tsp = TravellingSalesman(graph, 0)
-print("Travelling Salesman Problem:")
+print(colored('-'*100, 'red'))
+print(colored(f"Travelling Salesman Problem: {colored(tsp, 'magenta')}", 'magenta'))
 min_cost, path = tsp()
-print(f"Minimum cost: {min_cost}")
-print(f"Path: {path}")
+print(colored('-'*100, 'red'))
+print(colored(f"Minimum cost: {min_cost}", 'green'))
+print(colored('-'*100, 'red'))
+print(colored(f"Path: {path}", 'red'))
+print(colored('-'*100, 'red'))
 

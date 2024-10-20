@@ -41,7 +41,7 @@ class DiningPhilosophers:
         self.forks = [threading.Lock() for _ in range(n)]
 
     def __repr__(self):
-        return f'DiningPhilosophers(n={self.n})'
+        return colored(f'DiningPhilosophers(n={self.n}\n', 'magenta')
 
     def wants_to_eat(self, philosopher, pick_left_fork, pick_right_fork, eat, put_left_fork, put_right_fork):
         left_fork = philosopher
