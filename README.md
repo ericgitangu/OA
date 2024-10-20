@@ -1,6 +1,6 @@
 # OA Coding Tech Interview Preparation
 
-![Logo](https://developer.ericgitangu.com/_next/image?url=%2Ffavicon.png&w=96&q=75)
+![Logo](https://lh3.googleusercontent.com/a/ACg8ocKvFjk3vfOWHRr8rE-C8cyqeCb5lvi2oQmVZvoqf9uYOv9iUydJ=s288-c-no)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
@@ -9,6 +9,7 @@ A comprehensive collection of Python scripts designed to help you prepare for te
 
 ## Table of Contents
 
+- [About](#about)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Scripts](#scripts)
@@ -17,6 +18,10 @@ A comprehensive collection of Python scripts designed to help you prepare for te
 - [Author](#author)
 - [PR and Bug Reports](#pr-and-bug-reports)
 
+## About
+
+Pruning the grind leetcode type questions to patterns once you crack you will ready for any OA interview or just brush up on rusty concepts. Happy coding! 
+
 ## Installation
 
 Clone the repository and install the required dependencies:
@@ -24,6 +29,8 @@ Clone the repository and install the required dependencies:
 ```bash
     git clone https://github.com/your-username/oa-coding-tech-interview-prep.git
     cd oa-coding-tech-interview-prep
+    python -m venv my_virtual_env
+    source my_virtual_env/bin/activate
     pip install -r requirements.txt
 ```
 
@@ -80,7 +87,7 @@ This project is licensed under the MIT License.
 
 ## Author
 
-Created with ❤️ by Eric Gitangu - [Deveric](https://developer.ericgitangu.com). A code-blooded Software Engineer a pythonista with an array of various stack and techs. Intetests ML, CyberSecurity (MLSecOps), experience Full Stack developer 8+ years with various techs. **LinkedIn** [https://linkedin.com/in/ericgitangu](https://linkedin.com/in/ericgitangu), let's connect and feel free to contribute, I will continue building on this repo, pruning the grind leetcode type questions to patterns once you crack you will ready for any OA interview or just brush up on rusty concepts. Happy coding! 
+Created with ❤️ by Eric Gitangu - [Deveric](https://developer.ericgitangu.com). A code-blooded Software Engineer a pythonista with an array of various stack and techs. Intetests ML, CyberSecurity (MLSecOps), experience Full Stack developer 8+ years with various techs. **LinkedIn** [https://linkedin.com/in/ericgitangu](https://linkedin.com/in/ericgitangu), let's connect and feel free to contribute, I will continue building on this repo and hopefully y'all too with help me prune out the grind PRs welcomed!.
 
 ## PR and Bug Reports
 
