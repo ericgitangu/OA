@@ -34,6 +34,20 @@ class Graph:
         """
         Problem Type: Graph Traversal, Breadth-First Search (BFS)
         
+        Breadth-First Search (BFS) is an algorithm for traversing or searching tree or graph data structures. 
+        It starts at the tree root (or some arbitrary node of a graph, sometimes referred to as a 'search key') 
+        and explores the neighbor nodes at the present depth prior to moving on to nodes at the next depth level.
+        
+        The BFS algorithm works as follows:
+        1. Initialize a queue and add the starting node to it.
+        2. Initialize a set to keep track of visited nodes.
+        3. Loop until the queue is empty:
+            a. Pop a node from the left side of the queue.
+            b. If the node has not been visited:
+                i. Print the node.
+                ii. Mark the node as visited.
+                iii. Add all unvisited neighbors of the node to the queue.
+
         Problem Statement:
         Given a graph represented as an adjacency list and a starting node, perform a breadth-first search (BFS) traversal of the graph.
         
@@ -54,19 +68,45 @@ class Graph:
         }
         graph.bfs('A') -> A B C D E F
         """
+        # Initialize a set to keep track of visited nodes
+        visited = set()
+        # Initialize a queue and add the starting node to it
+        queue = deque([start])
+        
+        # Loop until the queue is empty
+        while queue:
+            # Pop a node from the left side of the queue
+            vertex = queue.popleft()
+            # If the node has not been visited
+            if vertex not in visited:
+                # Print the node
+                print(colored(vertex, 'green'), end=", ", sep="", flush=True)
+                # Mark the node as visited
+                visited.add(vertex)
+                # Add all unvisited neighbors of the node to the queue
+                queue.extend([neighbor for neighbor in self.graph[vertex] if neighbor not in visited])
+        
+        # Reinitialize the visited set and queue for a second traversal
         visited = set()
         queue = deque([start])
         
+        # Loop until the queue is empty
         while queue:
+            # Pop a node from the left side of the queue
             vertex = queue.popleft()
+            # If the node has not been visited
             if vertex not in visited:
+                # Print the node
                 print(colored(vertex, 'green'), end=", ", sep="", flush=True)
+                # Mark the node as visited
                 visited.add(vertex)
+                # Add all unvisited neighbors of the node to the queue
                 queue.extend([neighbor for neighbor in self.graph[vertex] if neighbor not in visited])
-        print(f"\nTraversal Complete: {visited} \n")
+        # Print the set of visited nodes after the second traversal
+        print(f"\n{colored('Nodes Visited:', 'red')} {colored(visited, 'green')}")
         
     def __repr__(self):
-        return f"Graph(adjacency_list={self.graph})"
+        return f"{colored('Graph:', 'green')} {colored(self.graph, 'green')}"
 
 # Example usage:
 graph = {
@@ -81,6 +121,10 @@ graph = {
 
 g = Graph(graph)
 print(colored("\nGraph Structure:", 'magenta'))
+print(f"{colored('-'*100, 'red')}")
 print(colored(repr(g), 'cyan'))
+print(f"{colored('-'*100, 'red')}")
 print(colored("\nBFS Traversal:", 'magenta'))
+print(f"{colored('-'*100, 'red')}")
 g.bfs('B')  # Output: B D E G
+print(f"{colored('-'*100, 'red')}")
