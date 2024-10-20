@@ -85,23 +85,6 @@ class Graph:
                 visited.add(vertex)
                 # Add all unvisited neighbors of the node to the queue
                 queue.extend([neighbor for neighbor in self.graph[vertex] if neighbor not in visited])
-        
-        # Reinitialize the visited set and queue for a second traversal
-        visited = set()
-        queue = deque([start])
-        
-        # Loop until the queue is empty
-        while queue:
-            # Pop a node from the left side of the queue
-            vertex = queue.popleft()
-            # If the node has not been visited
-            if vertex not in visited:
-                # Print the node
-                print(colored(vertex, 'green'), end=", ", sep="", flush=True)
-                # Mark the node as visited
-                visited.add(vertex)
-                # Add all unvisited neighbors of the node to the queue
-                queue.extend([neighbor for neighbor in self.graph[vertex] if neighbor not in visited])
         # Print the set of visited nodes after the second traversal
         print(f"\n{colored('Nodes Visited:', 'red')} {colored(visited, 'green')}")
         
