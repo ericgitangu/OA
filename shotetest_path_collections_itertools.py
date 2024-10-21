@@ -100,27 +100,45 @@ class NetworkGraph:
         List[List[str]]: A list of all possible paths from start to end.
         """
         def find_paths(graph, start, end, path=[]):
+            # Add the start node to the current path
             path = path + [start]
+            # If the start node is the end node, return the current path as a complete path
             if start == end:
                 return [path]
+            # If the start node is not in the graph, return an empty list (no paths)
             if start not in graph:
                 return []
+            # Initialize a list to store all possible paths
             paths = []
+            # Iterate over the neighbors of the start node
             for node in graph[start]:
+                # If the neighbor has not been visited in the current path
                 if node not in path:
+                    # Recursively find all paths from the neighbor to the end node
                     newpaths = find_paths(graph, node, end, path)
+                    # Add each new path to the list of paths
                     for p in newpaths:
                         paths.append(p)
+            # Return the list of all possible paths
             return paths
         
+        # Get a list of all nodes in the graph
         nodes = list(self.graph.keys())
+        # Initialize a list to store all possible paths
         all_possible_paths = []
+        # Iterate over all possible lengths of combinations of nodes
         for r in range(1, len(nodes) + 1):
+            # Iterate over all combinations of nodes of length r
             for combination in itertools.combinations(nodes, r):
+                # If both the start and end nodes are in the combination
                 if start in combination and end in combination:
+                    # Create a subgraph with only the nodes in the combination
                     subgraph = {node: self.graph[node] for node in combination}
+                    # Find all paths in the subgraph from start to end
                     paths = find_paths(subgraph, start, end)
+                    # Add the found paths to the list of all possible paths
                     all_possible_paths.extend(paths)
+        # Remove duplicate paths by converting to a set of tuples and back to a list of lists
         return list(map(list, set(map(tuple, all_possible_paths))))
 
     def __repr__(self):
