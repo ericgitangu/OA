@@ -34,6 +34,13 @@ class DiningPhilosophers:
         P4          P3
     
     Each philosopher needs both forks to eat, but can only pick up one fork at a time.
+    
+    Approach:
+    To ensure that all philosophers get a chance to eat and to avoid race conditions, we use the following approach:
+    1. Each fork is represented by a threading.Lock() to ensure mutual exclusion when a philosopher picks up a fork.
+    2. Philosophers always pick up the lower-numbered fork first to avoid deadlock. This means that if a philosopher's left fork has a lower number than their right fork, they will pick up the left fork first, and vice versa.
+    3. We use a ThreadPoolExecutor to manage the concurrent execution of the philosophers' actions, ensuring that multiple philosophers can attempt to eat simultaneously without causing race conditions.
+    4. The use of context managers (with statements) ensures that forks are properly acquired and released, maintaining thread safety.
     """
     
     def __init__(self, n):
@@ -49,34 +56,36 @@ class DiningPhilosophers:
 
         # Ensure thread safety by always picking up the lower-numbered fork first
         first_fork, second_fork = (left_fork, right_fork) if left_fork < right_fork else (right_fork, left_fork)
-
         with self.forks[first_fork]:
             with self.forks[second_fork]:
-                pick_left_fork()
-                pick_right_fork()
-                eat()
-                put_left_fork()
-                put_right_fork()
+                pick_left_fork(philosopher)
+                pick_right_fork(philosopher)
+                eat(philosopher)
+                put_left_fork(philosopher)
+                put_right_fork(philosopher)
+            print(colored("-" * 100, "blue"), flush=True)
+            print(colored("\nPhilosopher {} finished eating\n".format(philosopher + 1), "green"))
+            
+# Implementation of the functions:
+def pick_left_fork(philosopher):
+    print(colored(f"\nPhilosopher {philosopher + 1} picked up left fork 👈", "magenta"))
 
-# Example usage:
-def pick_left_fork():
-    print(colored("Picked up left fork", "green"))
+def pick_right_fork(philosopher):
+    print(colored(f"\nPhilosopher {philosopher + 1} picked up right fork 👉", "green"))
 
-def pick_right_fork():
-    print(colored("Picked up right fork", "green"))
+def eat(philosopher):
+    print(colored(f"\nPhilosopher {philosopher + 1} is eating", "yellow"))
 
-def eat():
-    print(colored("Eating", "yellow"))
+def put_left_fork(philosopher):
+    print(colored(f"\nPhilosopher {philosopher + 1} put down left fork", "green"))
 
-def put_left_fork():
-    print(colored("Put down left fork", "red"))
-
-def put_right_fork():
-    print(colored("Put down right fork", "red"))
+def put_right_fork(philosopher):
+    print(colored(f"\nPhilosopher {philosopher + 1} put down right fork", "green"))
 
 philosophers = DiningPhilosophers(5)
 print(philosophers)
 with ThreadPoolExecutor(max_workers=5) as executor:
     for i in range(5):
+        print(colored("\nPhilosopher {} is thinking 🤔".format(i + 1), "blue"), flush=True)
         executor.submit(philosophers.wants_to_eat, i, pick_left_fork, pick_right_fork, eat, put_left_fork, put_right_fork)
-
+        print(colored("\nPhilosopher {} finished thinking 🤔".format(i + 1), "blue"), flush=True)
