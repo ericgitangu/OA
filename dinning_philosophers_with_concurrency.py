@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import threading
 from termcolor import colored
+import time
 
 class DiningPhilosophers:
     """
@@ -56,6 +57,7 @@ class DiningPhilosophers:
 
         # Ensure thread safety by always picking up the lower-numbered fork first
         first_fork, second_fork = (left_fork, right_fork) if left_fork < right_fork else (right_fork, left_fork)
+        start_time = time.time()
         with self.forks[first_fork]:
             with self.forks[second_fork]:
                 pick_left_fork(philosopher)
@@ -63,8 +65,9 @@ class DiningPhilosophers:
                 eat(philosopher)
                 put_left_fork(philosopher)
                 put_right_fork(philosopher)
-            print(colored("-" * 100, "blue"), flush=True)
-            print(colored("\nPhilosopher {} finished eating\n".format(philosopher + 1), "green"))
+            end_time = time.time()
+            print(colored(f"-" * 100, "blue"), flush=True)
+            print(colored(f"\nPhilosopher {philosopher + 1} finished eating in {end_time - start_time:.4f} seconds", "green"))
             
 # Implementation of the functions:
 def pick_left_fork(philosopher):
