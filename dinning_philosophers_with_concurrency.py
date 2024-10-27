@@ -84,11 +84,11 @@ def put_left_fork(philosopher):
 
 def put_right_fork(philosopher):
     print(colored(f"\nPhilosopher {philosopher + 1} put down right fork", "green"))
-
-philosophers = DiningPhilosophers(5)
+PHILOSOPHERS = 5
+philosophers = DiningPhilosophers(PHILOSOPHERS)
 print(philosophers)
-with ThreadPoolExecutor(max_workers=5) as executor:
-    for i in range(5):
+with ThreadPoolExecutor(max_workers=PHILOSOPHERS) as executor:
+    for i in range(PHILOSOPHERS):
         print(colored("\nPhilosopher {} is thinking 🤔".format(i + 1), "blue"), flush=True)
         executor.submit(philosophers.wants_to_eat, i, pick_left_fork, pick_right_fork, eat, put_left_fork, put_right_fork)
         print(colored("\nPhilosopher {} finished thinking 🤔".format(i + 1), "blue"), flush=True)
