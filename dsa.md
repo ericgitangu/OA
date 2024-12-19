@@ -992,7 +992,39 @@ The implementation below shows a simplified node structure, though actual B-Tree
 
 ### Segment Tree (Advanced)
 
-Description: Constructing a segment tree for range sum queries.
+Description: A segment tree is a specialized tree data structure for efficiently performing range queries and updates on an array. Key data structures and design choices:
+
+Data Structures Used:
+- Array-based Binary Tree:
+  - Uses array to represent complete binary tree structure
+  - Parent at index i has children at 2i and 2i+1
+  - Enables O(1) navigation between nodes
+  - More cache-friendly than pointer-based tree
+  - Requires 4n space to handle all cases
+
+- Internal Nodes:
+  - Store aggregate value (sum) for their range
+  - Enable efficient range decomposition
+  - Allow O(log n) query/update operations
+  - Form a hierarchical structure of ranges
+
+- Leaf Nodes:
+  - Contain actual array values
+  - Form base level of tree
+  - Enable point updates to propagate up
+  - Map 1:1 with input array elements
+
+The segment tree excels at:
+- Range sum/min/max queries in O(log n)
+- Point updates while maintaining ranges
+- Problems requiring fast range operations
+- Space-efficient range processing
+
+Key advantages over alternatives:
+- Faster than naive O(n) range sum approach
+- More flexible than prefix sum arrays
+- Supports both queries and updates efficiently
+- Simple array-based implementation
 
 ```python
     class SegmentTree:
@@ -2052,23 +2084,65 @@ The algorithm is especially useful for:
 
 ```python
     def bellman_ford(graph, start):
-        # graph: list of edges (u,v,w)
-        # find shortest paths to all vertices from start
+        """
+        Find shortest paths from start vertex to all vertices in weighted graph.
+        Handles negative edge weights and detects negative cycles.
+        
+        Args:
+            graph: List of edge tuples (u,v,w) where u,v are vertices and w is weight
+            start: Starting vertex
+            
+        Returns:
+            dist: Dictionary mapping each vertex to shortest distance from start
+            None if negative cycle exists
+            
+        Time Complexity: O(VE) where V is vertices and E is edges
+        Space Complexity: O(V) for distance dictionary
+        """
+        # Initialize distances
         dist = {}
         for u,v,w in graph:
             dist[u] = float('inf')
             dist[v] = float('inf')
         dist[start] = 0
-
+        
+        # Get number of vertices
         V = len(dist)
-        for _ in range(V-1):
+        
+        # Relax all edges V-1 times
+        for i in range(V-1):
             for u,v,w in graph:
-                if dist[u] + w < dist[v]:
+                if dist[u] != float('inf') and dist[u] + w < dist[v]:
                     dist[v] = dist[u] + w
+                    
+        # Check for negative cycles
+        for u,v,w in graph:
+            if dist[u] != float('inf') and dist[u] + w < dist[v]:
+                return None  # Negative cycle exists
+                
         return dist
 
-    edges = [('A','B',1),('B','C',2),('A','C',4)]
-    print(bellman_ford(edges, 'A')) # {'A':0, 'B':1, 'C':3}
+    # Example usage with negative weights
+    edges = [
+        ('A','B',4), ('B','C',3), ('A','C',5),
+        ('C','D',-2), ('D','B',-1), ('B','E',2), 
+        ('E','D',3)
+    ]
+    
+    # Find shortest paths from A
+    distances = bellman_ford(edges, 'A')
+    if distances:
+        print("Shortest distances from A:", distances)
+    else:
+        print("Graph contains negative cycle")
+        
+    # Example with negative cycle
+    negative_cycle = [
+        ('A','B',2), ('B','C',-3),
+        ('C','A',-1)  # Creates cycle A->B->C->A with total weight -2
+    ]
+    result = bellman_ford(negative_cycle, 'A')
+    print("Graph with negative cycle:", result)  # None
 ```
 
 ### Floyd-Warshall (Advanced)
