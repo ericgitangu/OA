@@ -13,6 +13,7 @@ A comprehensive collection of Python scripts designed to help you prepare for te
 - [Installation](#installation)
 - [Usage](#usage)
 - [Scripts](#scripts)
+- [DSA](#DSA)
 - [Contributing](#contributing)
 - [License](#license)
 - [Author](#author)
@@ -45,31 +46,37 @@ Each script can be run independently. For example:
 
 ## Scripts
 
-1. **multiplication_algorithms.py**: Implements various multiplication algorithms, including naive, Python's built-in, and Karatsuba multiplication.
+### Graph Algorithms
+1. **bfs.py**: Demonstrates Breadth-First Search (BFS) algorithm implementation on a graph.
+2. **dfs.py**: Implements the Depth-First Search (DFS) algorithm for graph traversal.
+3. **graph_traversal.py**: Finds all possible paths between two nodes in a graph.
+4. **shortest_path_collections_itertools.py**: Implements shortest path algorithms using collections and itertools.
 
-2. **bfs.py**: Demonstrates Breadth-First Search (BFS) algorithm implementation on a graph.
+### Data Structures
+5. **min_max-heap.py**: Implements min-heap and max-heap data structures and their operations.
+6. **linked_lists.py**: Implements and traverses a linked-list.
+7. **double_linked_list.py**: Implements and traverses a doubly-linked list.
+8. **circular_linked_lists.py**: Implements and traverses a circular linked list.
 
-3. **dynamic_programming_memoization.py**: Solves the "Unique Paths" problem using dynamic programming with memoization.
+### Dynamic Programming
+9. **dynamic_programming_memoization.py**: Solves the "Unique Paths" problem using dynamic programming with memoization.
+10. **travelling_salesman.py**: Solves the Travelling Salesman Problem using dynamic programming.
+11. **longest_palidromic_string.py**: Finds the longest palindromic substring in a given string.
 
-4. **chat_room.py**: Simulates a real-time chat room with concurrent user interactions.
+### String Processing
+12. **text_search_algoritms.py**: Implements various text search algorithms.
+13. **multiplication_algorithms.py**: Implements various multiplication algorithms.
 
-5. **collections_itertools.py**: Demonstrates the usage of Python's collections and itertools modules for efficient data manipulation.
+### Concurrency
+14. **chat_room.py**: Simulates a real-time chat room with concurrent user interactions.
+15. **meeting_scheduler.py**: Implements a concurrent meeting scheduler.
+16. **dinning_philosophers_with_concurrency.py**: Implements the dining philosophers problem.
+---
+More examples in the link in the DSA section
 
-6. **min_max-heap.py**: Implements min-heap and max-heap data structures and their operations.
+## DSA
 
-7. **travelling_salesman.py**: Solves the Travelling Salesman Problem using dynamic programming.
-
-8. **dfs.py**: Implements the Depth-First Search (DFS) algorithm for graph traversal.
-
-9. **graph_traversal.py**: Finds all possible paths between two nodes in a graph.
-
-10. **longest_palidromic_string.py**: Finds the longest palindromic substring in a given string.
-
-11. **linked_lists.py**:  Implements and traverses a linked-list
-
-12. **double_linked_list.py**: Implements and traverses a doubly-linked list.
-
-13. **circular_linked_lists.py**: Implements and traverses a circular linked list.
+Comprehensive DSA Guide [included here](https://github.com/ericgitangu/oa/dsa.md)
 
 ## Contributing
 
