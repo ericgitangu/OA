@@ -76,7 +76,7 @@ More examples in the link in the DSA section
 
 ## DSA
 
-Comprehensive DSA Guide [included here](https://github.com/ericgitangu/oa/dsa.md)
+Comprehensive DSA Guide [included here](https://github.com/ericgitangu/OA/blob/main/dsa.md)
 
 ## Contributing
 
