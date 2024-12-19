@@ -93,7 +93,33 @@ Common use cases:
 ```
 ### Linked List (Basic)
 
-Description: Implementation of a singly linked list with basic insert and search operations.
+Description: Implementation of a singly linked list demonstrating fundamental linked data structure concepts. Key features:
+
+Data Structures Used:
+- Node Class:
+  - Contains value field for data storage
+  - Contains next pointer for linking to subsequent node
+  - Enables O(1) pointer manipulation for insertions/deletions
+  - Forms building block for the linked structure
+
+- LinkedList Class:
+  - Maintains head pointer to first node
+  - Tracks size for O(1) length queries
+  - Provides interface for list operations
+  - Manages node connections and traversal
+
+Key advantages over arrays:
+- O(1) insertions/deletions at known positions
+- Dynamic size without resizing/reallocation
+- Memory efficiency with no empty spaces
+- Easy implementation of stacks/queues
+
+Common applications:
+- Implementation of stacks and queues
+- Memory allocation systems
+- Undo systems in software
+- Music playlists
+- Browser history
 
 ```python
     class Node:
@@ -463,7 +489,36 @@ This simple structure makes it easy to implement but lacks the self-balancing pr
 
 ### Heap / Priority Queue (Intermediate)
 
-Description: Using heapq to implement a min-heap (priority queue).
+Description: Implementation of a min-heap (priority queue) using Python's heapq module. Key features:
+
+Data Structures Used:
+- List/Array:
+  - Stores heap elements in level-order
+  - Maintains heap property where parent <= children
+  - Enables O(1) access to min element at index 0
+  - Allows O(log n) insertions and deletions
+  - Provides implicit binary tree structure
+
+- Binary Tree Structure (implicit):
+  - For node at index i:
+    - Left child at 2i + 1
+    - Right child at 2i + 2
+    - Parent at (i-1)//2
+  - Enables efficient upheap/downheap operations
+  - Maintains balanced tree shape
+
+The heap data structure is ideal for:
+- Priority queues
+- Task scheduling
+- Graph algorithms like Dijkstra's
+- Event-driven simulations
+- Median finding
+
+Key operations and complexities:
+- Push: O(log n) - Add element and bubble up
+- Pop: O(log n) - Remove min and bubble down  
+- Peek: O(1) - Access min element
+- Heapify: O(n) - Build heap from array
 
 ```python
     import heapq
@@ -498,7 +553,33 @@ Description: Using heapq to implement a min-heap (priority queue).
 
 ### Graph (Adjacency List) (Intermediate)
 
-Description: Representing a graph with an adjacency list and adding edges.
+Description: Implementation of a graph data structure using an adjacency list representation. Key features:
+
+Data Structures Used:
+- Dictionary/Hash Map:
+  - Maps vertices to their adjacency lists
+  - Provides O(1) vertex lookup
+  - Enables efficient edge insertion
+  - Dynamically grows as vertices are added
+
+- Adjacency Lists (Arrays):
+  - Store neighbors for each vertex
+  - Enable O(1) edge insertion
+  - Space efficient for sparse graphs
+  - Fast iteration over neighbors
+
+Key advantages over adjacency matrix:
+- Space efficient O(V + E) vs O(V^2)
+- Faster to add vertices
+- Better for sparse graphs
+- More efficient neighbor iteration
+
+Common applications:
+- Social networks
+- Road/transportation networks  
+- Computer networks
+- Web page links
+- Dependency graphs
 
 ```python
     class Graph:
@@ -562,7 +643,33 @@ Description: Representing a graph with an adjacency list and adding edges.
 ```
 
 ### Trie (Prefix Tree) (Advanced)
-Description: Inserting and searching in a basic Trie.
+
+Description: A Trie (also called prefix tree) is an efficient tree-like data structure for storing and retrieving strings. Key features:
+
+Data Structures Used:
+- TrieNode Class:
+  - Dictionary/Hash Map for children: Enables O(1) access to child nodes
+  - Boolean flag for word endings: Marks complete words
+  - Integer counter for prefix frequency: Tracks usage statistics
+  - Forms tree structure through node linking
+
+- Trie Class:
+  - Root node as entry point
+  - Methods for insertion and search
+  - Maintains tree invariants
+
+Key advantages over other string storage:
+- O(m) lookup time where m is string length
+- Space-efficient for common prefixes
+- Prefix-based operations like autocomplete
+- No hash collisions unlike hash tables
+
+Common applications:
+- Autocomplete/type-ahead features
+- Spell checkers
+- IP routing tables
+- Dictionary implementations
+- Phone directories
 
 ```python
     class TrieNode:
@@ -955,7 +1062,38 @@ Description: Constructing a segment tree for range sum queries.
 
 ### Fenwick Tree (BIT) (Advanced)
 
-Description: A Fenwick Tree (Binary Indexed Tree) is a space-efficient data structure that provides efficient methods for calculating prefix sums in a dynamic array. It uses a clever binary representation technique where each node stores partial sums in a way that allows updates and queries in O(log n) time. The tree is represented as a flat array where each index i is responsible for storing the sum of a range of elements determined by the rightmost set bit in i's binary representation. This makes it more memory efficient than a segment tree since it needs only n nodes instead of 4n. The structure excels at both point updates and range queries, making it ideal for scenarios requiring dynamic cumulative frequency tables or prefix sum calculations. The implementation uses bitwise operations (i & -i) to efficiently traverse the tree structure, where each node implicitly maintains a relationship with its parent and children through binary arithmetic rather than explicit pointers.
+Description: A Fenwick Tree (Binary Indexed Tree) is a space-efficient data structure that provides efficient methods for calculating prefix sums in a dynamic array. 
+
+Data Structures Used:
+- Array/List as Primary Structure:
+  - Stores partial sums in a flat array format
+  - Uses 1-based indexing for simpler arithmetic
+  - Requires only O(n) space vs O(4n) for segment trees
+  - Enables O(log n) updates and queries through binary arithmetic
+  - More cache-friendly than pointer-based trees
+
+- Binary Number Properties:
+  - Leverages binary representation of indices
+  - Uses least significant bit (LSB) for tree traversal
+  - Each index i covers range of size LSB(i)
+  - Parent/child relationships implicit in binary form
+  - No explicit pointers needed between nodes
+
+Key advantages over other structures:
+- More memory efficient than segment trees
+- Simpler implementation than other range query structures  
+- Cache-friendly array-based storage
+- Fast O(log n) updates and queries
+- No pointer overhead or complex tree maintenance
+
+Common applications:
+- Range sum queries in dynamic arrays
+- Cumulative frequency tables
+- Count of inversions in an array
+- Rectangle sum queries in 2D arrays
+- Dynamic ranking systems
+
+The structure achieves its efficiency by using a clever binary representation technique where each index i is responsible for storing the sum of elements determined by its rightmost set bit. Updates and queries traverse the implicit tree structure using bitwise operations (i & -i) to efficiently move between levels. This binary arithmetic approach eliminates the need for explicit parent-child pointers while maintaining O(log n) performance.
 
 ```python
     class FenwickTree:
@@ -1038,7 +1176,48 @@ Description: A Fenwick Tree (Binary Indexed Tree) is a space-efficient data stru
 
 ### Disjoint Set (Union-Find) (Advanced)
 
-Description: Union-Find (also known as Disjoint Set) is a data structure that efficiently tracks disjoint (non-overlapping) sets of elements. It uses two key optimizations: path compression and union by rank. The data structure maintains a forest of trees where each tree represents a set, with the root being the representative element. Path compression flattens the tree during find operations by making nodes point directly to the root, which gives near-constant time operations. Union by rank minimizes tree height by attaching the shorter tree to the root of the taller tree. This makes it extremely efficient for problems involving grouping elements and checking connectivity, like finding connected components in graphs or detecting cycles. The structure achieves nearly O(1) amortized time complexity for both union and find operations.
+Description: Union-Find (also known as Disjoint Set) is a data structure that efficiently tracks disjoint (non-overlapping) sets of elements. It uses several key data structures working together:
+
+Data Structures Used:
+- Array/List for Parent Pointers:
+  - Maps each element to its parent element
+  - Forms tree structure implicitly through indices
+  - Enables O(1) access to parent nodes
+  - Path compression updates these pointers to root
+
+- Array/List for Ranks:
+  - Tracks approximate height/depth of each tree
+  - Used to keep trees balanced during unions
+  - Prevents degenerate linear chains
+  - Critical for O(log n) height bound
+
+- Array/List for Set Sizes:
+  - Maintains count of elements in each set
+  - Enables O(1) size queries
+  - Useful for keeping sets balanced
+  - Updated during union operations
+
+The data structure maintains a forest of trees where each tree represents a set, with two key optimizations:
+
+1. Path Compression:
+   - During find operations, updates parent pointers to point directly to root
+   - Flattens tree structure over time
+   - Reduces future traversal costs
+   - Critical for amortized near-constant time
+
+2. Union by Rank:
+   - Attaches shorter tree under root of taller tree
+   - Prevents trees from becoming too deep
+   - Maintains logarithmic height bound
+   - Works with path compression for efficiency
+
+This combination makes it extremely efficient for:
+- Finding connected components in graphs
+- Detecting cycles in graphs
+- Tracking equivalence classes
+- Implementing Kruskal's MST algorithm
+
+The structure achieves nearly O(1) amortized time complexity for both union and find operations through the synergy of these optimizations and data structures.
 
 ```python
     class UnionFind:
@@ -1117,7 +1296,40 @@ Description: Union-Find (also known as Disjoint Set) is a data structure that ef
 ## Algorithm Code Snippets
 ### Bubble Sort (Basic)
 
-Description: Bubble sort is a simple comparison-based sorting algorithm that works by repeatedly stepping through the list, comparing adjacent elements and swapping them if they are in the wrong order. The algorithm uses the array itself as the primary data structure, requiring no additional memory allocation (O(1) space complexity). The name "bubble" comes from the way smaller elements "bubble" to the top of the list with each iteration. While intuitive and easy to implement, it has O(n²) time complexity making it inefficient on large lists. The algorithm is stable, meaning it preserves the relative order of equal elements. It performs well on nearly sorted arrays and can detect if a list is already sorted by checking if any swaps were needed in a pass.
+Description: Bubble sort is a simple comparison-based sorting algorithm that demonstrates fundamental sorting concepts. Key features:
+
+Data Structures Used:
+- Array/List as Primary Structure:
+  - Stores elements to be sorted in contiguous memory
+  - Enables O(1) access to adjacent elements for comparisons
+  - Modified in-place without auxiliary storage
+  - Maintains stable ordering of equal elements
+  - Size remains fixed during sorting
+
+- Boolean Flag for Optimization:
+  - Tracks if any swaps occurred in a pass
+  - Enables early termination if array is sorted
+  - Improves best case to O(n) for nearly sorted arrays
+  - Simple but effective optimization technique
+
+Key advantages:
+- Simple implementation with minimal extra space O(1)
+- Stable sorting preserves relative order
+- Works well for small or nearly sorted arrays
+- Can detect sorted arrays early
+- Good for teaching sorting concepts
+
+Limitations:
+- O(n²) time complexity makes it inefficient for large arrays
+- Requires many array accesses and swaps
+- Not suitable for large datasets
+- Other algorithms like quicksort are usually better
+
+The algorithm gets its name from the way smaller elements "bubble up" to their correct positions with each pass through the array. While not efficient for large datasets, it remains useful for:
+- Educational purposes demonstrating sorting concepts
+- Small arrays where simplicity is preferred
+- Nearly sorted arrays that need minor corrections
+- When stable sorting is required with minimal space
 
 ```python
     def bubble_sort(arr):
@@ -1162,7 +1374,34 @@ Description: Bubble sort is a simple comparison-based sorting algorithm that wor
 ```
 
 ### Insertion Sort (Basic)
-Description: Insertion sort builds a sorted portion of the array one element at a time.
+
+Description: Insertion sort is a simple sorting algorithm that builds a sorted portion of the array one element at a time. Key features:
+
+Data Structures Used:
+- Array/List:
+  - Primary data structure that is sorted in-place
+  - Maintains sorted portion at beginning
+  - Unsorted portion follows sorted portion
+  - Enables O(1) access for comparisons and swaps
+  - No extra space needed beyond input array
+
+- Temporary Variable:
+  - Stores current element being inserted
+  - Enables shifting of elements without losing value
+  - Acts as swap space during insertions
+
+The algorithm is ideal for:
+- Small arrays/lists
+- Nearly sorted data
+- Online sorting (processing elements as they arrive)
+- Linked list sorting due to local swaps
+
+Key advantages:
+- O(1) extra space - sorts in place
+- O(n) best case for nearly sorted arrays
+- Stable sort - maintains relative order of equal elements
+- Simple implementation
+- Adaptive - runs faster on partially sorted arrays
 
 ```python
     def insertion_sort(arr):
@@ -1206,7 +1445,37 @@ Description: Insertion sort builds a sorted portion of the array one element at 
 
 ### Selection Sort (Basic)
 
-Description: Selection sort is an in-place comparison sorting algorithm that divides the input array into a sorted and unsorted region. It uses the array itself as the primary data structure, requiring no extra space. The algorithm repeatedly finds the minimum element from the unsorted region and swaps it with the first element of the unsorted region, effectively growing the sorted region one element at a time. While simple to implement and using minimal memory (O(1) extra space), it has O(n²) time complexity in all cases since it must scan the unsorted region completely for each element. The algorithm is not stable as it can change the relative order of equal elements through swapping.
+Description: Selection sort is an in-place comparison sorting algorithm that relies on several key data structures and properties:
+
+Data Structures Used:
+- Input Array:
+  - Serves as both input and output storage
+  - Divided conceptually into sorted and unsorted regions
+  - Modified in-place through swapping
+  - Enables O(1) access to elements
+  - No extra space needed beyond input array
+  - Size remains constant throughout sorting
+
+- Two Logical Regions:
+  - Sorted Region (Left Side):
+    - Grows from left to right
+    - Contains elements in final sorted order
+    - Elements never move once placed
+    - Size increases by 1 each iteration
+  
+  - Unsorted Region (Right Side):
+    - Shrinks from right to left
+    - Contains remaining elements to sort
+    - Scanned fully to find each minimum
+    - Size decreases by 1 each iteration
+
+Key Properties:
+- In-Place: Uses O(1) extra space by modifying input array directly
+- Unstable: Can change relative order of equal elements through swapping
+- Quadratic Time: O(n²) in all cases due to nested loops
+- Simple Implementation: Uses basic array operations only
+- Not Adaptive: Running time independent of input order
+- Minimal Memory Writes: O(n) swaps vs O(n²) comparisons
 
 ```python
     def selection_sort(arr):
@@ -1241,7 +1510,47 @@ Description: Selection sort is an in-place comparison sorting algorithm that div
 
 ### Merge Sort (Intermediate)
 
-Description: Merge sort is a divide-and-conquer sorting algorithm that uses recursion and temporary arrays. It divides the input array into two halves, recursively sorts them, and then merges the sorted halves using a separate merge procedure. The key data structures are the input array and temporary arrays created during merging. The merge operation uses two pointers to track positions in the subarrays being merged, comparing elements and copying them in sorted order. While not in-place (requires O(n) extra space), merge sort guarantees O(n log n) time complexity in all cases and is stable (preserves relative order of equal elements). The predictable performance and stability make it ideal for sorting linked lists and in external sorting where data doesn't fit in memory.
+Description: Merge sort is a divide-and-conquer sorting algorithm that relies on several key data structures and properties:
+
+Data Structures Used:
+- Input Array:
+  - Stores original unsorted data
+  - Divided into subarrays during recursion
+  - Modified in-place during merging
+  - Enables O(1) access to elements
+
+- Temporary Arrays (Left/Right):
+  - Created during merge step
+  - Store sorted subarrays temporarily
+  - Enable stable merging of elements
+  - Total O(n) extra space required
+  - Freed after each merge completes
+
+- Recursion Stack:
+  - Implicitly tracks subproblems
+  - Stores local variables and return addresses
+  - Maximum depth O(log n)
+  - Enables divide-and-conquer strategy
+
+Key Properties:
+- Stability: Preserves relative order of equal elements by using <= in merge
+- Parallelizable: Subarrays can be sorted independently
+- Cache-friendly: Sequential access patterns during merge
+- External sort friendly: Can efficiently merge sorted files
+
+Time/Space Analysis:
+- Time: O(n log n) guaranteed
+  - log n levels of recursion
+  - O(n) work per level during merges
+- Space: O(n) auxiliary space
+  - O(n) for temporary arrays
+  - O(log n) for recursion stack
+
+Ideal Use Cases:
+- Sorting linked lists (no random access needed)
+- External sorting of large files
+- When stable sorting is required
+- When predictable performance matters more than space
 
 ```python
     def merge(arr, left, right):
@@ -1304,7 +1613,44 @@ Description: Merge sort is a divide-and-conquer sorting algorithm that uses recu
 
 ### Quick Sort (Intermediate)
 
-Description: Quick sort is a highly efficient, in-place sorting algorithm that uses a divide-and-conquer strategy. It works by selecting a 'pivot' element and partitioning the array around it, such that smaller elements go to the left and larger elements go to the right. The key data structures used are the input array itself (since it's in-place) and the call stack for recursion. The partition operation typically uses two pointers that scan the array from both ends, swapping elements when necessary. While the average time complexity is O(n log n), the worst case is O(n²) when poorly balanced partitions occur (e.g., with an already sorted array). The space complexity is O(log n) on average for the recursive call stack, though it can degrade to O(n) in the worst case. Quick sort is widely used in practice due to its good cache performance and ability to sort in-place.
+Description: Quick sort is a highly efficient, in-place sorting algorithm that uses a divide-and-conquer strategy. 
+
+Data Structures Used:
+- Input Array:
+  - Used directly for in-place sorting without auxiliary storage
+  - Enables O(1) swaps between elements
+  - Provides good cache locality during partitioning
+  - Allows random access for efficient pivoting
+
+- Call Stack:
+  - Implicitly used for recursive calls
+  - Stores function parameters and local variables
+  - Enables divide-and-conquer by tracking subproblems
+  - Depth is O(log n) on average, O(n) worst case
+
+- Two Pointers:
+  - Left and right indices scan array during partition
+  - Enable efficient element comparison and swapping
+  - Help maintain partition invariants
+  - Allow in-place partitioning without extra space
+
+Key advantages of these structures:
+- In-place sorting saves memory
+- Good cache performance from array locality
+- Minimal auxiliary space needed
+- Efficient element swapping
+
+The algorithm works by selecting a 'pivot' element and partitioning the array around it, such that smaller elements go to the left and larger elements go to the right. The partition operation uses the two pointers to scan the array from both ends, swapping elements when necessary.
+
+Time complexity:
+- Average case: O(n log n) - balanced partitions
+- Worst case: O(n²) - poorly balanced partitions (e.g. sorted array)
+
+Space complexity:
+- Average case: O(log n) - recursive call stack depth
+- Worst case: O(n) - unbalanced recursion
+
+Quick sort is widely used in practice due to its excellent cache performance from in-place sorting and generally good average case performance. The choice of pivot strategy can significantly impact performance.
 
 ```python
     def partition(arr, low, high):
@@ -1353,7 +1699,39 @@ Description: Quick sort is a highly efficient, in-place sorting algorithm that u
 
 ### Binary Search (Basic)
 
-Description: Binary search is an efficient search algorithm that works on sorted arrays by repeatedly dividing the search interval in half. It uses three pointers (low, mid, high) to track the current search range. The algorithm compares the middle element with the target: if equal, we've found it; if target is greater, we search the right half; if smaller, we search the left half. This divide-and-conquer approach gives binary search a time complexity of O(log n), making it much faster than linear search O(n) for large datasets. Space complexity is O(1) as it only uses a constant amount of extra space for the pointers. The key requirement is that the input array must be sorted, as the algorithm relies on the ordering to eliminate half the remaining elements in each step.
+Description: Binary search is an efficient search algorithm that works on sorted arrays by repeatedly dividing the search interval in half. 
+
+Data Structures Used:
+- Sorted Array:
+  - Primary data structure that enables O(1) random access
+  - Must be sorted to allow eliminating half the search space
+  - Enables comparison-based decisions at each step
+  - Supports efficient memory access patterns
+  - Common implementations use arrays/lists
+
+- Three Pointers:
+  - Low: Tracks start of current search range
+  - Mid: Divides range for comparison with target
+  - High: Tracks end of current search range
+  - Together enable O(1) space complexity
+  - Allow efficient range manipulation
+
+The algorithm compares the middle element with the target: if equal, we've found it; if target is greater, we search the right half; if smaller, we search the left half. This divide-and-conquer approach gives binary search a time complexity of O(log n), making it much faster than linear search O(n) for large datasets.
+
+Key advantages:
+- O(log n) time complexity through halving
+- O(1) space as only pointers needed
+- Cache-friendly array access pattern
+- Highly efficient for large sorted datasets
+
+Common applications:
+- Dictionary/phone book lookups
+- Database indexing and queries
+- Finding insertion points
+- Root finding algorithms
+- Package version resolution
+
+The key requirement is that the input array must be sorted, as the algorithm relies on the ordering to eliminate half the remaining elements in each step. This makes binary search ideal for frequently searched but rarely modified data.
 
 ```python
     def binary_search(arr, target):
@@ -1399,7 +1777,44 @@ Description: Binary search is an efficient search algorithm that works on sorted
 
 ### Breadth-First Search (BFS) (Intermediate)
 
-Description: BFS (Breadth-First Search) uses a queue data structure to systematically traverse a graph level by level, starting from a source node. The queue (typically implemented with collections.deque for O(1) operations) ensures we process nodes in FIFO (First-In-First-Out) order, which naturally creates the level-by-level traversal pattern. A visited set/hash table tracks explored nodes to avoid cycles. The queue contains nodes to be processed, while the visited set prevents re-processing of nodes in graphs with cycles. Time complexity is O(V + E) where V is vertices and E is edges, as we visit each vertex once and explore each edge once. Space complexity is O(V) for both queue and visited set in worst case.
+Description: BFS (Breadth-First Search) is a fundamental graph traversal algorithm that uses two key data structures:
+
+Data Structures Used:
+- Queue (collections.deque):
+  - Stores nodes to be processed in FIFO order
+  - O(1) enqueue/dequeue operations
+  - Naturally creates level-by-level traversal
+  - Maintains frontier between explored and unexplored nodes
+  - Typically implemented with collections.deque for efficiency
+  - Size is O(V) in worst case for complete graphs
+
+- Visited Set (Hash Set):
+  - Tracks already explored nodes
+  - O(1) lookups to check for visited nodes
+  - Prevents cycles and re-processing
+  - Essential for graphs with cycles
+  - Implemented as hash table/set for efficiency
+  - Size is O(V) to store all vertices
+
+The algorithm works by:
+1. Starting from source node, add to queue and visited set
+2. While queue not empty:
+   - Dequeue next node to process
+   - Add all unvisited neighbors to queue and visited set
+3. Queue ensures level-by-level traversal
+4. Visited set prevents cycles
+
+Key advantages of this approach:
+- Guarantees shortest path in unweighted graphs
+- Visits nodes in order of distance from source
+- Memory efficient O(V) space complexity
+- Handles disconnected components if needed
+- Natural for level-order tree traversal
+
+Time complexity is O(V + E) since we:
+- Visit each vertex once O(V)
+- Explore each edge once O(E)
+Space complexity is O(V) for both queue and visited set.
 
 ```python
     from collections import deque
@@ -1449,7 +1864,48 @@ Description: BFS (Breadth-First Search) uses a queue data structure to systemati
 
 ### Depth-First Search (DFS) (Intermediate)
 
-Description: DFS (Depth-First Search) is a graph traversal algorithm that uses a stack data structure (either explicitly or through recursion) to explore as far as possible along each branch before backtracking. The stack naturally handles the last-in-first-out (LIFO) order needed to go deep before wide. DFS typically uses a visited set/hash table to track explored nodes and avoid cycles. The recursive implementation implicitly uses the call stack, while an iterative version would use an explicit stack. Time complexity is O(V + E) where V is vertices and E is edges, as we visit each vertex once and explore each edge once. Space complexity is O(V) for the visited set and recursion stack in the worst case of a linear graph.
+Description: DFS (Depth-First Search) is a graph traversal algorithm that explores a graph by going as deep as possible along each branch before backtracking.
+
+Data Structures Used:
+- Stack (Implicit or Explicit):
+  - Handles Last-In-First-Out (LIFO) order needed for backtracking
+  - Recursive implementation uses call stack implicitly
+  - Iterative version uses explicit stack data structure
+  - Enables O(1) push/pop operations for tracking path
+  - Natural fit for backtracking pattern
+
+- Visited Set/Hash Table:
+  - Tracks explored nodes to avoid cycles
+  - Provides O(1) lookups to check if node visited
+  - Essential for handling graphs with cycles
+  - Grows proportionally to number of vertices
+  - Prevents infinite loops in cyclic graphs
+
+- Graph Representation (Adjacency List):
+  - Maps vertices to lists of neighbors
+  - Enables O(1) access to a node's neighbors
+  - Space efficient for sparse graphs
+  - Supports both directed and undirected graphs
+  - Allows flexible graph structures
+
+Key advantages of DFS:
+- Memory efficient for deep graphs compared to BFS
+- Natural fit for recursive problems
+- Good for topological sorting
+- Path finding in maze-like structures
+- Tree/graph structure analysis
+
+Time Complexity: O(V + E) where:
+- V is number of vertices (each vertex visited once)
+- E is number of edges (each edge explored once)
+- Stack operations are O(1)
+- Visited set operations are O(1)
+
+Space Complexity: O(V) for:
+- Visited set to track explored nodes
+- Recursion/explicit stack in worst case
+- Linear space usage in deepest case
+- Proportional to graph depth
 
 ```python
     def dfs_recursive(graph, start, visited=None):
@@ -1560,14 +2016,39 @@ Description: Finds the shortest path from a start node to all others in a weight
     # Distances from A: {'A': 0, 'B': 3, 'C': 2, 'D': 8, 'E': 10}
     # Shortest path from A to E: ['A', 'C', 'B', 'D', 'E']
 ```
-
 ### Bellman-Ford (Advanced)
 
-Description: Handles shortest paths with negative edges but no negative cycles.
+Description: The Bellman-Ford algorithm finds shortest paths in a weighted graph that can handle negative edge weights (unlike Dijkstra's), with the constraint that there cannot be negative cycles. Here's a detailed breakdown:
 
-### Bellman-Ford (Advanced)
+Data Structures:
+- Graph representation: List of edges where each edge is a tuple (u,v,w) representing edge from u to v with weight w
+- Distance dictionary (dist): Maps each vertex to its current shortest distance from start vertex
+  - Initially all distances set to infinity except start vertex (0)
+  - Gets updated as shorter paths are found
+  - Key: vertex, Value: current shortest distance
 
-Description: Finds shortest paths in a weighted graph that can have negative edge weights (unlike Dijkstra's), but requires no negative cycles. Uses a distance dictionary to track shortest paths and iteratively relaxes all edges V-1 times, where V is number of vertices. The key insight is that a shortest path can visit each vertex at most once, so V-1 iterations are sufficient to find all shortest paths. The algorithm also detects negative cycles - if after V-1 iterations we can still relax an edge, there must be a negative cycle. Time complexity is O(VE) where V is vertices and E is edges, making it slower than Dijkstra's but more versatile. Space complexity is O(V) for the distance dictionary.
+Key Algorithm Steps:
+1. Initialize distances - O(V) space for distance dictionary
+2. Relax all edges V-1 times:
+   - For each edge (u,v,w), if dist[u] + w < dist[v], update dist[v]
+   - V-1 iterations because longest possible path without cycles visits each vertex once
+   - Each iteration processes all E edges
+3. Optional: Check for negative cycles by trying one more relaxation
+   - If any distance can still be reduced, negative cycle exists
+
+Time Complexity: O(VE) - must process all E edges, V-1 times
+Space Complexity: O(V) for the distance dictionary
+
+Key Advantages:
+- Can handle negative edge weights (unlike Dijkstra's)
+- Simpler implementation than Dijkstra's (no priority queue needed)
+- Can detect negative cycles
+- Guarantees shortest paths if no negative cycles exist
+
+The algorithm is especially useful for:
+- Networks with negative weights (e.g., forex trading)
+- Detecting arbitrage opportunities
+- Situations where simple implementation is preferred over speed
 
 ```python
     def bellman_ford(graph, start):
@@ -1667,7 +2148,32 @@ Description: The Floyd-Warshall algorithm finds shortest paths between all pairs
 
 ### Topological Sort (Intermediate)
 
-Description: Orders vertices in a DAG so that all edges go from earlier to later in order.
+Description: Topological sort orders vertices in a Directed Acyclic Graph (DAG) such that all edges point forward in the ordering. Key data structures used:
+
+- Dictionary/Hash Map for graph representation:
+  - Maps vertices to lists of neighbors
+  - Provides O(1) access to adjacency lists
+  - Space efficient for sparse graphs
+  - Easy to iterate over edges
+
+- Queue for processing zero in-degree vertices:
+  - Enables breadth-first processing order
+  - O(1) enqueue/dequeue operations
+  - Maintains FIFO ordering of vertices
+  - Key to Kahn's algorithm approach
+
+- Dictionary for tracking in-degree counts:
+  - Maps vertices to number of incoming edges
+  - O(1) updates when processing edges
+  - Helps identify available vertices
+  - Detects cycles if counts remain non-zero
+
+The algorithm is ideal for:
+- Dependency resolution
+- Task scheduling
+- Build systems
+- Course prerequisites
+- Process ordering
 
 ```python
     def topological_sort(graph):

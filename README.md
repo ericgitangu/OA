@@ -80,7 +80,7 @@ Comprehensive DSA Guide [included here](https://github.com/ericgitangu/OA/blob/m
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. A good place to start would be to add tests then incoporate them into our CI/CD or alternatively, write a script to run tests to run against our implementations including testing our DSA guide examples. TODO: add tests.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
