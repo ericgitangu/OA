@@ -49,6 +49,7 @@
 ### Array (Basic)
 
 *Description:* Arrays are fundamental data structures that store elements in contiguous memory locations. In Python, lists serve as dynamic arrays that automatically resize when needed. Key features:
+
 - Backed by contiguous memory blocks for O(1) random access by index
 - Dynamic resizing (typically doubles capacity when full) gives amortized O(1) append
 - Cache-friendly due to memory locality
@@ -64,33 +65,36 @@ Common use cases:
 - Small to medium collections with mostly reads and appends
 
 ```python
+
     # Create an array and demonstrate O(1) random access
     arr = [1, 2, 3, 4, 5]
     print(arr[3])      # O(1) random access -> prints 4
-    
+
     # Demonstrate O(1) amortized append at end
     arr.append(6)      # Fast append at end
     print(arr)         # [1, 2, 3, 4, 5, 6]
-    
+
     # Demonstrate O(n) insertion in middle requiring shifts
     arr.insert(2, 10)  # Insert at index 2, shifts elements right
     print(arr)         # [1, 2, 10, 3, 4, 5, 6]
-    
+
     # Demonstrate O(n) deletion requiring shifts
     del arr[3]         # Delete at index 3, shifts elements left
     print(arr)         # [1, 2, 10, 4, 5, 6]
-    
+
     # Demonstrate iteration and memory locality
     total = 0
     for x in arr:      # Fast iteration due to memory locality
         total += x
     print(f"Sum: {total}")
-    
+
     # Demonstrate dynamic resizing
     for i in range(10):
         arr.append(i)  # Array will resize automatically when needed
     print(f"Length after growth: {len(arr)}")
+
 ```
+
 ### Linked List (Basic)
 
 Description: Implementation of a singly linked list demonstrating fundamental linked data structure concepts. Key features:
@@ -122,6 +126,7 @@ Common applications:
 - Browser history
 
 ```python
+
     class Node:
         def __init__(self, val):
             self.val = val
@@ -131,7 +136,7 @@ Common applications:
         """
         A singly linked list implementation with basic operations.
         Each node contains a value and a pointer to the next node.
-        
+
         Key features:
         - O(1) insertions at head/tail
         - O(n) search and deletion
@@ -165,12 +170,12 @@ Common applications:
             """Delete first occurrence of val in O(n) time"""
             if not self.head:
                 return False
-                
+
             if self.head.val == val:
                 self.head = self.head.next
                 self.size -= 1
                 return True
-                
+
             current = self.head
             while current.next:
                 if current.next.val == val:
@@ -203,6 +208,7 @@ Common applications:
     print(ll.get_size())   # 3
     ll.delete(10)          # List: 20->30
     print(ll.get_size())   # 2
+
 ```
 
 ### Stack (Basic)
@@ -227,16 +233,17 @@ Description: A Stack is a fundamental data structure that follows Last-In-First-
 The implementation below uses a Python list which automatically handles resizing.
 
 ```python
+
     class Stack:
         """
         A Stack data structure that implements LIFO (Last-In-First-Out) ordering.
-        
+
         Attributes:
             items (list): Internal list to store stack elements
-            
+
         Methods:
             push(item): Add item to top of stack in O(1) time
-            pop(): Remove and return top item in O(1) time 
+            pop(): Remove and return top item in O(1) time
             peek(): Return top item without removing it in O(1) time
             is_empty(): Check if stack is empty in O(1) time
             size(): Return number of items in stack in O(1) time
@@ -257,13 +264,13 @@ The implementation below uses a Python list which automatically handles resizing
         def peek(self):
             """Return top item without removing it"""
             if self.is_empty():
-                raise IndexError("Peek at empty stack") 
+                raise IndexError("Peek at empty stack")
             return self.items[-1]  # O(1)
-            
+
         def is_empty(self):
             """Check if stack is empty"""
             return len(self.items) == 0  # O(1)
-            
+
         def size(self):
             """Return number of items in stack"""
             return len(self.items)  # O(1)
@@ -271,11 +278,12 @@ The implementation below uses a Python list which automatically handles resizing
     # Example usage
     stack = Stack()
     stack.push("function_call_1")  # Simulating function call stack
-    stack.push("function_call_2") 
+    stack.push("function_call_2")
     print(stack.peek())  # "function_call_2"
     print(stack.pop())   # "function_call_2"
     print(stack.pop())   # "function_call_1"
     print(stack.is_empty())  # True
+
 ```
 
 ### Queue (Basic)
@@ -290,33 +298,34 @@ Description: A Queue is a fundamental data structure that follows First-In-First
 - Ideal for breadth-first search, task scheduling, and producer-consumer patterns
 - Common operations:
   - append() - Add to right end (enqueue)
-  - popleft() - Remove from left end (dequeue) 
+  - popleft() - Remove from left end (dequeue)
   - appendleft() - Add to left end
   - pop() - Remove from right end
 
 The implementation below uses collections.deque which provides all these benefits automatically.
 
 ```python
+
     from collections import deque
 
     class Queue:
         """
         A Queue data structure that implements FIFO (First-In-First-Out) ordering.
-        
+
         Attributes:
             items (collections.deque): Internal deque to store queue elements
-            
+
         Methods:
             enqueue(item): Add item to end of queue in O(1) time
             dequeue(): Remove and return item from front of queue in O(1) time
             peek(): Return front item without removing it in O(1) time
             is_empty(): Check if queue is empty in O(1) time
             size(): Return number of items in queue in O(1) time
-            
+
         Example:
             >>> q = Queue()
             >>> q.enqueue(1)
-            >>> q.enqueue(2) 
+            >>> q.enqueue(2)
             >>> q.dequeue()
             1
             >>> q.peek()
@@ -324,23 +333,23 @@ The implementation below uses collections.deque which provides all these benefit
         """
         def __init__(self):
             self.items = deque()
-            
+
         def enqueue(self, item):
             """Add item to end of queue"""
             self.items.append(item)  # O(1)
-            
+
         def dequeue(self):
             """Remove and return item from front of queue"""
             return self.items.popleft() if self.items else None  # O(1)
-            
+
         def peek(self):
             """Return front item without removing it"""
             return self.items[0] if self.items else None  # O(1)
-            
+
         def is_empty(self):
             """Check if queue is empty"""
             return len(self.items) == 0
-            
+
         def size(self):
             """Return number of items in queue"""
             return len(self.items)
@@ -350,10 +359,11 @@ The implementation below uses collections.deque which provides all these benefit
     queue.enqueue(1)  # Add to end
     queue.enqueue(2)  # Add to end
     queue.enqueue(3)  # Add to end
-    
-    print(queue.dequeue())  # Remove from front -> 1 
+
+    print(queue.dequeue())  # Remove from front -> 1
     print(queue.peek())     # Look at front -> 2
     print(queue.size())     # Number of items -> 2
+
 ```
 
 ### Hash Table / Hash Map (Intermediate)
@@ -372,49 +382,52 @@ Description: A Hash Table (or Hash Map) is a data structure that implements an a
 Python's dictionary is a highly optimized hash table implementation that provides fast, constant-time operations for most use cases while handling collision resolution and dynamic resizing automatically.
 
 ```python
+
     # Create a hash map and demonstrate key operations
     hash_map = {}
-    
+
     # Insertions - O(1) average
     hash_map['name'] = 'Alice'
     hash_map['age'] = 25
     hash_map['city'] = 'New York'
-    
+
     # Lookups - O(1) average
     print(hash_map.get('name'))      # 'Alice'
     print(hash_map.get('invalid'))   # None - key doesn't exist
-    
+
     # Update existing key - O(1)
     hash_map['age'] = 26
-    
+
     # Delete operation - O(1)
     del hash_map['city']
-    
+
     # Check key existence - O(1)
     print('name' in hash_map)        # True
     print('city' in hash_map)        # False
-    
+
     # Get all keys and values
     print(hash_map.keys())           # dict_keys(['name', 'age'])
     print(hash_map.values())         # dict_values(['Alice', 26])
+
 ```
 
 ### Binary Search Tree (BST) (Intermediate)
 
 Description: A Binary Search Tree (BST) is a hierarchical data structure where each node has at most two children (left and right). The key property is that for any node, all values in its left subtree are less than the node's value, and all values in its right subtree are greater. This ordering enables O(log n) search, insert and delete operations on average when the tree is relatively balanced. However, this implementation shows an unbalanced BST which can degrade to O(n) performance if values are inserted in sorted order (creating a linear chain). The tree uses a node-based structure where each node contains:
 - A value
-- A left child pointer 
+- A left child pointer
 - A right child pointer
 This simple structure makes it easy to implement but lacks the self-balancing properties of more advanced trees like AVL or Red-Black trees. The BST is useful for maintaining a sorted collection of data with reasonably fast operations when the data is randomly distributed.
 
 ```python
+
     class BSTNode:
         """
         Binary Search Tree node implementation with basic operations.
         Maintains BST property: left subtree values < node value < right subtree values
-        
+
         Operations:
-        - insert: Add new value maintaining BST property 
+        - insert: Add new value maintaining BST property
         - search: Find if value exists in tree
         - delete: Remove value maintaining BST property
         - min/max: Find min/max value in tree
@@ -422,9 +435,9 @@ This simple structure makes it easy to implement but lacks the self-balancing pr
         """
         def __init__(self, val):
             self.val = val
-            self.left = None 
+            self.left = None
             self.right = None
-            
+
         def insert(self, val):
             """Insert value into BST maintaining BST property"""
             if val < self.val:
@@ -437,7 +450,7 @@ This simple structure makes it easy to implement but lacks the self-balancing pr
                     self.right = BSTNode(val)
                 else:
                     self.right.insert(val)
-                    
+
         def search(self, val):
             """Search for value in BST"""
             if val == self.val:
@@ -450,21 +463,21 @@ This simple structure makes it easy to implement but lacks the self-balancing pr
                 if self.right is None:
                     return False
                 return self.right.search(val)
-                
+
         def min_value(self):
             """Get minimum value in BST"""
             current = self
             while current.left:
                 current = current.left
             return current.val
-            
+
         def max_value(self):
             """Get maximum value in BST"""
             current = self
             while current.right:
                 current = current.right
             return current.val
-            
+
         def inorder(self):
             """Get values in sorted order"""
             result = []
@@ -479,12 +492,13 @@ This simple structure makes it easy to implement but lacks the self-balancing pr
     root = BSTNode(5)
     for val in [2, 7, 1, 3, 6, 8]:
         root.insert(val)
-        
+
     print(root.search(3))  # True
     print(root.search(4))  # False
     print(root.min_value())  # 1
     print(root.max_value())  # 8
     print(root.inorder())  # [1, 2, 3, 5, 6, 7, 8]
+
 ```
 
 ### Heap / Priority Queue (Intermediate)
@@ -521,6 +535,7 @@ Key operations and complexities:
 - Heapify: O(n) - Build heap from array
 
 ```python
+
     import heapq
 
     # Initialize an empty min-heap
@@ -549,6 +564,7 @@ Key operations and complexities:
     # Replace top element - O(log n), more efficient than pop + push
     print(heapq.heapreplace(nums, 6))  # -> 1 (returns old top element)
     print(nums[0])  # -> 3 (new min after replacement)
+
 ```
 
 ### Graph (Adjacency List) (Intermediate)
@@ -582,17 +598,18 @@ Common applications:
 - Dependency graphs
 
 ```python
+
     class Graph:
         """
         Graph implementation using adjacency list representation.
         Supports both directed and undirected graphs.
-        
+
         Operations:
         - add_vertex: Add a new vertex to graph
         - add_edge: Add edge between vertices
         - get_neighbors: Get adjacent vertices
         - has_edge: Check if edge exists
-        
+
         Time Complexity:
         - Adding vertex/edge: O(1) amortized
         - Getting neighbors: O(1)
@@ -601,45 +618,46 @@ Common applications:
         def __init__(self, directed=False):
             self.graph = {}  # Adjacency list
             self.directed = directed
-            
+
         def add_vertex(self, v):
             """Add vertex if it doesn't exist"""
             if v not in self.graph:
                 self.graph[v] = []
-                
+
         def add_edge(self, u, v):
             """Add edge from u to v"""
             # Add vertices if they don't exist
             self.add_vertex(u)
             self.add_vertex(v)
-            
+
             # Add edge
             self.graph[u].append(v)
             # If undirected, add reverse edge
             if not self.directed:
                 self.graph[v].append(u)
-                
+
         def get_neighbors(self, v):
             """Get list of vertices adjacent to v"""
             return self.graph.get(v, [])
-            
+
         def has_edge(self, u, v):
             """Check if edge exists from u to v"""
             return v in self.graph.get(u, [])
 
     # Example usage
     g = Graph(directed=True)  # Create directed graph
-    
+
     # Add edges
     g.add_edge(0, 1)
-    g.add_edge(0, 2) 
+    g.add_edge(0, 2)
     g.add_edge(1, 2)
-    
+
     # Check graph structure
     print(g.graph)  # {0: [1, 2], 1: [2], 2: []}
     print(g.get_neighbors(0))  # [1, 2]
     print(g.has_edge(0, 2))  # True
     print(g.has_edge(2, 0))  # False (directed)
+
 ```
 
 ### Trie (Prefix Tree) (Advanced)
@@ -672,15 +690,16 @@ Common applications:
 - Phone directories
 
 ```python
+
     class TrieNode:
         """
         A node in the Trie data structure.
-        
+
         Attributes:
             children: Dict mapping characters to child TrieNodes
             end_of_word: Boolean flag marking if node represents end of valid word
             count: Number of words containing the prefix represented by this node
-            
+
         The TrieNode forms the building block of a Trie, storing:
         - Links to child nodes in a map for O(1) access
         - Flag to mark complete words
@@ -753,12 +772,13 @@ Common applications:
     words = ["apple", "app", "apricot", "bear", "bet"]
     for word in words:
         trie.insert(word)
-        
+
     print(trie.search("apple"))     # True
     print(trie.search("app"))       # True
     print(trie.search("appl"))      # False
     print(trie.starts_with("app"))  # True
     print(trie.count_prefix("app")) # 2 - "apple" and "app"
+
 ```
 
 ### Balanced BST (AVL/Red-Black) (Advanced)
@@ -778,6 +798,7 @@ The example below shows basic node structure and insertion without rotations. Fu
 - Height updates after modifications
 
 ```python
+
 class AVLNode:
     def __init__(self, val):
         self.val = val
@@ -785,10 +806,11 @@ class AVLNode:
         self.right = None
         self.height = 1
 
-# Full AVL operations including rotations are complex; 
-# This snippet only shows structure setup for demonstration.
+# Full AVL operations including rotations are complex
+# This snippet only shows structure setup for demonstration
 
 ```python
+
     def avl_insert(root, val):
         # Insert like BST
         if root is None:
@@ -912,6 +934,7 @@ class AVLNode:
     for val in values:
         root = avl_insert_with_balance(root, val)
         print(f"Inserted {val}, root is now {root.val}")
+
 ```
 
 ### B-Tree / B+ Tree (Advanced)
@@ -927,6 +950,7 @@ Description: B-Trees are self-balancing search trees designed for efficient disk
 The implementation below shows a simplified node structure, though actual B-Tree operations like insertion and deletion require careful handling of node splits and merges to maintain the B-Tree properties.
 
 ```python
+
     class BTreeNode:
         def __init__(self, t):
             """Initialize B-Tree node with minimum degree t"""
@@ -945,29 +969,29 @@ The implementation below shows a simplified node structure, though actual B-Tree
         def search(self, k):
             """Search for key k in the B-Tree"""
             return self._search_recursive(self.root, k)
-            
+
         def _search_recursive(self, x, k):
             """Helper method to recursively search for key k"""
             i = 0
             # Find the first key greater than or equal to k
             while i < x.n and k > x.keys[i]:
                 i += 1
-                
+
             # If we found the key
             if i < x.n and k == x.keys[i]:
                 return (x, i)
-                
+
             # If we're at a leaf, key not found
             if x.leaf:
                 return None
-                
+
             # Recurse to appropriate child
             return self._search_recursive(x.children[i], k)
 
         def insert(self, k):
             """Insert key k into the B-Tree"""
             root = self.root
-            
+
             # Handle root splitting
             if root.n == (2 * self.t) - 1:
                 new_root = BTreeNode(self.t)
@@ -975,7 +999,7 @@ The implementation below shows a simplified node structure, though actual B-Tree
                 new_root.children.append(self.root)
                 self._split_child(new_root, 0)
                 self.root = new_root
-                
+
             self._insert_non_full(self.root, k)
 
     # Example usage
@@ -984,10 +1008,11 @@ The implementation below shows a simplified node structure, though actual B-Tree
     keys = [10, 20, 5, 6, 12, 30, 7, 17]
     for k in keys:
         btree.insert(k)
-        
+
     # Search for keys
     print(btree.search(6) is not None)  # True
     print(btree.search(15) is not None)  # False
+
 ```
 
 ### Segment Tree (Advanced)
@@ -1027,13 +1052,14 @@ Key advantages over alternatives:
 - Simple array-based implementation
 
 ```python
+
     class SegmentTree:
         """
         A segment tree data structure that supports:
         - Range queries in O(log n) time
         - Point updates in O(log n) time
         - Space complexity O(4n)
-        
+
         Implementation details:
         - Uses array representation of binary tree
         - Each node stores sum of its range
@@ -1046,42 +1072,42 @@ Key advantages over alternatives:
             self.tree = [0] * (4 * self.n)
             if self.n > 0:
                 self._build_tree(arr, 0, self.n-1, 1)
-        
+
         def _build_tree(self, arr, start, end, node):
             """Recursively build segment tree from input array"""
             # Base case - leaf node
             if start == end:
                 self.tree[node] = arr[start]
                 return self.tree[node]
-            
+
             # Recursively build left and right subtrees
             mid = (start + end) // 2
             left_sum = self._build_tree(arr, start, mid, 2*node)
             right_sum = self._build_tree(arr, mid+1, end, 2*node+1)
-            
+
             # Internal node stores sum of children
             self.tree[node] = left_sum + right_sum
             return self.tree[node]
-            
+
         def range_sum(self, left, right):
             """Get sum of elements from index left to right inclusive"""
             if left < 0 or right >= self.n:
                 raise ValueError("Range out of bounds")
             return self._range_sum_util(0, self.n-1, left, right, 1)
-            
+
         def _range_sum_util(self, start, end, left, right, node):
             """Helper method for range sum query"""
             # No overlap
             if right < start or left > end:
                 return 0
-                
+
             # Complete overlap
             if left <= start and right >= end:
                 return self.tree[node]
-                
+
             # Partial overlap - recurse on children
             mid = (start + end) // 2
-            return (self._range_sum_util(start, mid, left, right, 2*node) + 
+            return (self._range_sum_util(start, mid, left, right, 2*node) +
                    self._range_sum_util(mid+1, end, left, right, 2*node+1))
 
     # Example usage
@@ -1094,7 +1120,7 @@ Key advantages over alternatives:
 
 ### Fenwick Tree (BIT) (Advanced)
 
-Description: A Fenwick Tree (Binary Indexed Tree) is a space-efficient data structure that provides efficient methods for calculating prefix sums in a dynamic array. 
+Description: A Fenwick Tree (Binary Indexed Tree) is a space-efficient data structure that provides efficient methods for calculating prefix sums in a dynamic array.
 
 Data Structures Used:
 - Array/List as Primary Structure:
@@ -1128,20 +1154,21 @@ Common applications:
 The structure achieves its efficiency by using a clever binary representation technique where each index i is responsible for storing the sum of elements determined by its rightmost set bit. Updates and queries traverse the implicit tree structure using bitwise operations (i & -i) to efficiently move between levels. This binary arithmetic approach eliminates the need for explicit parent-child pointers while maintaining O(log n) performance.
 
 ```python
+
     class FenwickTree:
         """
         A Fenwick Tree (Binary Indexed Tree) data structure that supports:
         - Point updates in O(log n) time
         - Range sum queries in O(log n) time
         - Space efficient O(n) storage
-        
+
         Key operations:
         - update(i, delta): Add delta to element at index i
         - prefix_sum(i): Get sum of elements from 1 to i
         - range_sum(l, r): Get sum of elements from l to r
         - get(i): Get value at index i
         - set(i, val): Set value at index i
-        
+
         Implementation details:
         - Uses 1-based indexing internally
         - Leverages binary arithmetic (i & -i) for tree traversal
@@ -1152,7 +1179,7 @@ The structure achieves its efficiency by using a clever binary representation te
             """Initialize Fenwick tree with size n"""
             self.size = n
             self.fw = [0] * (n + 1)  # 1-based indexing
-            
+
         def update(self, i, delta):
             """Add delta to element at index i
             Time complexity: O(log n)
@@ -1162,7 +1189,7 @@ The structure achieves its efficiency by using a clever binary representation te
             while i <= self.size:
                 self.fw[i] += delta
                 i += i & (-i)  # Add least significant bit
-                
+
         def prefix_sum(self, i):
             """Get sum of elements from index 1 to i inclusive
             Time complexity: O(log n)
@@ -1176,17 +1203,17 @@ The structure achieves its efficiency by using a clever binary representation te
                 total += self.fw[i]
                 i -= i & (-i)  # Remove least significant bit
             return total
-            
+
         def range_sum(self, left, right):
             """Get sum of elements from index left to right inclusive"""
             if left > right:
                 raise ValueError("Left bound larger than right bound")
             return self.prefix_sum(right) - self.prefix_sum(left - 1)
-            
+
         def get(self, i):
             """Get value at index i"""
             return self.range_sum(i, i)
-            
+
         def set(self, i, val):
             """Set value at index i"""
             delta = val - self.get(i)
@@ -1195,15 +1222,16 @@ The structure achieves its efficiency by using a clever binary representation te
     # Example usage showing key operations
     arr = [1, 2, 3, 4, 5]
     ft = FenwickTree(len(arr))
-    
+
     # Build tree from array
     for i, val in enumerate(arr, 1):  # 1-based indexing
         ft.update(i, val)
-        
+
     print(ft.prefix_sum(3))  # Sum of first 3 elements: 6
     print(ft.range_sum(2, 4))  # Sum of elements 2-4: 9
     ft.set(2, 10)  # Change value at index 2 to 10
     print(ft.range_sum(2, 4))  # New sum of elements 2-4: 17
+
 ```
 
 ### Disjoint Set (Union-Find) (Advanced)
@@ -1237,7 +1265,7 @@ The data structure maintains a forest of trees where each tree represents a set,
    - Reduces future traversal costs
    - Critical for amortized near-constant time
 
-2. Union by Rank:
+1. Union by Rank:
    - Attaches shorter tree under root of taller tree
    - Prevents trees from becoming too deep
    - Maintains logarithmic height bound
@@ -1252,26 +1280,27 @@ This combination makes it extremely efficient for:
 The structure achieves nearly O(1) amortized time complexity for both union and find operations through the synergy of these optimizations and data structures.
 
 ```python
+
     class UnionFind:
         """
         A data structure for efficiently managing disjoint sets of elements.
-        
+
         Key features:
         - Uses path compression and union by rank optimizations
         - Near O(1) amortized time for operations
         - Tracks set sizes and total number of disjoint sets
         - Perfect for connectivity problems and finding connected components
-        
+
         Operations:
-        - find(x): Find set representative for element x 
+        - find(x): Find set representative for element x
         - union(x,y): Merge sets containing x and y
         - connected(x,y): Check if x and y are in same set
         - get_size(x): Get size of set containing x
-        
+
         Time Complexity:
         - All operations are O(α(n)) amortized, where α is inverse Ackermann
         - For practical purposes, O(1) since α(n) ≤ 4 for all reasonable n
-        
+
         Space Complexity: O(n) to store parent pointers and ranks
         """
         def __init__(self, n):
@@ -1293,24 +1322,24 @@ The structure achieves nearly O(1) amortized time complexity for both union and 
             rx, ry = self.find(x), self.find(y)
             if rx == ry:
                 return False  # Already in same set
-                
+
             # Union by rank - attach smaller rank tree under root of higher rank tree
             if self.rank[rx] < self.rank[ry]:
                 rx, ry = ry, rx
             self.parent[ry] = rx
             self.size[rx] += self.size[ry]
-            
+
             # If same rank, increment rank of root
             if self.rank[rx] == self.rank[ry]:
                 self.rank[rx] += 1
-                
+
             self.count -= 1  # Decrease number of disjoint sets
             return True
 
         def connected(self, x, y):
             """Check if two elements are in the same set"""
             return self.find(x) == self.find(y)
-            
+
         def get_size(self, x):
             """Get size of set containing element x"""
             return self.size[self.find(x)]
@@ -1323,9 +1352,11 @@ The structure achieves nearly O(1) amortized time complexity for both union and 
     print(uf.connected(0, 1))  # True - now connected
     print(uf.get_size(0))  # 2 - size of set containing 0
     print(uf.count)  # 3 - three disjoint sets remain
+
 ```
 
 ## Algorithm Code Snippets
+
 ### Bubble Sort (Basic)
 
 Description: Bubble sort is a simple comparison-based sorting algorithm that demonstrates fundamental sorting concepts. Key features:
@@ -1364,19 +1395,20 @@ The algorithm gets its name from the way smaller elements "bubble up" to their c
 - When stable sorting is required with minimal space
 
 ```python
+
     def bubble_sort(arr):
         """
         Sorts array in-place using bubble sort algorithm by:
         1. Making multiple passes through array
-        2. Comparing adjacent elements and swapping if out of order
-        3. Optimizing by stopping if no swaps needed (array is sorted)
+        1. Comparing adjacent elements and swapping if out of order
+        1. Optimizing by stopping if no swaps needed (array is sorted)
         Time: O(n²), Space: O(1)
         """
         n = len(arr)
         for i in range(n):
             # Flag to detect if any swaps happened in this pass
             swapped = False
-            
+
             # Last i elements are already in place
             for j in range(n - i - 1):
                 # Compare adjacent elements
@@ -1384,7 +1416,7 @@ The algorithm gets its name from the way smaller elements "bubble up" to their c
                     # Swap them if they are in wrong order
                     arr[j], arr[j + 1] = arr[j + 1], arr[j]
                     swapped = True
-                    
+
             # If no swapping occurred, array is already sorted
             if not swapped:
                 break
@@ -1403,6 +1435,7 @@ The algorithm gets its name from the way smaller elements "bubble up" to their c
     reverse_sorted = [5, 4, 3, 2, 1]  # Worst case
     bubble_sort(reverse_sorted)
     print("Reverse sorted case:", reverse_sorted)  # [1, 2, 3, 4, 5]
+
 ```
 
 ### Insertion Sort (Basic)
@@ -1436,12 +1469,13 @@ Key advantages:
 - Adaptive - runs faster on partially sorted arrays
 
 ```python
+
     def insertion_sort(arr):
         """
         Builds sorted portion of array one element at a time by:
         1. Taking next unsorted element
-        2. Shifting larger sorted elements right
-        3. Inserting element in correct position
+        1. Shifting larger sorted elements right
+        1. Inserting element in correct position
         Time: O(n²), Space: O(1)
         """
         # Iterate through array starting from second element
@@ -1450,12 +1484,12 @@ Key advantages:
             key = arr[i]
             # Start comparing with previous sorted elements
             j = i - 1
-            
+
             # Shift elements right while they're larger than key
             while j >= 0 and arr[j] > key:
                 arr[j + 1] = arr[j]
                 j -= 1
-            
+
             # Insert key in correct position
             arr[j + 1] = key
 
@@ -1473,6 +1507,7 @@ Key advantages:
     reverse_sorted = [5, 4, 3, 2, 1]  # Worst case
     insertion_sort(reverse_sorted)
     print("Reverse sorted case:", reverse_sorted)  # [1, 2, 3, 4, 5]
+
 ```
 
 ### Selection Sort (Basic)
@@ -1510,12 +1545,13 @@ Key Properties:
 - Minimal Memory Writes: O(n) swaps vs O(n²) comparisons
 
 ```python
+
     def selection_sort(arr):
         """
         In-place comparison sorting algorithm that:
         1. Divides array into sorted and unsorted regions
-        2. Repeatedly finds minimum from unsorted region
-        3. Swaps it with first unsorted element
+        1. Repeatedly finds minimum from unsorted region
+        1. Swaps it with first unsorted element
         Time: O(n²), Space: O(1)
         """
         n = len(arr)
@@ -1526,7 +1562,7 @@ Key Properties:
             for j in range(i+1, n):
                 if arr[j] < arr[min_idx]:
                     min_idx = j
-            
+
             # Swap minimum with first unsorted element
             # Only swap if needed to minimize operations
             if min_idx != i:
@@ -1538,6 +1574,7 @@ Key Properties:
     selection_sort(data)
     print("Sorted array:", data)  # [11, 12, 22, 25, 34, 64, 90]
     print(data) # [1,2,3]
+
 ```
 
 ### Merge Sort (Intermediate)
@@ -1585,30 +1622,31 @@ Ideal Use Cases:
 - When predictable performance matters more than space
 
 ```python
+
     def merge(arr, left, right):
         """
         Merges two sorted arrays into a single sorted array.
         Uses two pointers to track positions in subarrays being merged.
         """
         i = j = k = 0
-        
+
         # Compare elements from both arrays and merge in sorted order
         while i < len(left) and j < len(right):
             if left[i] <= right[j]:  # Use <= for stability
                 arr[k] = left[i]
                 i += 1
             else:
-                arr[k] = right[j] 
+                arr[k] = right[j]
                 j += 1
             k += 1
-            
+
         # Copy remaining elements from left array, if any
         while i < len(left):
             arr[k] = left[i]
             i += 1
             k += 1
-            
-        # Copy remaining elements from right array, if any    
+
+        # Copy remaining elements from right array, if any
         while j < len(right):
             arr[k] = right[j]
             j += 1
@@ -1618,14 +1656,14 @@ Ideal Use Cases:
         """
         Divide-and-conquer sorting algorithm that:
         1. Divides array into two halves
-        2. Recursively sorts the halves 
-        3. Merges sorted halves using auxiliary arrays
+        1. Recursively sorts the halves
+        1. Merges sorted halves using auxiliary arrays
         Time: O(n log n), Space: O(n)
         """
         if len(arr) <= 1:  # Base case
             return
-            
-        # Divide array into two halves    
+
+        # Divide array into two halves
         mid = len(arr) // 2
         left = arr[:mid]
         right = arr[mid:]
@@ -1641,11 +1679,12 @@ Ideal Use Cases:
     data = [3, 1, 4, 1, 5, 9, 2, 6, 5]
     merge_sort(data)
     print(data)  # [1, 1, 2, 3, 4, 5, 5, 6, 9]
+
 ```
 
 ### Quick Sort (Intermediate)
 
-Description: Quick sort is a highly efficient, in-place sorting algorithm that uses a divide-and-conquer strategy. 
+Description: Quick sort is a highly efficient, in-place sorting algorithm that uses a divide-and-conquer strategy.
 
 Data Structures Used:
 - Input Array:
@@ -1685,6 +1724,7 @@ Space complexity:
 Quick sort is widely used in practice due to its excellent cache performance from in-place sorting and generally good average case performance. The choice of pivot strategy can significantly impact performance.
 
 ```python
+
     def partition(arr, low, high):
         """
         Partitions array around a pivot using two-pointer technique.
@@ -1693,13 +1733,13 @@ Quick sort is widely used in practice due to its excellent cache performance fro
         # Choose rightmost element as pivot
         pivot = arr[high]
         i = low - 1  # Index of smaller element
-        
+
         # Move elements smaller than pivot to left side
         for j in range(low, high):
             if arr[j] <= pivot:
                 i += 1
                 arr[i], arr[j] = arr[j], arr[i]
-                
+
         # Place pivot in correct position
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
         return i + 1
@@ -1711,7 +1751,7 @@ Quick sort is widely used in practice due to its excellent cache performance fro
         if low < high:
             # Get pivot position after partitioning
             pivot_idx = partition(arr, low, high)
-            
+
             # Recursively sort elements before and after pivot
             quick_sort_helper(arr, low, pivot_idx - 1)
             quick_sort_helper(arr, pivot_idx + 1, high)
@@ -1727,11 +1767,12 @@ Quick sort is widely used in practice due to its excellent cache performance fro
     data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
     quick_sort(data)
     print(data)  # [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+
 ```
 
 ### Binary Search (Basic)
 
-Description: Binary search is an efficient search algorithm that works on sorted arrays by repeatedly dividing the search interval in half. 
+Description: Binary search is an efficient search algorithm that works on sorted arrays by repeatedly dividing the search interval in half.
 
 Data Structures Used:
 - Sorted Array:
@@ -1766,6 +1807,7 @@ Common applications:
 The key requirement is that the input array must be sorted, as the algorithm relies on the ordering to eliminate half the remaining elements in each step. This makes binary search ideal for frequently searched but rarely modified data.
 
 ```python
+
     def binary_search(arr, target):
         """
         Performs binary search to find target in a sorted array.
@@ -1778,33 +1820,34 @@ The key requirement is that the input array must be sorted, as the algorithm rel
         # Initialize pointers to track search range
         low = 0
         high = len(arr) - 1
-        
+
         # Keep searching while valid range exists
         while low <= high:
             # Find middle element
             mid = low + (high - low) // 2  # Prevents integer overflow
-            
+
             # Check if middle element is target
             if arr[mid] == target:
                 return mid
-                
+
             # If target is greater, ignore left half
             elif arr[mid] < target:
                 low = mid + 1
-                
+
             # If target is smaller, ignore right half
             else:
                 high = mid - 1
-                
+
         # Target not found
         return -1
 
     # Example usage showing different cases
     sorted_arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     print(binary_search(sorted_arr, 1))   # 0 (first element)
-    print(binary_search(sorted_arr, 5))   # 4 (middle element) 
+    print(binary_search(sorted_arr, 5))   # 4 (middle element)
     print(binary_search(sorted_arr, 10))  # 9 (last element)
     print(binary_search(sorted_arr, 11))  # -1 (not found)
+
 ```
 
 ### Breadth-First Search (BFS) (Intermediate)
@@ -1830,11 +1873,11 @@ Data Structures Used:
 
 The algorithm works by:
 1. Starting from source node, add to queue and visited set
-2. While queue not empty:
+1. While queue not empty:
    - Dequeue next node to process
    - Add all unvisited neighbors to queue and visited set
-3. Queue ensures level-by-level traversal
-4. Visited set prevents cycles
+1. Queue ensures level-by-level traversal
+1. Visited set prevents cycles
 
 Key advantages of this approach:
 - Guarantees shortest path in unweighted graphs
@@ -1849,6 +1892,7 @@ Time complexity is O(V + E) since we:
 Space complexity is O(V) for both queue and visited set.
 
 ```python
+
     from collections import deque
 
     def bfs(graph, start):
@@ -1864,19 +1908,19 @@ Space complexity is O(V) for both queue and visited set.
         visited = set([start])
         queue = deque([start])
         traversal = []  # Track traversal order
-        
+
         # Process nodes level by level using queue
         while queue:
             # Get next node from front of queue
             current = queue.popleft()
             traversal.append(current)
-            
+
             # Add unvisited neighbors to queue
             for neighbor in graph[current]:
                 if neighbor not in visited:
                     visited.add(neighbor)
                     queue.append(neighbor)
-                    
+
         return traversal
 
     # Example usage:
@@ -1892,6 +1936,7 @@ Space complexity is O(V) for both queue and visited set.
     # Perform BFS from node 0
     result = bfs(graph, 0)
     print(result)  # [0, 1, 2, 3, 4]
+
 ```
 
 ### Depth-First Search (DFS) (Intermediate)
@@ -1940,25 +1985,26 @@ Space Complexity: O(V) for:
 - Proportional to graph depth
 
 ```python
+
     def dfs_recursive(graph, start, visited=None):
         # Initialize visited set if this is the first call
         if visited is None:
             visited = set()
-            
+
         # Mark current node as visited and process it
         visited.add(start)
         print(start)  # Process node (can be modified based on needs)
-        
+
         # Recursively visit all unvisited neighbors
         for neighbor in graph[start]:
             if neighbor not in visited:
                 dfs_recursive(graph, neighbor, visited)
-                
+
     def dfs_iterative(graph, start):
         # Use explicit stack instead of recursion
         visited = set()
         stack = [start]
-        
+
         while stack:
             node = stack.pop()
             if node not in visited:
@@ -1976,6 +2022,7 @@ Space Complexity: O(V) for:
     dfs_recursive(g, 0)  # 0,1,2,3
     print("\nIterative DFS:")
     dfs_iterative(g, 0)  # 0,1,2,3
+
 ```
 
 ### Dijkstra’s Algorithm (Advanced)
@@ -1983,6 +2030,7 @@ Space Complexity: O(V) for:
 Description: Finds the shortest path from a start node to all others in a weighted graph with no negative edges. Uses a min-heap priority queue to always process the node with smallest current distance first. Maintains a distance dictionary to track shortest paths. The priority queue ensures we process nodes in order of increasing distance, making it more efficient than checking all edges repeatedly. Time complexity is O((V+E)logV) where V is number of vertices and E is number of edges. Space complexity is O(V) for the distance dictionary and priority queue.
 
 ```python
+
     import heapq
     from collections import defaultdict
 
@@ -1991,32 +2039,32 @@ Description: Finds the shortest path from a start node to all others in a weight
         dist = {node: float('inf') for node in graph}
         prev = {node: None for node in graph}
         dist[start] = 0
-        
+
         # Priority queue stores (distance, node) tuples
         pq = [(0, start)]
         visited = set()
-        
+
         while pq:
             current_dist, u = heapq.heappop(pq)
-            
+
             # Skip if we've found a better path already
             if u in visited:
                 continue
-                
+
             visited.add(u)
-            
+
             # Explore neighbors
             for v, w in graph[u]:
                 if v in visited:
                     continue
-                    
+
                 # Relaxation step
                 new_dist = dist[u] + w
                 if new_dist < dist[v]:
                     dist[v] = new_dist
                     prev[v] = u
                     heapq.heappush(pq, (new_dist, v))
-        
+
         return dist, prev
 
     def get_shortest_path(prev, start, end):
@@ -2031,7 +2079,7 @@ Description: Finds the shortest path from a start node to all others in a weight
     # Each neighbor is a tuple of (vertex, weight)
     weighted_graph = {
         'A': [('B',4), ('C',2)],
-        'B': [('C',1), ('D',5)], 
+        'B': [('C',1), ('D',5)],
         'C': [('B',1), ('D',8), ('E',10)],
         'D': [('E',2)],
         'E': []
@@ -2040,14 +2088,16 @@ Description: Finds the shortest path from a start node to all others in a weight
     # Find shortest paths from A
     distances, previous = dijkstra(weighted_graph, 'A')
     print(f"Distances from A: {distances}")
-    
+
     # Get shortest path from A to E
     path = get_shortest_path(previous, 'A', 'E')
     print(f"Shortest path from A to E: {path}")
     # Output:
     # Distances from A: {'A': 0, 'B': 3, 'C': 2, 'D': 8, 'E': 10}
     # Shortest path from A to E: ['A', 'C', 'B', 'D', 'E']
+
 ```
+
 ### Bellman-Ford (Advanced)
 
 Description: The Bellman-Ford algorithm finds shortest paths in a weighted graph that can handle negative edge weights (unlike Dijkstra's), with the constraint that there cannot be negative cycles. Here's a detailed breakdown:
@@ -2061,11 +2111,11 @@ Data Structures:
 
 Key Algorithm Steps:
 1. Initialize distances - O(V) space for distance dictionary
-2. Relax all edges V-1 times:
+1. Relax all edges V-1 times:
    - For each edge (u,v,w), if dist[u] + w < dist[v], update dist[v]
    - V-1 iterations because longest possible path without cycles visits each vertex once
    - Each iteration processes all E edges
-3. Optional: Check for negative cycles by trying one more relaxation
+1. Optional: Check for negative cycles by trying one more relaxation
    - If any distance can still be reduced, negative cycle exists
 
 Time Complexity: O(VE) - must process all E edges, V-1 times
@@ -2083,19 +2133,20 @@ The algorithm is especially useful for:
 - Situations where simple implementation is preferred over speed
 
 ```python
+
     def bellman_ford(graph, start):
         """
         Find shortest paths from start vertex to all vertices in weighted graph.
         Handles negative edge weights and detects negative cycles.
-        
+
         Args:
             graph: List of edge tuples (u,v,w) where u,v are vertices and w is weight
             start: Starting vertex
-            
+
         Returns:
             dist: Dictionary mapping each vertex to shortest distance from start
             None if negative cycle exists
-            
+
         Time Complexity: O(VE) where V is vertices and E is edges
         Space Complexity: O(V) for distance dictionary
         """
@@ -2105,37 +2156,37 @@ The algorithm is especially useful for:
             dist[u] = float('inf')
             dist[v] = float('inf')
         dist[start] = 0
-        
+
         # Get number of vertices
         V = len(dist)
-        
+
         # Relax all edges V-1 times
         for i in range(V-1):
             for u,v,w in graph:
                 if dist[u] != float('inf') and dist[u] + w < dist[v]:
                     dist[v] = dist[u] + w
-                    
+
         # Check for negative cycles
         for u,v,w in graph:
             if dist[u] != float('inf') and dist[u] + w < dist[v]:
                 return None  # Negative cycle exists
-                
+
         return dist
 
     # Example usage with negative weights
     edges = [
         ('A','B',4), ('B','C',3), ('A','C',5),
-        ('C','D',-2), ('D','B',-1), ('B','E',2), 
+        ('C','D',-2), ('D','B',-1), ('B','E',2),
         ('E','D',3)
     ]
-    
+
     # Find shortest paths from A
     distances = bellman_ford(edges, 'A')
     if distances:
         print("Shortest distances from A:", distances)
     else:
         print("Graph contains negative cycle")
-        
+
     # Example with negative cycle
     negative_cycle = [
         ('A','B',2), ('B','C',-3),
@@ -2143,6 +2194,7 @@ The algorithm is especially useful for:
     ]
     result = bellman_ford(negative_cycle, 'A')
     print("Graph with negative cycle:", result)  # None
+
 ```
 
 ### Floyd-Warshall (Advanced)
@@ -2161,6 +2213,7 @@ Description: The Floyd-Warshall algorithm finds shortest paths between all pairs
   - Finding maximum paths by negating edge weights
 
 ```python
+
     def floyd_warshall(matrix):
         """
         Finds shortest paths between all pairs of vertices in a weighted graph.
@@ -2205,7 +2258,7 @@ Description: The Floyd-Warshall algorithm finds shortest paths between all pairs
     matrix = [
         # Direct paths: A->B=5, A->D=10
         # Indirect path: A->B->C->D = 9 (shorter than direct A->D)
-        [0,   5,   INF, 10], 
+        [0,   5,   INF, 10],
         [INF, 0,   3,   INF],
         [INF, INF, 0,   1],
         [INF, INF, INF, 0]
@@ -2218,6 +2271,7 @@ Description: The Floyd-Warshall algorithm finds shortest paths between all pairs
         formatted = [f"{x:^7.0f}" if x != float('inf') else "  INF  " for x in row]
         print(f"From vertex {i}: {formatted}")
     # Shortest paths matrix
+
 ```
 
 ### Topological Sort (Intermediate)
@@ -2250,17 +2304,18 @@ The algorithm is ideal for:
 - Process ordering
 
 ```python
+
     def topological_sort(graph):
         """
         Performs topological sort on a directed acyclic graph (DAG) using Kahn's algorithm.
         Returns vertices in an order where for each directed edge u->v, u comes before v.
-        
+
         Args:
             graph: Dict representing DAG where keys are vertices and values are lists of neighbors
-            
+
         Returns:
             List of vertices in topological order
-            
+
         Raises:
             ValueError if graph contains a cycle
         """
@@ -2269,32 +2324,32 @@ The algorithm is ideal for:
         for u in graph:
             for v in graph[u]:
                 in_degree[v] = in_degree.get(v, 0) + 1
-                
+
         # Initialize queue with vertices that have no incoming edges
         queue = deque([u for u in graph if in_degree[u] == 0])
         order = []
-        
+
         # Process vertices in queue
         while queue:
             u = queue.popleft()
             order.append(u)
-            
+
             # Reduce in-degree of neighbors and add to queue if in-degree becomes 0
             for v in graph[u]:
                 in_degree[v] -= 1
                 if in_degree[v] == 0:
                     queue.append(v)
-                    
+
         # Check if all vertices were processed (no cycles)
         if len(order) != len(graph):
             raise ValueError("Graph contains a cycle - topological sort not possible")
-            
+
         return order
 
     # Example usage showing different DAG scenarios
     if __name__ == "__main__":
         from collections import deque
-        
+
         # Example 1: Simple linear DAG
         dag1 = {
             'A': ['B'],
@@ -2303,7 +2358,7 @@ The algorithm is ideal for:
             'D': []
         }
         print("Linear DAG:", topological_sort(dag1))  # ['A', 'B', 'C', 'D']
-        
+
         # Example 2: DAG with multiple paths
         dag2 = {
             'CS101': ['CS201', 'CS210'],
@@ -2313,7 +2368,7 @@ The algorithm is ideal for:
             'CS401': []
         }
         print("Course prerequisites:", topological_sort(dag2))
-        
+
         # Example 3: DAG with independent paths
         dag3 = {
             'start': ['a1', 'b1'],
@@ -2324,6 +2379,7 @@ The algorithm is ideal for:
             'end': []
         }
         print("Parallel paths:", topological_sort(dag3))
+
 ```
 
 ### Knuth-Morris-Pratt (KMP) (Intermediate)
@@ -2352,6 +2408,7 @@ Common Use Cases:
 - Network packet inspection
 
 ```python
+
     def build_lps_array(pattern):
         """
         Build Longest Proper Prefix which is also Suffix (LPS) array
@@ -2391,22 +2448,22 @@ Common Use Cases:
 
         matches = []
         lps = build_lps_array(pattern)
-        
+
         i = 0  # Index for text
         j = 0  # Index for pattern
-        
+
         while i < len(text):
             # Characters match - move both pointers
             if text[i] == pattern[j]:
                 i += 1
                 j += 1
-                
+
                 # Found complete pattern
                 if j == len(pattern):
                     matches.append(i - j)
                     # Look for more matches - use LPS to avoid recomparing
                     j = lps[j - 1]
-                    
+
             else:
                 if j > 0:
                     # Mismatch after some matches - use LPS array
@@ -2414,7 +2471,7 @@ Common Use Cases:
                 else:
                     # Mismatch at start - move text pointer
                     i += 1
-                    
+
         return matches
 
     # Example usage showing multiple pattern occurrences
@@ -2428,8 +2485,9 @@ Common Use Cases:
 
     # Example with DNA sequence matching
     dna = "ACGTACGTACGT"
-    seq = "ACGT" 
+    seq = "ACGT"
     print(f"DNA sequence '{seq}' found at indices: {kmp_search(dna, seq)}")  # [0, 4, 8]
+
 ```
 
 ### Rabin-Karp (Intermediate)
@@ -2455,58 +2513,59 @@ Data structures used:
 - Rolling hash: Special hash function that can be updated in O(1)
 
 ```python
+
     def rabin_karp(text, patterns):
         """
         Rabin-Karp string matching algorithm that can find multiple patterns.
         Uses rolling hash for efficient sliding window comparison.
-        
+
         Args:
             text: String to search in
             patterns: Single pattern string or list of pattern strings
-        
+
         Returns:
             Dictionary mapping each pattern to list of indices where it was found
         """
         # Handle single pattern case
         if isinstance(patterns, str):
             patterns = [patterns]
-            
+
         # Initialize variables
         base = 256  # Number of characters in input alphabet
         prime = 101  # Prime number for hash calculation
         results = {p: [] for p in patterns}
-        
+
         # Process each pattern
         for pattern in patterns:
             m = len(pattern)
             n = len(text)
-            
+
             if m > n:
                 continue
-                
+
             # Calculate initial hash values
             pattern_hash = 0
             text_hash = 0
             h = pow(base, m-1) % prime  # Used for rolling hash calculation
-            
+
             # Calculate hash value for pattern and first window of text
             for i in range(m):
                 pattern_hash = (base * pattern_hash + ord(pattern[i])) % prime
                 text_hash = (base * text_hash + ord(text[i])) % prime
-                
+
             # Slide pattern over text one by one
             for i in range(n - m + 1):
                 # Check character by character if hash values match
                 if pattern_hash == text_hash:
                     if text[i:i+m] == pattern:
                         results[pattern].append(i)
-                        
+
                 # Calculate hash value for next window by removing leading digit
                 # and adding trailing digit
                 if i < n - m:
-                    text_hash = ((text_hash - ord(text[i]) * h) * base + 
+                    text_hash = ((text_hash - ord(text[i]) * h) * base +
                                 ord(text[i + m])) % prime
-                    
+
                     # Handle negative values
                     if text_hash < 0:
                         text_hash += prime
@@ -2519,11 +2578,12 @@ Data structures used:
     print(f"Pattern '{pattern}' found at indices: {rabin_karp(text, pattern)[pattern]}")  # [0, 9, 13]
 
     # Multiple pattern matching
-    dna = "ACGTACGTACGT" 
+    dna = "ACGTACGTACGT"
     patterns = ["ACGT", "CGT"]
     matches = rabin_karp(dna, patterns)
     for p in patterns:
         print(f"Pattern '{p}' found at indices: {matches[p]}")
+
 ```
 
 ### Dynamic Programming (DP) (Advanced)
@@ -2542,7 +2602,7 @@ Common Use Cases:
 
 Example: Computing nth Fibonacci number demonstrates both main DP approaches:
 1. Top-down memoization using hash map to cache results
-2. Bottom-up tabulation using array to build solution iteratively
+1. Bottom-up tabulation using array to build solution iteratively
 
 Benefits:
 - Reduces time complexity from O(2^n) to O(n)
@@ -2550,6 +2610,7 @@ Benefits:
 - Avoids redundant calculations by storing intermediate results
 
 ```python
+
     # Top-down memoization approach
     def fib_memoization(n, memo=None):
         """Calculate nth Fibonacci number using memoization (top-down DP)
@@ -2572,7 +2633,7 @@ Benefits:
         # Initialize table to store solutions of subproblems
         dp = [0] * (n + 1)
         dp[1] = 1
-        
+
         # Fill table in bottom-up manner
         for i in range(2, n + 1):
             dp[i] = dp[i-1] + dp[i-2]
@@ -2602,7 +2663,7 @@ Benefits:
 Description: Greedy algorithms make locally optimal choices at each step, hoping to find a global optimum. A classic example is interval scheduling - selecting the maximum number of non-overlapping intervals from a set of intervals.
 
 Key data structures and why they're used:
-- List of tuples for intervals: 
+- List of tuples for intervals:
   - List provides O(n log n) sorting efficiency
   - Tuples are immutable and memory-efficient for storing (start,end) pairs
   - Random access O(1) for iterating through sorted intervals
@@ -2615,13 +2676,14 @@ Key data structures and why they're used:
 
 The greedy strategy is to:
 1. Sort intervals by end time (earliest ending first)
-2. Take first interval
-3. Take next interval that starts after current end time
-4. Repeat until no more intervals
+1. Take first interval
+1. Take next interval that starts after current end time
+1. Repeat until no more intervals
 
 This produces optimal solution in O(n log n) time due to sorting, with O(n) space complexity.
 
 ```python
+
     # Store intervals as list of tuples (start_time, end_time)
     # List allows O(n log n) sorting and O(1) appends
     # Tuples are immutable and space-efficient for pairs
@@ -2635,7 +2697,7 @@ This produces optimal solution in O(n log n) time due to sorting, with O(n) spac
     # Store selected intervals in result list
     # List allows O(1) appends and maintains selection order
     result = []
-    
+
     # Track end time of last selected interval
     # Initialize to -1 to handle first interval
     current_end = -1
@@ -2645,7 +2707,7 @@ This produces optimal solution in O(n log n) time due to sorting, with O(n) spac
     for interval in intervals:
         start = interval[0]
         end = interval[1]
-        
+
         # If current interval starts after previous end
         # we can select it without overlap
         if start >= current_end:
@@ -2654,6 +2716,7 @@ This produces optimal solution in O(n log n) time due to sorting, with O(n) spac
 
     # Result contains maximum set of non-overlapping intervals
     print(f"Maximum non-overlapping intervals: {result}")
+
 ```
 
 ### Suffix Array Construction (Intermediate/Advanced)
@@ -2679,10 +2742,11 @@ This produces optimal solution in O(n log n) time due to sorting, with O(n) spac
 The naive construction approach shown here is O(n² log n), though more efficient O(n) algorithms exist like SA-IS. The naive version helps illustrate the core concept while being simpler to understand.
 
 ```python
+
     def suffix_array(s):
         """
         Build a suffix array for string s using naive approach.
-        
+
         Data structures used:
         - List of tuples: Store (suffix, position) pairs
           - Allows O(1) access and O(n log n) sorting
@@ -2692,24 +2756,24 @@ The naive construction approach shown here is O(n² log n), though more efficien
         - Final list: Store sorted positions
           - Maintains order of suffix positions
           - Allows O(1) access by index
-        
+
         Time complexity: O(n² log n)
         - O(n) to generate suffixes
         - Each suffix comparison takes O(n)
         - Sorting takes O(n log n) comparisons
         - Total: O(n) * O(n log n) = O(n² log n)
-        
+
         Space complexity: O(n²)
         - Storing n suffixes of average length n/2
         """
         # Create list of (suffix, position) tuples
         # Each suffix starts at position i and goes to end
         suffixes = [(s[i:], i) for i in range(len(s))]
-        
+
         # Sort suffixes lexicographically
         # Python's sort is stable - maintains relative order of equal elements
         suffixes.sort()  # O(n² log n) due to string comparisons
-        
+
         # Extract just the positions in sorted order
         # List comprehension maintains order while dropping suffixes
         return [pos for (suffix, pos) in suffixes]
@@ -2719,6 +2783,7 @@ The naive construction approach shown here is O(n² log n), though more efficien
     # Returns [5,3,1,0,4,2] corresponding to suffixes:
     # a, ana, anana, banana, na, nana
     print(suffix_array(text))
+
 ```
 
 ### Suffix Tree (Conceptual)
@@ -2747,17 +2812,18 @@ Data Structures Used:
 While powerful, suffix trees are complex to implement correctly and have a significant memory footprint. This implementation shows a conceptual node structure using Ukkonen's algorithm for linear-time construction.
 
 ```python
+
     class SuffixTreeNode:
         """
         A node in a suffix tree data structure.
-        
+
         Attributes:
             children (dict): Maps characters to child nodes
             start (int): Starting index of substring on edge to this node
             end (int): Ending index of substring on edge to this node
             suffix_link (SuffixTreeNode): Link to longest proper suffix
             leaf (bool): Whether this is a leaf node
-            
+
         The suffix tree allows O(m) substring searches where m is pattern length.
         Each node represents a substring of the original text, with:
         - Edge labels = substrings from text
@@ -2770,17 +2836,17 @@ While powerful, suffix trees are complex to implement correctly and have a signi
             self.end = end      # End index of substring on edge
             self.suffix_link = None  # Link to longest proper suffix
             self.leaf = False   # Whether this is a leaf node
-            
+
         def get_edge_length(self):
             """Get length of substring on edge to this node"""
             if self.end is None:
                 return 0
             return self.end - self.start
-            
+
         def add_child(self, char, node):
             """Add a child node under given character"""
             self.children[char] = node
-            
+
         def get_child(self, char):
             """Get child node for given character"""
             return self.children.get(char)
@@ -2790,23 +2856,23 @@ While powerful, suffix trees are complex to implement correctly and have a signi
         # Add terminal character to handle leaf nodes
         text = text + "$"
         n = len(text)
-        
+
         # Create root node
         root = SuffixTreeNode()
-        
+
         # Active point tracks where we need to add next suffix
         active_node = root
         active_edge = None
         active_length = 0
-        
+
         # Tracks where suffix link should go from last created node
         last_new_node = None
-        
+
         # Process each character to build tree incrementally
         for i in range(n):
             # For each position, extend all suffixes
             remaining = 1  # Number of suffixes yet to be added
-            
+
             while remaining > 0:
                 if active_length == 0:
                     # Start new edge from active node
@@ -2815,7 +2881,7 @@ While powerful, suffix trees are complex to implement correctly and have a signi
                         leaf = SuffixTreeNode(i, None)
                         leaf.leaf = True
                         active_node.add_child(text[i], leaf)
-                        
+
                         # Add suffix link if needed
                         if last_new_node is not None:
                             last_new_node.suffix_link = active_node
@@ -2830,41 +2896,41 @@ While powerful, suffix trees are complex to implement correctly and have a signi
                     next_char = text[i]
                     edge_node = active_node.get_child(active_edge)
                     edge_length = edge_node.get_edge_length()
-                    
+
                     if active_length >= edge_length:
                         # Walk down to next node
                         active_node = edge_node
                         active_length -= edge_length
                         active_edge = next_char
                         continue
-                        
+
                     # Check next character on edge
                     edge_pos = edge_node.start + active_length
                     if text[edge_pos] == next_char:
                         # Match found
                         active_length += 1
                         break  # Rule 3 extension
-                    
+
                     # Split edge and add new leaf
                     split = SuffixTreeNode(edge_node.start, edge_node.start + active_length)
                     active_node.add_child(active_edge, split)
-                    
+
                     # Add leaf node for new suffix
-                    leaf = SuffixTreeNode(i, None) 
+                    leaf = SuffixTreeNode(i, None)
                     leaf.leaf = True
                     split.add_child(next_char, leaf)
-                    
+
                     # Update original node
                     edge_node.start += active_length
                     split.add_child(text[edge_node.start], edge_node)
-                    
+
                     # Add suffix link if needed
                     if last_new_node is not None:
                         last_new_node.suffix_link = split
                     last_new_node = split
-                
+
                 remaining -= 1
-                
+
                 if active_node == root and active_length > 0:
                     active_length -= 1
                     active_edge = text[i - remaining + 1]
@@ -2872,12 +2938,13 @@ While powerful, suffix trees are complex to implement correctly and have a signi
                     active_node = active_node.suffix_link
                 else:
                     active_node = root
-                    
+
         return root
-        
+
     # Example usage
     text = "banana"
     root = build_suffix_tree(text)
+
 ```
 
 ### Kruskal’s Algorithm for Minimum Spanning Tree (MST) (Intermediate)
@@ -2895,26 +2962,27 @@ Data Structures Used:
 
 The algorithm works by:
 1. Sorting all edges by weight (O(E log E))
-2. Processing edges in order, using Union-Find to:
+1. Processing edges in order, using Union-Find to:
    - Check if vertices are already connected (would form cycle)
    - If not connected, add edge to MST and merge components
-3. Continues until MST has (V-1) edges
+1. Continues until MST has (V-1) edges
 
 Time Complexity: O(E log E) for sort + O(E * α(V)) for Union-Find operations
 Space Complexity: O(V) for Union-Find data structure
 
 ```python
+
     class UnionFind:
         """
         A Union-Find (Disjoint Set) data structure that efficiently tracks disjoint sets
         and supports union operations. Used in Kruskal's to detect cycles.
-        
+
         Key features:
         - Uses path compression in find() for near O(1) operations
         - Uses union by rank to keep trees balanced
         - parent[]: Each index maps to its parent node (initially itself)
         - rank[]: Tracks approximate depth of each tree to keep balanced
-        
+
         Time complexity:
         - find(): O(α(n)) amortized (α is inverse Ackermann, effectively constant)
         - union(): O(α(n)) amortized
@@ -2952,23 +3020,23 @@ Space Complexity: O(V) for Union-Find data structure
     def kruskal(edges, n):
         """
         Kruskal's MST Algorithm using Union-Find to detect cycles.
-        
+
         Args:
             edges: List of tuples (weight, u, v) representing weighted edges
             n: Number of vertices (0 to n-1)
-            
+
         Returns:
             List of (u,v,weight) tuples in the MST
-            
+
         Time complexity: O(E log E) due to sorting edges
         Space complexity: O(V) for UnionFind + O(E) for edge list
         """
         # Sort edges by weight to process cheapest first
         edges.sort(key=lambda x: x[0])
-        
+
         # Initialize Union-Find to track connected components
         uf = UnionFind(n)
-        
+
         # Build MST by adding edges that don't create cycles
         mst = []
         for w, u, v in edges:
@@ -2988,6 +3056,7 @@ Space Complexity: O(V) for Union-Find data structure
     ]
     print(kruskal(edges, 4))  # Returns MST edges in order added
     # Output: [(0,1,1), (1,2,2), (2,3,4)] representing minimum spanning tree
+
 ```
 
 ### Prim’s Algorithm for MST (Intermediate)
@@ -3001,65 +3070,68 @@ Data Structures:
 
 The algorithm maintains a "frontier" of edges in the priority queue, always greedily selecting the lightest edge that connects to an unvisited vertex. This guarantees optimality because:
 1. Any MST must cross each cut of the graph with its lightest edge
-2. The priority queue ensures we always select the current lightest edge
-3. The visited set ensures we don't create cycles
+1. The priority queue ensures we always select the current lightest edge
+1. The visited set ensures we don't create cycles
 
 Ideal for dense graphs where Kruskal's algorithm's edge sorting becomes expensive.
 
 ```python
+
 def prim(graph, start):
     """
     Prim's MST Algorithm using a min heap priority queue.
-    
+
     Args:
         graph: Dict representing adjacency list {vertex: [(neighbor, weight), ...]}
         start: Starting vertex to grow MST from
-        
+
     Returns:
         List of (u,v,weight) tuples in the MST
-        
+
     Time complexity: O(E log V) using binary heap
     Space complexity: O(V + E) for visited set and heap
     """
     visited = set()  # Track vertices in MST
     mst = []        # Store MST edges
     total_cost = 0  # Track total weight of MST
-    
+
     # Priority queue stores (weight, vertex, parent) tuples
     min_heap = [(0, start, None)]
-    
+
     while min_heap and len(visited) < len(graph):
         weight, curr_vertex, parent = heapq.heappop(min_heap)
-        
+
         # Skip if vertex already in MST
         if curr_vertex in visited:
             continue
-            
+
         visited.add(curr_vertex)
-        
+
         # Add edge to MST (except for start vertex)
         if parent is not None:
             mst.append((parent, curr_vertex, weight))
             total_cost += weight
-            
+
         # Add edges to unvisited neighbors
         for neighbor, edge_weight in graph[curr_vertex]:
             if neighbor not in visited:
                 heapq.heappush(min_heap, (edge_weight, neighbor, curr_vertex))
-                
+
     return mst, total_cost
 
-# Example usage showing different graph configurations:
+# Example usage showing different graph configurations
 
 # Diamond shaped graph (same as Kruskal's example)
+
 diamond_graph = {
     0: [(1,1), (2,3)],
-    1: [(0,1), (2,2), (3,5)], 
+    1: [(0,1), (2,2), (3,5)],
     2: [(0,3), (1,2), (3,4)],
     3: [(1,5), (2,4)]
 }
 
 # More complex graph with multiple possible MSTs
+
 complex_graph = {
     0: [(1,4), (2,3)],
     1: [(0,4), (2,1), (3,2)],
@@ -3069,15 +3141,17 @@ complex_graph = {
 }
 
 # Test both graphs
+
 print("Diamond Graph MST:")
 mst_edges, total_weight = prim(diamond_graph, 0)
 print(f"MST Edges: {mst_edges}")
 print(f"Total Weight: {total_weight}\n")
 
-print("Complex Graph MST:") 
+print("Complex Graph MST:")
 mst_edges, total_weight = prim(complex_graph, 0)
 print(f"MST Edges: {mst_edges}")
 print(f"Total Weight: {total_weight}")
+
 ```
 
 ### A* Search (Advanced)
@@ -3086,14 +3160,14 @@ Description: A* is an advanced pathfinding algorithm that combines Dijkstra's sh
 
 Data Structures Used:
 - Priority Queue (Min-Heap): Stores nodes to explore, prioritized by f(n) = g(n) + h(n)
-  - g(n): Actual cost from start to current node 
+  - g(n): Actual cost from start to current node
   - h(n): Heuristic estimated cost from current to goal
   - Enables efficient O(log n) selection of most promising nodes
-- Dictionary/Hash Map: 
+- Dictionary/Hash Map:
   - Tracks parent pointers for path reconstruction
   - Stores g-scores and f-scores for each node
   - Provides O(1) lookups
-- Set: 
+- Set:
   - Maintains visited nodes
   - Ensures O(1) lookup to avoid revisiting nodes
 - Grid Array:
@@ -3109,16 +3183,17 @@ The algorithm guarantees finding the optimal path when using an admissible heuri
 Below is an implementation for grid-based pathfinding using Manhattan distance heuristic.
 
 ```python
+
 import heapq
 from typing import List, Tuple, Dict, Set, Optional
 
 def heuristic(a: Tuple[int, int], b: Tuple[int, int]) -> float:
     """Calculate heuristic distance between two points.
-    
+
     Args:
         a: Starting point coordinates (x,y)
         b: Goal point coordinates (x,y)
-        
+
     Returns:
         Estimated distance between points using Manhattan distance
     """
@@ -3127,34 +3202,34 @@ def heuristic(a: Tuple[int, int], b: Tuple[int, int]) -> float:
 
 def get_neighbors(pos: Tuple[int, int], grid: List[List[int]]) -> List[Tuple[int, int]]:
     """Get valid neighboring positions.
-    
+
     Args:
         pos: Current position (x,y)
         grid: 2D grid map
-        
+
     Returns:
         List of valid neighbor positions
     """
     rows, cols = len(grid), len(grid[0])
     x, y = pos
     neighbors = []
-    
+
     # Check all 4 adjacent cells
     for dx, dy in [(1,0), (-1,0), (0,1), (0,-1)]:
         nx, ny = x + dx, y + dy
         if (0 <= nx < rows and 0 <= ny < cols and grid[nx][ny] == 0):
             neighbors.append((nx, ny))
-            
+
     return neighbors
 
-def reconstruct_path(parent: Dict[Tuple[int, int], Tuple[int, int]], 
+def reconstruct_path(parent: Dict[Tuple[int, int], Tuple[int, int]],
                     current: Tuple[int, int]) -> List[Tuple[int, int]]:
     """Reconstruct path from parent pointers.
-    
+
     Args:
         parent: Dictionary mapping positions to their parent in the path
         current: Current/goal position to trace back from
-        
+
     Returns:
         List of positions forming the path from start to goal
     """
@@ -3164,63 +3239,64 @@ def reconstruct_path(parent: Dict[Tuple[int, int], Tuple[int, int]],
         current = parent.get(current)
     return path[::-1]
 
-def astar_search(grid: List[List[int]], 
-                start: Tuple[int, int], 
+def astar_search(grid: List[List[int]],
+                start: Tuple[int, int],
                 goal: Tuple[int, int]) -> Optional[List[Tuple[int, int]]]:
     """Find shortest path using A* search algorithm.
-    
+
     Args:
         grid: 2D grid where 0=walkable, 1=blocked
         start: Starting position coordinates (x,y)
         goal: Goal position coordinates (x,y)
-        
+
     Returns:
         List of positions forming shortest path if one exists, None otherwise
     """
     # Priority queue ordered by f-score (g + h)
     open_set = [(0, start)]
-    
+
     # Track g-scores (actual distance from start)
     g_score = {start: 0}
-    
+
     # Track parent pointers for path reconstruction
     parent = {start: None}
-    
+
     # Track visited nodes
     closed_set: Set[Tuple[int, int]] = set()
 
     while open_set:
         # Get node with lowest f-score
         f_score, current = heapq.heappop(open_set)
-        
+
         if current in closed_set:
             continue
-            
+
         if current == goal:
             return reconstruct_path(parent, current)
-            
+
         closed_set.add(current)
-        
+
         # Check all neighbors
         for neighbor in get_neighbors(current, grid):
             if neighbor in closed_set:
                 continue
-                
+
             # 1 is the distance between adjacent cells
             tentative_g = g_score[current] + 1
-            
+
             if neighbor not in g_score or tentative_g < g_score[neighbor]:
                 parent[neighbor] = current
                 g_score[neighbor] = tentative_g
                 f_score = tentative_g + heuristic(neighbor, goal)
                 heapq.heappush(open_set, (f_score, neighbor))
-                
+
     return None  # No path exists
 
 # Example usage with different maze configurations
+
 simple_maze = [
     [0,0,0,1],
-    [0,1,0,0], 
+    [0,1,0,0],
     [0,0,0,0],
     [1,0,0,0]
 ]
@@ -3234,16 +3310,19 @@ complex_maze = [
 ]
 
 # Test simple maze
+
 start, goal = (0,0), (3,3)
 path = astar_search(simple_maze, start, goal)  # Prints [(0, 0), (0, 1), (0, 2), (1, 2), (2, 2), (2, 3), (3, 3)]
 print("Simple maze path:", path)
 
 # Test complex maze
-start, goal = (0,0), (4,4) 
+
+start, goal = (0,0), (4,4)
 path = astar_search(complex_maze, start, goal)  # Prints [(0, 0), (0, 1), (0, 2), (2, 2), (2, 3), (2, 4), (3, 4), (4, 4)]
 print("Complex maze path:", path)
 
 # Test impossible maze
+
 impossible_maze = [
     [0,0,1],
     [1,1,1],
@@ -3252,6 +3331,7 @@ impossible_maze = [
 start, goal = (0,0), (2,2)
 path = astar_search(impossible_maze, start, goal)  # This will print None since there is no valid path from (0,0) to (2,2) due to the wall of 1's blocking the way
 print("Impossible maze path:", path)  # Should print None
+
 ```
 
 ### Dynamic Programming: Longest Increasing Subsequence (LIS) (Intermediate)
@@ -3259,7 +3339,7 @@ print("Impossible maze path:", path)  # Should print None
 Description: Dynamic Programming solution for finding the length of the Longest Increasing Subsequence (LIS) in O(n²) time. Key features:
 
 Data Structures Used:
-- DP Array: 
+- DP Array:
   - 1D array storing length of LIS ending at each index
   - dp[i] represents length of LIS ending at index i
   - Enables efficient subproblem reuse and optimal solution building
@@ -3273,9 +3353,9 @@ Data Structures Used:
 
 The algorithm systematically builds solutions by:
 1. Initializing dp[i] = 1 for all indices (single element subsequences)
-2. For each position i, checking all previous positions j < i
-3. If arr[j] < arr[i], can extend subsequence ending at j
-4. Taking maximum of all possible extensions
+1. For each position i, checking all previous positions j < i
+1. If arr[j] < arr[i], can extend subsequence ending at j
+1. Taking maximum of all possible extensions
 
 Common applications include:
 - Stock price analysis
@@ -3284,29 +3364,30 @@ Common applications include:
 - Sequence analysis
 
 ```python
+
     def longest_increasing_subsequence(arr):
         """Find length and one possible longest increasing subsequence.
-        
+
         Args:
             arr: Input array of numbers
-            
+
         Returns:
             Tuple of (length, subsequence) where subsequence is one possible LIS
         """
         if not arr:
             return 0, []
-            
+
         n = len(arr)
         # dp[i] stores length of LIS ending at index i
         dp = [1] * n
-        
+
         # prev[i] stores previous index in LIS ending at i
         prev = [-1] * n
-        
+
         # Track index of cell containing longest subsequence
         max_length = 1
         max_index = 0
-        
+
         # Build solutions bottom-up
         for i in range(n):
             for j in range(i):
@@ -3315,19 +3396,19 @@ Common applications include:
                     if dp[j] + 1 > dp[i]:
                         dp[i] = dp[j] + 1
                         prev[i] = j
-                        
+
             # Update max if needed
             if dp[i] > max_length:
                 max_length = dp[i]
                 max_index = i
-                
+
         # Reconstruct subsequence by walking back through prev pointers
         subsequence = []
         curr = max_index
         while curr != -1:
             subsequence.append(arr[curr])
             curr = prev[curr]
-            
+
         return max_length, subsequence[::-1]  # Reverse to get correct order
 
     # Example usage showing both length and subsequence
@@ -3344,6 +3425,7 @@ Common applications include:
 
     # Test strictly decreasing array
     print(longest_increasing_subsequence([5,4,3,2,1]))  # (1, [1])
+
 ```
 
 ### Advanced DP Variation: Minimum Edit Distance (Levenshtein Distance)
@@ -3351,7 +3433,7 @@ Common applications include:
 Description: The Minimum Edit Distance (Levenshtein Distance) algorithm calculates the minimum number of operations needed to transform one string into another. Key features:
 
 Data Structures Used:
-- 2D DP Table (Matrix): 
+- 2D DP Table (Matrix):
   - Size (m+1) x (n+1) where m,n are string lengths
   - Each cell [i,j] represents min edits needed for prefixes s1[0:i], s2[0:j]
   - Enables efficient subproblem reuse and optimal solution building
@@ -3364,7 +3446,7 @@ Data Structures Used:
 
 The algorithm systematically fills the DP table by considering three possible operations at each step:
 - Insertion: Add a character (cost of 1)
-- Deletion: Remove a character (cost of 1) 
+- Deletion: Remove a character (cost of 1)
 - Substitution: Replace a character (cost of 1 if chars different, 0 if same)
 
 Common applications include:
@@ -3374,16 +3456,17 @@ Common applications include:
 - Fuzzy string matching
 
 ```python
+
     def edit_distance(s1: str, s2: str) -> int:
         """Calculate minimum edit distance between two strings.
-        
+
         Args:
             s1: First string
             s2: Second string
-            
+
         Returns:
             Minimum number of operations (insert/delete/substitute) to transform s1 to s2
-            
+
         The DP table is filled using the recurrence relation:
         If chars match: dp[i][j] = dp[i-1][j-1]
         If chars differ: dp[i][j] = 1 + min(
@@ -3393,16 +3476,16 @@ Common applications include:
         )
         """
         m, n = len(s1), len(s2)
-        
+
         # Create DP table with base cases
         dp = [[0]*(n+1) for _ in range(m+1)]
-        
+
         # Base cases - transforming to/from empty string
         for i in range(m+1):
             dp[i][0] = i  # Deletions needed
         for j in range(n+1):
             dp[0][j] = j  # Insertions needed
-            
+
         # Fill DP table
         for i in range(1, m+1):
             for j in range(1, n+1):
@@ -3413,10 +3496,10 @@ Common applications include:
                     # Take minimum of three operations
                     dp[i][j] = 1 + min(
                         dp[i-1][j],    # deletion
-                        dp[i][j-1],    # insertion 
+                        dp[i][j-1],    # insertion
                         dp[i-1][j-1]   # substitution
                     )
-                    
+
         return dp[m][n]
 
     # Example usage with different test cases
@@ -3427,8 +3510,10 @@ Common applications include:
     print(edit_distance("same", "same"))  # 0 operations
 
 ```
-----
-## Additional DP examples:
+
+---
+
+## Additional DP examples
 
 Below are several additional examples of dynamic programming (DP) solutions, illustrating both memoization (top-down) and tabulation (bottom-up) approaches, along with common use cases. These examples include classic problems like the 0/1 Knapsack, Coin Change, Longest Common Subsequence (LCS), and a simple counting paths problem. Each snippet will show a brief explanation of where such an approach is beneficial and when to consider using either iterative (tabulation) or memoization strategies.
 
@@ -3442,7 +3527,7 @@ Key Data Structures Used:
 - Arrays/Lists: Store the weights and values of items
   - Provides O(1) access to item properties
   - Maintains item ordering for consistent lookup
-- 2D DP Array/Dictionary: 
+- 2D DP Array/Dictionary:
   - Memoization: Dictionary mapping (item_index, remaining_capacity) to optimal value
   - Tabulation: 2D array where dp[i][w] represents optimal value for first i items with capacity w
   - Enables O(1) lookup of subproblem solutions
@@ -3458,25 +3543,27 @@ This problem appears frequently in:
 The binary (0/1) constraint of taking an item completely or not at all makes this harder than fractional knapsack, requiring dynamic programming rather than a greedy approach.
 
 **Memoization (Top-Down)**:
+
 ```python
+
     def knapsack_memoization(weights: list[int], values: list[int], capacity: int) -> int:
         """
         Solves the 0/1 Knapsack problem using memoization (top-down DP).
-        
+
         Args:
             weights: List of item weights
-            values: List of item values 
+            values: List of item values
             capacity: Maximum weight capacity
-            
+
         Returns:
             Maximum value achievable within weight capacity
-            
+
         Time Complexity: O(n*W) where n is number of items and W is capacity
         Space Complexity: O(n*W) for memoization dictionary
         """
         if not weights or not values or len(weights) != len(values):
             return 0
-            
+
         n = len(weights)
         memo = {}  # Maps (item_index, remaining_capacity) to optimal value
 
@@ -3486,19 +3573,19 @@ The binary (0/1) constraint of taking an item completely or not at all makes thi
                 return 0
             if remaining_cap <= 0:  # No capacity left
                 return 0
-                
+
             # Check if subproblem already solved
             if (i, remaining_cap) in memo:
                 return memo[(i, remaining_cap)]
 
             # Try excluding current item
             exclude_value = dfs(i + 1, remaining_cap)
-            
+
             # Try including current item if possible
             include_value = 0
             if weights[i] <= remaining_cap:
                 include_value = values[i] + dfs(i + 1, remaining_cap - weights[i])
-            
+
             # Take maximum and cache result
             optimal_value = max(exclude_value, include_value)
             memo[(i, remaining_cap)] = optimal_value
@@ -3510,34 +3597,38 @@ The binary (0/1) constraint of taking an item completely or not at all makes thi
     weights = [2, 3, 4, 5]  # Item weights
     values = [3, 4, 5, 6]   # Corresponding values
     capacity = 5            # Knapsack capacity
-    
+
     # Should return 7 (optimal solution takes items with weights 2,3 and values 3,4)
     print(knapsack_memoization(weights, values, capacity))
-    
+
     # Edge cases
     print(knapsack_memoization([], [], 5))  # 0 (empty lists)
     print(knapsack_memoization([1], [10], 0))  # 0 (no capacity)
     print(knapsack_memoization([5], [10], 3))  # 0 (item too heavy)
+
 ```
+
 **Tabulation (Bottom-Up)**:
+
 ```python
+
     def knapsack_tabulation(weights: list[int], values: list[int], capacity: int) -> int:
         """Solve 0/1 knapsack using bottom-up dynamic programming.
-        
+
         Args:
             weights: List of item weights
-            values: List of item values 
+            values: List of item values
             capacity: Maximum weight capacity
-            
+
         Returns:
             Maximum achievable value within weight capacity
-            
+
         Time Complexity: O(n*W) where n is number of items and W is capacity
         Space Complexity: O(n*W) for dp table
         """
         if not weights or not values or len(weights) != len(values):
             return 0
-            
+
         n = len(weights)
         # dp[i][w] represents max value achievable using first i items with capacity w
         dp = [[0]*(capacity+1) for _ in range(n+1)]
@@ -3545,12 +3636,12 @@ The binary (0/1) constraint of taking an item completely or not at all makes thi
         # Build table bottom-up
         for i in range(1, n+1):
             for w in range(capacity+1):
-                # Not taking item i-1 
+                # Not taking item i-1
                 dp[i][w] = dp[i-1][w]
-                
+
                 # Taking item i-1 if possible
                 if weights[i-1] <= w:
-                    dp[i][w] = max(dp[i][w], 
+                    dp[i][w] = max(dp[i][w],
                                 values[i-1] + dp[i-1][w-weights[i-1]])
 
         return dp[n][capacity]
@@ -3567,8 +3658,11 @@ The binary (0/1) constraint of taking an item completely or not at all makes thi
     print(knapsack_tabulation([], [], 5))  # 0 (empty lists)
     print(knapsack_tabulation([1], [10], 0))  # 0 (no capacity)
     print(knapsack_tabulation([5], [10], 3))  # 0 (item too heavy)
+
 ```
+
 ---
+
 ### Coin Change (Minimum Coins)
 
 The Coin Change problem (minimizing coins) is common in making change problems, currency systems, and combinational optimization tasks. Given a set of denominations and a target amount, we want the fewest coins to make that amount. If it can't be formed exactly, return -1.
@@ -3594,23 +3688,24 @@ The problem exhibits optimal substructure (minimum solution for amount n uses mi
 **Memoization (Top-Down)**:
 
 ```python
+
     def coin_change_memo(coins: list[int], amount: int) -> int:
         """Find minimum number of coins needed to make given amount.
-        
+
         Args:
             coins: List of coin denominations available
             amount: Target amount to make
-            
+
         Returns:
             Minimum number of coins needed, or -1 if amount cannot be made
-            
+
         Uses memoization (top-down DP) to avoid recalculating subproblems.
         Time complexity: O(amount * len(coins))
         Space complexity: O(amount) for memoization cache
         """
         # Cache to store minimum coins needed for each amount
         memo = {}
-        
+
         def dfs(remaining: int) -> int:
             """Recursive helper with memoization."""
             # Base cases
@@ -3620,12 +3715,12 @@ The problem exhibits optimal substructure (minimum solution for amount n uses mi
                 return float('inf')
             if remaining in memo:
                 return memo[remaining]
-                
+
             # Try using each coin and take minimum
             min_coins = float('inf')
             for coin in coins:
                 min_coins = min(min_coins, 1 + dfs(remaining - coin))
-                
+
             # Cache result before returning
             memo[remaining] = min_coins
             return min_coins
@@ -3633,7 +3728,7 @@ The problem exhibits optimal substructure (minimum solution for amount n uses mi
         # Handle edge cases
         if not coins or amount < 0:
             return -1
-            
+
         result = dfs(amount)
         return result if result != float('inf') else -1
 
@@ -3649,22 +3744,24 @@ The problem exhibits optimal substructure (minimum solution for amount n uses mi
     for coins, amount in test_cases:
         result = coin_change_memo(coins, amount)
         print(f"Coins={coins}, Amount={amount}: {result}")
+
 ```
 
 **Tabulation (Bottom-Up)**:
 
 ```python
+
 def coin_change_tab(coins: list[int], amount: int) -> int:
     """
     Solves the coin change problem using tabulation (bottom-up DP).
-    
+
     Args:
         coins: List of coin denominations
         amount: Target amount to make change for
-        
+
     Returns:
         Minimum number of coins needed, or -1 if impossible
-        
+
     Time Complexity: O(amount * len(coins))
     Space Complexity: O(amount) for dp array
     """
@@ -3673,12 +3770,12 @@ def coin_change_tab(coins: list[int], amount: int) -> int:
         return -1
     if amount == 0:
         return 0
-        
+
     # Initialize dp array with infinity
     # dp[i] represents min coins needed for amount i
     dp = [float('inf')] * (amount + 1)
     dp[0] = 0  # Base case - 0 coins needed for amount 0
-    
+
     # Build up solution for each amount from 1 to target
     for curr_amount in range(1, amount + 1):
         # Try using each coin denomination
@@ -3690,11 +3787,12 @@ def coin_change_tab(coins: list[int], amount: int) -> int:
                     dp[curr_amount],
                     1 + dp[curr_amount - coin]
                 )
-                
+
     # Return -1 if no solution found
     return dp[amount] if dp[amount] != float('inf') else -1
 
 # Example usage with test cases
+
 test_cases = [
     ([1,2,5], 11),     # Should return 3 (5+5+1)
     ([2], 3),          # Should return -1 (impossible)
@@ -3706,8 +3804,11 @@ test_cases = [
 for coins, amount in test_cases:
     result = coin_change_tab(coins, amount)
     print(f"Coins={coins}, Amount={amount}: {result}")
+
 ```
+
 ---
+
 ### Longest Common Subsequence (LCS)
 
 The Longest Common Subsequence (LCS) problem finds the longest sequence of characters that appear in order in both strings. It has important applications in:
@@ -3737,36 +3838,37 @@ The dynamic programming approach is necessary because the problem exhibits:
 **Memoization (Top-Down)**:
 
 ```python
+
     def lcs_memo(s1: str, s2: str) -> int:
         """
         Find length of Longest Common Subsequence using memoization.
-        
+
         Args:
             s1: First string
             s2: Second string
-            
+
         Returns:
             Length of longest common subsequence
-            
+
         Time Complexity: O(m*n) where m,n are string lengths
         Space Complexity: O(m*n) for memoization dictionary
         """
         # Handle edge cases
         if not s1 or not s2:
             return 0
-            
+
         memo = {}  # Cache for subproblems
-        
+
         def dfs(i: int, j: int) -> int:
             """Recursive helper with memoization"""
             # Base case - reached end of either string
             if i == len(s1) or j == len(s2):
                 return 0
-                
+
             # Return cached result if available
             if (i,j) in memo:
                 return memo[(i,j)]
-            
+
             # If characters match, include in LCS and move both pointers
             if s1[i] == s2[j]:
                 memo[(i,j)] = 1 + dfs(i+1, j+1)
@@ -3778,13 +3880,13 @@ The dynamic programming approach is necessary because the problem exhibits:
                     dfs(i, j+1)   # Skip character in s2
                 )
             return memo[(i,j)]
-            
+
         return dfs(0, 0)
 
     # Example usage with different test cases
     test_cases = [
         ("abcde", "ace"),     # 3 (ace)
-        ("abc", "abc"),       # 3 (abc) 
+        ("abc", "abc"),       # 3 (abc)
         ("abc", "def"),       # 0 (no common subsequence)
         ("", "abc"),          # 0 (empty string)
         ("long", "stone"),    # 3 (lon)
@@ -3799,28 +3901,29 @@ The dynamic programming approach is necessary because the problem exhibits:
 **Tabulation (Bottom-Up)**:
 
 ```python
+
 def lcs_tab(s1: str, s2: str) -> int:
     """
     Finds length of Longest Common Subsequence using tabulation (bottom-up DP).
-    
+
     Args:
         s1: First string
         s2: Second string
-        
+
     Returns:
         Length of longest common subsequence
-        
+
     Time Complexity: O(m*n) where m,n are string lengths
     Space Complexity: O(m*n) for dp table
     """
     # Handle edge cases
     if not s1 or not s2:
         return 0
-        
+
     # Create dp table with extra row/col for empty string base case
     m, n = len(s1), len(s2)
     dp = [[0]*(n+1) for _ in range(m+1)]
-    
+
     # Fill dp table bottom-up
     for i in range(m-1, -1, -1):
         for j in range(n-1, -1, -1):
@@ -3830,14 +3933,15 @@ def lcs_tab(s1: str, s2: str) -> int:
             else:
                 # Characters don't match - take max of skipping either
                 dp[i][j] = max(dp[i+1][j], dp[i][j+1])
-                
+
     return dp[0][0]
 
 # Example usage with different test cases
+
 test_cases = [
     ("abcde", "ace"),     # 3 (ace)
     ("abc", "abc"),       # 3 (abc)
-    ("abc", "def"),       # 0 (no common subsequence) 
+    ("abc", "def"),       # 0 (no common subsequence)
     ("", "abc"),          # 0 (empty string)
     ("long", "stone"),    # 3 (lon)
 ]
@@ -3878,6 +3982,7 @@ In essence, DP is particularly useful when:
 - There is no simple greedy choice that always leads to an optimal solution.
 
 ## More Greedy Algorithms
+
 ### Huffman Coding (Tree construction)
 
 Description: Huffman coding constructs an optimal prefix-free binary code by building a special binary tree. Key features:
@@ -3908,6 +4013,7 @@ The algorithm works by repeatedly merging the two lowest frequency nodes until a
 Below is a code snippet for building the Huffman tree and printing the optimal binary codes.
 
 ```python
+
     import heapq
     from collections import defaultdict
 
@@ -3918,7 +4024,7 @@ Below is a code snippet for building the Huffman tree and printing the optimal b
             self.freq = freq
             self.left = None
             self.right = None
-            
+
         def __lt__(self, other):
             # For heap comparison
             return self.freq < other.freq
@@ -3929,39 +4035,39 @@ Below is a code snippet for building the Huffman tree and printing the optimal b
         freq = defaultdict(int)
         for char in text:
             freq[char] += 1
-            
+
         # Create leaf nodes and add to min heap
         heap = []
         for char, count in freq.items():
             node = HuffmanNode(char, count)
             heapq.heappush(heap, node)
-            
+
         # Merge nodes until only root remains
         while len(heap) > 1:
             # Get two minimum frequency nodes
             left = heapq.heappop(heap)
             right = heapq.heappop(heap)
-            
+
             # Create internal node with combined frequency
             internal = HuffmanNode(None, left.freq + right.freq)
             internal.left = left
             internal.right = right
-            
+
             # Add back to heap
             heapq.heappush(heap, internal)
-            
+
         return heap[0]
 
     def generate_codes(root, code="", codes=None):
         """Generate binary codes for each character by traversing tree"""
         if codes is None:
             codes = {}
-            
+
         # Leaf node - store code
         if root.char is not None:
             codes[root.char] = code
             return
-            
+
         # Traverse left (0) and right (1)
         generate_codes(root.left, code + "0", codes)
         generate_codes(root.right, code + "1", codes)
@@ -3972,11 +4078,11 @@ Below is a code snippet for building the Huffman tree and printing the optimal b
         # Handle empty input
         if not text:
             return "", None
-            
+
         # Build tree and generate codes
         root = build_huffman_tree(text)
         codes = generate_codes(root)
-        
+
         # Encode text
         encoded = "".join(codes[char] for char in text)
         return encoded, root
@@ -3997,11 +4103,11 @@ Below is a code snippet for building the Huffman tree and printing the optimal b
     #       (h) (i)  (a)
 
     print("Original text:", text)  
-    # Output: 
+    # Output:
     # Original text: this is an example for huffman encoding
 
     print("Huffman Codes:", generate_codes(tree))  
-    # Output: 
+    # Output:
     # Huffman Codes: {
     #     'h': '110',    'i': '101',    'a': '011',
     #     't': '1101',   's': '1100',   'e': '1110',
@@ -4013,6 +4119,7 @@ Below is a code snippet for building the Huffman tree and printing the optimal b
 
     print("Encoded text:", encoded)
     # Output:
-    # Encoded text: 
+    # Encoded text:
     # 110110101100101100011010100110011011110011001111101100100111111010100101101110010110011
+
 ```

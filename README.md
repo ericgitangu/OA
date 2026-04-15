@@ -13,7 +13,8 @@ A comprehensive collection of Python scripts designed to help you prepare for te
 - [Installation](#installation)
 - [Usage](#usage)
 - [Scripts](#scripts)
-- [DSA](#DSA)
+- [DSA](#dsa)
+- [Competitive Programming Routine](#competitive-programming-routine)
 - [Contributing](#contributing)
 - [License](#license)
 - [Author](#author)
@@ -21,18 +22,20 @@ A comprehensive collection of Python scripts designed to help you prepare for te
 
 ## About
 
-Pruning the grind leetcode type questions to patterns once you crack you will ready for any OA interview or just brush up on rusty concepts. Happy coding! 
+Pruning the grind leetcode type questions to patterns once you crack you will ready for any OA interview or just brush up on rusty concepts. Happy coding!
 
 ## Installation
 
 Clone the repository and install the required dependencies:
 
 ```bash
+
     git clone https://github.com/your-username/oa-coding-tech-interview-prep.git
     cd oa-coding-tech-interview-prep
     python -m venv my_virtual_env
     source my_virtual_env/bin/activate
     pip install -r requirements.txt
+
 ```
 
 ## Usage
@@ -40,37 +43,44 @@ Clone the repository and install the required dependencies:
 Each script can be run independently. For example:
 
 ```bash
-    python multiplication_algorithms.py
-```
 
+    python multiplication_algorithms.py
+
+```
 
 ## Scripts
 
 ### Graph Algorithms
+
 1. **bfs.py**: Demonstrates Breadth-First Search (BFS) algorithm implementation on a graph.
-2. **dfs.py**: Implements the Depth-First Search (DFS) algorithm for graph traversal.
-3. **graph_traversal.py**: Finds all possible paths between two nodes in a graph.
-4. **shortest_path_collections_itertools.py**: Implements shortest path algorithms using collections and itertools.
+1. **dfs.py**: Implements the Depth-First Search (DFS) algorithm for graph traversal.
+1. **graph_traversal.py**: Finds all possible paths between two nodes in a graph.
+1. **shortest_path_collections_itertools.py**: Implements shortest path algorithms using collections and itertools.
 
 ### Data Structures
-5. **min_max-heap.py**: Implements min-heap and max-heap data structures and their operations.
-6. **linked_lists.py**: Implements and traverses a linked-list.
-7. **double_linked_list.py**: Implements and traverses a doubly-linked list.
-8. **circular_linked_lists.py**: Implements and traverses a circular linked list.
+
+1. **min_max-heap.py**: Implements min-heap and max-heap data structures and their operations.
+1. **linked_lists.py**: Implements and traverses a linked-list.
+1. **double_linked_list.py**: Implements and traverses a doubly-linked list.
+1. **circular_linked_lists.py**: Implements and traverses a circular linked list.
 
 ### Dynamic Programming
-9. **dynamic_programming_memoization.py**: Solves the "Unique Paths" problem using dynamic programming with memoization.
-10. **travelling_salesman.py**: Solves the Travelling Salesman Problem using dynamic programming.
-11. **longest_palidromic_string.py**: Finds the longest palindromic substring in a given string.
+
+1. **dynamic_programming_memoization.py**: Solves the "Unique Paths" problem using dynamic programming with memoization.
+1. **travelling_salesman.py**: Solves the Travelling Salesman Problem using dynamic programming.
+1. **longest_palidromic_string.py**: Finds the longest palindromic substring in a given string.
 
 ### String Processing
-12. **text_search_algoritms.py**: Implements various text search algorithms.
-13. **multiplication_algorithms.py**: Implements various multiplication algorithms.
+
+1. **text_search_algoritms.py**: Implements various text search algorithms.
+1. **multiplication_algorithms.py**: Implements various multiplication algorithms.
 
 ### Concurrency
-14. **chat_room.py**: Simulates a real-time chat room with concurrent user interactions.
-15. **meeting_scheduler.py**: Implements a concurrent meeting scheduler.
-16. **dinning_philosophers_with_concurrency.py**: Implements the dining philosophers problem.
+
+1. **chat_room.py**: Simulates a real-time chat room with concurrent user interactions.
+1. **meeting_scheduler.py**: Implements a concurrent meeting scheduler.
+1. **dinning_philosophers_with_concurrency.py**: Implements the dining philosophers problem.
+
 ---
 More examples in the link in the DSA section
 
@@ -78,19 +88,23 @@ More examples in the link in the DSA section
 
 Comprehensive DSA Guide [included here](https://github.com/ericgitangu/OA/blob/main/dsa.md)
 
+## Competitive Programming Routine
+
+Follow the 4-Hour 4AM daily plan designed to rapidly restore your algorithmic readiness: [INDEX.md](INDEX.md)
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. A good place to start would be to add tests then incoporate them into our CI/CD or alternatively, write a script to run tests to run against our implementations including testing our DSA guide examples. TODO: add tests.
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+1. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+1. Push to the branch (`git push origin feature/AmazingFeature`)
+1. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the MIT License.
 
 ## Author
 

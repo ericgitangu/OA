@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Competitive Programming Tracker//OA Grind//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:competitive_programming_4am@ericgitangu.com
+DTSTAMP:20260415T090000Z
+DTSTART:20260416T040000
+DTEND:20260416T080000
+RRULE:FREQ=DAILY
+SUMMARY:Competitive Programming Grind
+DESCRIPTION:4-Hour Routine\n\n04:00-04:30: Warm-up & Spaced Repetition\n04:30-06:15: Deep Work & Discovery\n06:15-07:15: Solution Deconstruction\n07:15-08:00: Documentation
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Wake up! CP Grind starts in 15 mins.
+END:VALARM
+END:VEVENT
+END:VCALENDAR
