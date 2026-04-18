@@ -595,29 +595,58 @@ sequenceDiagram
 
 ## Requirements
 
-### Epic 1: Customer Onboarding
-
-As a field installer, onboard a new customer (KYC, device pairing, financing, first payment) in under 15 minutes including offline scenarios.
-
-### Epic 2: Metering and Payment Allocation
-
-As a customer, M-Pesa payment unlocks solar system tokens within 60 seconds.
-
-### Epic 3: Multi-Manufacturer Device Fleet
-
-As a platform operator, integrate a new hardware manufacturer in under 4 weeks.
-
-### Epic 4: Tariff DSL
-
-As a distributor product manager, define new tariff structures in a business-readable DSL and A/B test them without engineering involvement.
-
-### Epic 5: Unified Call Center Agent Desktop
-
-As a call center agent, one screen shows everything about the calling customer with live Sauti transcription and sentiment scoring.
-
-### Epic 6: Regulator Reporting
-
-As a compliance officer, quarterly reports generated automatically from platform data.
+| ID | Requirement | Priority | Status |
+|----|-------------|----------|--------|
+| **Epic 1: Customer Onboarding** | | | |
+| REQ-001 | Field installer can onboard a new customer (KYC, device pairing, financing, first payment) in under 15 minutes including offline scenarios | P0 | Not Started |
+| REQ-002 | KYC capture supports photo ID, selfie, GPS location, and basic customer details | P0 | Not Started |
+| REQ-003 | Device pairing workflow (enter serial, pair with physical unit) completes in under 2 minutes | P0 | Not Started |
+| REQ-004 | Financing plan selection from pre-approved templates with LendStream underwriting for device financing | P0 | Not Started |
+| REQ-005 | First payment collection via M-Pesa during onboarding flow | P0 | Not Started |
+| REQ-006 | Entire onboarding flow works offline with CRDT-based sync when connectivity returns | P0 | Not Started |
+| REQ-007 | Customer receives SMS confirmation within 5 minutes of connectivity restoration | P1 | Not Started |
+| REQ-008 | Installer commission accrues in real-time on their dashboard | P1 | Not Started |
+| **Epic 2: Metering and Payment Allocation** | | | |
+| REQ-009 | M-Pesa payment webhook processed within 10 seconds | P0 | Not Started |
+| REQ-010 | Payment allocation saga runs: allocate to principal, interest, fees; compute new unlock duration | P0 | Not Started |
+| REQ-011 | Tokens generated deterministically from the payment amount | P0 | Not Started |
+| REQ-012 | Tokens dispatched to customer device via SMS or IoT API depending on device type | P0 | Not Started |
+| REQ-013 | Customer SMS confirmation includes new unlock period (e.g., "Your Sun King is now on for 14 days") | P1 | Not Started |
+| REQ-014 | End-to-end payment-to-token flow completes in under 60 seconds | P0 | Not Started |
+| **Epic 3: Multi-Manufacturer Device Fleet** | | | |
+| REQ-015 | New hardware manufacturer integration completes in under 4 weeks | P1 | Not Started |
+| REQ-016 | Each manufacturer integration lives in a hexagonal adapter with no changes to core domain | P0 | Not Started |
+| REQ-017 | Manufacturer-specific tokenization logic encapsulated in a dedicated module | P0 | Not Started |
+| REQ-018 | Device-specific fleet management (firmware updates, diagnostics) exposed via a unified port | P1 | Not Started |
+| REQ-019 | End-to-end test exercises the full flow for each new manufacturer | P1 | Not Started |
+| REQ-020 | Manufacturer integration rolled out to specific distributors via feature flag | P1 | Not Started |
+| **Epic 4: Tariff DSL** | | | |
+| REQ-021 | F#-based DSL allows product managers to define tariff structures in business-readable syntax | P0 | Not Started |
+| REQ-022 | DSL validates tariffs for mathematical consistency at definition time | P0 | Not Started |
+| REQ-023 | Product managers can simulate tariffs against historical customer data | P1 | Not Started |
+| REQ-024 | Tariffs can be activated for a specified cohort (e.g., 10% of new customers in Uganda) for A/B testing | P1 | Not Started |
+| REQ-025 | A/B tests run deterministically with comparable results after 30 days | P1 | Not Started |
+| REQ-026 | Tariffs can be rolled back without code deployment | P0 | Not Started |
+| **Epic 5: Unified Call Center Agent Desktop** | | | |
+| REQ-027 | Customer full profile auto-loads in under 2 seconds when inbound call arrives | P0 | Not Started |
+| REQ-028 | Sauti live transcription appears in the same agent view | P1 | Not Started |
+| REQ-029 | Sentiment score updates every 10 seconds during active call | P2 | Not Started |
+| REQ-030 | Suggested next actions appear based on call context and customer state | P1 | Not Started |
+| REQ-031 | Call outcome captured with one click and feeds customer profile | P0 | Not Started |
+| **Epic 6: Regulator Reporting** | | | |
+| REQ-032 | System aggregates required data per regulator format (EPRA, ERA, ENEE) | P1 | Not Started |
+| REQ-033 | Reports generated as Excel + PDF | P1 | Not Started |
+| REQ-034 | Cryptographic signature on reports proves data integrity | P2 | Not Started |
+| REQ-035 | Compliance officer can review, approve, and submit reports via Partner BFF | P1 | Not Started |
+| REQ-036 | Full reporting process takes under 4 hours (vs 4 days previously) | P1 | Not Started |
+| **Epic 7: LendStream Integration (Credit Underwriting)** | | | |
+| REQ-037 | Anti-corruption layer translates between PayGoHub domain language and LendStream domain language | P0 | Not Started |
+| REQ-038 | Device financing flows (12-month amortization) routed through LendStream underwriting | P0 | Not Started |
+| REQ-039 | Bundle financing (solar + TV + fan) handled by LendStream with full underwriting | P1 | Not Started |
+| REQ-040 | Installer commission advances processed as LendStream micro-loans | P2 | Not Started |
+| REQ-041 | gRPC contract between PayGoHub Payments and LendStream Scoring contexts (typed, versioned, code-generated from shared .proto) | P0 | Not Started |
+| REQ-042 | Event bridge via Azure Service Bus: CustomerRequestedFinancing / LoanOriginated / LoanRejected events | P0 | Not Started |
+| REQ-043 | Shared customer identity reconciled via Customer context as system of record | P0 | Not Started |
 
 ---
 
@@ -625,54 +654,64 @@ As a compliance officer, quarterly reports generated automatically from platform
 
 ### Epic 1: Customer Onboarding
 
-- [ ] KYC capture (photo ID, selfie, GPS, basic details) completes in under 5 minutes
-- [ ] Device pairing (enter serial, pair with physical unit) completes in under 2 minutes
-- [ ] Financing plan selected from pre-approved templates
-- [ ] First payment collected via M-Pesa
-- [ ] Entire flow works offline (syncs when connectivity returns)
-- [ ] Customer receives SMS confirmation within 5 minutes of connectivity
-- [ ] Installer commission accrues in real-time on their dashboard
+- [ ] **AC-001** KYC capture (photo ID, selfie, GPS, basic details) completes in under 5 minutes
+- [ ] **AC-002** Device pairing (enter serial, pair with physical unit) completes in under 2 minutes
+- [ ] **AC-003** Financing plan selected from pre-approved templates
+- [ ] **AC-004** First payment collected via M-Pesa
+- [ ] **AC-005** Entire flow works offline (syncs when connectivity returns via CRDTs)
+- [ ] **AC-006** Customer receives SMS confirmation within 5 minutes of connectivity
+- [ ] **AC-007** Installer commission accrues in real-time on their dashboard
 
 ### Epic 2: Metering and Payment Allocation
 
-- [ ] Webhook processed within 10 seconds
-- [ ] Payment allocation saga runs (allocate to principal, interest, fees; compute new unlock duration)
-- [ ] Tokens generated deterministically from the payment amount
-- [ ] Tokens dispatched to customer device (via SMS or IoT API depending on device type)
-- [ ] Customer SMS confirmation includes new unlock period
-- [ ] Whole flow completes in under 60 seconds
+- [ ] **AC-008** Webhook processed within 10 seconds
+- [ ] **AC-009** Payment allocation saga runs (allocate to principal, interest, fees; compute new unlock duration)
+- [ ] **AC-010** Tokens generated deterministically from the payment amount
+- [ ] **AC-011** Tokens dispatched to customer device (via SMS or IoT API depending on device type)
+- [ ] **AC-012** Customer SMS confirmation includes new unlock period
+- [ ] **AC-013** Whole flow completes in under 60 seconds
 
 ### Epic 3: Multi-Manufacturer Device Fleet
 
-- [ ] Integration lives in a hexagonal adapter (no changes to core)
-- [ ] Manufacturer-specific tokenization logic in a dedicated module
-- [ ] Device-specific fleet management exposed via a unified port
-- [ ] End-to-end test exercises the full flow for the new manufacturer
-- [ ] Integration rolled out to specific distributors via feature flag
+- [ ] **AC-014** Integration lives in a hexagonal adapter (no changes to core)
+- [ ] **AC-015** Manufacturer-specific tokenization logic in a dedicated module
+- [ ] **AC-016** Device-specific fleet management exposed via a unified port
+- [ ] **AC-017** End-to-end test exercises the full flow for the new manufacturer
+- [ ] **AC-018** Integration rolled out to specific distributors via feature flag
 
 ### Epic 4: Tariff DSL
 
-- [ ] F#-based DSL validates tariff for mathematical consistency
-- [ ] PM can simulate tariff against historical customer data
-- [ ] PM can activate tariff for a specified cohort (e.g., 10% of new customers in Uganda)
-- [ ] A/B test runs deterministically; results comparable after 30 days
-- [ ] PM can roll back tariff without code deployment
+- [ ] **AC-019** F#-based DSL validates tariff for mathematical consistency
+- [ ] **AC-020** PM can simulate tariff against historical customer data
+- [ ] **AC-021** PM can activate tariff for a specified cohort (e.g., 10% of new customers in Uganda)
+- [ ] **AC-022** A/B test runs deterministically; results comparable after 30 days
+- [ ] **AC-023** PM can roll back tariff without code deployment
 
 ### Epic 5: Unified Call Center Agent Desktop
 
-- [ ] Customer full profile auto-loads in under 2 seconds
-- [ ] Sauti live transcription appears in the same view
-- [ ] Sentiment score updates every 10 seconds
-- [ ] Suggested next actions appear based on call context
-- [ ] Call outcome captured with one click and feeds customer profile
+- [ ] **AC-024** Customer full profile auto-loads in under 2 seconds
+- [ ] **AC-025** Sauti live transcription appears in the same view
+- [ ] **AC-026** Sentiment score updates every 10 seconds
+- [ ] **AC-027** Suggested next actions appear based on call context
+- [ ] **AC-028** Call outcome captured with one click and feeds customer profile
 
 ### Epic 6: Regulator Reporting
 
-- [ ] System aggregates required data per regulator format
-- [ ] Report generated as Excel + PDF
-- [ ] Cryptographic signature proves data integrity
-- [ ] Compliance officer reviews, approves, submits
-- [ ] Full process takes under 4 hours (vs 4 days previously)
+- [ ] **AC-029** System aggregates required data per regulator format
+- [ ] **AC-030** Report generated as Excel + PDF
+- [ ] **AC-031** Cryptographic signature proves data integrity
+- [ ] **AC-032** Compliance officer reviews, approves, submits
+- [ ] **AC-033** Full process takes under 4 hours (vs 4 days previously)
+
+### Epic 7: LendStream Integration (Credit Underwriting)
+
+- [ ] **AC-034** Anti-corruption layer correctly translates between PayGoHub and LendStream domain vocabularies
+- [ ] **AC-035** Device financing request triggers LendStream underwriting via gRPC and returns approval/rejection
+- [ ] **AC-036** CustomerRequestedFinancing event published to Azure Service Bus; LoanOriginated/LoanRejected events consumed and projected
+- [ ] **AC-037** Customer IDs reconciled via Customer context as system of record (LendStream tracks as external_customer_id)
+- [ ] **AC-038** Compliance query can span both PayGoHub and LendStream event stores via shared Customer ID
+- [ ] **AC-039** Bundle financing (solar + accessories) routed through LendStream with full underwriting
+- [ ] **AC-040** LendStream integration is optional per distributor (feature flag controlled)
 
 ---
 
@@ -718,6 +757,24 @@ As a compliance officer, quarterly reports generated automatically from platform
 | Customers per distributor | Up to 500K active |
 | Stateless services | Horizontal scaling |
 | Device fleet management | 5M+ connected devices |
+
+### Regulatory Compliance
+
+| Requirement | Implementation |
+|-------------|---------------|
+| Data residency | Kenya customer data in Kenya (Azure South Africa North or local); Uganda data in appropriate region |
+| Retention | 7 years for financial records; 3 years for call recordings with consent |
+| Reporting | Automated generation for EPRA (Kenya), ERA (Uganda), ENEE (Honduras), others as onboarded |
+
+### Observability
+
+| Requirement | Implementation |
+|-------------|---------------|
+| Distributed tracing | OpenTelemetry to Azure Monitor with full trace propagation |
+| Dashboards | Per-tenant dashboards in Grafana (hosted or Azure-native) |
+| Business SLIs | Onboarding success rate, payment allocation accuracy, token dispatch latency |
+| Platform SLIs | Service mesh health, database latency, event store write rate |
+| Alerting | PagerDuty for P0/P1; Slack for P2/P3 |
 
 ---
 
