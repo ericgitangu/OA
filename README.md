@@ -134,3 +134,25 @@ leetcode/          Solutions organized by pattern
 projects/          Saturday project scaffolds
 docs/              Sprint planning artifacts and PRDs
 ```
+
+## Glossary — Ubiquitous Language
+
+| Term | Definition |
+|------|-----------|
+| **ADT** | Algebraic Data Type. Sum types (enums) + product types (structs). |
+| **BFF** | Backend-for-Frontend. A dedicated backend per client type. |
+| **CQRS** | Command Query Responsibility Segregation. Separate read and write models. |
+| **DDD** | Domain-Driven Design. Model software around business domains. |
+| **Event Sourcing** | Store events, not state. Derive current state by replaying. |
+| **Fan-Out/Fan-In** | Distribute work, collect results. Channel-based coordination. |
+| **Hexagonal Architecture** | Ports and adapters. Domain isolated from infrastructure. |
+| **Monk Mode** | 15-week intensive sprint. Daily 4AM sessions. No distractions. |
+| **OTP** | Open Telecom Platform (Erlang/Elixir). Supervision trees, GenServers. |
+| **Pipeline** | Chain processing stages connected by channels. |
+| **RAII** | Resource Acquisition Is Initialization. C++/Rust ownership pattern. |
+| **ROP** | Railway-Oriented Programming. Composable error handling via Result types. |
+| **Saga** | Multi-step distributed transaction with compensating actions. |
+| **Third Eye** | Architectural perception. Seeing patterns in code before they're named. |
+| **Tier** | A 2-week language grouping in the sprint (Tier 1 = Rust+C++). |
+| **Zazen** | Seated Zen meditation. 15 minutes daily before code. |
+| **Zero-Copy** | Data moves through systems without being copied between buffers. |
