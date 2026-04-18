@@ -25,8 +25,8 @@
 <!-- Tier 5b — Lisp -->
 ![Clojure](https://img.shields.io/badge/Clojure-1.12-5881D8?logo=clojure&logoColor=white)
 <!-- Tier 6 — .NET -->
-![C#](https://img.shields.io/badge/C%23-12-512BD4?logo=dotnet&logoColor=white)
-![F#](https://img.shields.io/badge/F%23-8-378BBA?logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-10.0-512BD4?logo=dotnet&logoColor=white)
+![F#](https://img.shields.io/badge/F%23-10.0-378BBA?logo=dotnet&logoColor=white)
 
 <!-- Tooling -->
 ![Docker](https://img.shields.io/badge/Docker-29.3-2496ED?logo=docker&logoColor=white)
@@ -117,7 +117,7 @@ leetcode/two_pointers/valid_palindrome.rs
 | PHP | 8.5 | Installed |
 | Elixir | 1.19 | Installed |
 | Clojure | 1.12 | Installed |
-| .NET | — | Needs sudo install |
+| .NET | 10.0 | Installed |
 
 ## Repo Structure
 
