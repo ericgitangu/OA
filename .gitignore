@@ -1,0 +1,9 @@
+# Sprint branch work — keep off main
+tier_0_python/
+tier_1_systems/
+
+# Claude Code config
+.claude/
+
+# Node
+node_modules/

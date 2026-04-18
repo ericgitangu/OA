@@ -58,6 +58,7 @@
 - Drawbacks include O(n) insertions/deletions in middle due to shifting elements
 
 Common use cases:
+
 - Fast random access to elements
 - Iteration over sequential data
 - Building blocks for other data structures (stacks, queues, heaps)
@@ -100,6 +101,7 @@ Common use cases:
 Description: Implementation of a singly linked list demonstrating fundamental linked data structure concepts. Key features:
 
 Data Structures Used:
+
 - Node Class:
   - Contains value field for data storage
   - Contains next pointer for linking to subsequent node
@@ -113,12 +115,14 @@ Data Structures Used:
   - Manages node connections and traversal
 
 Key advantages over arrays:
+
 - O(1) insertions/deletions at known positions
 - Dynamic size without resizing/reallocation
 - Memory efficiency with no empty spaces
 - Easy implementation of stacks/queues
 
 Common applications:
+
 - Implementation of stacks and queues
 - Memory allocation systems
 - Undo systems in software
@@ -214,6 +218,7 @@ Common applications:
 ### Stack (Basic)
 
 Description: A Stack is a fundamental data structure that follows Last-In-First-Out (LIFO) ordering. Key features:
+
 - Uses a Python list internally which provides O(1) amortized append/pop operations
 - Only allows access to the top element (most recently added)
 - Perfect for tracking function calls, undo operations, and parsing expressions
@@ -414,6 +419,7 @@ Python's dictionary is a highly optimized hash table implementation that provide
 ### Binary Search Tree (BST) (Intermediate)
 
 Description: A Binary Search Tree (BST) is a hierarchical data structure where each node has at most two children (left and right). The key property is that for any node, all values in its left subtree are less than the node's value, and all values in its right subtree are greater. This ordering enables O(log n) search, insert and delete operations on average when the tree is relatively balanced. However, this implementation shows an unbalanced BST which can degrade to O(n) performance if values are inserted in sorted order (creating a linear chain). The tree uses a node-based structure where each node contains:
+
 - A value
 - A left child pointer
 - A right child pointer
@@ -506,6 +512,7 @@ This simple structure makes it easy to implement but lacks the self-balancing pr
 Description: Implementation of a min-heap (priority queue) using Python's heapq module. Key features:
 
 Data Structures Used:
+
 - List/Array:
   - Stores heap elements in level-order
   - Maintains heap property where parent <= children
@@ -522,6 +529,7 @@ Data Structures Used:
   - Maintains balanced tree shape
 
 The heap data structure is ideal for:
+
 - Priority queues
 - Task scheduling
 - Graph algorithms like Dijkstra's
@@ -529,6 +537,7 @@ The heap data structure is ideal for:
 - Median finding
 
 Key operations and complexities:
+
 - Push: O(log n) - Add element and bubble up
 - Pop: O(log n) - Remove min and bubble down  
 - Peek: O(1) - Access min element
@@ -572,6 +581,7 @@ Key operations and complexities:
 Description: Implementation of a graph data structure using an adjacency list representation. Key features:
 
 Data Structures Used:
+
 - Dictionary/Hash Map:
   - Maps vertices to their adjacency lists
   - Provides O(1) vertex lookup
@@ -585,12 +595,14 @@ Data Structures Used:
   - Fast iteration over neighbors
 
 Key advantages over adjacency matrix:
+
 - Space efficient O(V + E) vs O(V^2)
 - Faster to add vertices
 - Better for sparse graphs
 - More efficient neighbor iteration
 
 Common applications:
+
 - Social networks
 - Road/transportation networks  
 - Computer networks
@@ -665,6 +677,7 @@ Common applications:
 Description: A Trie (also called prefix tree) is an efficient tree-like data structure for storing and retrieving strings. Key features:
 
 Data Structures Used:
+
 - TrieNode Class:
   - Dictionary/Hash Map for children: Enables O(1) access to child nodes
   - Boolean flag for word endings: Marks complete words
@@ -677,12 +690,14 @@ Data Structures Used:
   - Maintains tree invariants
 
 Key advantages over other string storage:
+
 - O(m) lookup time where m is string length
 - Space-efficient for common prefixes
 - Prefix-based operations like autocomplete
 - No hash collisions unlike hash tables
 
 Common applications:
+
 - Autocomplete/type-ahead features
 - Spell checkers
 - IP routing tables
@@ -784,6 +799,7 @@ Common applications:
 ### Balanced BST (AVL/Red-Black) (Advanced)
 
 Description: AVL trees are self-balancing binary search trees where the heights of the left and right subtrees of any node differ by at most one. Key features:
+
 - Uses height-balanced property to ensure O(log n) operations
 - Each node stores a balance factor = height(left) - height(right)
 - When balance factor becomes > 1 or < -1, rotations restore balance
@@ -792,6 +808,7 @@ Description: AVL trees are self-balancing binary search trees where the heights 
 - Common in memory-based applications needing fast lookups
 
 The example below shows basic node structure and insertion without rotations. Full implementation requires:
+
 - Balance factor tracking
 - Left and right rotations
 - Left-Right and Right-Left double rotations
@@ -940,6 +957,7 @@ class AVLNode:
 ### B-Tree / B+ Tree (Advanced)
 
 Description: B-Trees are self-balancing search trees designed for efficient disk access and database operations. Unlike binary trees, a B-Tree node can have multiple keys and children. Key features:
+
 - Each node can have M-1 keys and M children (where M is the order/degree)
 - All leaves are at the same level (perfect balance)
 - Nodes are typically sized to match disk blocks for I/O efficiency
@@ -1020,6 +1038,7 @@ The implementation below shows a simplified node structure, though actual B-Tree
 Description: A segment tree is a specialized tree data structure for efficiently performing range queries and updates on an array. Key data structures and design choices:
 
 Data Structures Used:
+
 - Array-based Binary Tree:
   - Uses array to represent complete binary tree structure
   - Parent at index i has children at 2i and 2i+1
@@ -1040,12 +1059,14 @@ Data Structures Used:
   - Map 1:1 with input array elements
 
 The segment tree excels at:
+
 - Range sum/min/max queries in O(log n)
 - Point updates while maintaining ranges
 - Problems requiring fast range operations
 - Space-efficient range processing
 
 Key advantages over alternatives:
+
 - Faster than naive O(n) range sum approach
 - More flexible than prefix sum arrays
 - Supports both queries and updates efficiently
@@ -1123,6 +1144,7 @@ Key advantages over alternatives:
 Description: A Fenwick Tree (Binary Indexed Tree) is a space-efficient data structure that provides efficient methods for calculating prefix sums in a dynamic array.
 
 Data Structures Used:
+
 - Array/List as Primary Structure:
   - Stores partial sums in a flat array format
   - Uses 1-based indexing for simpler arithmetic
@@ -1138,6 +1160,7 @@ Data Structures Used:
   - No explicit pointers needed between nodes
 
 Key advantages over other structures:
+
 - More memory efficient than segment trees
 - Simpler implementation than other range query structures  
 - Cache-friendly array-based storage
@@ -1145,6 +1168,7 @@ Key advantages over other structures:
 - No pointer overhead or complex tree maintenance
 
 Common applications:
+
 - Range sum queries in dynamic arrays
 - Cumulative frequency tables
 - Count of inversions in an array
@@ -1239,6 +1263,7 @@ The structure achieves its efficiency by using a clever binary representation te
 Description: Union-Find (also known as Disjoint Set) is a data structure that efficiently tracks disjoint (non-overlapping) sets of elements. It uses several key data structures working together:
 
 Data Structures Used:
+
 - Array/List for Parent Pointers:
   - Maps each element to its parent element
   - Forms tree structure implicitly through indices
@@ -1272,6 +1297,7 @@ The data structure maintains a forest of trees where each tree represents a set,
    - Works with path compression for efficiency
 
 This combination makes it extremely efficient for:
+
 - Finding connected components in graphs
 - Detecting cycles in graphs
 - Tracking equivalence classes
@@ -1362,6 +1388,7 @@ The structure achieves nearly O(1) amortized time complexity for both union and 
 Description: Bubble sort is a simple comparison-based sorting algorithm that demonstrates fundamental sorting concepts. Key features:
 
 Data Structures Used:
+
 - Array/List as Primary Structure:
   - Stores elements to be sorted in contiguous memory
   - Enables O(1) access to adjacent elements for comparisons
@@ -1376,6 +1403,7 @@ Data Structures Used:
   - Simple but effective optimization technique
 
 Key advantages:
+
 - Simple implementation with minimal extra space O(1)
 - Stable sorting preserves relative order
 - Works well for small or nearly sorted arrays
@@ -1383,12 +1411,14 @@ Key advantages:
 - Good for teaching sorting concepts
 
 Limitations:
+
 - O(n²) time complexity makes it inefficient for large arrays
 - Requires many array accesses and swaps
 - Not suitable for large datasets
 - Other algorithms like quicksort are usually better
 
 The algorithm gets its name from the way smaller elements "bubble up" to their correct positions with each pass through the array. While not efficient for large datasets, it remains useful for:
+
 - Educational purposes demonstrating sorting concepts
 - Small arrays where simplicity is preferred
 - Nearly sorted arrays that need minor corrections
@@ -1443,6 +1473,7 @@ The algorithm gets its name from the way smaller elements "bubble up" to their c
 Description: Insertion sort is a simple sorting algorithm that builds a sorted portion of the array one element at a time. Key features:
 
 Data Structures Used:
+
 - Array/List:
   - Primary data structure that is sorted in-place
   - Maintains sorted portion at beginning
@@ -1456,12 +1487,14 @@ Data Structures Used:
   - Acts as swap space during insertions
 
 The algorithm is ideal for:
+
 - Small arrays/lists
 - Nearly sorted data
 - Online sorting (processing elements as they arrive)
 - Linked list sorting due to local swaps
 
 Key advantages:
+
 - O(1) extra space - sorts in place
 - O(n) best case for nearly sorted arrays
 - Stable sort - maintains relative order of equal elements
@@ -1515,6 +1548,7 @@ Key advantages:
 Description: Selection sort is an in-place comparison sorting algorithm that relies on several key data structures and properties:
 
 Data Structures Used:
+
 - Input Array:
   - Serves as both input and output storage
   - Divided conceptually into sorted and unsorted regions
@@ -1537,6 +1571,7 @@ Data Structures Used:
     - Size decreases by 1 each iteration
 
 Key Properties:
+
 - In-Place: Uses O(1) extra space by modifying input array directly
 - Unstable: Can change relative order of equal elements through swapping
 - Quadratic Time: O(n²) in all cases due to nested loops
@@ -1582,6 +1617,7 @@ Key Properties:
 Description: Merge sort is a divide-and-conquer sorting algorithm that relies on several key data structures and properties:
 
 Data Structures Used:
+
 - Input Array:
   - Stores original unsorted data
   - Divided into subarrays during recursion
@@ -1602,12 +1638,14 @@ Data Structures Used:
   - Enables divide-and-conquer strategy
 
 Key Properties:
+
 - Stability: Preserves relative order of equal elements by using <= in merge
 - Parallelizable: Subarrays can be sorted independently
 - Cache-friendly: Sequential access patterns during merge
 - External sort friendly: Can efficiently merge sorted files
 
 Time/Space Analysis:
+
 - Time: O(n log n) guaranteed
   - log n levels of recursion
   - O(n) work per level during merges
@@ -1616,6 +1654,7 @@ Time/Space Analysis:
   - O(log n) for recursion stack
 
 Ideal Use Cases:
+
 - Sorting linked lists (no random access needed)
 - External sorting of large files
 - When stable sorting is required
@@ -1687,6 +1726,7 @@ Ideal Use Cases:
 Description: Quick sort is a highly efficient, in-place sorting algorithm that uses a divide-and-conquer strategy.
 
 Data Structures Used:
+
 - Input Array:
   - Used directly for in-place sorting without auxiliary storage
   - Enables O(1) swaps between elements
@@ -1706,6 +1746,7 @@ Data Structures Used:
   - Allow in-place partitioning without extra space
 
 Key advantages of these structures:
+
 - In-place sorting saves memory
 - Good cache performance from array locality
 - Minimal auxiliary space needed
@@ -1714,10 +1755,12 @@ Key advantages of these structures:
 The algorithm works by selecting a 'pivot' element and partitioning the array around it, such that smaller elements go to the left and larger elements go to the right. The partition operation uses the two pointers to scan the array from both ends, swapping elements when necessary.
 
 Time complexity:
+
 - Average case: O(n log n) - balanced partitions
 - Worst case: O(n²) - poorly balanced partitions (e.g. sorted array)
 
 Space complexity:
+
 - Average case: O(log n) - recursive call stack depth
 - Worst case: O(n) - unbalanced recursion
 
@@ -1775,6 +1818,7 @@ Quick sort is widely used in practice due to its excellent cache performance fro
 Description: Binary search is an efficient search algorithm that works on sorted arrays by repeatedly dividing the search interval in half.
 
 Data Structures Used:
+
 - Sorted Array:
   - Primary data structure that enables O(1) random access
   - Must be sorted to allow eliminating half the search space
@@ -1792,12 +1836,14 @@ Data Structures Used:
 The algorithm compares the middle element with the target: if equal, we've found it; if target is greater, we search the right half; if smaller, we search the left half. This divide-and-conquer approach gives binary search a time complexity of O(log n), making it much faster than linear search O(n) for large datasets.
 
 Key advantages:
+
 - O(log n) time complexity through halving
 - O(1) space as only pointers needed
 - Cache-friendly array access pattern
 - Highly efficient for large sorted datasets
 
 Common applications:
+
 - Dictionary/phone book lookups
 - Database indexing and queries
 - Finding insertion points
@@ -1855,6 +1901,7 @@ The key requirement is that the input array must be sorted, as the algorithm rel
 Description: BFS (Breadth-First Search) is a fundamental graph traversal algorithm that uses two key data structures:
 
 Data Structures Used:
+
 - Queue (collections.deque):
   - Stores nodes to be processed in FIFO order
   - O(1) enqueue/dequeue operations
@@ -1872,6 +1919,7 @@ Data Structures Used:
   - Size is O(V) to store all vertices
 
 The algorithm works by:
+
 1. Starting from source node, add to queue and visited set
 1. While queue not empty:
    - Dequeue next node to process
@@ -1880,6 +1928,7 @@ The algorithm works by:
 1. Visited set prevents cycles
 
 Key advantages of this approach:
+
 - Guarantees shortest path in unweighted graphs
 - Visits nodes in order of distance from source
 - Memory efficient O(V) space complexity
@@ -1887,6 +1936,7 @@ Key advantages of this approach:
 - Natural for level-order tree traversal
 
 Time complexity is O(V + E) since we:
+
 - Visit each vertex once O(V)
 - Explore each edge once O(E)
 Space complexity is O(V) for both queue and visited set.
@@ -1944,6 +1994,7 @@ Space complexity is O(V) for both queue and visited set.
 Description: DFS (Depth-First Search) is a graph traversal algorithm that explores a graph by going as deep as possible along each branch before backtracking.
 
 Data Structures Used:
+
 - Stack (Implicit or Explicit):
   - Handles Last-In-First-Out (LIFO) order needed for backtracking
   - Recursive implementation uses call stack implicitly
@@ -1966,6 +2017,7 @@ Data Structures Used:
   - Allows flexible graph structures
 
 Key advantages of DFS:
+
 - Memory efficient for deep graphs compared to BFS
 - Natural fit for recursive problems
 - Good for topological sorting
@@ -1973,12 +2025,14 @@ Key advantages of DFS:
 - Tree/graph structure analysis
 
 Time Complexity: O(V + E) where:
+
 - V is number of vertices (each vertex visited once)
 - E is number of edges (each edge explored once)
 - Stack operations are O(1)
 - Visited set operations are O(1)
 
 Space Complexity: O(V) for:
+
 - Visited set to track explored nodes
 - Recursion/explicit stack in worst case
 - Linear space usage in deepest case
@@ -2103,6 +2157,7 @@ Description: Finds the shortest path from a start node to all others in a weight
 Description: The Bellman-Ford algorithm finds shortest paths in a weighted graph that can handle negative edge weights (unlike Dijkstra's), with the constraint that there cannot be negative cycles. Here's a detailed breakdown:
 
 Data Structures:
+
 - Graph representation: List of edges where each edge is a tuple (u,v,w) representing edge from u to v with weight w
 - Distance dictionary (dist): Maps each vertex to its current shortest distance from start vertex
   - Initially all distances set to infinity except start vertex (0)
@@ -2110,6 +2165,7 @@ Data Structures:
   - Key: vertex, Value: current shortest distance
 
 Key Algorithm Steps:
+
 1. Initialize distances - O(V) space for distance dictionary
 1. Relax all edges V-1 times:
    - For each edge (u,v,w), if dist[u] + w < dist[v], update dist[v]
@@ -2122,12 +2178,14 @@ Time Complexity: O(VE) - must process all E edges, V-1 times
 Space Complexity: O(V) for the distance dictionary
 
 Key Advantages:
+
 - Can handle negative edge weights (unlike Dijkstra's)
 - Simpler implementation than Dijkstra's (no priority queue needed)
 - Can detect negative cycles
 - Guarantees shortest paths if no negative cycles exist
 
 The algorithm is especially useful for:
+
 - Networks with negative weights (e.g., forex trading)
 - Detecting arbitrage opportunities
 - Situations where simple implementation is preferred over speed
@@ -2200,6 +2258,7 @@ The algorithm is especially useful for:
 ### Floyd-Warshall (Advanced)
 
 Description: The Floyd-Warshall algorithm finds shortest paths between all pairs of vertices in a weighted graph, including those with negative edges but no negative cycles. Key features:
+
 - Uses a 2D distance matrix/table to track shortest paths between every vertex pair
 - Dynamically builds up paths by considering all vertices as potential intermediate points
 - Matrix[i][j] represents shortest path from vertex i to j
@@ -2297,6 +2356,7 @@ Description: Topological sort orders vertices in a Directed Acyclic Graph (DAG) 
   - Detects cycles if counts remain non-zero
 
 The algorithm is ideal for:
+
 - Dependency resolution
 - Task scheduling
 - Build systems
@@ -2387,6 +2447,7 @@ The algorithm is ideal for:
 Description: The Knuth-Morris-Pratt (KMP) algorithm is an efficient string pattern matching algorithm that uses a prefix table (also called failure function or LPS array) to avoid unnecessary character comparisons. Key features:
 
 Data Structures:
+
 - Pattern string: The substring we're searching for
 - Text string: The main string we're searching in
 - Prefix table (int[]): An array storing the length of longest proper prefix that is also a suffix for each position
@@ -2396,11 +2457,13 @@ Data Structures:
   - Used to determine how far back to move pattern when mismatch occurs
 
 Time Complexity:
+
 - O(m) preprocessing to build prefix table
 - O(n) for pattern search where n is text length
 - Total: O(m + n) vs O(mn) for naive approach
 
 Common Use Cases:
+
 - String searching/pattern matching
 - DNA sequence matching
 - Finding repeated substrings
@@ -2508,6 +2571,7 @@ Description: The Rabin-Karp algorithm uses rolling hash functions and string mat
   - Finding duplicate file content
 
 Data structures used:
+
 - Hash table: Stores pattern hashes for constant time lookup
 - Sliding window: Maintains current substring being compared
 - Rolling hash: Special hash function that can be updated in O(1)
@@ -2591,20 +2655,24 @@ Data structures used:
 Description: Dynamic Programming (DP) is a problem-solving technique that breaks down complex problems into simpler subproblems and stores their solutions to avoid redundant computations. Key features:
 
 Data Structures Used:
+
 - Arrays/Lists: For tabulation approach to store solutions bottom-up
 - Hash Maps/Dictionaries: For memoization approach to cache computed results
 - Recursion Stack: When using recursive memoization approach
 
 Common Use Cases:
+
 - Optimization problems (finding min/max values)
 - Counting problems (number of ways to achieve something)
 - Problems with overlapping subproblems
 
 Example: Computing nth Fibonacci number demonstrates both main DP approaches:
+
 1. Top-down memoization using hash map to cache results
 1. Bottom-up tabulation using array to build solution iteratively
 
 Benefits:
+
 - Reduces time complexity from O(2^n) to O(n)
 - Space-time tradeoff using extra memory for better runtime
 - Avoids redundant calculations by storing intermediate results
@@ -2663,6 +2731,7 @@ Benefits:
 Description: Greedy algorithms make locally optimal choices at each step, hoping to find a global optimum. A classic example is interval scheduling - selecting the maximum number of non-overlapping intervals from a set of intervals.
 
 Key data structures and why they're used:
+
 - List of tuples for intervals:
   - List provides O(n log n) sorting efficiency
   - Tuples are immutable and memory-efficient for storing (start,end) pairs
@@ -2675,6 +2744,7 @@ Key data structures and why they're used:
   - Constant space overhead
 
 The greedy strategy is to:
+
 1. Sort intervals by end time (earliest ending first)
 1. Take first interval
 1. Take next interval that starts after current end time
@@ -2791,6 +2861,7 @@ The naive construction approach shown here is O(n² log n), though more efficien
 Description: Suffix trees are advanced data structures that enable extremely fast substring searching in O(m) time (where m is the pattern length). They achieve this by preprocessing the text to build a tree-like structure with the following key components:
 
 Data Structures Used:
+
 - Tree Structure: A rooted tree where:
   - Each edge is labeled with a substring of the text
   - Each internal node has multiple children
@@ -2952,6 +3023,7 @@ While powerful, suffix trees are complex to implement correctly and have a signi
 Description: Kruskal's algorithm finds a Minimum Spanning Tree (MST) by greedily selecting edges in order of increasing weight while avoiding cycles. Key features:
 
 Data Structures Used:
+
 - Priority Queue/Sorted List: Edges are sorted by weight to process smallest weights first
 - Disjoint Set (Union-Find): Efficiently tracks connected components to detect cycles
   - Uses arrays/lists for O(1) access to parent pointers
@@ -2961,6 +3033,7 @@ Data Structures Used:
   - No need for adjacency lists/matrix since we process edges sequentially
 
 The algorithm works by:
+
 1. Sorting all edges by weight (O(E log E))
 1. Processing edges in order, using Union-Find to:
    - Check if vertices are already connected (would form cycle)
@@ -3064,11 +3137,13 @@ Space Complexity: O(V) for Union-Find data structure
 Description: Prim's algorithm finds a Minimum Spanning Tree (MST) by iteratively growing a tree from a starting vertex. Key features:
 
 Data Structures:
+
 - Priority Queue (Min Heap): Essential for efficiently selecting the next lightest edge. Stores (weight, vertex, parent) tuples and provides O(log V) operations.
 - Visited Set: Tracks vertices already in MST to avoid cycles. O(1) lookups.
 - Adjacency List: Graph representation allowing O(1) access to neighbors. More space efficient than matrix for sparse graphs.
 
 The algorithm maintains a "frontier" of edges in the priority queue, always greedily selecting the lightest edge that connects to an unvisited vertex. This guarantees optimality because:
+
 1. Any MST must cross each cut of the graph with its lightest edge
 1. The priority queue ensures we always select the current lightest edge
 1. The visited set ensures we don't create cycles
@@ -3159,6 +3234,7 @@ print(f"Total Weight: {total_weight}")
 Description: A* is an advanced pathfinding algorithm that combines Dijkstra's shortest path with heuristic guidance to efficiently find optimal paths. Key features:
 
 Data Structures Used:
+
 - Priority Queue (Min-Heap): Stores nodes to explore, prioritized by f(n) = g(n) + h(n)
   - g(n): Actual cost from start to current node
   - h(n): Heuristic estimated cost from current to goal
@@ -3175,6 +3251,7 @@ Data Structures Used:
   - Allows O(1) access to check valid moves
 
 The algorithm guarantees finding the optimal path when using an admissible heuristic (never overestimates). Common use cases include:
+
 - Video game pathfinding
 - Robot navigation
 - Route planning
@@ -3339,6 +3416,7 @@ print("Impossible maze path:", path)  # Should print None
 Description: Dynamic Programming solution for finding the length of the Longest Increasing Subsequence (LIS) in O(n²) time. Key features:
 
 Data Structures Used:
+
 - DP Array:
   - 1D array storing length of LIS ending at each index
   - dp[i] represents length of LIS ending at index i
@@ -3352,12 +3430,14 @@ Data Structures Used:
   - Supports O(1) element comparisons
 
 The algorithm systematically builds solutions by:
+
 1. Initializing dp[i] = 1 for all indices (single element subsequences)
 1. For each position i, checking all previous positions j < i
 1. If arr[j] < arr[i], can extend subsequence ending at j
 1. Taking maximum of all possible extensions
 
 Common applications include:
+
 - Stock price analysis
 - Box stacking problems
 - Chain optimization
@@ -3433,6 +3513,7 @@ Common applications include:
 Description: The Minimum Edit Distance (Levenshtein Distance) algorithm calculates the minimum number of operations needed to transform one string into another. Key features:
 
 Data Structures Used:
+
 - 2D DP Table (Matrix):
   - Size (m+1) x (n+1) where m,n are string lengths
   - Each cell [i,j] represents min edits needed for prefixes s1[0:i], s2[0:j]
@@ -3445,11 +3526,13 @@ Data Structures Used:
   - Support efficient substring operations
 
 The algorithm systematically fills the DP table by considering three possible operations at each step:
+
 - Insertion: Add a character (cost of 1)
 - Deletion: Remove a character (cost of 1)
 - Substitution: Replace a character (cost of 1 if chars different, 0 if same)
 
 Common applications include:
+
 - Spell checking and correction
 - DNA sequence alignment
 - Natural language processing
@@ -3524,6 +3607,7 @@ Below are several additional examples of dynamic programming (DP) solutions, ill
 The 0/1 Knapsack problem is a classic optimization problem that demonstrates the power of dynamic programming. Given a set of items, each with a weight and a value, and a capacity constraint on the total weight, the goal is to maximize the total value without exceeding the capacity.
 
 Key Data Structures Used:
+
 - Arrays/Lists: Store the weights and values of items
   - Provides O(1) access to item properties
   - Maintains item ordering for consistent lookup
@@ -3534,6 +3618,7 @@ Key Data Structures Used:
   - Space complexity O(n*W) where n is number of items and W is capacity
 
 This problem appears frequently in:
+
 - Resource allocation (CPU, memory, storage)
 - Investment portfolio optimization
 - Cargo loading and logistics
@@ -3668,6 +3753,7 @@ The binary (0/1) constraint of taking an item completely or not at all makes thi
 The Coin Change problem (minimizing coins) is common in making change problems, currency systems, and combinational optimization tasks. Given a set of denominations and a target amount, we want the fewest coins to make that amount. If it can't be formed exactly, return -1.
 
 Data Structures Used:
+
 - Dynamic Programming Array/Table:
   - 1D array of size amount+1 storing minimum coins needed for each subproblem
   - dp[i] represents minimum coins needed for amount i
@@ -3680,6 +3766,7 @@ Data Structures Used:
   - Order doesn't matter since we try all combinations
 
 The problem exhibits optimal substructure (minimum solution for amount n uses minimum solutions for smaller amounts) and overlapping subproblems (same smaller amounts calculated repeatedly), making it ideal for dynamic programming. Common applications include:
+
 - Making change with minimum coins
 - Currency exchange optimization
 - Resource allocation problems
@@ -3814,6 +3901,7 @@ for coins, amount in test_cases:
 The Longest Common Subsequence (LCS) problem finds the longest sequence of characters that appear in order in both strings. It has important applications in:
 
 Data Structures Used:
+
 - 2D DP Array/Dictionary:
   - Tabulation: dp[i][j] represents LCS length for prefixes s1[0:i], s2[0:j]
   - Memoization: Dictionary maps (i,j) positions to optimal LCS length
@@ -3825,6 +3913,7 @@ Data Structures Used:
   - Maintains character ordering for subsequence property
 
 Common Applications:
+
 - Bioinformatics: DNA/protein sequence alignment and comparison
 - Version Control (diff): Finding common lines between file versions
 - Spell Checking: Identifying similar words for suggestions
@@ -3832,6 +3921,7 @@ Common Applications:
 - File Comparison: Detecting similarities in text files
 
 The dynamic programming approach is necessary because the problem exhibits:
+
 - Optimal substructure (solution built from smaller subproblems)
 - Overlapping subproblems (same subproblems solved repeatedly)
 
@@ -3988,6 +4078,7 @@ In essence, DP is particularly useful when:
 Description: Huffman coding constructs an optimal prefix-free binary code by building a special binary tree. Key features:
 
 Data Structures Used:
+
 - Min Heap (Priority Queue):
   - Stores nodes prioritized by frequency
   - Enables efficient O(log n) selection of minimum frequency nodes
@@ -4005,6 +4096,7 @@ Data Structures Used:
   - Provides O(1) lookups
   
 The algorithm works by repeatedly merging the two lowest frequency nodes until a single tree remains. This greedy approach guarantees an optimal prefix-free code that minimizes the weighted path lengths (bits per character). Common applications include:
+
 - Text compression
 - Data compression
 - File compression algorithms
