@@ -15,6 +15,7 @@ docker run tier1-cpp
 ```
 
 ## Focus Areas
+
 - RAII and move semantics
 - Templates and concepts (C++20)
 - Ranges library
