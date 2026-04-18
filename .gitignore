@@ -1,6 +1,7 @@
 # Sprint branch work — keep off main
 tier_0_python/
 tier_1_systems/
+leetcode/
 
 # Claude Code config
 .claude/
