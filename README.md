@@ -1,5 +1,50 @@
 # OA — Monk Mode: 15-Week Polyglot Architectural Mastery Sprint
 
+[![CI](https://github.com/ericgitangu/OA/actions/workflows/ci.yml/badge.svg?branch=zen)](https://github.com/ericgitangu/OA/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<!-- Tier 0 — Python -->
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+<!-- Tier 1 — Systems -->
+![Rust](https://img.shields.io/badge/Rust-1.92-000000?logo=rust&logoColor=white)
+![C++](https://img.shields.io/badge/C++-20/23-00599C?logo=cplusplus&logoColor=white)
+<!-- Tier 2 — JVM -->
+![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.x-7F52FF?logo=kotlin&logoColor=white)
+![Scala](https://img.shields.io/badge/Scala-3-DC322F?logo=scala&logoColor=white)
+<!-- Tier 3 — Web -->
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2024-F7DF1E?logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+<!-- Tier 4 — Concurrent -->
+![Go](https://img.shields.io/badge/Go-1.25-00ADD8?logo=go&logoColor=white)
+![Zig](https://img.shields.io/badge/Zig-0.14-F7A41D?logo=zig&logoColor=white)
+<!-- Tier 5a — Scripting -->
+![Ruby](https://img.shields.io/badge/Ruby-3.3-CC342D?logo=ruby&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)
+![Elixir](https://img.shields.io/badge/Elixir-1.17-4B275F?logo=elixir&logoColor=white)
+<!-- Tier 5b — Lisp -->
+![Clojure](https://img.shields.io/badge/Clojure-1.12-5881D8?logo=clojure&logoColor=white)
+<!-- Tier 6 — .NET -->
+![C#](https://img.shields.io/badge/C%23-12-512BD4?logo=dotnet&logoColor=white)
+![F#](https://img.shields.io/badge/F%23-8-378BBA?logo=dotnet&logoColor=white)
+
+<!-- Tooling -->
+![Docker](https://img.shields.io/badge/Docker-29.3-2496ED?logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
+![CMake](https://img.shields.io/badge/CMake-3.20+-064F8C?logo=cmake&logoColor=white)
+![Cargo](https://img.shields.io/badge/Cargo-Rust_Build-000000?logo=rust&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-24-339933?logo=nodedotjs&logoColor=white)
+
+<!-- Architecture -->
+![Event-Driven](https://img.shields.io/badge/Pattern-Event--Driven-blueviolet)
+![BFF](https://img.shields.io/badge/Pattern-BFF-blueviolet)
+![CQRS](https://img.shields.io/badge/Pattern-CQRS-blueviolet)
+![Hexagonal](https://img.shields.io/badge/Pattern-Hexagonal-blueviolet)
+![Clean Architecture](https://img.shields.io/badge/Pattern-Clean_Architecture-blueviolet)
+![Micro-Frontends](https://img.shields.io/badge/Pattern-Micro--Frontends-blueviolet)
+![OTP](https://img.shields.io/badge/Pattern-OTP_Supervision-blueviolet)
+![Fan-Out/Fan-In](https://img.shields.io/badge/Pattern-Fan--Out%2FFan--In-blueviolet)
+
 **Start:** 2026-04-20 | **End:** 2026-08-02 | **Languages:** 16 | **Patterns:** 14
 
 Solve in Python first. Reimplement in paired language groups. Ship a production-grade Saturday project every tier.
