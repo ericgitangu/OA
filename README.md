@@ -1,118 +1,91 @@
-# OA Coding Tech Interview Preparation
+# OA — Monk Mode: 15-Week Polyglot Architectural Mastery Sprint
 
-![Logo](https://lh3.googleusercontent.com/a/ACg8ocKvFjk3vfOWHRr8rE-C8cyqeCb5lvi2oQmVZvoqf9uYOv9iUydJ=s288-c-no)
+**Start:** 2026-04-20 | **End:** 2026-08-02 | **Languages:** 16 | **Patterns:** 14
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+Solve in Python first. Reimplement in paired language groups. Ship a production-grade Saturday project every tier.
 
-A comprehensive collection of Python scripts designed to help you prepare for technical interviews, particularly for Online Assessments (OAs).
+## Sprint Status
 
-## Table of Contents
+| Weeks | Tier | Languages | Patterns | Status |
+|-------|------|-----------|----------|--------|
+| 1-2 | [Tier 1 — Systems](tier_1_systems/) | Rust, C++ | Event-Driven, BFF, Zero-Copy | Upcoming |
+| 3-4 | [Tier 2 — JVM](tier_2_jvm/) | Java, Kotlin, Scala | CQRS, Event Sourcing, Saga, Hexagonal | Planned |
+| 5-6 | [Tier 3 — Web](tier_3_web/) | JS, TS | Micro-Frontends, Server Components, Edge | Planned |
+| 7-8 | [Tier 4 — Concurrent](tier_4_concurrent/) | Go, Zig | Fan-Out/Fan-In, Pipeline | Planned |
+| 9-10 | [Tier 5a — Scripting](tier_5a_scripting/) | Ruby, PHP, Elixir | OTP Supervision Trees | Planned |
+| 11-12 | [Tier 5b — Lisp](tier_5b_lisp/) | Clojure | Immutable-First, Transducers | Planned |
+| 13-14 | [Tier 6 — .NET](tier_6_dotnet/) | C#, F# | Clean Architecture, ADTs | Planned |
+| 15 | Buffer | All | Review & polish | Planned |
 
-- [About](#about)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Scripts](#scripts)
-- [DSA](#dsa)
-- [Competitive Programming Routine](#competitive-programming-routine)
-- [Contributing](#contributing)
-- [License](#license)
-- [Author](#author)
-- [PR and Bug Reports](#pr-and-bug-reports)
+## Quick Links
 
-## About
+| Doc | Description |
+|-----|-------------|
+| [Sprint Overview](docs/sprint_overview.md) | Full tier breakdown, language pairings, philosophy |
+| [Daily Schedule](docs/daily_schedule.md) | 3:30-8:00 AM routine + zazen instructions |
+| [Progress Tracker](docs/progress_tracker.md) | Weekly checkbox tracker |
+| [Architectural Patterns](docs/architectural_patterns.md) | 14-pattern quick reference with tier mapping |
+| [Learning Resources](docs/learning_resources.md) | Curated resources for all 16 languages |
+| [Claude Code Strategy](docs/claude_code_strategy.md) | Agent setup, workflows, and best practices |
+| [CP Routine](tier_0_python/cp_routine.md) | Original 4AM competitive programming routine |
+| [DSA Reference](tier_0_python/dsa_reference.md) | 4,125-line data structures & algorithms guide |
 
-Pruning the grind leetcode type questions to patterns once you crack you will ready for any OA interview or just brush up on rusty concepts. Happy coding!
+## Saturday Projects
 
-## Installation
+| # | Project | Languages | Patterns | PRD |
+|---|---------|-----------|----------|-----|
+| 1 | [Sauti](projects/sauti/) | Rust, C++ | Event-Driven, BFF, Zero-Copy | [PRD](docs/projects/01_sauti.md) |
+| 2 | [LendStream v2](projects/lendstream_v2/) | Java, Kotlin | CQRS, Event Sourcing, Saga | [PRD](docs/projects/02_lendstream_v2.md) |
+| 3 | [Sherehe](projects/sherehe/) | TypeScript | Micro-Frontends, Server Components | [PRD](docs/projects/03_sherehe.md) |
+| 4 | [Unicorns v2](projects/unicorns_v2/) | Kotlin, Scala | Hexagonal Architecture | [PRD](docs/projects/04_unicorns_v2.md) |
+| 5 | [Shamba](projects/shamba/) | Go | Fan-Out/Fan-In, Pipeline | [PRD](docs/projects/05_shamba.md) |
+| 6 | [BSD Engine v2](projects/bsd_engine_v2/) | Elixir | OTP Supervision Trees | [PRD](docs/projects/06_bsd_engine_v2.md) |
+| 7 | [PayGoHub v2](projects/paygohub_v2/) | C#, F# | Clean Architecture | [PRD](docs/projects/07_paygohub_v2.md) |
 
-Clone the repository and install the required dependencies:
+## LeetCode
 
-```bash
-
-    git clone https://github.com/your-username/oa-coding-tech-interview-prep.git
-    cd oa-coding-tech-interview-prep
-    python -m venv my_virtual_env
-    source my_virtual_env/bin/activate
-    pip install -r requirements.txt
+Organized by [pattern](leetcode/), not language. Solutions sit side-by-side for cross-language comparison:
 
 ```
-
-## Usage
-
-Each script can be run independently. For example:
-
-```bash
-
-    python multiplication_algorithms.py
-
+leetcode/two_pointers/valid_palindrome.py
+leetcode/two_pointers/valid_palindrome.rs
 ```
 
-## Scripts
+13 pattern directories: arrays & hashing, two pointers, sliding window, stacks & queues, linked lists, trees & tries, graphs, dynamic programming, greedy, backtracking, bit manipulation, intervals, math & geometry.
 
-### Graph Algorithms
+## Tooling
 
-1. **bfs.py**: Demonstrates Breadth-First Search (BFS) algorithm implementation on a graph.
-1. **dfs.py**: Implements the Depth-First Search (DFS) algorithm for graph traversal.
-1. **graph_traversal.py**: Finds all possible paths between two nodes in a graph.
-1. **shortest_path_collections_itertools.py**: Implements shortest path algorithms using collections and itertools.
+| Tool | Version | Status |
+|------|---------|--------|
+| Python | 3.12 | Installed |
+| Rust | 1.92 | Installed |
+| Go | 1.25 | Installed |
+| Java | 21 | Installed |
+| Node.js | 24 | Installed |
+| Ruby | 3.3 | Installed |
+| Zig | latest | Installed |
+| Docker | 29.3 | Installed |
+| C++ (clang) | Xcode CLT | Installed |
+| Kotlin | — | Week 3 |
+| Scala | — | Week 3 |
+| TypeScript | — | Week 5 |
+| PHP | — | Week 9 |
+| Elixir | — | Week 9 |
+| Clojure | — | Week 11 |
+| .NET | — | Week 13 |
 
-### Data Structures
+## Repo Structure
 
-1. **min_max-heap.py**: Implements min-heap and max-heap data structures and their operations.
-1. **linked_lists.py**: Implements and traverses a linked-list.
-1. **double_linked_list.py**: Implements and traverses a doubly-linked list.
-1. **circular_linked_lists.py**: Implements and traverses a circular linked list.
-
-### Dynamic Programming
-
-1. **dynamic_programming_memoization.py**: Solves the "Unique Paths" problem using dynamic programming with memoization.
-1. **travelling_salesman.py**: Solves the Travelling Salesman Problem using dynamic programming.
-1. **longest_palidromic_string.py**: Finds the longest palindromic substring in a given string.
-
-### String Processing
-
-1. **text_search_algoritms.py**: Implements various text search algorithms.
-1. **multiplication_algorithms.py**: Implements various multiplication algorithms.
-
-### Concurrency
-
-1. **chat_room.py**: Simulates a real-time chat room with concurrent user interactions.
-1. **meeting_scheduler.py**: Implements a concurrent meeting scheduler.
-1. **dinning_philosophers_with_concurrency.py**: Implements the dining philosophers problem.
-
----
-More examples in the link in the DSA section
-
-## DSA
-
-Comprehensive DSA Guide [included here](https://github.com/ericgitangu/OA/blob/main/dsa.md)
-
-## Competitive Programming Routine
-
-Follow the 4-Hour 4AM daily plan designed to rapidly restore your algorithmic readiness: [INDEX.md](INDEX.md)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. A good place to start would be to add tests then incoporate them into our CI/CD or alternatively, write a script to run tests to run against our implementations including testing our DSA guide examples. TODO: add tests.
-
-1. Fork the repository
-1. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-1. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-1. Push to the branch (`git push origin feature/AmazingFeature`)
-1. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License.
-
-## Author
-
-Created with ❤️ by Eric Gitangu - [Deveric](https://developer.ericgitangu.com). A code-blooded Software Engineer a pythonista with an array of various stack and techs. Intetests ML, CyberSecurity (MLSecOps), experience Full Stack developer 8+ years with various techs. **LinkedIn** [https://linkedin.com/in/ericgitangu](https://linkedin.com/in/ericgitangu), let's connect and feel free to contribute, I will continue building on this repo and hopefully y'all too with help me prune out the grind PRs welcomed!.
-
-## PR and Bug Reports
-
-For any PRs or bug reports, please use the following contact information:
-
-- **Email**: [developer.ericgitangu@gmail.com](mailto:developer.ericgitangu@gmail.com)
-- **Website**: [https://developer.ericgitangu.com/](https://developer.ericgitangu.com/)
+```
+tier_0_python/     Python DSA scripts, reference docs, CP routine
+tier_1_systems/    Rust + C++ (Weeks 1-2)
+tier_2_jvm/        Java, Kotlin, Scala (Weeks 3-4)
+tier_3_web/        JS, TS (Weeks 5-6)
+tier_4_concurrent/ Go, Zig (Weeks 7-8)
+tier_5a_scripting/ Ruby, PHP, Elixir (Weeks 9-10)
+tier_5b_lisp/      Clojure (Weeks 11-12)
+tier_6_dotnet/     C#, F# (Weeks 13-14)
+leetcode/          Solutions organized by pattern
+projects/          Saturday project scaffolds
+docs/              Sprint planning artifacts and PRDs
+```
