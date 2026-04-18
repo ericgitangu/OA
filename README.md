@@ -91,7 +91,7 @@ Solve in Python first. Reimplement in paired language groups. Ship a production-
 
 Organized by [pattern](leetcode/), not language. Solutions sit side-by-side for cross-language comparison:
 
-```
+```text
 leetcode/two_pointers/valid_palindrome.py
 leetcode/two_pointers/valid_palindrome.rs
 ```
@@ -121,7 +121,7 @@ leetcode/two_pointers/valid_palindrome.rs
 
 ## Repo Structure
 
-```
+```text
 tier_0_python/     Python DSA scripts, reference docs, CP routine
 tier_1_systems/    Rust + C++ (Weeks 1-2)
 tier_2_jvm/        Java, Kotlin, Scala (Weeks 3-4)
