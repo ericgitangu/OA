@@ -9,19 +9,19 @@
 ![Rust](https://img.shields.io/badge/Rust-1.92-000000?logo=rust&logoColor=white)
 ![C++](https://img.shields.io/badge/C++-20/23-00599C?logo=cplusplus&logoColor=white)
 <!-- Tier 2 — JVM -->
-![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.x-7F52FF?logo=kotlin&logoColor=white)
-![Scala](https://img.shields.io/badge/Scala-3-DC322F?logo=scala&logoColor=white)
+![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.3-7F52FF?logo=kotlin&logoColor=white)
+![Scala](https://img.shields.io/badge/Scala-3.8-DC322F?logo=scala&logoColor=white)
 <!-- Tier 3 — Web -->
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES2024-F7DF1E?logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)
 <!-- Tier 4 — Concurrent -->
 ![Go](https://img.shields.io/badge/Go-1.25-00ADD8?logo=go&logoColor=white)
-![Zig](https://img.shields.io/badge/Zig-0.14-F7A41D?logo=zig&logoColor=white)
+![Zig](https://img.shields.io/badge/Zig-0.15-F7A41D?logo=zig&logoColor=white)
 <!-- Tier 5a — Scripting -->
 ![Ruby](https://img.shields.io/badge/Ruby-3.3-CC342D?logo=ruby&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)
-![Elixir](https://img.shields.io/badge/Elixir-1.17-4B275F?logo=elixir&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.5-777BB4?logo=php&logoColor=white)
+![Elixir](https://img.shields.io/badge/Elixir-1.19-4B275F?logo=elixir&logoColor=white)
 <!-- Tier 5b — Lisp -->
 ![Clojure](https://img.shields.io/badge/Clojure-1.12-5881D8?logo=clojure&logoColor=white)
 <!-- Tier 6 — .NET -->
@@ -105,19 +105,19 @@ leetcode/two_pointers/valid_palindrome.rs
 | Python | 3.12 | Installed |
 | Rust | 1.92 | Installed |
 | Go | 1.25 | Installed |
-| Java | 21 | Installed |
+| Java | 17 | Installed |
 | Node.js | 24 | Installed |
 | Ruby | 3.3 | Installed |
-| Zig | latest | Installed |
+| Zig | 0.15 | Installed |
 | Docker | 29.3 | Installed |
 | C++ (clang) | Xcode CLT | Installed |
-| Kotlin | — | Week 3 |
-| Scala | — | Week 3 |
-| TypeScript | — | Week 5 |
-| PHP | — | Week 9 |
-| Elixir | — | Week 9 |
-| Clojure | — | Week 11 |
-| .NET | — | Week 13 |
+| Kotlin | 2.3 | Installed |
+| Scala | 3.8 | Installed |
+| TypeScript | 6.0 | Installed |
+| PHP | 8.5 | Installed |
+| Elixir | 1.19 | Installed |
+| Clojure | 1.12 | Installed |
+| .NET | — | Needs sudo install |
 
 ## Repo Structure
 
