@@ -114,7 +114,7 @@ inline fun <T> measureTime(label: String, block: () -> T): T {
     val start = System.nanoTime()
     val result = block()
     val elapsed = (System.nanoTime() - start) / 1_000_000.0
-    println("    $label took %.2f ms".format(elapsed))
+    println("    $label took %.2f ms".format(elapsed))  // => (varies)
     return result
 }
 
@@ -168,7 +168,7 @@ class UserProfile {
     // Thread-safe by default (uses LazyThreadSafetyMode.SYNCHRONIZED). Use
     // LazyThreadSafetyMode.NONE if you guarantee single-threaded access for ~10% better perf.
     val createdAt: Long by lazy {
-        println("    (lazy init: computing createdAt)")
+        println("    (lazy init: computing createdAt)")  // => (lazy init: computing createdAt)
         System.currentTimeMillis()
     }
 
@@ -176,7 +176,7 @@ class UserProfile {
     // Kotlin's stdlib also provides Delegates.observable() and Delegates.vetoable()
     // for common patterns without writing your own delegate class.
     var displayName: String by ObservableProperty("Anonymous") { old, new ->
-        println("    (observed: displayName changed '$old' -> '$new')")
+        println("    (observed: displayName changed '$old' -> '$new')")  // => (varies)
     }
 }
 
@@ -198,7 +198,7 @@ fun main() {
 
 // ── 1. Basics ────────────────────────────────────────────────────────
 fun basics() {
-    println("=== 1. BASICS ===")
+    println("=== 1. BASICS ===")  // => === 1. BASICS ===
 
     // `val` (immutable reference) vs `var` (mutable reference): Kotlin makes immutability
     // the natural choice by requiring `var` explicitly. `val` is like Java's `final` but
@@ -207,13 +207,13 @@ fun basics() {
     val name = "Kotlin"
     var counter = 0
     counter += 1
-    println("  val name=$name, var counter=$counter")
+    println("  val name=$name, var counter=$counter")  // => val name=Kotlin, var counter=1
 
     // String templates: `$variable` for simple references, `${expression}` for complex
     // expressions. Compiled to StringBuilder.append() calls — no performance penalty
     // vs manual concatenation. Java requires explicit concatenation or String.format().
     val x = 42
-    println("  x=$x, x*2=${x * 2}, name has ${name.length} chars")
+    println("  x=$x, x*2=${x * 2}, name has ${name.length} chars")  // => x=42, x*2=84, name has 6 chars
 
     // Raw strings (triple-quoted): preserve all whitespace and special characters literally.
     // trimMargin() strips leading whitespace up to the margin character (default: `|`).
@@ -224,7 +224,7 @@ fun basics() {
         |Line 2: using pipe as margin prefix
         |Line 3: raw string literal
     """.trimMargin()
-    println("  Multiline:\n$text")
+    println("  Multiline:\n$text")  // => Multiline: (followed by 3 trimmed lines)
 
     // Null safety: Kotlin's type system distinguishes nullable (`String?`) from non-null
     // (`String`) at compile time. This is Kotlin's flagship feature over Java — it
@@ -235,26 +235,26 @@ fun basics() {
 
     // Safe call operator `?.`: returns null if the receiver is null, otherwise calls the
     // method. Chains gracefully: `a?.b?.c?.d` short-circuits at the first null.
-    println("  nullable?.length = ${nullable?.length}")
-    println("  alsoNull?.length = ${alsoNull?.length}")
+    println("  nullable?.length = ${nullable?.length}")  // => nullable?.length = 5
+    println("  alsoNull?.length = ${alsoNull?.length}")  // => alsoNull?.length = null
 
     // Elvis operator `?:`: provides a default value when the left side is null.
     // Named after Elvis Presley's hairstyle (turn `?:` sideways). Equivalent to
     // Java's `Optional.orElse()` but works with any nullable type, not just Optional.
     val len = alsoNull?.length ?: -1
-    println("  alsoNull?.length ?: -1 = $len")
+    println("  alsoNull?.length ?: -1 = $len")  // => alsoNull?.length ?: -1 = -1
 
     // `?.let {}`: executes the block only if the receiver is non-null. The non-null
     // value is available as `it` inside the lambda. This is idiomatic for null-guarded
     // transformations — cleaner than `if (x != null) { ... }`.
-    nullable?.let { println("  nullable is not null: '$it'") }
-    alsoNull?.let { println("  THIS SHOULD NOT PRINT") }
+    nullable?.let { println("  nullable is not null: '$it'") }  // => nullable is not null: 'hello'
+    alsoNull?.let { println("  THIS SHOULD NOT PRINT") }  // (not printed — alsoNull is null)
 
     // Not-null assertion `!!`: converts nullable to non-null, throwing KotlinNullPointerException
     // if null. Use sparingly — it defeats the purpose of null safety. Legitimate uses:
     // bridging with Java APIs or after a null check the compiler can't track.
     val definitelyNotNull: String = nullable!!
-    println("  !! assertion: $definitelyNotNull")
+    println("  !! assertion: $definitelyNotNull")  // => !! assertion: hello
 
     // Smart casts: after an `is` check, the compiler automatically casts the variable
     // to the checked type within the scope where the check holds. No explicit cast needed.
@@ -262,7 +262,7 @@ fun basics() {
     // even after instanceof (until Java 16's pattern matching for instanceof).
     val obj: Any = "I'm a String"
     if (obj is String) {
-        println("  Smart cast: length=${obj.length}")  // obj is auto-cast to String
+        println("  Smart cast: length=${obj.length}")  // obj is auto-cast to String  // => Smart cast: length=12
     }
 
     println()
@@ -270,7 +270,7 @@ fun basics() {
 
 // ── 2. Collections ───────────────────────────────────────────────────
 fun collections() {
-    println("=== 2. COLLECTIONS ===")
+    println("=== 2. COLLECTIONS ===")  // => === 2. COLLECTIONS ===
 
     // Kotlin collections default to read-only interfaces (List, Map, Set) that expose
     // no mutation methods. This is a wrapper-level distinction — the underlying JVM
@@ -280,16 +280,16 @@ fun collections() {
     val names = listOf("Alice", "Bob", "Charlie", "Diana")
     val scores = mapOf("Alice" to 95, "Bob" to 87, "Charlie" to 92)
     val tags = setOf("kotlin", "jvm", "oop")
-    println("  List: $names")
-    println("  Map: $scores")
-    println("  Set: $tags")
+    println("  List: $names")  // => List: [Alice, Bob, Charlie, Diana]
+    println("  Map: $scores")  // => Map: {Alice=95, Bob=87, Charlie=92}
+    println("  Set: $tags")  // => Set: [kotlin, jvm, oop]
 
     // Mutable collections: explicitly requested. The `+=` operator on mutable collections
     // calls add() — this is operator overloading via the `plusAssign` convention.
     val mutableNames = mutableListOf("Eve", "Frank")
     mutableNames += "Grace"
     mutableNames.removeAt(0)
-    println("  Mutable list: $mutableNames")
+    println("  Mutable list: $mutableNames")  // => Mutable list: [Frank, Grace]
 
     // Kotlin's collection operations are eager by default (unlike Java Streams which are
     // lazy). Each filter/map creates an intermediate list. For large collections, use
@@ -299,49 +299,49 @@ fun collections() {
     // `it`: implicit name for a single-parameter lambda. Equivalent to Scala's `_`
     // placeholder but more readable in complex expressions.
     val evenSquares = numbers.filter { it.isEven() }.map { it * it }
-    println("  Even squares: $evenSquares")
+    println("  Even squares: $evenSquares")  // => Even squares: [4, 16, 36, 64, 100]
 
     // reduce(): folds without an initial value — uses the first element as the
     // accumulator. Throws on empty collections. Use fold() with an initial value
     // for safety, or reduceOrNull() for nullable result on empty input.
     val sum = numbers.reduce { acc, n -> acc + n }
-    println("  Reduce sum: $sum")
+    println("  Reduce sum: $sum")  // => Reduce sum: 55
 
     val grouped = names.groupBy { it.first() }
-    println("  Grouped by first char: $grouped")
+    println("  Grouped by first char: $grouped")  // => Grouped by first char: {A=[Alice], B=[Bob], C=[Charlie], D=[Diana]}
 
     // flatMap: maps each element to a collection and flattens the result.
     // `{ it }` is short for `{ list -> list }` — uses the identity transform.
     val flat = listOf(listOf(1, 2), listOf(3, 4), listOf(5)).flatMap { it }
-    println("  FlatMap: $flat")
+    println("  FlatMap: $flat")  // => FlatMap: [1, 2, 3, 4, 5]
 
     // associateWith: creates a Map from keys to computed values. Compare with
     // associateBy (which computes keys from values). Both are Kotlin-specific
     // convenience functions not found in Java's Stream API or Scala's collections.
     val nameLengths = names.associateWith { it.length }
-    println("  AssociateWith: $nameLengths")
+    println("  AssociateWith: $nameLengths")  // => AssociateWith: {Alice=5, Bob=3, Charlie=7, Diana=5}
 
     // Destructuring declarations: `val (a, b) = pair` calls component1() and component2().
     // partition() returns a Pair<List, List> which supports destructuring. Data classes
     // and Pairs auto-generate componentN() functions; regular classes need `operator fun`.
     val (evens, odds) = numbers.partition { it.isEven() }
-    println("  Partition evens=$evens, odds=$odds")
+    println("  Partition evens=$evens, odds=$odds")  // => Partition evens=[2, 4, 6, 8, 10], odds=[1, 3, 5, 7, 9]
 
     // zip: combines two lists element-wise into a list of Pairs. Stops at the shorter
     // list's length. unzip: reverses the operation, splitting Pairs back into two lists.
     val keys = listOf("a", "b", "c")
     val values = listOf(1, 2, 3)
     val zipped = keys.zip(values)
-    println("  Zip: $zipped")
+    println("  Zip: $zipped")  // => Zip: [(a, 1), (b, 2), (c, 3)]
     val (unzippedKeys, unzippedVals) = zipped.unzip()
-    println("  Unzip: keys=$unzippedKeys, vals=$unzippedVals")
+    println("  Unzip: keys=$unzippedKeys, vals=$unzippedVals")  // => Unzip: keys=[a, b, c], vals=[1, 2, 3]
 
     println()
 }
 
 // ── 3. Sequences (lazy evaluation) ───────────────────────────────────
 fun sequences() {
-    println("=== 3. SEQUENCES ===")
+    println("=== 3. SEQUENCES ===")  // => === 3. SEQUENCES ===
 
     // Sequences: Kotlin's lazy collection pipeline, analogous to Java's Streams and
     // Scala's LazyLists/Views. Operations are applied element-by-element (vertical
@@ -353,12 +353,12 @@ fun sequences() {
         .map { it * it }
         .take(5)
         .toList()
-    println("  First 5 squares of multiples of 3: $result")
+    println("  First 5 squares of multiples of 3: $result")  // => First 5 squares of multiples of 3: [9, 36, 81, 144, 225]
 
     // generateSequence: creates a potentially infinite sequence from a seed value
     // and a successor function. The sequence terminates when the function returns null.
     val powers = generateSequence(1) { it * 2 }.take(10).toList()
-    println("  Powers of 2: $powers")
+    println("  Powers of 2: $powers")  // => Powers of 2: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 
     // sequence { } builder: uses Kotlin's suspend mechanism (coroutine-based) to
     // generate values lazily with yield(). The builder suspends after each yield and
@@ -374,14 +374,14 @@ fun sequences() {
             b = next
         }
     }
-    println("  First 12 Fibonacci: ${fibs.take(12).toList()}")
+    println("  First 12 Fibonacci: ${fibs.take(12).toList()}")  // => First 12 Fibonacci: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
     println()
 }
 
 // ── 4. Classes & objects ─────────────────────────────────────────────
 fun classesAndObjects() {
-    println("=== 4. CLASSES & OBJECTS ===")
+    println("=== 4. CLASSES & OBJECTS ===")  // => === 4. CLASSES & OBJECTS ===
 
     // Data class: Kotlin generates equals(), hashCode(), toString(), copy(), and
     // componentN() from ALL properties declared in the primary constructor.
@@ -392,9 +392,9 @@ fun classesAndObjects() {
 
     val user = User("Alice", 30)
     val updated = user.copy(age = 31)
-    println("  Data class: $user")
-    println("  Copy with modification: $updated")
-    println("  Destructuring: name=${user.name}, age=${user.age}")
+    println("  Data class: $user")  // => Data class: User(name=Alice, age=30)
+    println("  Copy with modification: $updated")  // => Copy with modification: User(name=Alice, age=31)
+    println("  Destructuring: name=${user.name}, age=${user.age}")  // => Destructuring: name=Alice, age=30
 
     // Sealed class exhaustive `when`: the compiler verifies every subtype is handled.
     // No `else` branch needed because the compiler knows all subtypes. If you add a
@@ -406,34 +406,34 @@ fun classesAndObjects() {
             is Shape.Rectangle -> "Rect ${shape.width}x${shape.height}"
             is Shape.Triangle -> "Triangle b=${shape.base} h=${shape.height}"
         }
-        println("  $desc -> area=${shape.area()}")
+        println("  $desc -> area=${shape.area()}")  // => Circle r=5.0 -> area=78.5... | Rect 3.0x4.0 -> area=12.0 | Triangle b=6.0 h=3.0 -> area=9.0
     }
 
     val dir = Direction.NORTH
-    println("  Direction: $dir, opposite=${dir.opposite()}, dx=${dir.dx} dy=${dir.dy}")
+    println("  Direction: $dir, opposite=${dir.opposite()}, dx=${dir.dx} dy=${dir.dy}")  // => Direction: NORTH, opposite=SOUTH, dx=0 dy=1
 
     // Object singleton: Registry.INSTANCE on the JVM. Thread-safe initialization
     // is guaranteed by the JVM class loader.
     Registry.register("version", "1.0")
     Registry.register("lang", "Kotlin")
-    println("  Singleton: $Registry")
+    println("  Singleton: $Registry")  // => Singleton: Registry({version=1.0, lang=Kotlin})
 
     // Companion object usage: looks like static access but is actually an object instance.
     // This means companion objects can implement interfaces and be passed around as values.
-    println("  Companion: RED=${Color.RED}, fromHex=${Color.fromHex("#FF8800")}")
+    println("  Companion: RED=${Color.RED}, fromHex=${Color.fromHex("#FF8800")}")  // => Companion: RED=Color(r=255, g=0, b=0), fromHex=Color(r=255, g=136, b=0)
 
     // Interface with default method: Kotlin compiles defaults differently than Java —
     // it generates a static DefaultImpls class to maintain backward compatibility
     // with Java 6/7 bytecode targets (though modern Kotlin targets Java 8+).
     val item = NamedItem("score", 100)
-    println("  Interface: ${item.describe()}, tag=${item.tag()}")
+    println("  Interface: ${item.describe()}, tag=${item.tag()}")  // => Interface: score=100, tag=[score=100]
 
     println()
 }
 
 // ── 5. When expressions ──────────────────────────────────────────────
 fun patternMatchingWithWhen() {
-    println("=== 5. WHEN EXPRESSIONS ===")
+    println("=== 5. WHEN EXPRESSIONS ===")  // => === 5. WHEN EXPRESSIONS ===
 
     // `when` without a subject: acts as a cleaner if-else-if chain. Each branch
     // is a boolean condition. The first matching branch wins. When used as an
@@ -446,7 +446,7 @@ fun patternMatchingWithWhen() {
         x in 11..100 -> "medium"
         else -> "large"
     }
-    println("  $x is $label")
+    println("  $x is $label")  // => 15 is medium
 
     // `when` with a subject: the subject is matched against each branch using `is`
     // (type check), `in` (range/collection containment), or equality. Smart casts
@@ -460,7 +460,7 @@ fun patternMatchingWithWhen() {
         is List<*> -> "list of size ${obj.size}"
         else -> "unknown"
     }
-    println("  Type matching: $typeDesc")
+    println("  Type matching: $typeDesc")  // => Type matching: list of size 3
 
     // Multiple values in one branch: comma-separated alternatives are like Java's
     // case fallthrough but without the bug-prone fall-through semantics.
@@ -471,14 +471,14 @@ fun patternMatchingWithWhen() {
         in 'A'..'Z' -> "uppercase letter"
         else -> "other"
     }
-    println("  '$char' is a $kind")
+    println("  '$char' is a $kind")  // => 'e' is a vowel
 
     println()
 }
 
 // ── 6. Functional ────────────────────────────────────────────────────
 fun functional() {
-    println("=== 6. FUNCTIONAL ===")
+    println("=== 6. FUNCTIONAL ===")  // => === 6. FUNCTIONAL ===
 
     // Lambda syntax: `{ params -> body }`. When a lambda has a single parameter,
     // you can omit it and use `it`. Kotlin lambdas are closures — they capture
@@ -487,20 +487,20 @@ fun functional() {
     // captured mutable vars in IntRef/ObjectRef wrapper objects on the JVM.
     val double: (Int) -> Int = { it * 2 }
     val add: (Int, Int) -> Int = { a, b -> a + b }
-    println("  double(5)=${double(5)}, add(3,4)=${add(3, 4)}")
+    println("  double(5)=${double(5)}, add(3,4)=${add(3, 4)}")  // => double(5)=10, add(3,4)=7
 
     // Higher-order function usage: passing lambdas as arguments. The trailing lambda
     // syntax (last lambda outside parentheses) is a Kotlin convention that enables
     // DSL-like code. If the lambda is the ONLY argument, parentheses can be omitted entirely.
     val numbers = listOf(1, 2, 3, 4, 5)
     val result = numbers.mapAndFilter({ it * it }, { it > 10 })
-    println("  mapAndFilter (square, >10): $result")
+    println("  mapAndFilter (square, >10): $result")  // => mapAndFilter (square, >10): [16, 25]
 
     // Extension functions called on instances: these look like member methods but
     // are statically dispatched. The extension is resolved based on the compile-time
     // type of the expression, NOT the runtime type.
-    println("  \"hello world\".wordCount() = ${"hello world".wordCount()}")
-    println("  listOf(1,2,3).secondOrNull() = ${listOf(1, 2, 3).secondOrNull()}")
+    println("  \"hello world\".wordCount() = ${"hello world".wordCount()}")  // => "hello world".wordCount() = 2
+    println("  listOf(1,2,3).secondOrNull() = ${listOf(1, 2, 3).secondOrNull()}")  // => listOf(1,2,3).secondOrNull() = 2
 
     // Method/function references use `::` — same syntax as Java. Can reference
     // class methods (String::lowercase), instance methods (obj::method), or
@@ -508,7 +508,7 @@ fun functional() {
     // the receiver; unbound references (String::lowercase) need it as a parameter.
     val words = listOf("Hello", "WORLD", "kotlin")
     val lower = words.map(String::lowercase)
-    println("  Method ref lowercase: $lower")
+    println("  Method ref lowercase: $lower")  // => Method ref lowercase: [hello, world, kotlin]
 
     // Inline function in action: the compiler will copy measureTime's body AND the
     // lambda body directly into this call site. No Function object is allocated.
@@ -516,7 +516,7 @@ fun functional() {
     val computed = measureTime("sum 1..1M") {
         (1..1_000_000).sum()
     }
-    println("    result=$computed")
+    println("    result=$computed")  // => result=500000500000
 
     // Manual function composition: Kotlin's stdlib doesn't include compose/andThen
     // (unlike Java's Function.andThen() or Scala's Function.compose()). You can
@@ -524,14 +524,14 @@ fun functional() {
     // this and much more for FP-heavy codebases.
     fun <A, B, C> compose(f: (B) -> C, g: (A) -> B): (A) -> C = { a -> f(g(a)) }
     val doubleAndToString = compose(Int::toString, double)
-    println("  compose(toString, double)(21) = ${doubleAndToString(21)}")
+    println("  compose(toString, double)(21) = ${doubleAndToString(21)}")  // => compose(toString, double)(21) = 42
 
     println()
 }
 
 // ── 7. Scope functions ───────────────────────────────────────────────
 fun scopeFunctions() {
-    println("=== 7. SCOPE FUNCTIONS ===")
+    println("=== 7. SCOPE FUNCTIONS ===")  // => === 7. SCOPE FUNCTIONS ===
 
     // Kotlin's 5 scope functions (let, run, with, apply, also) differ by:
     // 1. How they reference the object: `this` (run, with, apply) vs `it` (let, also)
@@ -543,15 +543,15 @@ fun scopeFunctions() {
     // execute code only when non-null — Kotlin's alternative to Optional.map().
     val name: String? = "Alice"
     val greeting = name?.let { "Hello, $it!" } ?: "Hello, stranger!"
-    println("  let: $greeting")
+    println("  let: $greeting")  // => let: Hello, Alice!
 
     // run: executes a block with the object as `this` (receiver). Returns the lambda
     // result. Use when you need to compute something from an object's properties.
     val result = "Hello, World!".run {
-        println("  run: original='$this'")
+        println("  run: original='$this'")  // => run: original='Hello, World!'
         uppercase().reversed()
     }
-    println("  run result: $result")
+    println("  run result: $result")  // => run result: !DLROW ,OLLEH
 
     // with: same as run but takes the receiver as an argument instead of an extension.
     // Prefer `with` when the object is already in scope and you want to call multiple
@@ -562,7 +562,7 @@ fun scopeFunctions() {
         add(5)
         "List has $size items, sum=${sum()}"
     }
-    println("  with: $summary")
+    println("  with: $summary")  // => with: List has 5 items, sum=15
 
     // apply: configures an object and returns the object itself. The object is `this`
     // inside the lambda. Ideal for object initialization — Kotlin's builder pattern
@@ -573,23 +573,23 @@ fun scopeFunctions() {
         append("World")
         append("!")
     }
-    println("  apply: $sb")
+    println("  apply: $sb")  // => apply: Hello, World!
 
     // also: performs side effects and returns the object itself. The object is `it`
     // inside the lambda. Use for logging, debugging, or validation without breaking
     // a call chain. Equivalent to Java's peek() in streams.
     val items = mutableListOf("a", "b").also {
-        println("  also: initial list = $it")
+        println("  also: initial list = $it")  // => also: initial list = [a, b]
         it.add("c")
     }
-    println("  also: after = $items")
+    println("  also: after = $items")  // => also: after = [a, b, c]
 
     println()
 }
 
 // ── 8. Delegation ────────────────────────────────────────────────────
 fun delegation() {
-    println("=== 8. DELEGATION ===")
+    println("=== 8. DELEGATION ===")  // => === 8. DELEGATION ===
 
     val profile = UserProfile()
 
@@ -597,10 +597,10 @@ fun delegation() {
     // cached. Subsequent accesses return the cached value without re-executing.
     // This is thread-safe (synchronized) by default. Use for expensive initialization
     // that might not be needed — avoids paying the cost upfront.
-    println("  First access to createdAt:")
-    println("    createdAt = ${profile.createdAt}")
-    println("  Second access (cached):")
-    println("    createdAt = ${profile.createdAt}")
+    println("  First access to createdAt:")  // => First access to createdAt:
+    println("    createdAt = ${profile.createdAt}")  // => (varies — prints lazy init message, then timestamp)
+    println("  Second access (cached):")  // => Second access (cached):
+    println("    createdAt = ${profile.createdAt}")  // => (varies — same cached timestamp)
 
     // Custom observable delegate in action: the onChange callback fires on every
     // property assignment with the old and new values.
@@ -617,14 +617,14 @@ fun delegation() {
     }
 
     val config = Config(mapOf("host" to "localhost", "port" to 8080, "debug" to true))
-    println("  Map delegate: host=${config.host}, port=${config.port}, debug=${config.debug}")
+    println("  Map delegate: host=${config.host}, port=${config.port}, debug=${config.debug}")  // => Map delegate: host=localhost, port=8080, debug=true
 
     println()
 }
 
 // ── 9. DSL building ──────────────────────────────────────────────────
 fun dslBuilding() {
-    println("=== 9. DSL BUILDING ===")
+    println("=== 9. DSL BUILDING ===")  // => === 9. DSL BUILDING ===
 
     // Type-safe builder using lambdas with receivers: html { } calls the lambda with
     // an HtmlBuilder as `this`, so h1(), p(), ul() are called directly without a
@@ -640,8 +640,8 @@ fun dslBuilding() {
         }
         p("Footer text here.")
     }
-    println("  Generated HTML:")
-    page.lines().forEach { println("    $it") }
+    println("  Generated HTML:")  // => Generated HTML:
+    page.lines().forEach { println("    $it") }  // => (HTML lines: <h1>..., <p>..., <ul>..., etc.)
 
     // Infix functions: called without dot or parentheses (`5 shouldEqual 5` instead of
     // `5.shouldEqual(5)`). Requirements: must be member or extension functions, must
@@ -650,10 +650,10 @@ fun dslBuilding() {
     // and DSLs. Abuse leads to unreadable code — use judiciously.
     infix fun Int.shouldEqual(expected: Int) {
         check(this == expected) { "Expected $expected but got $this" }
-        println("    PASS: $this == $expected")
+        println("    PASS: $this == $expected")  // => (varies)
     }
 
-    println("  Mini test DSL:")
+    println("  Mini test DSL:")  // => Mini test DSL:
     5 shouldEqual 5
     (2 + 3) shouldEqual 5
 
@@ -662,7 +662,7 @@ fun dslBuilding() {
 
 // ── 10. Coroutines (conceptual) ──────────────────────────────────────
 fun coroutinesConcepts() {
-    println("=== 10. COROUTINES (conceptual — requires kotlinx.coroutines) ===")
+    println("=== 10. COROUTINES (conceptual — requires kotlinx.coroutines) ===")  // => === 10. COROUTINES (conceptual — requires kotlinx.coroutines) ===
     // Kotlin coroutines (kotlinx.coroutines, KEEP-87): lightweight concurrency primitives
     // that use CPS (continuation-passing style) transformation at compile time. Unlike
     // Java's virtual threads (JVM-level, blocking-friendly), Kotlin coroutines are a
@@ -729,5 +729,5 @@ fun coroutinesConcepts() {
     """.trimMargin())
 
     println()
-    println("=== DONE ===")
+    println("=== DONE ===")  // => === DONE ===
 }

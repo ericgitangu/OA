@@ -185,55 +185,55 @@ def basics
   name = "Ruby"
   flag = true
   nothing = nil
-  puts "int=#{x}  float=#{pi}  str=#{name.inspect}  bool=#{flag}  nil=#{nothing.inspect}"
+  puts "int=#{x}  float=#{pi}  str=#{name.inspect}  bool=#{flag}  nil=#{nothing.inspect}"  # => int=42  float=3.14  str="Ruby"  bool=true  nil=nil
 
   # In Ruby, only nil and false are falsy. Everything else — including 0, "", and [] — is truthy.
   # This differs from Python/JS where 0 and "" are falsy.
-  puts "Falsy in Ruby: only nil and false — 0 is truthy: #{!!0}"
+  puts "Falsy in Ruby: only nil and false — 0 is truthy: #{!!0}"  # => Falsy in Ruby: only nil and false — 0 is truthy: true
 
   # Symbols are immutable, interned strings. They're stored once in memory and
   # compared by identity (object_id), not by value — making them faster than strings
   # for keys, method names, and identifiers. The symbol table is never garbage collected.
   sym = :hello
-  puts "Symbol: #{sym}  object_id stable: #{:hello.object_id == :hello.object_id}"
-  puts "Symbol to string: #{sym.to_s}  String to symbol: #{"world".to_sym.inspect}"
+  puts "Symbol: #{sym}  object_id stable: #{:hello.object_id == :hello.object_id}"  # => Symbol: hello  object_id stable: true
+  puts "Symbol to string: #{sym.to_s}  String to symbol: #{"world".to_sym.inspect}"  # => Symbol to string: hello  String to symbol: :world
 
   # Double-quoted strings support interpolation; single-quoted don't.
   # Strings are mutable by default in Ruby (unlike Python/Java).
   greeting = "Hello, #{name}!"
-  puts greeting
-  puts "upcase=#{name.upcase}  reverse=#{name.reverse}  chars=#{name.chars}"
+  puts greeting  # => Hello, Ruby!
+  puts "upcase=#{name.upcase}  reverse=#{name.reverse}  chars=#{name.chars}"  # => upcase=RUBY  reverse=ybuR  chars=["R", "u", "b", "y"]
 
   # freeze makes an object immutable. Ruby 3+ has frozen string literals opt-in
   # via `# frozen_string_literal: true` pragma, which improves memory and performance
   # by deduplicating identical string objects.
-  puts "Frozen string: #{name.freeze.frozen?}"
+  puts "Frozen string: #{name.freeze.frozen?}"  # => Frozen string: true
 
   # Heredocs with <<~ strip leading indentation (squiggly heredoc, Ruby 2.3+).
   multiline = <<~HEREDOC
     This is a heredoc.
     It preserves #{2 + 2} interpolation.
   HEREDOC
-  puts "Heredoc: #{multiline.strip.inspect}"
+  puts "Heredoc: #{multiline.strip.inspect}"  # => Heredoc: "This is a heredoc.\nIt preserves 4 interpolation."
 
   # Ranges are objects that represent intervals. Two dots (..) is inclusive,
   # three dots (...) is exclusive of the end. Ranges are lazy — they don't
   # allocate all elements until you call to_a or iterate.
   inclusive = (1..5)
   exclusive = (1...5)
-  puts "Inclusive: #{inclusive.to_a}  Exclusive: #{exclusive.to_a}"
-  puts "Range includes 3? #{inclusive.include?(3)}  Alphabet: #{('a'..'e').to_a}"
+  puts "Inclusive: #{inclusive.to_a}  Exclusive: #{exclusive.to_a}"  # => Inclusive: [1, 2, 3, 4, 5]  Exclusive: [1, 2, 3, 4]
+  puts "Range includes 3? #{inclusive.include?(3)}  Alphabet: #{('a'..'e').to_a}"  # => Range includes 3? true  Alphabet: ["a", "b", "c", "d", "e"]
 
   # Endless ranges (Ruby 2.6+) have no upper bound — useful with take, lazy, and case/when.
-  puts "Endless range: #{(1..).take(5)}"
+  puts "Endless range: #{(1..).take(5)}"  # => Endless range: [1, 2, 3, 4, 5]
 
   # Regex literals use /pattern/ syntax. match returns a MatchData object
   # that supports indexed access to capture groups.
   str = "Ruby 3.2 is great"
   match = str.match(/(\w+)\s(\d+\.\d+)/)
-  puts "Match: #{match[0]}  Capture1: #{match[1]}  Capture2: #{match[2]}"
-  puts "gsub: #{str.gsub(/\d+/, 'X')}"
-  puts "scan: #{str.scan(/\w+/)}"
+  puts "Match: #{match[0]}  Capture1: #{match[1]}  Capture2: #{match[2]}"  # => Match: Ruby 3.2  Capture1: Ruby  Capture2: 3.2
+  puts "gsub: #{str.gsub(/\d+/, 'X')}"  # => gsub: Ruby X.X is great
+  puts "scan: #{str.scan(/\w+/)}"  # => scan: ["Ruby", "3", "2", "is", "great"]
 end
 
 # ============================================================
@@ -245,48 +245,48 @@ def collections
   # Arrays are ordered, integer-indexed, heterogeneous collections.
   # Internally they're C arrays of VALUE pointers — O(1) random access.
   arr = [3, 1, 4, 1, 5, 9, 2, 6]
-  puts "Array: #{arr}"
-  puts "push/pop: #{arr.push(7).pop}  unshift/shift: #{arr.unshift(0).shift}"
-  puts "slice: #{arr[1..3]}  last: #{arr.last(3)}  flatten: #{[[1, 2], [3]].flatten}"
-  puts "compact: #{[1, nil, 2, nil, 3].compact}"
-  puts "uniq: #{[1, 1, 2, 3, 3].uniq}  sort: #{arr.sort}"
+  puts "Array: #{arr}"  # => Array: [3, 1, 4, 1, 5, 9, 2, 6]
+  puts "push/pop: #{arr.push(7).pop}  unshift/shift: #{arr.unshift(0).shift}"  # => push/pop: 7  unshift/shift: 0
+  puts "slice: #{arr[1..3]}  last: #{arr.last(3)}  flatten: #{[[1, 2], [3]].flatten}"  # => slice: [1, 4, 1]  last: [9, 2, 6]  flatten: [1, 2, 3]
+  puts "compact: #{[1, nil, 2, nil, 3].compact}"  # => compact: [1, 2, 3]
+  puts "uniq: #{[1, 1, 2, 3, 3].uniq}  sort: #{arr.sort}"  # => uniq: [1, 2, 3]  sort: [1, 1, 2, 3, 4, 5, 6, 9]
 
   # Hashes are ordered (since Ruby 1.9) key-value stores.
   # The symbol shorthand { name: "Ruby" } is syntactic sugar for { :name => "Ruby" }.
   # fetch raises KeyError if missing (safer than [] which returns nil silently).
   h = { name: "Ruby", version: 3.2, paradigm: "OOP" }
-  puts "Hash: #{h}"
-  puts "fetch: #{h.fetch(:name)}  dig: #{h.dig(:name)}"
-  puts "keys: #{h.keys}  values: #{h.values}"
+  puts "Hash: #{h}"  # => Hash: {name: "Ruby", version: 3.2, paradigm: "OOP"}
+  puts "fetch: #{h.fetch(:name)}  dig: #{h.dig(:name)}"  # => fetch: Ruby  dig: Ruby
+  puts "keys: #{h.keys}  values: #{h.values}"  # => keys: [:name, :version, :paradigm]  values: ["Ruby", 3.2, "OOP"]
   h.merge!(year: 1995)
-  puts "merge!: #{h}"
-  puts "select: #{h.select { |_k, v| v.is_a?(Numeric) }}"
+  puts "merge!: #{h}"  # => merge!: {name: "Ruby", version: 3.2, paradigm: "OOP", year: 1995}
+  puts "select: #{h.select { |_k, v| v.is_a?(Numeric) }}"  # => select: {:version=>3.2, :year=>1995}
 
   # Set requires 'set' — it's a Hash wrapper where keys are the elements and values are true.
   s1 = Set[1, 2, 3, 4]
   s2 = Set[3, 4, 5, 6]
-  puts "Set union: #{(s1 | s2).to_a}  intersection: #{(s1 & s2).to_a}  diff: #{(s1 - s2).to_a}"
+  puts "Set union: #{(s1 | s2).to_a}  intersection: #{(s1 & s2).to_a}  diff: #{(s1 - s2).to_a}"  # => Set union: [1, 2, 3, 4, 5, 6]  intersection: [3, 4]  diff: [1, 2]
 
   # Enumerable is Ruby's most powerful mixin — mixed into Array, Hash, Range, Set, etc.
   # It provides 50+ methods; you only need to define #each and include Enumerable.
   # The &:method_name syntax creates a Proc from a method name via Symbol#to_proc.
   nums = (1..10).to_a
-  puts "map:       #{nums.map { |n| n * 2 }}"
-  puts "select:    #{nums.select(&:even?)}"
-  puts "reject:    #{nums.reject(&:even?)}"
+  puts "map:       #{nums.map { |n| n * 2 }}"  # => map:       [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+  puts "select:    #{nums.select(&:even?)}"  # => select:    [2, 4, 6, 8, 10]
+  puts "reject:    #{nums.reject(&:even?)}"  # => reject:    [1, 3, 5, 7, 9]
 
   # reduce (alias: inject) folds the collection into a single value.
   # The :+ shorthand passes the method name directly — no block needed.
-  puts "reduce:    #{nums.reduce(0, :+)}"
-  puts "group_by:  #{nums.group_by { |n| n % 3 }}"
-  puts "flat_map:  #{[[1, 2], [3, 4]].flat_map { |a| a.map { |x| x * 10 } }}"
-  puts "zip:       #{[1, 2, 3].zip(['a', 'b', 'c'])}"
-  puts "each_with_object: #{nums.each_with_object({}) { |n, h| h[n] = n**2 }.take(5).to_h}"
+  puts "reduce:    #{nums.reduce(0, :+)}"  # => reduce:    55
+  puts "group_by:  #{nums.group_by { |n| n % 3 }}"  # => group_by:  {1=>[1, 4, 7, 10], 2=>[2, 5, 8], 0=>[3, 6, 9]}
+  puts "flat_map:  #{[[1, 2], [3, 4]].flat_map { |a| a.map { |x| x * 10 } }}"  # => flat_map:  [10, 20, 30, 40]
+  puts "zip:       #{[1, 2, 3].zip(['a', 'b', 'c'])}"  # => zip:       [[1, "a"], [2, "b"], [3, "c"]]
+  puts "each_with_object: #{nums.each_with_object({}) { |n, h| h[n] = n**2 }.take(5).to_h}"  # => each_with_object: {1=>1, 2=>4, 3=>9, 4=>16, 5=>25}
 
   # tally (Ruby 2.7+) counts occurrences — equivalent to group_by + count.
-  puts "tally:     #{%w[a b a c b a].tally}"
-  puts "min_by:    #{%w[apple fig banana].min_by(&:length)}"
-  puts "chunk:     #{nums.chunk { |n| n <= 5 }.map { |key, vals| [key, vals] }}"
+  puts "tally:     #{%w[a b a c b a].tally}"  # => tally:     {"a"=>3, "b"=>2, "c"=>1}
+  puts "min_by:    #{%w[apple fig banana].min_by(&:length)}"  # => min_by:    fig
+  puts "chunk:     #{nums.chunk { |n| n <= 5 }.map { |key, vals| [key, vals] }}"  # => chunk:     [[true, [1, 2, 3, 4, 5]], [false, [6, 7, 8, 9, 10]]]
 end
 
 # ============================================================
@@ -300,13 +300,13 @@ def with_timing
   start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
   result = yield
   elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
-  puts "  Elapsed: #{(elapsed * 1000).round(3)}ms, Result: #{result}"
+  puts "  Elapsed: #{(elapsed * 1000).round(3)}ms, Result: #{result}"  # => (varies)
 end
 
 # The & prefix converts a block into a Proc object, making it a first-class value
 # you can store, pass around, and call later. Without &, blocks are invisible to the method.
 def capture_block(&blk)
-  puts "  Block class: #{blk.class}, arity: #{blk.arity}"
+  puts "  Block class: #{blk.class}, arity: #{blk.arity}"  # => Block class: Proc, arity: 1
   blk.call(10)
 end
 
@@ -317,7 +317,7 @@ def blocks_procs_lambdas
   with_timing { (1..1000).reduce(:+) }
 
   # --- Explicit &block ---
-  capture_block { |x| puts "  Block received: #{x}" }
+  capture_block { |x| puts "  Block received: #{x}" }  # => Block received: 10
 
   # Proc vs Lambda: two kinds of callable objects with different semantics.
   # Procs have loose arity (missing args become nil, extra args ignored).
@@ -326,21 +326,21 @@ def blocks_procs_lambdas
   # This makes lambdas behave like methods, while procs behave like inline code blocks.
   my_proc = Proc.new { |x, y| "proc: #{x}, #{y}" }
   my_lambda = ->(x, y) { "lambda: #{x}, #{y}" }
-  puts "Proc (missing arg): #{my_proc.call(1)}"       # y is nil
-  puts "Lambda: #{my_lambda.call(1, 2)}"
-  puts "Proc lambda?: #{my_proc.lambda?}  Lambda lambda?: #{my_lambda.lambda?}"
+  puts "Proc (missing arg): #{my_proc.call(1)}"       # y is nil  # => Proc (missing arg): proc: 1,
+  puts "Lambda: #{my_lambda.call(1, 2)}"  # => Lambda: lambda: 1, 2
+  puts "Proc lambda?: #{my_proc.lambda?}  Lambda lambda?: #{my_lambda.lambda?}"  # => Proc lambda?: false  Lambda lambda?: true
 
   # method(:puts) returns a Method object — a bound reference to the method.
   # The & converts it to a Proc so it can be passed as a block argument.
   method_obj = method(:puts)
-  puts "Method object: #{method_obj.class}, name: #{method_obj.name}"
+  puts "Method object: #{method_obj.class}, name: #{method_obj.name}"  # => Method object: Method, name: puts
   [1, 2, 3].each(&method(:puts))
 
   # Currying transforms a multi-argument function into a chain of single-argument functions.
   # This enables partial application — fix some args now, supply the rest later.
   adder = ->(a, b) { a + b }
   add5 = adder.curry.(5)
-  puts "Curried: add5.(10) = #{add5.(10)}"
+  puts "Curried: add5.(10) = #{add5.(10)}"  # => Curried: add5.(10) = 15
 end
 
 # ============================================================
@@ -350,18 +350,18 @@ def oop_demo
   section("4. OOP — Classes, Modules, Mixins, Open Classes")
 
   dog = Dog.new("Rex")
-  puts dog.speak
-  puts dog.fetch("ball")
+  puts dog.speak  # => Rex says Woof
+  puts dog.fetch("ball")  # => Rex fetches the ball!
 
-  puts Person.new("Alice").greet
+  puts Person.new("Alice").greet  # => Hello, I'm Alice
 
   # ancestors shows the full method lookup chain: class -> included modules -> superclass -> ...
   # This is how Ruby resolves method calls — it walks this chain until it finds a match.
-  puts "Person ancestors: #{Person.ancestors.take(4)}"
+  puts "Person ancestors: #{Person.ancestors.take(4)}"  # => Person ancestors: [Person, Greetable, Object, Kernel]
 
   proxy = DynamicProxy.new
-  puts proxy.say_hello
-  puts "responds to say_hi? #{proxy.respond_to?(:say_hi)}"
+  puts proxy.say_hello  # => Saying: hello
+  puts "responds to say_hi? #{proxy.respond_to?(:say_hi)}"  # => responds to say_hi? true
 
   # Open classes: Ruby lets you reopen ANY class (including built-in ones like Integer)
   # and add or override methods at runtime. This is called "monkey patching."
@@ -374,7 +374,7 @@ def oop_demo
       self * (self - 1).factorial
     end
   end
-  puts "5! = #{5.factorial}"
+  puts "5! = #{5.factorial}"  # => 5! = 120
 end
 
 # ============================================================
@@ -384,8 +384,8 @@ def metaprogramming_demo
   section("5. METAPROGRAMMING — define_method, eval, hooks")
 
   t = Talker.new
-  puts t.speak_english
-  puts t.speak_french
+  puts t.speak_english  # => Speaking English!
+  puts t.speak_french  # => Speaking French!
 
   # class_eval opens a class for modification — equivalent to reopening with `class` keyword
   # but works with variables (class keyword requires a constant).
@@ -395,7 +395,7 @@ def metaprogramming_demo
       upcase + "!!!"
     end
   end
-  puts "hello".shout
+  puts "hello".shout  # => HELLO!!!
 
   # instance_eval evaluates code in the context of a specific object's eigenclass
   # (singleton class). The eigenclass is an invisible class unique to each object,
@@ -408,10 +408,10 @@ def metaprogramming_demo
       @secret
     end
   end
-  puts "instance_eval secret: #{obj.reveal}"
+  puts "instance_eval secret: #{obj.reveal}"  # => instance_eval secret: 42
 
-  puts "Tracked methods: #{Tracked.tracked_methods}"
-  puts AutoConst::ANYTHING
+  puts "Tracked methods: #{Tracked.tracked_methods}"  # => Tracked methods: [:foo, :bar]
+  puts AutoConst::ANYTHING  # => Auto-generated constant: ANYTHING
 end
 
 # ============================================================
@@ -426,14 +426,14 @@ def functional_demo
   begin
     frozen_arr << 4
   rescue => e
-    puts "FrozenError: #{e.message}"
+    puts "FrozenError: #{e.message}"  # => FrozenError: can't modify frozen Array: [1, 2, 3]
   end
 
   # --- Comparable ---
   temps = [30, 20, 25, 15].map { |d| Temperature.new(d) }
-  puts "Sorted temps: #{temps.sort}"
-  puts "Max: #{temps.max}  Min: #{temps.min}"
-  puts "Between? #{Temperature.new(22).between?(Temperature.new(20), Temperature.new(25))}"
+  puts "Sorted temps: #{temps.sort}"  # => Sorted temps: [15°, 20°, 25°, 30°]
+  puts "Max: #{temps.max}  Min: #{temps.min}"  # => Max: 30°  Min: 15°
+  puts "Between? #{Temperature.new(22).between?(Temperature.new(20), Temperature.new(25))}"  # => Between? true
 
   # Lazy enumerators defer computation until values are consumed.
   # Without lazy, (1..Float::INFINITY).select would try to build an infinite array.
@@ -442,7 +442,7 @@ def functional_demo
     .select { |n| n.odd? }
     .map { |n| n ** 2 }
     .first(5)
-  puts "Lazy odd squares: #{lazy_result}"
+  puts "Lazy odd squares: #{lazy_result}"  # => Lazy odd squares: [1, 9, 25, 49, 81]
 
   # Enumerator.new creates a custom lazy sequence using a yielder.
   # The loop + y.yield pattern produces values on demand — the enumerator
@@ -454,7 +454,7 @@ def functional_demo
       a, b = b, a + b
     end
   end
-  puts "First 10 fibs: #{fibs.take(10)}"
+  puts "First 10 fibs: #{fibs.take(10)}"  # => First 10 fibs: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 end
 
 # ============================================================
@@ -466,15 +466,15 @@ def patterns_demo
   # --- Struct ---
   p1 = Point.new(0, 0)
   p2 = Point.new(3, 4)
-  puts "Point: #{p1}  Distance: #{p1.distance_to(p2)}"
-  puts "Struct members: #{Point.members}"
+  puts "Point: #{p1}  Distance: #{p1.distance_to(p2)}"  # => Point: #<struct Point x=0, y=0>  Distance: 5.0
+  puts "Struct members: #{Point.members}"  # => Struct members: [:x, :y]
 
   # OpenStruct creates objects with arbitrary attributes defined at runtime.
   # It uses method_missing internally — convenient for prototyping but slower
   # than Struct (which generates real methods at creation time).
   config = OpenStruct.new(host: "localhost", port: 8080)
   config.debug = true
-  puts "OpenStruct: host=#{config.host} port=#{config.port} debug=#{config.debug}"
+  puts "OpenStruct: host=#{config.host} port=#{config.port} debug=#{config.debug}"  # => OpenStruct: host=localhost port=8080 debug=true
 
   # Pattern matching (Ruby 3+) brings ML-style structural matching to Ruby.
   # `case/in` is different from `case/when`: it matches structure not just equality.
@@ -489,18 +489,18 @@ def patterns_demo
            else
              "Unknown"
            end
-  puts "Pattern match: #{result}"
+  puts "Pattern match: #{result}"  # => Pattern match: Admin user: Alice
 
   # Array pattern matching with splat (*rest) captures remaining elements.
   case [1, 2, 3, 4, 5]
   in [Integer => first, Integer => second, *rest]
-    puts "Array pattern: first=#{first}, second=#{second}, rest=#{rest}"
+    puts "Array pattern: first=#{first}, second=#{second}, rest=#{rest}"  # => Array pattern: first=1, second=2, rest=[3, 4, 5]
   end
 
   # Find pattern (Ruby 3.1+) searches for elements matching criteria anywhere in the array.
   case [1, 2, 3, "hello", 4]
   in [*, String => s, *]
-    puts "Find pattern found string: #{s}"
+    puts "Find pattern found string: #{s}"  # => Find pattern found string: hello
   end
 
   # Pin operator (^) prevents rebinding — it matches against the variable's current value
@@ -509,7 +509,7 @@ def patterns_demo
   expected_val = 42
   case { value: 42 }
   in { value: ^expected_val }
-    puts "Pin operator matched expected value: #{expected_val}"
+    puts "Pin operator matched expected value: #{expected_val}"  # => Pin operator matched expected value: 42
   end
 
   # Ractor (Ruby 3+) is Ruby's actor-based concurrency model for true parallelism.
@@ -522,16 +522,16 @@ def patterns_demo
       "Ractor processed: #{msg.upcase}"
     end
     r.send("hello")
-    puts r.take
+    puts r.take  # => Ractor processed: HELLO
   else
-    puts "Ractor not available in this Ruby version"
+    puts "Ractor not available in this Ruby version"  # => Ractor not available in this Ruby version
   end
 end
 
 # ============================================================
 #  MAIN
 # ============================================================
-puts "Ruby #{RUBY_VERSION} Fundamentals"
+puts "Ruby #{RUBY_VERSION} Fundamentals"  # => Ruby <version> Fundamentals
 puts "=" * 60
 
 basics
@@ -543,5 +543,5 @@ functional_demo
 patterns_demo
 
 puts "\n#{'=' * 60}"
-puts "  All sections complete!"
+puts "  All sections complete!"  # => All sections complete!
 puts "=" * 60

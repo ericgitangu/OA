@@ -44,27 +44,27 @@ def basics() -> None:
     name: str = "Python"
     flag: bool = True
     nothing: None = None
-    print(f"int={x}  float={pi}  str={name!r}  bool={flag}  None={nothing}")
+    print(f"int={x}  float={pi}  str={name!r}  bool={flag}  None={nothing}")  # => int=42  float=3.14  str='Python'  bool=True  None=None
 
     # Python treats these values as falsy: 0, empty string, empty containers, and None.
     # This matters for idiomatic guards like `if not my_list:` instead of `if len(my_list) == 0:`.
-    print(f"Falsy values: {[bool(v) for v in (0, '', [], {}, set(), None)]}")
+    print(f"Falsy values: {[bool(v) for v in (0, '', [], {}, set(), None)]}")  # => Falsy values: [False, False, False, False, False, False]
 
     # f-string format specs follow the pattern {value:spec}. The spec mini-language supports
     # comma grouping (,), decimal precision (.2f), zero-padding (05d), and base conversion (#x, #b).
     # !r calls repr() on the value — useful for debugging strings with whitespace.
     val = 123456.789
-    print(f"Comma sep: {val:,.2f}  Padded: {x:05d}  Hex: {x:#x}  Bin: {x:#010b}")
+    print(f"Comma sep: {val:,.2f}  Padded: {x:05d}  Hex: {x:#x}  Bin: {x:#010b}")  # => Comma sep: 123,456.79  Padded: 00042  Hex: 0x2a  Bin: 0b00101010
     # The `=` in f-strings (3.8+) prints both the variable name and its value — great for debugging.
-    print(f"Repr: {name!r}  Centered: {'hi':^10}  Debug: {x = }")
+    print(f"Repr: {name!r}  Centered: {'hi':^10}  Debug: {x = }")  # => Repr: 'Python'  Centered:     hi      Debug: x = 42
 
     # Slicing uses [start:stop:step]. Negative indices count from the end.
     # Slices never raise IndexError — they silently clamp to valid bounds, which is
     # safe but can mask bugs if you're expecting an exception.
     nums = list(range(10))
-    print(f"Original: {nums}")
-    print(f"[2:7]={nums[2:7]}  [::2]={nums[::2]}  [::-1]={nums[::-1]}")
-    print(f"[-3:]={nums[-3:]}  [1:8:3]={nums[1:8:3]}")
+    print(f"Original: {nums}")  # => Original: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    print(f"[2:7]={nums[2:7]}  [::2]={nums[::2]}  [::-1]={nums[::-1]}")  # => [2:7]=[2, 3, 4, 5, 6]  [::2]=[0, 2, 4, 6, 8]  [::-1]=[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    print(f"[-3:]={nums[-3:]}  [1:8:3]={nums[1:8:3]}")  # => [-3:]=[7, 8, 9]  [1:8:3]=[1, 4, 7]
 
     # List comprehensions are syntactic sugar for the map+filter pattern, but they're
     # faster than equivalent for-loops because the iteration happens in C internally.
@@ -72,20 +72,20 @@ def basics() -> None:
     squares = [n**2 for n in range(6)]
     evens = [n for n in range(20) if n % 2 == 0]
     flat = [x for row in [[1, 2], [3, 4], [5]] for x in row]
-    print(f"Squares: {squares}  Evens: {evens}  Flat: {flat}")
+    print(f"Squares: {squares}  Evens: {evens}  Flat: {flat}")  # => Squares: [0, 1, 4, 9, 16, 25]  Evens: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]  Flat: [1, 2, 3, 4, 5]
 
     # Dict comprehensions create dicts inline. Set comprehensions use {expr for ...}
     # (no key:value pair). Both are O(n) and more readable than dict()/set() constructors.
     word_len = {w: len(w) for w in ("apple", "kiwi", "banana")}
     unique_mods = {n % 3 for n in range(10)}
-    print(f"Dict comp: {word_len}")
-    print(f"Set comp: {unique_mods}")
+    print(f"Dict comp: {word_len}")  # => Dict comp: {'apple': 5, 'kiwi': 4, 'banana': 6}
+    print(f"Set comp: {unique_mods}")  # => Set comp: {0, 1, 2}
 
     # Extended unpacking with * captures "the rest" into a list. This works because
     # Python's assignment target is structurally matched — similar to pattern matching
     # but available since Python 3.0. The starred variable always becomes a list.
     first, *middle, last = [1, 2, 3, 4, 5]
-    print(f"Unpack: first={first} middle={middle} last={last}")
+    print(f"Unpack: first={first} middle={middle} last={last}")  # => Unpack: first=1 middle=[2, 3, 4] last=5
 
     # Python's ternary is `value_if_true if condition else value_if_false` — note the
     # inverted order compared to C's `condition ? true : false`.
@@ -93,7 +93,7 @@ def basics() -> None:
     # evaluated as `(1 < 5) and (5 < 10)` but each middle expression is evaluated only once.
     status = "even" if x % 2 == 0 else "odd"
     in_range = 1 < 5 < 10 < 100
-    print(f"Ternary: {x} is {status}  Chained: {in_range}")
+    print(f"Ternary: {x} is {status}  Chained: {in_range}")  # => Ternary: 42 is even  Chained: True
 
 
 # ============================================================
@@ -107,8 +107,8 @@ def data_structures() -> None:
     # In production, use Counter for frequency analysis instead of manual dict counting.
     words = "the cat sat on the mat the cat".split()
     c = Counter(words)
-    print(f"Counter: {c}")
-    print(f"Most common 2: {c.most_common(2)}")
+    print(f"Counter: {c}")  # => Counter: Counter({'the': 3, 'cat': 2, 'sat': 1, 'on': 1, 'mat': 1})
+    print(f"Most common 2: {c.most_common(2)}")  # => Most common 2: [('the', 3), ('cat', 2)]
 
     # defaultdict eliminates the "check-then-insert" pattern. The factory function (here `list`)
     # is called whenever a missing key is accessed, so dd["dog"] auto-creates an empty list.
@@ -116,7 +116,7 @@ def data_structures() -> None:
     dd: defaultdict[str, list[str]] = defaultdict(list)
     for animal, sound in [("dog", "woof"), ("cat", "meow"), ("dog", "bark")]:
         dd[animal].append(sound)
-    print(f"defaultdict: {dict(dd)}")
+    print(f"defaultdict: {dict(dd)}")  # => defaultdict: {'dog': ['woof', 'bark'], 'cat': ['meow']}
 
     # deque (double-ended queue) provides O(1) append/pop on both ends, unlike list which
     # is O(n) for left operations. maxlen creates a bounded buffer — when full, items are
@@ -124,35 +124,35 @@ def data_structures() -> None:
     dq: deque[int] = deque(maxlen=5)
     for i in range(7):
         dq.append(i)
-    print(f"deque(maxlen=5) after 0..6: {list(dq)}")
+    print(f"deque(maxlen=5) after 0..6: {list(dq)}")  # => deque(maxlen=5) after 0..6: [2, 3, 4, 5, 6]
     # rotate(n) shifts elements n positions to the right (negative = left) in O(n).
     dq.appendleft(99)
     dq.rotate(2)
-    print(f"After appendleft(99) + rotate(2): {list(dq)}")
+    print(f"After appendleft(99) + rotate(2): {list(dq)}")  # => After appendleft(99) + rotate(2): [4, 5, 99, 2, 3]
 
     # namedtuple creates an immutable tuple subclass with named fields — lighter than
     # a dataclass when you just need a simple value object. _asdict() returns an OrderedDict.
     # Prefer dataclass for mutable data or when you need methods beyond simple field access.
     Point = namedtuple("Point", ["x", "y"])
     p = Point(3, 4)
-    print(f"namedtuple: {p}, x={p.x}, as dict={p._asdict()}")
+    print(f"namedtuple: {p}, x={p.x}, as dict={p._asdict()}")  # => namedtuple: Point(x=3, y=4), x=3, as dict={'x': 3, 'y': 4}
 
     # Since Python 3.7, regular dicts preserve insertion order. OrderedDict still exists
     # for its move_to_end() and equality semantics (two OrderedDicts with different order
     # compare unequal, while regular dicts don't consider order).
     od = OrderedDict(a=1, b=2, c=3)
     od.move_to_end("a")
-    print(f"OrderedDict move_to_end('a'): {list(od.items())}")
+    print(f"OrderedDict move_to_end('a'): {list(od.items())}")  # => OrderedDict move_to_end('a'): [('b', 2), ('c', 3), ('a', 1)]
 
     # heapq implements a min-heap over a plain list. Python has no max-heap — the standard
     # workaround is to negate values. heapify is O(n), push/pop are O(log n).
     # In production, use heapq for top-K problems and priority queues.
     data = [5, 1, 8, 3, 2]
     heapq.heapify(data)
-    print(f"Heapified: {data}  Smallest: {heapq.nsmallest(3, data)}")
+    print(f"Heapified: {data}  Smallest: {heapq.nsmallest(3, data)}")  # => Heapified: [1, 2, 8, 3, 5]  Smallest: [1, 2, 3]
     heapq.heappush(data, 0)
     popped = heapq.heappop(data)
-    print(f"Push 0, pop → {popped}, heap now: {data}")
+    print(f"Push 0, pop → {popped}, heap now: {data}")  # => Push 0, pop → 0, heap now: [1, 2, 8, 3, 5]
 
     # bisect operates on already-sorted lists using binary search (O(log n) lookup).
     # bisect_left returns the leftmost valid insertion index; insort maintains sorted order.
@@ -160,7 +160,7 @@ def data_structures() -> None:
     arr = [1, 3, 5, 7, 9]
     idx = bisect.bisect_left(arr, 4)
     bisect.insort(arr, 4)
-    print(f"bisect_left(4) → idx {idx}, after insort: {arr}")
+    print(f"bisect_left(4) → idx {idx}, after insort: {arr}")  # => bisect_left(4) → idx 2, after insort: [1, 3, 4, 5, 7, 9]
 
 
 # ============================================================
@@ -179,7 +179,7 @@ def functions() -> None:
         return multiply
 
     triple = make_multiplier(3)
-    print(f"Closure: triple(7) = {triple(7)}")
+    print(f"Closure: triple(7) = {triple(7)}")  # => Closure: triple(7) = 21
 
     # This is a decorator factory — a function that returns a decorator. The three-level
     # nesting (repeat -> decorator -> wrapper) is necessary because decorators with arguments
@@ -198,7 +198,7 @@ def functions() -> None:
     def greet(name: str) -> str:
         return f"Hi {name}"
 
-    print(f"Decorator: {greet('Eric')}  __name__={greet.__name__}")
+    print(f"Decorator: {greet('Eric')}  __name__={greet.__name__}")  # => Decorator: ['Hi Eric', 'Hi Eric', 'Hi Eric']  __name__=greet
 
     # Generators use `yield` to produce values lazily — they don't compute the full sequence
     # upfront. Each call to next() resumes execution right after the last yield. This makes
@@ -210,29 +210,29 @@ def functions() -> None:
             yield a
             a, b = b, a + b
 
-    print(f"Generator fib(8): {list(fib(8))}")
+    print(f"Generator fib(8): {list(fib(8))}")  # => Generator fib(8): [0, 1, 1, 2, 3, 5, 8, 13]
 
     # Generator expressions are inline generators — they use () instead of []. Unlike list
     # comprehensions, they don't materialize the full list in memory. Here sum() consumes
     # the generator one element at a time, so peak memory is O(1) instead of O(n).
     gen_sum = sum(x**2 for x in range(10))
-    print(f"Genexpr sum of squares: {gen_sum}")
+    print(f"Genexpr sum of squares: {gen_sum}")  # => Genexpr sum of squares: 285
 
     # itertools provides C-optimized combinatoric iterators. product() is the Cartesian product
     # (nested loops), permutations() generates ordered arrangements, combinations() generates
     # unordered selections. All return lazy iterators, making them viable for large inputs.
-    print(f"product('AB', [1,2]): {list(product('AB', [1, 2]))}")
-    print(f"permutations('ABC', 2): {list(permutations('ABC', 2))[:4]}...")
-    print(f"combinations('ABCD', 2): {list(combinations('ABCD', 2))}")
+    print(f"product('AB', [1,2]): {list(product('AB', [1, 2]))}")  # => product('AB', [1,2]): [('A', 1), ('A', 2), ('B', 1), ('B', 2)]
+    print(f"permutations('ABC', 2): {list(permutations('ABC', 2))[:4]}...")  # => permutations('ABC', 2): [('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C')]...
+    print(f"combinations('ABCD', 2): {list(combinations('ABCD', 2))}")  # => combinations('ABCD', 2): [('A', 'B'), ('A', 'C'), ('A', 'D'), ('B', 'C'), ('B', 'D'), ('C', 'D')]
     # chain() concatenates iterables without copying — it just yields from each in turn.
-    print(f"chain([1,2], [3,4]): {list(chain([1, 2], [3, 4]))}")
+    print(f"chain([1,2], [3,4]): {list(chain([1, 2], [3, 4]))}")  # => chain([1,2], [3,4]): [1, 2, 3, 4]
 
     # groupby() groups consecutive elements with the same key. The input MUST be sorted by
     # the key first — otherwise you'll get fragmented groups. This is a common gotcha.
     # The groups are iterators that are invalidated when you advance to the next group.
     data = sorted([(1, "a"), (1, "b"), (2, "c"), (2, "d")], key=lambda t: t[0])
     grouped = {k: [v for _, v in g] for k, g in groupby(data, key=lambda t: t[0])}
-    print(f"groupby: {grouped}")
+    print(f"groupby: {grouped}")  # => groupby: {1: ['a', 'b'], 2: ['c', 'd']}
 
 
 # ============================================================
@@ -264,7 +264,7 @@ def oop() -> None:
             return f"Circle(r={self.r})"
 
     c = Circle(5)
-    print(f"{c}  area={c.area():.2f}  isinstance={isinstance(c, Shape)}")
+    print(f"{c}  area={c.area():.2f}  isinstance={isinstance(c, Shape)}")  # => Circle(r=5)  area=78.54  isinstance=True
 
     # @dataclass auto-generates __init__, __repr__, __eq__ (and optionally __hash__, __lt__, etc).
     # frozen=True makes instances immutable (attempts to set fields raise FrozenInstanceError),
@@ -283,7 +283,7 @@ def oop() -> None:
             return (self.x**2 + self.y**2) ** 0.5
 
     v1, v2 = Vec(3, 4, "a"), Vec(1, 2, "b")
-    print(f"Dataclass: {v1}  mag={v1.magnitude:.2f}  v1>v2={v1 > v2}")
+    print(f"Dataclass: {v1}  mag={v1.magnitude:.2f}  v1>v2={v1 > v2}")  # => Dataclass: Vec(x=3, y=4)  mag=5.00  v1>v2=True
 
     # Dunder (double-underscore) methods let your class hook into Python's syntax.
     # __getitem__ enables indexing (m[0,1]), __len__ enables len(), __contains__ enables `in`.
@@ -307,7 +307,7 @@ def oop() -> None:
             return f"Matrix({self.rows})"
 
     m = Matrix([[1, 2], [3, 4]])
-    print(f"{m}  m[0,1]={m[0, 1]}  len={len(m)}  3 in m={3 in m}")
+    print(f"{m}  m[0,1]={m[0, 1]}  len={len(m)}  3 in m={3 in m}")  # => Matrix([[1, 2], [3, 4]])  m[0,1]=2  len=2  3 in m=True
 
     # Descriptors are the mechanism behind @property, @classmethod, and @staticmethod.
     # A descriptor is any object with __get__, __set__, or __delete__. When assigned as a
@@ -333,11 +333,11 @@ def oop() -> None:
             self.balance = bal
 
     a = Account(100)
-    print(f"Descriptor: balance={a.balance}")
+    print(f"Descriptor: balance={a.balance}")  # => Descriptor: balance=100
     try:
         a.balance = -5
     except ValueError as e:
-        print(f"Descriptor guard: {e}")
+        print(f"Descriptor guard: {e}")  # => Descriptor guard: _balance must be positive
 
     # A metaclass is the class of a class — it controls class creation itself. type is the
     # default metaclass. Here SingletonMeta overrides __call__ to intercept instantiation,
@@ -356,7 +356,7 @@ def oop() -> None:
             self.debug = False
 
     c1, c2 = Config(), Config()
-    print(f"Metaclass singleton: c1 is c2 = {c1 is c2}")
+    print(f"Metaclass singleton: c1 is c2 = {c1 is c2}")  # => Metaclass singleton: c1 is c2 = True
 
 
 # ============================================================
@@ -387,7 +387,7 @@ def concurrency() -> None:
     # before workers finish, potentially corrupting shared state.
     for t in threads:
         t.join()
-    print(f"Threading results: {results}")
+    print(f"Threading results: {results}")  # => (thread-dependent, e.g. ['t0', 't1', 't2', 't3'])
 
     # asyncio is cooperative concurrency — coroutines voluntarily yield control at `await`
     # points. Unlike threads, there's no preemption and no GIL concern because everything
@@ -402,7 +402,7 @@ def concurrency() -> None:
         # It's the asyncio equivalent of threading + join, but without OS thread overhead.
         tasks = [fetch("A", 0.02), fetch("B", 0.01), fetch("C", 0.03)]
         results = await asyncio.gather(*tasks)
-        print(f"asyncio.gather: {results}")
+        print(f"asyncio.gather: {results}")  # => asyncio.gather: ['A:0.02s', 'B:0.01s', 'C:0.03s']
 
     asyncio.run(run_async())
 
@@ -412,7 +412,7 @@ def concurrency() -> None:
     from concurrent.futures import ProcessPoolExecutor
     with ProcessPoolExecutor(max_workers=2) as executor:
         mp_result = list(executor.map(pow, range(6), [2] * 6))
-    print(f"ProcessPoolExecutor map (x**2): {mp_result}")
+    print(f"ProcessPoolExecutor map (x**2): {mp_result}")  # => ProcessPoolExecutor map (x**2): [0, 1, 4, 9, 16, 25]
 
 
 # ============================================================
@@ -425,13 +425,13 @@ def functional() -> None:
     # The third argument (1) is the initial accumulator value. Python moved reduce out of
     # builtins into functools because Guido considers explicit loops more Pythonic for most cases.
     factorial = reduce(operator.mul, range(1, 7), 1)
-    print(f"reduce(mul, 1..6) = {factorial}")
+    print(f"reduce(mul, 1..6) = {factorial}")  # => reduce(mul, 1..6) = 720
 
     # partial freezes some arguments of a function, creating a new callable. It's useful
     # for adapting function signatures — e.g., passing a 2-arg function where a 1-arg callback
     # is expected. Unlike lambdas, partial objects are picklable (needed for multiprocessing).
     base2_log = partial(math.log2)
-    print(f"partial log base 2: log2(8)={base2_log(8):.1f}")
+    print(f"partial log base 2: log2(8)={base2_log(8):.1f}")  # => partial log base 2: log2(8)=3.0
 
     # lru_cache memoizes function results in a thread-safe dict keyed by arguments.
     # maxsize=128 means it evicts the Least Recently Used entry when full (LRU policy).
@@ -443,8 +443,8 @@ def functional() -> None:
             return n
         return fib_cached(n - 1) + fib_cached(n - 2)
 
-    print(f"lru_cache fib(30)={fib_cached(30)}")
-    print(f"Cache info: {fib_cached.cache_info()}")
+    print(f"lru_cache fib(30)={fib_cached(30)}")  # => lru_cache fib(30)=832040
+    print(f"Cache info: {fib_cached.cache_info()}")  # => Cache info: CacheInfo(hits=28, misses=31, maxsize=128, currsize=31)
 
     # singledispatch is Python's version of function overloading — dispatch based on the
     # type of the first argument. Unlike method overloading in Java/C++, this is single-dispatch
@@ -466,20 +466,20 @@ def functional() -> None:
     def _(val):
         return f"list[{len(val)}]"
 
-    print(f"singledispatch: {process(5)}  {process('hi')}  {process([1,2,3])}")
+    print(f"singledispatch: {process(5)}  {process('hi')}  {process([1,2,3])}")  # => singledispatch: int: 10  str: HI  list[3]
 
     # operator.itemgetter("name") creates a callable equivalent to lambda x: x["name"],
     # but faster because it's implemented in C. Use it as a sort key for dicts or tuples —
     # it's the idiomatic alternative to lambdas for simple field extraction.
     items = [{"name": "b", "val": 2}, {"name": "a", "val": 1}]
     items.sort(key=operator.itemgetter("name"))
-    print(f"itemgetter sort: {[i['name'] for i in items]}")
+    print(f"itemgetter sort: {[i['name'] for i in items]}")  # => itemgetter sort: ['a', 'b']
 
     # The operator module exposes Python's built-in operators as regular functions.
     # operator.add(a, b) is equivalent to a + b. Useful for reduce(), map(), and
     # anywhere you need to pass an operator as a first-class function.
     ops = [(operator.add, 3, 4), (operator.mod, 10, 3), (operator.pow, 2, 8)]
-    print(f"operator calls: {[op(a, b) for op, a, b in ops]}")
+    print(f"operator calls: {[op(a, b) for op, a, b in ops]}")  # => operator calls: [7, 1, 256]
 
 
 # ============================================================
@@ -513,7 +513,7 @@ def type_hints() -> None:
     s: Stack[int] = Stack()
     s.push(10)
     s.push(20)
-    print(f"Generic Stack: {s}  peek={s.peek()}  pop={s.pop()}")
+    print(f"Generic Stack: {s}  peek={s.peek()}  pop={s.pop()}")  # => Generic Stack: Stack([10, 20])  peek=20  pop=20
 
     # Protocol enables structural subtyping (duck typing with static checking). Unlike ABC,
     # classes don't need to explicitly inherit from Protocol — they just need to have the right
@@ -536,8 +536,8 @@ def type_hints() -> None:
         return obj.draw()
 
     b = Box()
-    print(f"Protocol: isinstance(Box, Drawable)={isinstance(b, Drawable)}")
-    print(f"Render: {render(Box())}  {render(Line())}")
+    print(f"Protocol: isinstance(Box, Drawable)={isinstance(b, Drawable)}")  # => Protocol: isinstance(Box, Drawable)=True
+    print(f"Render: {render(Box())}  {render(Line())}")  # => Render: [box]  ---line---
 
     # @overload provides type-checker hints for functions that return different types based on
     # input types. The overloaded signatures are ONLY for the type checker — the actual
@@ -553,7 +553,7 @@ def type_hints() -> None:
             return x * 2
         return x + x
 
-    print(f"overload: double(5)={double(5)}  double('ab')={double('ab')}")
+    print(f"overload: double(5)={double(5)}  double('ab')={double('ab')}")  # => overload: double(5)=10  double('ab')=abab
 
 
 # ============================================================
@@ -573,7 +573,7 @@ def context_managers() -> None:
 
         def __exit__(self, exc_type, exc_val, exc_tb) -> bool:
             self.elapsed = time.perf_counter() - self.start
-            print(f"  Timer: {self.elapsed:.6f}s")
+            print(f"  Timer: {self.elapsed:.6f}s")  # => (varies, e.g. Timer: 0.000823s)
             return False  # don't suppress exceptions
 
     with Timer():
@@ -584,33 +584,33 @@ def context_managers() -> None:
     # The yielded value becomes the `as` target in `with tag("b") as t:`.
     @contextmanager
     def tag(name: str):
-        print(f"  <{name}>", end="")
+        print(f"  <{name}>", end="")  # => <b>
         yield
-        print(f"</{name}>")
+        print(f"</{name}>")  # => </b>
 
     with tag("b"):
-        print("bold text", end="")
+        print("bold text", end="")  # => bold text
 
     # suppress() is a context manager that silently catches specified exceptions.
     # Equivalent to try/except with a pass, but more readable for simple cases.
     # Use it when you expect an exception and intentionally want to ignore it.
     with suppress(FileNotFoundError):
         open("/nonexistent/file.txt")
-    print("  suppress(FileNotFoundError): no crash")
+    print("  suppress(FileNotFoundError): no crash")  # =>   suppress(FileNotFoundError): no crash
 
     # Context managers can be nested and composed. Each one's __exit__ is guaranteed
     # to run in reverse order (LIFO), providing deterministic cleanup ordering.
     @contextmanager
     def indent(level: int):
         prefix = "  " * level
-        print(f"{prefix}entering level {level}")
+        print(f"{prefix}entering level {level}")  # => (e.g. "  entering level 1")
         yield prefix
-        print(f"{prefix}exiting level {level}")
+        print(f"{prefix}exiting level {level}")  # => (e.g. "  exiting level 1")
 
     with indent(1) as p1:
-        print(f"{p1}  work at level 1")
+        print(f"{p1}  work at level 1")  # =>     work at level 1
         with indent(2) as p2:
-            print(f"{p2}  work at level 2")
+            print(f"{p2}  work at level 2")  # =>       work at level 2
 
 
 # ============================================================
@@ -640,7 +640,7 @@ def pattern_matching() -> None:
                 return "Unknown"
 
     for code in (200, 302, 404, 503, 999):
-        print(f"  {code} → {http_status(code)}")
+        print(f"  {code} → {http_status(code)}")  # => 200 → OK / 302 → Redirect / 404 → Not Found / 503 → Server Error (503) / 999 → Unknown
 
     # Sequence patterns destructure lists/tuples. The * prefix captures remaining elements
     # into a list — similar to extended unpacking in assignments. The match engine checks
@@ -657,7 +657,7 @@ def pattern_matching() -> None:
                 return f"head={x}, tail=[{len(rest)} items]"
 
     for s in ([], [1], [1, 2], [1, 2, 3, 4]):
-        print(f"  {s} → {describe_seq(s)}")
+        print(f"  {s} → {describe_seq(s)}")  # => [] → empty / [1] → single: 1 / [1, 2] → pair: 1, 2 / [1, 2, 3, 4] → head=1, tail=[3 items]
 
     # Mapping patterns match dicts by key presence. Unmatched keys are ignored by default;
     # **rest captures them explicitly. Keys must be literals or constants — you can't use
@@ -677,7 +677,7 @@ def pattern_matching() -> None:
         {"type": "scroll", "delta": -3},
     ]
     for e in events:
-        print(f"  {e} → {handle_event(e)}")
+        print(f"  {e} → {handle_event(e)}")  # => {'type': 'click', ...} → Click at (10, 20) / {'type': 'key', ...} → Key: Enter / {'type': 'scroll', ...} → Other event: scroll, extra={'delta': -3}
 
     # Class patterns match dataclass/namedtuple instances by field values. The pattern
     # Cmd(action="quit") checks both the type (isinstance) and the field value simultaneously.
@@ -698,7 +698,7 @@ def pattern_matching() -> None:
                 return f"Unknown action: {a}"
 
     for cmd in [Cmd("quit"), Cmd("greet", "Eric"), Cmd("dance")]:
-        print(f"  {cmd} → {run_cmd(cmd)}")
+        print(f"  {cmd} → {run_cmd(cmd)}")  # => Cmd(action='quit', target='') → Goodbye / Cmd(action='greet', target='Eric') → Hello, Eric! / Cmd(action='dance', target='') → Unknown action: dance
 
 
 # ============================================================
@@ -713,7 +713,7 @@ def advanced() -> None:
     # Caution: avg is computed once but the := "leaks" into the enclosing scope.
     data = [1, 5, 3, 8, 2, 9, 4]
     above_avg = [x for x in data if x > (avg := sum(data) / len(data))]
-    print(f"Walrus: data={data}  avg={avg:.1f}  above_avg={above_avg}")
+    print(f"Walrus: data={data}  avg={avg:.1f}  above_avg={above_avg}")  # => Walrus: data=[1, 5, 3, 8, 2, 9, 4]  avg=4.6  above_avg=[5, 8, 9]
 
     # Walrus shines in while-loops where you need to read-and-check in one step.
     # Without :=, you'd need an assignment before the loop and a duplicate at the end.
@@ -722,7 +722,7 @@ def advanced() -> None:
     lines = []
     while (line := stream.readline()):
         lines.append(line.strip())
-    print(f"Walrus while-read: {lines}")
+    print(f"Walrus while-read: {lines}")  # => Walrus while-read: ['line1', 'line2', 'line3']
 
     # __slots__ replaces the per-instance __dict__ with a fixed-size struct of named fields.
     # This saves ~40-60% memory per instance and slightly speeds up attribute access.
@@ -745,12 +745,12 @@ def advanced() -> None:
 
     sp = SlottedPoint(1, 2)
     rp = RegularPoint(1, 2)
-    print(f"Slots: {sp}  has __dict__={hasattr(sp, '__dict__')}")
-    print(f"Regular: has __dict__={hasattr(rp, '__dict__')}  dict={rp.__dict__}")
+    print(f"Slots: {sp}  has __dict__={hasattr(sp, '__dict__')}")  # => Slots: SP(1, 2)  has __dict__=False
+    print(f"Regular: has __dict__={hasattr(rp, '__dict__')}  dict={rp.__dict__}")  # => Regular: has __dict__=True  dict={'x': 1, 'y': 2}
     try:
         sp.z = 3  # type: ignore
     except AttributeError as e:
-        print(f"Slots guard: {e}")
+        print(f"Slots guard: {e}")  # => Slots guard: 'SlottedPoint' object has no attribute 'z'
 
     # Protocol provides structural subtyping — the static-typing formalization of Python's
     # duck typing. If a class has __len__, it satisfies this Sized protocol WITHOUT inheriting
@@ -768,8 +768,8 @@ def advanced() -> None:
             return self._n
 
     bag = Bag(42)
-    print(f"Structural subtyping: isinstance(Bag, Sized)={isinstance(bag, Sized)}")
-    print(f"  len(bag)={len(bag)}  (no inheritance needed)")
+    print(f"Structural subtyping: isinstance(Bag, Sized)={isinstance(bag, Sized)}")  # => Structural subtyping: isinstance(Bag, Sized)=True
+    print(f"  len(bag)={len(bag)}  (no inheritance needed)")  # =>   len(bag)=42  (no inheritance needed)
 
     # __init_subclass__ (PEP 487) is called whenever a class is subclassed. It's a simpler
     # alternative to metaclasses for the common case of registering or validating subclasses.
@@ -789,7 +789,7 @@ def advanced() -> None:
     class XMLPlugin(PluginRegistry, name="xml"):
         pass
 
-    print(f"__init_subclass__ registry: {list(PluginRegistry._plugins.keys())}")
+    print(f"__init_subclass__ registry: {list(PluginRegistry._plugins.keys())}")  # => __init_subclass__ registry: ['json', 'xml']
 
     # Walrus in comprehensions: := binds inside the comprehension but the variable
     # is accessible in the enclosing scope. This is intentional but surprising —
@@ -799,15 +799,15 @@ def advanced() -> None:
         for word in ["hello", "world", "hi"]
         if (k := word[0]) and (v := len(word)) > 2
     }
-    print(f"Walrus in dict comp: {results}")
+    print(f"Walrus in dict comp: {results}")  # => Walrus in dict comp: {'h': 5, 'w': 5}
 
 
 # ============================================================
 #  MAIN — run all sections
 # ============================================================
 if __name__ == "__main__":
-    print("PYTHON FUNDAMENTALS — Beginner to Advanced Reference")
-    print(f"{'=' * 60}")
+    print("PYTHON FUNDAMENTALS — Beginner to Advanced Reference")  # => PYTHON FUNDAMENTALS — Beginner to Advanced Reference
+    print(f"{'=' * 60}")  # => ============================================================
 
     basics()
     data_structures()
@@ -820,6 +820,6 @@ if __name__ == "__main__":
     pattern_matching()
     advanced()
 
-    print(f"\n{'=' * 60}")
-    print("  Done. All sections executed successfully.")
-    print(f"{'=' * 60}")
+    print(f"\n{'=' * 60}")  # => ============================================================
+    print("  Done. All sections executed successfully.")  # =>   Done. All sections executed successfully.
+    print(f"{'=' * 60}")  # => ============================================================

@@ -9,7 +9,7 @@
 // ============================================================================
 // 1. BASICS
 // ============================================================================
-console.log("=== 1. BASICS ===\n");
+console.log("=== 1. BASICS ===\n");  // => === 1. BASICS ===
 
 // `let` creates block-scoped mutable bindings (ES6). Unlike `var`, `let` has a
 // "temporal dead zone" — referencing it before declaration throws ReferenceError.
@@ -17,63 +17,63 @@ console.log("=== 1. BASICS ===\n");
 // and arrays assigned to const can still be mutated internally).
 let counter = 0;
 const MAX = 100;
-console.log(`let/const: counter=${++counter}, MAX=${MAX}`);
+console.log(`let/const: counter=${++counter}, MAX=${MAX}`);  // => let/const: counter=1, MAX=100
 
 // Template literals (backtick strings) use tagged template machinery under the hood:
 // the engine splits the string into a TemplateStringsArray + expression values,
 // then concatenates them. This enables tagged templates (see BONUS section).
 const name = "JavaScript";
-console.log(`template literal: ${name} ${2024}`);
+console.log(`template literal: ${name} ${2024}`);  // => template literal: JavaScript 2024
 
 // Destructuring uses pattern matching against the iterable protocol (arrays) or
 // property access (objects). The engine calls [Symbol.iterator]() for arrays.
 // The `...rest` element collects remaining items into a new array via the iterator.
 const [first, second, ...remaining] = [10, 20, 30, 40, 50];
-console.log(`array destructure: ${first}, ${second}, rest:`, remaining);
+console.log(`array destructure: ${first}, ${second}, rest:`, remaining);  // => array destructure: 10, 20, rest: [ 30, 40, 50 ]
 
 // Object destructuring uses property keys to extract values. The `debug: isDebug`
 // syntax renames the binding (extracts `debug` but binds it as `isDebug`).
 // This is NOT type annotation — it's a rename. A common source of confusion.
 const { host, port, debug: isDebug } = { host: "localhost", port: 3000, debug: true };
-console.log(`object destructure: ${host}:${port}, debug=${isDebug}`);
+console.log(`object destructure: ${host}:${port}, debug=${isDebug}`);  // => object destructure: localhost:3000, debug=true
 
 // Nested destructuring with defaults: `= {}` provides a fallback if `a` is undefined,
 // preventing "Cannot destructure property 'b' of undefined". Defaults only apply
 // when the value is `undefined` (not `null` — a common gotcha per TC39 spec).
 const { a: { b: nested = 42 } = {} } = { a: { b: 7 } };
-console.log(`nested destructure with default: ${nested}`);
+console.log(`nested destructure with default: ${nested}`);  // => nested destructure with default: 7
 
 // Spread syntax (...) and rest parameters are syntactically identical but semantically
 // opposite. Spread *expands* an iterable into individual elements (calls [Symbol.iterator]).
 // Rest *collects* individual arguments into an array. Both were introduced in ES6.
 const arr1 = [1, 2, 3];
-console.log("spread array:", [...arr1, 4, 5]);
+console.log("spread array:", [...arr1, 4, 5]);  // => spread array: [ 1, 2, 3, 4, 5 ]
 // Object spread uses [[OwnPropertyKeys]] + [[Get]] — it performs a shallow copy
 // and only copies enumerable own properties. Later properties override earlier ones.
-console.log("spread object:", { ...{ x: 1 }, y: 2 });
+console.log("spread object:", { ...{ x: 1 }, y: 2 });  // => spread object: { x: 1, y: 2 }
 // Rest parameters replace the legacy `arguments` object. Unlike `arguments`, rest
 // params produce a real Array (with map/filter/reduce), not an array-like object.
 const sum = (...nums) => nums.reduce((a, n) => a + n, 0);
-console.log(`rest params: sum(1,2,3,4) = ${sum(1, 2, 3, 4)}`);
+console.log(`rest params: sum(1,2,3,4) = ${sum(1, 2, 3, 4)}`);  // => rest params: sum(1,2,3,4) = 10
 
 // Optional chaining (?.) short-circuits to `undefined` if the left side is null/undefined.
 // Without it, accessing deeply nested properties requires verbose `&&` chains or try/catch.
 // It works on property access (.prop), bracket access ([expr]), and method calls (fn?.()).
 // See TC39 proposal: https://github.com/tc39/proposal-optional-chaining
 const user = { profile: { address: { city: "Portland" } } };
-console.log(`optional chain: ${user.profile?.address?.city}`);
+console.log(`optional chain: ${user.profile?.address?.city}`);  // => optional chain: Portland
 // Nullish coalescing (??) returns the right operand ONLY when the left is null/undefined.
 // This differs from || which also triggers on falsy values (0, "", false, NaN).
 // This distinction matters: `0 ?? "default"` returns 0, but `0 || "default"` returns "default".
-console.log(`nullish coal: ${user.profile?.address?.zip ?? "N/A"}`);
+console.log(`nullish coal: ${user.profile?.address?.zip ?? "N/A"}`);  // => nullish coal: N/A
 // Method optional chaining: ?.() checks if the value is a function before calling it.
 // If not callable, it short-circuits to undefined instead of throwing TypeError.
-console.log(`method chain: ${user.profile?.getName?.() ?? "no method"}`);
+console.log(`method chain: ${user.profile?.getName?.() ?? "no method"}`);  // => method chain: no method
 
 // Demonstrating ?? vs || behavior: ?? only coalesces null/undefined, preserving
 // intentional falsy values like 0 and empty string.
 const val1 = null ?? "default", val2 = 0 ?? "default", val3 = "" ?? "default";
-console.log(`?? : ${val1}, ${val2}, ${val3}`);
+console.log(`?? : ${val1}, ${val2}, ${val3}`);  // => ?? : default, 0,
 
 // Logical assignment operators (ES2021) combine logical operators with assignment.
 // `??=` assigns only if the current value is null/undefined (nullish assignment).
@@ -81,49 +81,49 @@ console.log(`?? : ${val1}, ${val2}, ${val3}`);
 // These short-circuit: the RHS is never evaluated if the condition isn't met.
 let la = null; la ??= "assigned";
 let lb = 0; lb ||= 99;
-console.log(`??= ${la}, ||= ${lb}`);
+console.log(`??= ${la}, ||= ${lb}`);  // => ??= assigned, ||= 99
 
 // ============================================================================
 // 2. DATA STRUCTURES
 // ============================================================================
-console.log("\n=== 2. DATA STRUCTURES ===\n");
+console.log("\n=== 2. DATA STRUCTURES ===\n");  // => === 2. DATA STRUCTURES ===
 
 // Array methods: map/filter/reduce are the functional programming triad in JS.
 // They all return new arrays (immutable pattern) and never modify the original.
 // Internally, they iterate using integer indices (not the iterator protocol).
 // Time complexity: O(n) for each — chaining them creates multiple passes.
 const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-console.log("map (x2):", nums.map((n) => n * 2));
-console.log("filter (even):", nums.filter((n) => n % 2 === 0));
+console.log("map (x2):", nums.map((n) => n * 2));  // => map (x2): [ 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 ]
+console.log("filter (even):", nums.filter((n) => n % 2 === 0));  // => filter (even): [ 2, 4, 6, 8, 10 ]
 // reduce accumulates a single value from left to right. The second argument (0)
 // is the initial accumulator — without it, the first array element is used,
 // which throws TypeError on empty arrays.
-console.log("reduce (sum):", nums.reduce((a, n) => a + n, 0));
+console.log("reduce (sum):", nums.reduce((a, n) => a + n, 0));  // => reduce (sum): 55
 // flatMap = map + flat(1). Useful for one-to-many transformations where each element
 // produces an array. More efficient than separate .map().flat() calls.
-console.log("flatMap:", [[1, 2], [3, 4]].flatMap((x) => x.map((n) => n * 10)));
-console.log("find (>5):", nums.find((n) => n > 5));
-console.log("every (>0):", nums.every((n) => n > 0), "| some (>9):", nums.some((n) => n > 9));
+console.log("flatMap:", [[1, 2], [3, 4]].flatMap((x) => x.map((n) => n * 10)));  // => flatMap: [ 10, 20, 30, 40 ]
+console.log("find (>5):", nums.find((n) => n > 5));  // => find (>5): 6
+console.log("every (>0):", nums.every((n) => n > 0), "| some (>9):", nums.some((n) => n > 9));  // => every (>0): true | some (>9): true
 // toSorted() and with() are ES2023 "change array by copy" methods. Unlike sort()
 // and splice(), they return new arrays without mutating the original — enabling
 // immutable data patterns needed for React state, Redux, etc.
-console.log("toSorted:", [3, 1, 2].toSorted(), "| with(1,99):", [10, 20, 30].with(1, 99));
+console.log("toSorted:", [3, 1, 2].toSorted(), "| with(1,99):", [10, 20, 30].with(1, 99));  // => toSorted: [ 1, 2, 3 ] | with(1,99): [ 10, 99, 30 ]
 
 // Map maintains insertion order and allows ANY value as keys (objects, functions, etc.).
 // Unlike plain objects, Map keys aren't coerced to strings — so 42 !== "42" as keys.
 // Map uses the SameValueZero algorithm for key equality (similar to === but NaN === NaN).
 // See MDN: Map. Preferred over objects when keys are dynamic or non-string.
 const map = new Map([["key1", "value1"], [42, "numeric key"]]);
-console.log("Map size:", map.size, "| get(42):", map.get(42));
+console.log("Map size:", map.size, "| get(42):", map.get(42));  // => Map size: 2 | get(42): numeric key
 
 // Set stores unique values using SameValueZero comparison. Adding a duplicate is a no-op.
 // Set operations (union, intersection, difference) were standardized in ES2025 via
 // Set.prototype.union(), .intersection(), .difference() — below uses manual polyfills.
 const setA = new Set([1, 2, 3, 4]), setB = new Set([3, 4, 5, 6]);
-console.log("Set:", [...new Set([1, 2, 3, 3, 2])]);
-console.log("union:", [...new Set([...setA, ...setB])]);
-console.log("intersection:", [...setA].filter((x) => setB.has(x)));
-console.log("difference:", [...setA].filter((x) => !setB.has(x)));
+console.log("Set:", [...new Set([1, 2, 3, 3, 2])]);  // => Set: [ 1, 2, 3 ]
+console.log("union:", [...new Set([...setA, ...setB])]);  // => union: [ 1, 2, 3, 4, 5, 6 ]
+console.log("intersection:", [...setA].filter((x) => setB.has(x)));  // => intersection: [ 3, 4 ]
+console.log("difference:", [...setA].filter((x) => !setB.has(x)));  // => difference: [ 1, 2 ]
 
 // WeakMap holds weak references to object keys — entries are automatically removed
 // when the key object is garbage collected. This prevents memory leaks when associating
@@ -132,7 +132,7 @@ console.log("difference:", [...setA].filter((x) => !setB.has(x)));
 const weakMap = new WeakMap();
 let objKey = { id: 1 };
 weakMap.set(objKey, "weak value");
-console.log("WeakMap get:", weakMap.get(objKey));
+console.log("WeakMap get:", weakMap.get(objKey));  // => WeakMap get: weak value
 
 // WeakRef provides a weak reference to an object. Unlike WeakMap, you can read the
 // referent via deref() — which returns undefined if the object was garbage collected.
@@ -140,12 +140,12 @@ console.log("WeakMap get:", weakMap.get(objKey));
 // at any point. Pair with FinalizationRegistry for cleanup callbacks.
 let target = { data: "important" };
 const weakRef = new WeakRef(target);
-console.log("WeakRef deref:", weakRef.deref()?.data);
+console.log("WeakRef deref:", weakRef.deref()?.data);  // => WeakRef deref: important
 
 // ============================================================================
 // 3. FUNCTIONS
 // ============================================================================
-console.log("\n=== 3. FUNCTIONS ===\n");
+console.log("\n=== 3. FUNCTIONS ===\n");  // => === 3. FUNCTIONS ===
 
 // Closures: a function "closes over" variables from its enclosing lexical scope.
 // The inner functions retain a reference to the outer `count` variable — not a copy.
@@ -158,19 +158,19 @@ function makeCounter(init = 0) {
 }
 const ctr = makeCounter(10);
 ctr.inc(); ctr.inc(); ctr.dec();
-console.log(`closure counter: ${ctr.val()}`);
+console.log(`closure counter: ${ctr.val()}`);  // => closure counter: 11
 
 // IIFE (Immediately Invoked Function Expression) creates a new scope and executes
 // immediately. Before ES6 block scoping (let/const), IIFEs were the primary way
 // to avoid polluting the global scope. Still useful for one-time initialization.
-console.log(`IIFE: ${(() => "hidden".toUpperCase())()}`);
+console.log(`IIFE: ${(() => "hidden".toUpperCase())()}`);  // => IIFE: HIDDEN
 
 // Arrow functions capture `this` lexically from the enclosing scope (they have no
 // own `this` binding). Regular functions get `this` determined by HOW they're called
 // (call-site binding). This is why arrow functions can't be used as constructors
 // or with .call()/.apply()/.bind() to change `this`. See MDN: Arrow_functions
 const obj = { value: 42, getArrow: function () { return () => this.value; } };
-console.log(`arrow this: ${obj.getArrow()()}`);
+console.log(`arrow this: ${obj.getArrow()()}`);  // => arrow this: 42
 
 // compose applies functions right-to-left: compose(f, g)(x) = f(g(x)).
 // pipe applies functions left-to-right: pipe(f, g)(x) = g(f(x)).
@@ -180,8 +180,8 @@ console.log(`arrow this: ${obj.getArrow()()}`);
 const compose = (...fns) => (x) => fns.reduceRight((a, f) => f(a), x);
 const pipe = (...fns) => (x) => fns.reduce((a, f) => f(a), x);
 const double = (x) => x * 2, addOne = (x) => x + 1;
-console.log(`compose(addOne,double)(5): ${compose(addOne, double)(5)}`);
-console.log(`pipe(addOne,double)(5): ${pipe(addOne, double)(5)}`);
+console.log(`compose(addOne,double)(5): ${compose(addOne, double)(5)}`);  // => compose(addOne,double)(5): 11
+console.log(`pipe(addOne,double)(5): ${pipe(addOne, double)(5)}`);  // => pipe(addOne,double)(5): 12
 
 // Currying transforms a function of N arguments into N nested functions of 1 argument.
 // `fn.length` returns the number of declared parameters (excluding rest/default params).
@@ -193,7 +193,7 @@ function curry(fn) {
   };
 }
 const curriedAdd = curry((a, b, c) => a + b + c);
-console.log(`curry: ${curriedAdd(1)(2)(3)}, partial: ${curriedAdd(1, 2)(3)}`);
+console.log(`curry: ${curriedAdd(1)(2)(3)}, partial: ${curriedAdd(1, 2)(3)}`);  // => curry: 6, partial: 6
 
 // Memoization caches function results keyed by arguments. Subsequent calls with
 // the same arguments return the cached result in O(1) instead of recomputing.
@@ -213,12 +213,12 @@ function memoize(fn) {
 // Recursive calls must invoke the memoized wrapper (fib), not the inner function,
 // otherwise the cache is bypassed on recursive sub-calls — reducing O(2^n) to O(n).
 const fib = memoize(function(n) { return n <= 1 ? n : fib(n - 1) + fib(n - 2); });
-console.log(`memoized fib(10): ${fib(10)}`);
+console.log(`memoized fib(10): ${fib(10)}`);  // => memoized fib(10): 55
 
 // ============================================================================
 // 4. OOP
 // ============================================================================
-console.log("\n=== 4. OOP ===\n");
+console.log("\n=== 4. OOP ===\n");  // => === 4. OOP ===
 
 // Classes are syntactic sugar over JavaScript's prototype-based inheritance.
 // Under the hood, `class Animal` creates a constructor function + prototype object.
@@ -251,9 +251,9 @@ class Dog extends Animal {
 
 const dog = new Dog("Rex");
 dog.learn("sit").learn("shake");
-console.log(dog.speak());
-console.log(dog.showTricks());
-console.log(`Animals created: ${Animal.totalCreated()}`);
+console.log(dog.speak());  // => Rex says woof
+console.log(dog.showTricks());  // => Rex knows: sit, shake
+console.log(`Animals created: ${Animal.totalCreated()}`);  // => Animals created: 1
 
 // Symbols are unique, immutable primitives used as property keys. They don't collide
 // with string keys, making them ideal for "hidden" or framework-internal properties.
@@ -262,7 +262,7 @@ console.log(`Animals created: ${Animal.totalCreated()}`);
 // Object.getOwnPropertySymbols() or Reflect.ownKeys().
 const sym = Symbol("desc");
 const symObj = { [sym]: "symbol value", regular: "normal" };
-console.log(`Symbol prop: ${symObj[sym]}, keys:`, Object.keys(symObj));
+console.log(`Symbol prop: ${symObj[sym]}, keys:`, Object.keys(symObj));  // => Symbol prop: symbol value, keys: [ 'regular' ]
 
 // Proxy intercepts fundamental object operations (get, set, has, deleteProperty, etc.)
 // via "traps" defined in a handler object. It wraps the target transparently.
@@ -277,17 +277,17 @@ const handler = {
   },
 };
 const proxied = new Proxy({ x: 1, y: 2 }, handler);
-console.log(`proxy: x=${proxied.x}, z=${proxied.z}`);
+console.log(`proxy: x=${proxied.x}, z=${proxied.z}`);  // => proxy: x=1, z='z' not found
 proxied.x = 10;
-console.log(`proxy set: x=${proxied.x}`);
+console.log(`proxy set: x=${proxied.x}`);  // => proxy set: x=10
 // Reflect.ownKeys returns ALL own property keys: string keys + symbol keys,
 // unlike Object.keys which only returns enumerable string keys.
-console.log("Reflect.ownKeys:", Reflect.ownKeys(symObj));
+console.log("Reflect.ownKeys:", Reflect.ownKeys(symObj));  // => Reflect.ownKeys: [ 'regular', Symbol(desc) ]
 
 // ============================================================================
 // 5. ASYNC
 // ============================================================================
-console.log("\n=== 5. ASYNC ===\n");
+console.log("\n=== 5. ASYNC ===\n");  // => === 5. ASYNC ===
 
 // Promises represent a value that may not be available yet. They have 3 states:
 // pending -> fulfilled (resolved) or rejected. Once settled, the state is immutable.
@@ -307,13 +307,13 @@ function fetchPromise(id) {
 // point where other microtasks can run (but NOT macrotasks like setTimeout).
 async function runAsyncDemo() {
   const res = await fetchPromise(1);
-  console.log("await:", res);
+  console.log("await:", res);  // => await: { id: 1, data: 'result_1' }
 
   // Promise.all runs promises concurrently and resolves when ALL succeed.
   // If ANY promise rejects, the entire Promise.all rejects immediately (fail-fast).
   // The results array preserves the original order regardless of completion order.
   const results = await Promise.all([fetchPromise(1), fetchPromise(2), fetchPromise(3)]);
-  console.log("Promise.all:", results.map((r) => r.id));
+  console.log("Promise.all:", results.map((r) => r.id));  // => Promise.all: [ 1, 2, 3 ]
 
   // Promise.race resolves/rejects with whichever promise settles first.
   // The "losing" promises continue running (they aren't cancelled) — JS has no
@@ -322,13 +322,13 @@ async function runAsyncDemo() {
     new Promise((r) => setTimeout(() => r("slow"), 100)),
     new Promise((r) => setTimeout(() => r("fast"), 10)),
   ]);
-  console.log(`Promise.race: ${fastest}`);
+  console.log(`Promise.race: ${fastest}`);  // => Promise.race: fast
 
   // Promise.allSettled (ES2020) never rejects — it waits for ALL promises to settle
   // and returns an array of {status, value/reason} objects. Use when you need results
   // from all promises regardless of individual failures (e.g., batch API calls).
   const settled = await Promise.allSettled([fetchPromise(1), fetchPromise(-1), fetchPromise(3)]);
-  console.log("Promise.allSettled:", settled.map((s) => s.status));
+  console.log("Promise.allSettled:", settled.map((s) => s.status));  // => Promise.allSettled: [ 'fulfilled', 'rejected', 'fulfilled' ]
 
   // Promise.any (ES2021) resolves with the FIRST fulfilled promise. It only rejects
   // if ALL promises reject (with AggregateError). Inverse of Promise.all's fail-fast.
@@ -336,7 +336,7 @@ async function runAsyncDemo() {
     fetchPromise(-1).catch(() => Promise.reject("err")),
     fetchPromise(5),
   ]);
-  console.log("Promise.any:", any);
+  console.log("Promise.any:", any);  // => Promise.any: { id: 5, data: 'result_5' }
 
   // AbortController is the standard cancellation mechanism for async operations in JS.
   // The controller produces an AbortSignal that can be passed to fetch(), addEventListener(),
@@ -348,13 +348,13 @@ async function runAsyncDemo() {
     controller.signal.addEventListener("abort", () => { clearTimeout(timer); reject(new Error("Aborted")); });
   });
   controller.abort();
-  try { await abortable; } catch (e) { console.log(`AbortController: ${e.message}`); }
+  try { await abortable; } catch (e) { console.log(`AbortController: ${e.message}`); }  // => AbortController: Aborted
 }
 
 // ============================================================================
 // 6. ITERATORS & GENERATORS
 // ============================================================================
-console.log("\n=== 6. ITERATORS & GENERATORS ===\n");
+console.log("\n=== 6. ITERATORS & GENERATORS ===\n");  // => === 6. ITERATORS & GENERATORS ===
 
 // The iterable protocol: any object with a [Symbol.iterator]() method that returns
 // an iterator (an object with a next() method returning {value, done}) can be used
@@ -367,7 +367,7 @@ class Range {
     return { next() { return cur <= end ? { value: cur++, done: false } : { done: true }; } };
   }
 }
-console.log("custom iterable:", [...new Range(1, 5)]);
+console.log("custom iterable:", [...new Range(1, 5)]);  // => custom iterable: [ 1, 2, 3, 4, 5 ]
 
 // Generators (function*) produce iterators that can pause execution via `yield`.
 // Each call to next() resumes from the last yield point. This enables lazy sequences
@@ -376,7 +376,7 @@ console.log("custom iterable:", [...new Range(1, 5)]);
 // (which was originally implemented as generators + promises in Babel/regenerator).
 function* fibonacci() { let [a, b] = [0, 1]; while (true) { yield a; [a, b] = [b, a + b]; } }
 function take(gen, n) { const r = []; for (const v of gen) { r.push(v); if (r.length >= n) break; } return r; }
-console.log("fibonacci(10):", take(fibonacci(), 10));
+console.log("fibonacci(10):", take(fibonacci(), 10));  // => fibonacci(10): [ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 ]
 
 // Generators are bidirectional: next(value) sends a value INTO the generator.
 // The sent value becomes the result of the `yield` expression inside the generator.
@@ -388,13 +388,13 @@ function* stateful() {
   return `done: ${y}`;
 }
 const gen = stateful();
-console.log("gen:", gen.next().value, "|", gen.next(42).value, "|", gen.next(99).value);
+console.log("gen:", gen.next().value, "|", gen.next(42).value, "|", gen.next(99).value);  // => gen: first | received: 42 | done: 99
 
 // yield* delegates to another iterable/generator, flattening its values into the
 // outer generator's output. This enables composing generators like building blocks.
 function* inner() { yield "a"; yield "b"; }
 function* outer() { yield 1; yield* inner(); yield 2; }
-console.log("delegation:", [...outer()]);
+console.log("delegation:", [...outer()]);  // => delegation: [ 1, 'a', 'b', 2 ]
 
 // Async generators combine generators with promises: `async function*` can both
 // `yield` values and `await` async operations. Consumed with `for await...of`.
@@ -406,13 +406,13 @@ async function asyncGenDemo() {
   }
   const collected = [];
   for await (const val of asyncRange(1, 5)) collected.push(val);
-  console.log("async generator:", collected);
+  console.log("async generator:", collected);  // => async generator: [ 1, 2, 3, 4, 5 ]
 }
 
 // ============================================================================
 // 7. MODULES (comment-based patterns)
 // ============================================================================
-console.log("\n=== 7. MODULES ===\n");
+console.log("\n=== 7. MODULES ===\n");  // => === 7. MODULES ===
 // ESM (ECMAScript Modules) are statically analyzed — imports/exports must be top-level,
 // enabling tree-shaking (dead code elimination) by bundlers. This is impossible with
 // CommonJS `require()` because require is a runtime function call.
@@ -421,12 +421,12 @@ console.log("\n=== 7. MODULES ===\n");
 // export { default as Router } from "./router.js";  // re-export — barrel file pattern
 // const mod = await import("./heavy.js");            // dynamic import — code splitting, returns Promise
 // import data from "./config.json" with { type: "json" };  // import attributes (ES2025) — type assertions for non-JS
-console.log("(module patterns documented in source comments)");
+console.log("(module patterns documented in source comments)");  // => (module patterns documented in source comments)
 
 // ============================================================================
 // 8. ERROR HANDLING
 // ============================================================================
-console.log("\n=== 8. ERROR HANDLING ===\n");
+console.log("\n=== 8. ERROR HANDLING ===\n");  // => === 8. ERROR HANDLING ===
 
 // Custom errors should extend Error to get proper stack traces and instanceof checks.
 // Setting `this.name` is important — it appears in stack traces and error messages.
@@ -439,24 +439,24 @@ class ValidationError extends Error {
 // `finally` ALWAYS runs — even if catch re-throws. It's used for cleanup (closing files,
 // releasing locks). Note: `finally` does NOT receive the error — use catch for that.
 try { throw new ValidationError("email", "Invalid format"); }
-catch (e) { console.log(`${e.name} on '${e.field}': ${e.message}`); }
-finally { console.log("finally always runs"); }
+catch (e) { console.log(`${e.name} on '${e.field}': ${e.message}`); }  // => ValidationError on 'email': Invalid format
+finally { console.log("finally always runs"); }  // => finally always runs
 
 // AggregateError (ES2021) groups multiple errors into one. It's thrown by Promise.any()
 // when all promises reject. The `.errors` property contains the individual Error objects.
 const aggErr = new AggregateError([new Error("DB fail"), new Error("Cache miss")], "Multiple failures");
-console.log(`AggregateError: ${aggErr.message} [${aggErr.errors.map((e) => e.message)}]`);
+console.log(`AggregateError: ${aggErr.message} [${aggErr.errors.map((e) => e.message)}]`);  // => AggregateError: Multiple failures [DB fail,Cache miss]
 
 // Error cause (ES2022) enables error chaining via the `cause` option. This preserves
 // the original error context when wrapping errors at higher abstraction levels.
 // Access via `error.cause`. Can be chained: error.cause.cause, etc.
 try { try { throw new Error("root"); } catch (e) { throw new Error("wrapped", { cause: e }); } }
-catch (e) { console.log(`cause chain: ${e.message} <- ${e.cause.message}`); }
+catch (e) { console.log(`cause chain: ${e.message} <- ${e.cause.message}`); }  // => cause chain: wrapped <- root
 
 // ============================================================================
 // 9. METAPROGRAMMING
 // ============================================================================
-console.log("\n=== 9. METAPROGRAMMING ===\n");
+console.log("\n=== 9. METAPROGRAMMING ===\n");  // => === 9. METAPROGRAMMING ===
 
 // Proxy-based validation: the `set` trap intercepts property assignment, enabling
 // runtime type checking that plain JavaScript lacks. Each property can have its own
@@ -475,22 +475,22 @@ const person = createValidated({
   name: (v) => typeof v === "string" && v.length > 0,
 });
 person.name = "Alice"; person.age = 30;
-console.log(`validated: ${person.name}, ${person.age}`);
-try { person.age = -5; } catch (e) { console.log(`rejected: ${e.message}`); }
+console.log(`validated: ${person.name}, ${person.age}`);  // => validated: Alice, 30
+try { person.age = -5; } catch (e) { console.log(`rejected: ${e.message}`); }  // => rejected: Invalid 'age': -5
 
 // Observable proxy: the `set` trap logs property changes before they happen.
 // This is the core mechanism behind Vue 3's reactivity: wrap data in a Proxy,
 // intercept get (track dependencies) and set (trigger re-renders).
 const observed = new Proxy({ x: 1 }, {
-  set(o, p, v) { console.log(`  ${p}: ${o[p]} -> ${v}`); o[p] = v; return true; },
+  set(o, p, v) { console.log(`  ${p}: ${o[p]} -> ${v}`); o[p] = v; return true; },  // => x: 1 -> 2 / y: undefined -> 3
 });
-console.log("observable:"); observed.x = 2; observed.y = 3;
+console.log("observable:"); observed.x = 2; observed.y = 3;  // => observable:
 
 // Reflect.apply calls a function with a specific `this` context and arguments array.
 // Unlike Function.prototype.apply, Reflect.apply is a standalone function — useful
 // when the target might have overridden `.apply` on its prototype.
 function greet(g) { return `${g}, ${this.name}!`; }
-console.log("Reflect.apply:", Reflect.apply(greet, { name: "World" }, ["Hello"]));
+console.log("Reflect.apply:", Reflect.apply(greet, { name: "World" }, ["Hello"]));  // => Reflect.apply: Hello, World!
 
 // FinalizationRegistry (ES2021) registers a callback that runs when an object is
 // garbage collected. This is for cleanup of external resources (closing file handles,
@@ -500,13 +500,13 @@ console.log("Reflect.apply:", Reflect.apply(greet, { name: "World" }, ["Hello"])
 const registry = new FinalizationRegistry((v) => console.log(`GC'd: ${v}`));
 let ephemeral = { temp: true };
 registry.register(ephemeral, "ephemeral");
-console.log("WeakRef alive:", new WeakRef(ephemeral).deref() !== undefined);
-console.log("(FinalizationRegistry runs on GC — non-deterministic)");
+console.log("WeakRef alive:", new WeakRef(ephemeral).deref() !== undefined);  // => WeakRef alive: true
+console.log("(FinalizationRegistry runs on GC — non-deterministic)");  // => (FinalizationRegistry runs on GC — non-deterministic)
 
 // ============================================================================
 // 10. ADVANCED
 // ============================================================================
-console.log("\n=== 10. ADVANCED ===\n");
+console.log("\n=== 10. ADVANCED ===\n");  // => === 10. ADVANCED ===
 
 // structuredClone (2022) performs a deep clone using the structured clone algorithm
 // (same algorithm used by postMessage, IndexedDB, etc.). Unlike JSON.parse(JSON.stringify()),
@@ -515,40 +515,40 @@ console.log("\n=== 10. ADVANCED ===\n");
 const original = { date: new Date(), nested: { arr: [1, 2, 3] }, regex: /test/gi };
 const cloned = structuredClone(original);
 cloned.nested.arr.push(4);
-console.log("original:", original.nested.arr, "| cloned:", cloned.nested.arr);
+console.log("original:", original.nested.arr, "| cloned:", cloned.nested.arr);  // => original: [ 1, 2, 3 ] | cloned: [ 1, 2, 3, 4 ]
 
 // Object.groupBy (ES2024) groups array elements by a callback's return value.
 // Returns a null-prototype object (no inherited properties). This replaces the
 // common lodash _.groupBy pattern. Also available as Map.groupBy for Map results.
 const items = [{ n: "apple", t: "fruit" }, { n: "carrot", t: "veg" }, { n: "banana", t: "fruit" }];
 const grouped = Object.groupBy(items, (i) => i.t);
-console.log("groupBy:", { fruit: grouped.fruit?.map((i) => i.n), veg: grouped.veg?.map((i) => i.n) });
+console.log("groupBy:", { fruit: grouped.fruit?.map((i) => i.n), veg: grouped.veg?.map((i) => i.n) });  // => groupBy: { fruit: [ 'apple', 'banana' ], veg: [ 'carrot' ] }
 
 // SharedArrayBuffer enables true shared memory between Web Workers (or worker_threads
 // in Node.js). Atomics provides thread-safe operations (store, load, add, wait, notify)
 // to prevent data races. Requires cross-origin isolation headers in browsers (COOP/COEP).
 // const sab = new SharedArrayBuffer(1024);
 // Atomics.store(new Int32Array(sab), 0, 42); Atomics.load/add/wait/notify
-console.log("(SharedArrayBuffer/Atomics: requires cross-origin isolation)");
+console.log("(SharedArrayBuffer/Atomics: requires cross-origin isolation)");  // => (SharedArrayBuffer/Atomics: requires cross-origin isolation)
 
 // Temporal API (TC39 Stage 3) replaces the notoriously broken Date object.
 // Key improvements: immutable values, proper timezone handling, calendar support,
 // nanosecond precision, and clear distinction between absolute/wall-clock time.
 // Temporal.Now.plainDateTimeISO(), Temporal.PlainDate.from("2024-03-15")
 // Immutable, timezone-aware, replaces Date
-console.log("(Temporal: Stage 3 — immutable date/time API)");
+console.log("(Temporal: Stage 3 — immutable date/time API)");  // => (Temporal: Stage 3 — immutable date/time API)
 
 // Promise.withResolvers (ES2024) extracts resolve/reject from a Promise constructor,
 // avoiding the "deferred pattern" boilerplate of declaring outer variables. Useful when
 // resolve/reject need to be called from outside the Promise constructor callback.
 const { promise, resolve } = Promise.withResolvers();
 resolve("resolved externally");
-promise.then((v) => console.log(`Promise.withResolvers: ${v}`));
+promise.then((v) => console.log(`Promise.withResolvers: ${v}`));  // => Promise.withResolvers: resolved externally
 
 // ============================================================================
 // BONUS: Patterns & Idioms
 // ============================================================================
-console.log("\n=== BONUS: PATTERNS & IDIOMS ===\n");
+console.log("\n=== BONUS: PATTERNS & IDIOMS ===\n");  // => === BONUS: PATTERNS & IDIOMS ===
 
 // Tagged template literals: the tag function receives the string parts as a
 // TemplateStringsArray and the interpolated values as separate arguments.
@@ -561,7 +561,7 @@ function sql(strings, ...values) {
 }
 const table = "users";
 const id = 42;
-console.log("tagged template:", sql`SELECT * FROM ${table} WHERE id = ${id}`);
+console.log("tagged template:", sql`SELECT * FROM ${table} WHERE id = ${id}`);  // => tagged template: SELECT * FROM 'users' WHERE id = 42
 
 // Getters and setters create computed properties that look like regular property access.
 // Under the hood, they're accessor descriptors on the prototype (Object.defineProperty).
@@ -575,9 +575,9 @@ class Temperature {
   toString() { return `${this.#celsius.toFixed(1)}C / ${this.fahrenheit.toFixed(1)}F`; }
 }
 const temp = new Temperature(100);
-console.log(`Temperature: ${temp}`);
+console.log(`Temperature: ${temp}`);  // => Temperature: 100.0C / 212.0F
 temp.fahrenheit = 72;
-console.log(`After set F=72: ${temp}`);
+console.log(`After set F=72: ${temp}`);  // => After set F=72: 22.2C / 72.0F
 
 // Pattern matching via destructuring: simulate match/case by destructuring the
 // input object to extract fields, then branching on values. This is a pragmatic
@@ -587,8 +587,8 @@ function handleResponse({ status, data, error }) {
   if (status >= 400) return `Error ${status}: ${error}`;
   return `Redirect: ${status}`;
 }
-console.log(handleResponse({ status: 200, data: { ok: true }, error: null }));
-console.log(handleResponse({ status: 404, data: null, error: "Not found" }));
+console.log(handleResponse({ status: 200, data: { ok: true }, error: null }));  // => OK: {"ok":true}
+console.log(handleResponse({ status: 404, data: null, error: "Not found" }));  // => Error 404: Not found
 
 // Async iteration queue: implements the async iterable protocol ([Symbol.asyncIterator])
 // for push-based data sources. The producer calls push(), the consumer uses for-await-of.
@@ -612,7 +612,7 @@ function createAsyncQueue() {
     },
   };
 }
-console.log("(async queue pattern: push/pull async iteration)");
+console.log("(async queue pattern: push/pull async iteration)");  // => (async queue pattern: push/pull async iteration)
 
 // Using Symbols as private protocol identifiers: unlike string method names, Symbols
 // can't collide with other properties. This is how you define "private interfaces" that
@@ -624,7 +624,7 @@ class Config {
   [serialize]() { return JSON.stringify(this.data); }
 }
 const cfg = new Config({ env: "prod", port: 443 });
-console.log(`symbol protocol: ${cfg[serialize]()}`);
+console.log(`symbol protocol: ${cfg[serialize]()}`);  // => symbol protocol: {"env":"prod","port":443}
 
 // Optional chaining with bracket notation (?.[]) and nested array access.
 // The entire chain short-circuits to undefined on the first null/undefined,
@@ -632,7 +632,7 @@ console.log(`symbol protocol: ${cfg[serialize]()}`);
 const deepObj = { a: { b: { c: [{ d: "found" }] } } };
 const deep = deepObj?.a?.b?.c?.[0]?.d ?? "missing";
 const missing = deepObj?.x?.y?.z?.[0]?.w ?? "missing";
-console.log(`deep access: ${deep}, missing: ${missing}`);
+console.log(`deep access: ${deep}, missing: ${missing}`);  // => deep access: found, missing: missing
 
 // ============================================================================
 // RUN ASYNC DEMOS
@@ -643,5 +643,5 @@ console.log(`deep access: ${deep}, missing: ${missing}`);
 (async () => {
   await runAsyncDemo();
   await asyncGenDemo();
-  console.log("\n=== ALL DEMOS COMPLETE ===");
+  console.log("\n=== ALL DEMOS COMPLETE ===");  // => === ALL DEMOS COMPLETE ===
 })();

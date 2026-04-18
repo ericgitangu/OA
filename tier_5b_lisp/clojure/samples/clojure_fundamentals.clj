@@ -30,16 +30,16 @@
   ;; Clojure has rich numeric types. Ratios (22/7) are exact — no floating-point
   ;; rounding errors. BigInt (42N) and BigDecimal (3.14M) support arbitrary precision.
   ;; The JVM handles the heavy lifting for numeric types.
-  (println "Integer:" 42 " Long:" 9999999999 " BigInt:" 42N)
-  (println "Float:" 3.14 " Ratio:" (/ 22 7) " BigDecimal:" 3.14M)
-  (println "String:" "hello" " Char:" \a " Boolean:" true " Nil:" nil)
+  (println "Integer:" 42 " Long:" 9999999999 " BigInt:" 42N)  ; => Integer: 42  Long: 9999999999  BigInt: 42N
+  (println "Float:" 3.14 " Ratio:" (/ 22 7) " BigDecimal:" 3.14M)  ; => Float: 3.14  Ratio: 22/7  BigDecimal: 3.14M
+  (println "String:" "hello" " Char:" \a " Boolean:" true " Nil:" nil)  ; => String: hello  Char: a  Boolean: true  Nil:
 
   ;; Keywords (:name) are interned strings that evaluate to themselves.
   ;; They're also functions — (:name map) looks up :name in the map.
   ;; This dual nature (data AND function) is idiomatic Clojure and enables concise code.
   ;; Namespaced keywords (::local) expand to :current-ns/local for global uniqueness.
-  (println "Keyword:" :name " Namespaced:" ::local)
-  (println "Keyword as fn:" (:name {:name "Alice" :age 30}))
+  (println "Keyword:" :name " Namespaced:" ::local)  ; => Keyword: :name  Namespaced: :clojure-fundamentals/local
+  (println "Keyword as fn:" (:name {:name "Alice" :age 30}))  ; => Keyword as fn: Alice
 
   ;; def creates a global var (like a global constant). It's not variable assignment —
   ;; vars are stable references that can be rebound at the REPL but shouldn't change in production.
@@ -49,21 +49,21 @@
   (let [x 10
         y 20
         sum (+ x y)]
-    (println "let binding: x=" x "y=" y "sum=" sum))
+    (println "let binding: x=" x "y=" y "sum=" sum))  ; => let binding: x= 10 y= 20 sum= 30
 
   ;; Strings are Java strings. str concatenates by calling .toString on each arg.
   ;; clojure.string provides functional string operations that compose with pipelines.
-  (println "str concat:" (str "Hello" ", " "World!"))
-  (println "format:" (format "Pi is %.4f" pi))
-  (println "split:" (str/split "a,b,c" #","))
-  (println "join:" (str/join "-" ["hello" "world"]))
-  (println "upper:" (str/upper-case "hello"))
-  (println "includes?:" (str/includes? "hello world" "world"))
+  (println "str concat:" (str "Hello" ", " "World!"))  ; => str concat: Hello, World!
+  (println "format:" (format "Pi is %.4f" pi))  ; => format: Pi is 3.1416
+  (println "split:" (str/split "a,b,c" #","))  ; => split: [a b c]
+  (println "join:" (str/join "-" ["hello" "world"]))  ; => join: hello-world
+  (println "upper:" (str/upper-case "hello"))  ; => upper: HELLO
+  (println "includes?:" (str/includes? "hello world" "world"))  ; => includes?: true
 
   ;; Regex literals use #"pattern" syntax — compiled to java.util.regex.Pattern at read time.
-  (println "re-find:" (re-find #"\d+" "abc 123 def"))
-  (println "re-seq:" (re-seq #"\w+" "hello world 42"))
-  (println "re-matches:" (re-matches #"(\d{4})-(\d{2})" "2024-01")))
+  (println "re-find:" (re-find #"\d+" "abc 123 def"))  ; => re-find: 123
+  (println "re-seq:" (re-seq #"\w+" "hello world 42"))  ; => re-seq: (hello world 42)
+  (println "re-matches:" (re-matches #"(\d{4})-(\d{2})" "2024-01")))  ; => re-matches: [2024-01 2024 01]
 
 ;; ============================================================
 ;;  2. DATA STRUCTURES
@@ -79,56 +79,56 @@
   ;; Lists are singly-linked — O(1) prepend (conj adds to front), O(n) random access.
   ;; Quoted '(1 2 3) prevents evaluation (without quote, Clojure would try to call 1 as a function).
   (let [lst '(1 2 3 4 5)]
-    (println "List:" lst "first:" (first lst) "rest:" (rest lst))
-    (println "conj (prepend):" (conj lst 0))
-    (println "cons:" (cons 0 lst)))
+    (println "List:" lst "first:" (first lst) "rest:" (rest lst))  ; => List: (1 2 3 4 5) first: 1 rest: (2 3 4 5)
+    (println "conj (prepend):" (conj lst 0))  ; => conj (prepend): (0 1 2 3 4 5)
+    (println "cons:" (cons 0 lst)))  ; => cons: (0 1 2 3 4 5)
 
   ;; Vectors are the workhorse collection — O(~1) access, O(~1) append.
   ;; Internally they're 32-way branching trees (Hash Array Mapped Tries).
   ;; conj adds to the END (unlike lists where conj adds to the front).
   ;; This polymorphic conj behavior means algorithms work with any collection type.
   (let [v [10 20 30 40 50]]
-    (println "Vector:" v "nth:" (nth v 2) "get:" (get v 1))
-    (println "conj (append):" (conj v 60))
-    (println "assoc:" (assoc v 2 99))
-    (println "subvec:" (subvec v 1 4))
-    (println "peek:" (peek v) "pop:" (pop v)))
+    (println "Vector:" v "nth:" (nth v 2) "get:" (get v 1))  ; => Vector: [10 20 30 40 50] nth: 30 get: 20
+    (println "conj (append):" (conj v 60))  ; => conj (append): [10 20 30 40 50 60]
+    (println "assoc:" (assoc v 2 99))  ; => assoc: [10 20 99 40 50]
+    (println "subvec:" (subvec v 1 4))  ; => subvec: [20 30 40]
+    (println "peek:" (peek v) "pop:" (pop v)))  ; => peek: 50 pop: [10 20 30 40]
 
   ;; Maps are hash array mapped tries — O(~1) lookup, insert, update.
   ;; They use structural sharing internally, so (assoc m :key val) creates a new map
   ;; that shares most of its structure with m. Keywords as keys are idiomatic.
   (let [m {:name "Clojure" :year 2007 :creator "Rich Hickey"}]
-    (println "Map:" m)
-    (println "get:" (get m :name) "keyword-as-fn:" (:year m))
-    (println "assoc:" (assoc m :version "1.11"))
-    (println "dissoc:" (dissoc m :year))
-    (println "merge:" (merge m {:paradigm "FP"}))
-    (println "select-keys:" (select-keys m [:name :year]))
-    (println "update:" (update m :year inc)))
+    (println "Map:" m)  ; => Map: {:name Clojure, :year 2007, :creator Rich Hickey}
+    (println "get:" (get m :name) "keyword-as-fn:" (:year m))  ; => get: Clojure keyword-as-fn: 2007
+    (println "assoc:" (assoc m :version "1.11"))  ; => assoc: {:name Clojure, :year 2007, :creator Rich Hickey, :version 1.11}
+    (println "dissoc:" (dissoc m :year))  ; => dissoc: {:name Clojure, :creator Rich Hickey}
+    (println "merge:" (merge m {:paradigm "FP"}))  ; => merge: {:name Clojure, :year 2007, :creator Rich Hickey, :paradigm FP}
+    (println "select-keys:" (select-keys m [:name :year]))  ; => select-keys: {:name Clojure, :year 2007}
+    (println "update:" (update m :year inc)))  ; => update: {:name Clojure, :year 2008, :creator Rich Hickey}
 
   ;; get-in, assoc-in, update-in navigate nested data structures using key paths.
   ;; This eliminates the need for lens libraries or mutable nested updates.
   (let [nested {:user {:address {:city "Portland"}}}]
-    (println "get-in:" (get-in nested [:user :address :city]))
-    (println "assoc-in:" (assoc-in nested [:user :address :zip] "97201"))
-    (println "update-in:" (update-in nested [:user :address :city] str/upper-case)))
+    (println "get-in:" (get-in nested [:user :address :city]))  ; => get-in: Portland
+    (println "assoc-in:" (assoc-in nested [:user :address :zip] "97201"))  ; => assoc-in: {:user {:address {:city Portland, :zip 97201}}}
+    (println "update-in:" (update-in nested [:user :address :city] str/upper-case)))  ; => update-in: {:user {:address {:city PORTLAND}}}
 
   ;; Sets are unordered collections of unique values. #{} is the literal syntax.
   ;; Sets are also functions — (#{1 2 3} 2) returns 2 (truthy), (#{1 2 3} 4) returns nil.
   (let [s1 #{1 2 3 4}
         s2 #{3 4 5 6}]
-    (println "Set:" s1 "contains?:" (contains? s1 3))
-    (println "union:" (cset/union s1 s2))
-    (println "intersection:" (cset/intersection s1 s2))
-    (println "difference:" (cset/difference s1 s2))
-    (println "conj:" (conj s1 5) "disj:" (disj s1 2)))
+    (println "Set:" s1 "contains?:" (contains? s1 3))  ; => Set: #{1 4 3 2} contains?: true
+    (println "union:" (cset/union s1 s2))  ; => union: #{1 4 6 3 2 5}
+    (println "intersection:" (cset/intersection s1 s2))  ; => intersection: #{4 3}
+    (println "difference:" (cset/difference s1 s2))  ; => difference: #{1 2}
+    (println "conj:" (conj s1 5) "disj:" (disj s1 2)))  ; => conj: #{1 4 3 2 5} disj: #{1 4 3}
 
   ;; Persistence demo: v1 is NOT modified when v2 is created.
   ;; Both v1 and v2 share internal tree structure — only the path from root to the
   ;; changed leaf is copied. This is O(log32 n) time and space.
   (let [v1 [1 2 3]
         v2 (conj v1 4)]
-    (println "Persistent: v1=" v1 "v2=" v2 "(v1 unchanged)")))
+    (println "Persistent: v1=" v1 "v2=" v2 "(v1 unchanged)")))  ; => Persistent: v1= [1 2 3] v2= [1 2 3 4] (v1 unchanged)
 
 ;; ============================================================
 ;;  3. FUNCTIONS
@@ -141,21 +141,21 @@
   (defn greet
     ([name] (greet name "Hello"))
     ([name greeting] (str greeting ", " name "!")))
-  (println "Multi-arity:" (greet "Alice") (greet "Bob" "Hey"))
+  (println "Multi-arity:" (greet "Alice") (greet "Bob" "Hey"))  ; => Multi-arity: Hello, Alice! Hey, Bob!
 
   ;; fn creates an anonymous function. #(* %1 %1 %1) is the reader macro shorthand —
   ;; %1, %2, etc. refer to positional arguments. Use fn for multi-line bodies,
   ;; #() for quick one-liners. #() cannot be nested.
   (let [square (fn [x] (* x x))
         cube #(* %1 %1 %1)]
-    (println "Anonymous fn:" (square 5) "Reader macro:" (cube 3)))
+    (println "Anonymous fn:" (square 5) "Reader macro:" (cube 3)))  ; => Anonymous fn: 25 Reader macro: 27
 
   ;; apply "unpacks" a collection into positional arguments — like spread in JS.
   ;; map, filter, remove return lazy sequences — they don't compute until consumed.
-  (println "apply:" (apply + [1 2 3 4 5]))
-  (println "map:" (map inc [1 2 3]))
-  (println "filter:" (filter even? (range 1 11)))
-  (println "remove:" (remove even? (range 1 11)))
+  (println "apply:" (apply + [1 2 3 4 5]))  ; => apply: 15
+  (println "map:" (map inc [1 2 3]))  ; => map: (2 3 4)
+  (println "filter:" (filter even? (range 1 11)))  ; => filter: (2 4 6 8 10)
+  (println "remove:" (remove even? (range 1 11)))  ; => remove: (1 3 5 7 9)
 
   ;; partial fixes some arguments, returning a new function.
   ;; comp composes functions right-to-left: (comp f g) = f(g(x)).
@@ -164,9 +164,9 @@
   (let [add10 (partial + 10)
         double-then-inc (comp inc #(* 2 %))
         stats (juxt count #(apply min %) #(apply max %))]
-    (println "partial:" (add10 5))
-    (println "comp:" (double-then-inc 5))
-    (println "juxt:" (stats [3 1 4 1 5 9])))
+    (println "partial:" (add10 5))  ; => partial: 15
+    (println "comp:" (double-then-inc 5))  ; => comp: 11
+    (println "juxt:" (stats [3 1 4 1 5 9])))  ; => juxt: [6 1 9]
 
   ;; Threading macros restructure nested calls into sequential pipelines.
   ;; -> (thread-first) inserts each result as the FIRST arg of the next form.
@@ -177,12 +177,12 @@
                str/trim
                str/lower-case
                (str/split #" ")
-               first))
+               first))  ; => ->  (thread-first): hello,
   (println "->> (thread-last):"
            (->> (range 1 11)
                 (filter even?)
                 (map #(* % %))
-                (reduce +))))
+                (reduce +))))  ; => ->> (thread-last): 220
 
 ;; ============================================================
 ;;  4. SEQUENCES
@@ -195,26 +195,26 @@
   ;; Java collections, files, etc. This is because they operate on the sequence interface,
   ;; not concrete types. Most sequence operations return lazy sequences.
   (let [nums (range 1 11)]
-    (println "map:"         (map #(* % 2) nums))
+    (println "map:"         (map #(* % 2) nums))  ; => map: (2 4 6 8 10 12 14 16 18 20)
     ;; mapcat = map + concat. Like flatMap in other languages.
-    (println "mapcat:"      (mapcat #(vector % (* % 10)) [1 2 3]))
-    (println "frequencies:" (frequencies [:a :b :a :c :b :a]))
-    (println "group-by:"    (group-by #(mod % 3) nums))
-    (println "partition:"   (partition 3 nums))
-    (println "partition-by:" (partition-by #(< % 5) nums))
+    (println "mapcat:"      (mapcat #(vector % (* % 10)) [1 2 3]))  ; => mapcat: (1 10 2 20 3 30)
+    (println "frequencies:" (frequencies [:a :b :a :c :b :a]))  ; => frequencies: {:a 3, :b 2, :c 1}
+    (println "group-by:"    (group-by #(mod % 3) nums))  ; => group-by: {1 [1 4 7 10], 2 [2 5 8], 0 [3 6 9]}
+    (println "partition:"   (partition 3 nums))  ; => partition: ((1 2 3) (4 5 6) (7 8 9))
+    (println "partition-by:" (partition-by #(< % 5) nums))  ; => partition-by: ((1 2 3 4) (5 6 7 8 9 10))
     ;; (range) with no args is infinite — take 5 realizes only 5 elements.
     ;; Lazy sequences are computed on demand and cached once computed.
-    (println "take:"        (take 5 (range)))
-    (println "drop:"        (drop 7 nums))
-    (println "take-while:"  (take-while #(< % 5) nums))
-    (println "interleave:"  (interleave [:a :b :c] [1 2 3]))
-    (println "interpose:"   (interpose ", " ["a" "b" "c"]))
+    (println "take:"        (take 5 (range)))  ; => take: (0 1 2 3 4)
+    (println "drop:"        (drop 7 nums))  ; => drop: (8 9 10)
+    (println "take-while:"  (take-while #(< % 5) nums))  ; => take-while: (1 2 3 4)
+    (println "interleave:"  (interleave [:a :b :c] [1 2 3]))  ; => interleave: (:a 1 :b 2 :c 3)
+    (println "interpose:"   (interpose ", " ["a" "b" "c"]))  ; => interpose: (a , b , c)
     ;; zipmap creates a map from two sequences — keys and values.
-    (println "zipmap:"      (zipmap [:a :b :c] [1 2 3]))
+    (println "zipmap:"      (zipmap [:a :b :c] [1 2 3]))  ; => zipmap: {:a 1, :b 2, :c 3}
     ;; into pours one collection into another, using the target's conj behavior.
-    (println "into:"        (into {} [[:a 1] [:b 2] [:c 3]]))
-    (println "distinct:"    (distinct [1 1 2 3 3 2 4]))
-    (println "sort-by:"     (sort-by count ["banana" "fig" "apple"]))))
+    (println "into:"        (into {} [[:a 1] [:b 2] [:c 3]]))  ; => into: {:a 1, :b 2, :c 3}
+    (println "distinct:"    (distinct [1 1 2 3 3 2 4]))  ; => distinct: (1 2 3 4)
+    (println "sort-by:"     (sort-by count ["banana" "fig" "apple"]))))  ; => sort-by: (fig apple banana)
 
 ;; ============================================================
 ;;  5. POLYMORPHISM
@@ -235,8 +235,8 @@
   (defmethod area :default [shape]
     (str "Unknown shape: " (:shape shape)))
 
-  (println "Circle area:" (format "%.2f" (area {:shape :circle :radius 5})))
-  (println "Rect area:" (area {:shape :rectangle :width 4 :height 6}))
+  (println "Circle area:" (format "%.2f" (area {:shape :circle :radius 5})))  ; => Circle area: 78.54
+  (println "Rect area:" (area {:shape :rectangle :width 4 :height 6}))  ; => Rect area: 24
 
   ;; Protocols are like interfaces but dispatching on the type of the first argument.
   ;; They're faster than multimethods (JVM-level dispatch) but less flexible (type-only dispatch).
@@ -255,20 +255,20 @@
     Describable
     (describe [_] (str name " the " (if indoor? "indoor" "outdoor") " cat")))
 
-  (println "Protocol:" (describe (->Dog "Rex" "Lab")))
-  (println "Protocol:" (describe (->Cat "Whiskers" true)))
+  (println "Protocol:" (describe (->Dog "Rex" "Lab")))  ; => Protocol: Rex the Lab dog
+  (println "Protocol:" (describe (->Cat "Whiskers" true)))  ; => Protocol: Whiskers the indoor cat
 
   ;; Records support map operations because they implement IPersistentMap.
   (let [d (->Dog "Buddy" "Beagle")
         d2 (assoc d :age 5)]
-    (println "Record:" d "name:" (:name d))
-    (println "assoc'd:" d2))
+    (println "Record:" d "name:" (:name d))  ; => Record: #clojure_fundamentals.Dog{:name Buddy, :breed Beagle} name: Buddy
+    (println "assoc'd:" d2))  ; => assoc'd: #clojure_fundamentals.Dog{:name Buddy, :breed Beagle, :age 5}
 
   ;; reify creates an anonymous, one-off implementation of a protocol or interface.
   ;; Like Kotlin's object expression or Java's anonymous class, but more concise.
   (let [obj (reify Describable
               (describe [_] "I'm a reified object"))]
-    (println "reify:" (describe obj))))
+    (println "reify:" (describe obj))))  ; => reify: I'm a reified object
 
 ;; ============================================================
 ;;  6. CONCURRENCY
@@ -289,19 +289,19 @@
     (swap! counter inc)
     (swap! counter inc)
     (swap! counter + 10)
-    (println "Atom:" @counter)
+    (println "Atom:" @counter)  ; => Atom: 12
     (reset! counter 0)
-    (println "After reset:" @counter))
+    (println "After reset:" @counter))  ; => After reset: 0
 
   ;; Validators ensure atoms only hold valid values — the validator function runs on every
   ;; swap!/reset! and throws if it returns false. This is runtime invariant enforcement.
   (let [age (atom 25 :validator #(and (integer? %) (>= % 0)))]
     (swap! age inc)
-    (println "Validated atom:" @age)
+    (println "Validated atom:" @age)  ; => Validated atom: 26
     (try
       (reset! age -1)
       (catch Exception e
-        (println "Validator rejected:" (.getMessage e)))))
+        (println "Validator rejected:" (.getMessage e)))))  ; => Validator rejected: Invalid reference state
 
   ;; Refs use Software Transactional Memory (STM) — Clojure's answer to coordinated state.
   ;; dosync creates a transaction: ALL ref changes within it are atomic, consistent, and isolated.
@@ -313,7 +313,7 @@
     (dosync
      (alter account-a - 200)
      (alter account-b + 200))
-    (println "Refs after transfer: A=" @account-a "B=" @account-b))
+    (println "Refs after transfer: A=" @account-a "B=" @account-b))  ; => Refs after transfer: A= 800 B= 700
 
   ;; Agents handle state changes asynchronously. send dispatches the update function
   ;; to a thread pool — the caller doesn't wait. Agents process messages sequentially,
@@ -322,18 +322,18 @@
     (send log-agent conj "message 1")
     (send log-agent conj "message 2")
     (await log-agent)
-    (println "Agent:" @log-agent))
+    (println "Agent:" @log-agent))  ; => Agent: [message 1 message 2]
 
   ;; Futures run a computation on another thread. Dereferencing (@f) blocks until complete.
   ;; This is like Java's Future but with Clojure's immutable value semantics.
   (let [f (future (Thread/sleep 10) (* 6 7))]
-    (println "Future:" @f "realized?:" (realized? f)))
+    (println "Future:" @f "realized?:" (realized? f)))  ; => Future: 42 realized?: true
 
   ;; Promises are single-write containers — deliver sets the value, deref reads it.
   ;; A promise can only be delivered once; subsequent delivers are no-ops.
   (let [p (promise)]
     (future (Thread/sleep 10) (deliver p 42))
-    (println "Promise:" @p "realized?:" (realized? p))))
+    (println "Promise:" @p "realized?:" (realized? p))))  ; => Promise: 42 realized?: true
 
 ;; ============================================================
 ;;  7. TRANSDUCERS
@@ -354,14 +354,14 @@
     ;; transduce applies the transducer xf while reducing with +.
     ;; into applies xf while pouring results into a target collection.
     ;; sequence lazily applies xf to produce a seq.
-    (println "transduce:" (transduce xf + (range 1 100)))
-    (println "into vec:" (into [] xf (range 1 100)))
-    (println "into set:" (into #{} xf (range 1 100)))
-    (println "sequence:" (sequence xf (range 1 100))))
+    (println "transduce:" (transduce xf + (range 1 100)))  ; => transduce: 220
+    (println "into vec:" (into [] xf (range 1 100)))  ; => into vec: [4 16 36 64 100]
+    (println "into set:" (into #{} xf (range 1 100)))  ; => into set: #{100 36 4 64 16}
+    (println "sequence:" (sequence xf (range 1 100))))  ; => sequence: (4 16 36 64 100)
 
   (let [xf (comp (map inc) (filter even?))]
-    (println "transduce sum:" (transduce xf + 0 (range 10)))
-    (println "transduce str:" (transduce xf str (range 5)))))
+    (println "transduce sum:" (transduce xf + 0 (range 10)))  ; => transduce sum: 30
+    (println "transduce str:" (transduce xf str (range 5)))))  ; => transduce str: 24
 
 ;; ============================================================
 ;;  8. MACROS
@@ -374,8 +374,8 @@
   ;; quote (') prevents evaluation, returning the raw data structure.
   ;; syntax-quote (`) is like quote but resolves symbols to their fully-qualified names
   ;; and supports unquoting (~) to inject evaluated values.
-  (println "quote:" '(1 2 3))
-  (println "syntax-quote:" `(+ 1 2))
+  (println "quote:" '(1 2 3))  ; => quote: (1 2 3)
+  (println "syntax-quote:" `(+ 1 2))  ; => syntax-quote: (clojure.core/+ 1 2)
 
   ;; Macros receive unevaluated code (as data structures), transform it, and return new code.
   ;; The compiler evaluates the macro at COMPILE TIME, replacing the call with the returned form.
@@ -386,7 +386,7 @@
        ~@body))
 
   (unless false
-    (println "unless macro: condition was false, so this prints"))
+    (println "unless macro: condition was false, so this prints"))  ; => unless macro: condition was false, so this prints
 
   ;; Auto-gensym (result#) generates a unique symbol to prevent variable capture.
   ;; Without it, a macro's internal variable could shadow the caller's variable,
@@ -401,7 +401,7 @@
 
   ;; macroexpand shows the code a macro generates — essential for debugging macros.
   ;; You can see that (unless false (println "hi")) becomes (when (not false) (println "hi")).
-  (println "macroexpand:" (macroexpand '(unless false (println "hi"))))
+  (println "macroexpand:" (macroexpand '(unless false (println "hi"))))  ; => macroexpand: (if (clojure.core/not false) (do (println hi)))
 
   ;; when-let* chains multiple conditional bindings — if any is nil/false, the whole
   ;; form returns nil. This is a recursive macro that expands into nested when-let forms.
@@ -413,7 +413,7 @@
 
   (when-let* [a (get {:x 1} :x)
               b (inc a)]
-    (println "when-let* result:" b)))
+    (println "when-let* result:" b)))  ; => when-let* result: 2
 
 ;; ============================================================
 ;;  9. SPEC
@@ -429,10 +429,10 @@
   (s/def ::age (s/and int? #(>= % 0) #(<= % 150)))
   (s/def ::email (s/and string? #(re-matches #".+@.+\..+" %)))
 
-  (println "valid? name:" (s/valid? ::name "Alice"))
-  (println "valid? name:" (s/valid? ::name ""))
-  (println "valid? age:" (s/valid? ::age 30))
-  (println "valid? email:" (s/valid? ::email "a@b.com"))
+  (println "valid? name:" (s/valid? ::name "Alice"))  ; => valid? name: true
+  (println "valid? name:" (s/valid? ::name ""))  ; => valid? name: false
+  (println "valid? age:" (s/valid? ::age 30))  ; => valid? age: true
+  (println "valid? email:" (s/valid? ::email "a@b.com"))  ; => valid? email: true
 
   ;; s/keys specs for maps — :req-un means required keys (un-namespaced).
   ;; Each key's spec is looked up by its namespaced version, so ::name validates :name.
@@ -440,13 +440,13 @@
   (s/def ::person (s/keys :req-un [::name ::age]
                           :opt-un [::email]))
 
-  (println "valid? person:" (s/valid? ::person {:name "Alice" :age 30}))
-  (println "conform:" (s/conform ::person {:name "Bob" :age 25 :email "b@c.com"}))
+  (println "valid? person:" (s/valid? ::person {:name "Alice" :age 30}))  ; => valid? person: true
+  (println "conform:" (s/conform ::person {:name "Bob" :age 25 :email "b@c.com"}))  ; => conform: {:name Bob, :age 25, :email b@c.com}
 
   ;; Collection specs describe the shape of collections — what elements they contain,
   ;; their kind (vector, list), and cardinality constraints.
   (s/def ::names (s/coll-of ::name :kind vector? :min-count 1))
-  (println "valid? names:" (s/valid? ::names ["Alice" "Bob"]))
+  (println "valid? names:" (s/valid? ::names ["Alice" "Bob"]))  ; => valid? names: true
 
   ;; explain-str returns human-readable error messages describing why data doesn't conform.
   (println "explain-str:")
@@ -455,8 +455,8 @@
   ;; s/or tags each alternative — conform returns the matched tag + value pair.
   ;; This is how you know WHICH branch matched, unlike union types in other languages.
   (s/def ::id (s/or :int int? :str string?))
-  (println "conform or:" (s/conform ::id 42))
-  (println "conform or:" (s/conform ::id "abc")))
+  (println "conform or:" (s/conform ::id 42))  ; => conform or: [:int 42]
+  (println "conform or:" (s/conform ::id "abc")))  ; => conform or: [:str abc]
 
 ;; ============================================================
 ;;  10. JAVA INTEROP
@@ -467,52 +467,52 @@
   ;; Clojure runs on the JVM and has first-class Java interop — no FFI or wrappers needed.
   ;; .method calls instance methods, Class/field accesses statics, Class. constructs objects.
   ;; This gives Clojure access to the entire Java ecosystem without performance penalties.
-  (println ".toUpperCase:" (.toUpperCase "hello"))
-  (println ".substring:" (.substring "Hello, World!" 7))
-  (println ".length:" (.length "hello"))
+  (println ".toUpperCase:" (.toUpperCase "hello"))  ; => .toUpperCase: HELLO
+  (println ".substring:" (.substring "Hello, World!" 7))  ; => .substring: World!
+  (println ".length:" (.length "hello"))  ; => .length: 5
 
   ;; Static methods and fields use Class/member syntax.
-  (println "Math/PI:" Math/PI)
-  (println "Math/sqrt:" (Math/sqrt 144))
-  (println "Integer/parseInt:" (Integer/parseInt "42"))
-  (println "System/currentTimeMillis:" (System/currentTimeMillis))
+  (println "Math/PI:" Math/PI)  ; => Math/PI: 3.141592653589793
+  (println "Math/sqrt:" (Math/sqrt 144))  ; => Math/sqrt: 12.0
+  (println "Integer/parseInt:" (Integer/parseInt "42"))  ; => Integer/parseInt: 42
+  (println "System/currentTimeMillis:" (System/currentTimeMillis))  ; => (varies)
 
   ;; Constructor calls use ClassName. (with trailing dot) syntax.
   (let [sb (StringBuilder. "Hello")]
     (.append sb ", ")
     (.append sb "World!")
-    (println "StringBuilder:" (.toString sb)))
+    (println "StringBuilder:" (.toString sb)))  ; => StringBuilder: Hello, World!
 
   (let [al (java.util.ArrayList.)]
     (.add al "one")
     (.add al "two")
     (.add al "three")
-    (println "ArrayList:" al "size:" (.size al)))
+    (println "ArrayList:" al "size:" (.size al)))  ; => ArrayList: [one, two, three] size: 3
 
   ;; doto is a macro that threads an object through multiple method calls and returns it.
   ;; It's like a builder pattern in one expression — saves repeating the variable name.
   (let [m (doto (java.util.HashMap.)
             (.put "a" 1)
             (.put "b" 2))]
-    (println "doto HashMap:" m))
+    (println "doto HashMap:" m))  ; => doto HashMap: {a 1, b 2}
 
   ;; proxy creates a subclass or interface implementation at runtime.
   ;; It generates a JVM class that delegates to Clojure functions.
   (let [runnable (proxy [Runnable] []
-                   (run [] (println "  proxy Runnable executed!")))]
+                   (run [] (println "  proxy Runnable executed!")))]  ; => proxy Runnable executed!
     (.run runnable))
 
   ;; Type hints (^ClassName) tell the compiler the exact type, avoiding reflection.
   ;; Without hints, Clojure uses reflection for Java interop — slower at runtime.
   ;; Use *warn-on-reflection* to find unhinted interop calls in hot paths.
   (let [^String s "hello"]
-    (println "Type-hinted:" (.charAt s 0))))
+    (println "Type-hinted:" (.charAt s 0))))  ; => Type-hinted: h
 
 ;; ============================================================
 ;;  MAIN
 ;; ============================================================
 (defn -main [& _args]
-  (println (str "Clojure " (clojure-version) " Fundamentals"))
+  (println (str "Clojure " (clojure-version) " Fundamentals"))  ; => Clojure <version> Fundamentals
   (println (apply str (repeat 60 "=")))
 
   (basics)
@@ -527,7 +527,7 @@
   (java-interop-demo)
 
   (println (str "\n" (apply str (repeat 60 "="))))
-  (println "  All sections complete!")
+  (println "  All sections complete!")  ; => All sections complete!
   (println (apply str (repeat 60 "="))))
 
 (-main)
