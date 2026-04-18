@@ -9,7 +9,7 @@
 ![Rust](https://img.shields.io/badge/Rust-1.92-000000?logo=rust&logoColor=white)
 ![C++](https://img.shields.io/badge/C++-20/23-00599C?logo=cplusplus&logoColor=white)
 <!-- Tier 2 — JVM -->
-![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)
+![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.3-7F52FF?logo=kotlin&logoColor=white)
 ![Scala](https://img.shields.io/badge/Scala-3.8-DC322F?logo=scala&logoColor=white)
 <!-- Tier 3 — Web -->
@@ -105,7 +105,7 @@ leetcode/two_pointers/valid_palindrome.rs
 | Python | 3.12 | Installed |
 | Rust | 1.92 | Installed |
 | Go | 1.25 | Installed |
-| Java | 17 | Installed |
+| Java | 21 | Installed |
 | Node.js | 24 | Installed |
 | Ruby | 3.3 | Installed |
 | Zig | 0.15 | Installed |
