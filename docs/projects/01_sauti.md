@@ -152,6 +152,39 @@ Arduino and ESP32-based hardware customizations starting with automotive (car li
 - **And** failed webhook deliveries retry with exponential backoff up to 24 hours
 - **And** an idempotency key is included so our system can deduplicate
 
+### 4.4 Epic: Hate Speech Detection and Flagging
+
+> **Context:** Kenya's National Cohesion and Integration Act (2008) criminalizes hate speech, but enforcement is hampered by the lack of qualified transcribers who can determine hate speech across Kenya's multilingual landscape. Daniel Mutegi has called for amending the Act to include transcribers who are qualified to determine hate speech. Sauti is uniquely positioned to be that technological backbone — providing AI-assisted first-pass detection with human-in-the-loop determination by qualified transcribers.
+
+**User Story 4.4.1:** As a compliance analyst at a government monitoring desk, I want Sauti to flag potential hate speech segments in real-time across Swahili, Sheng, Kikuyu, Luo, and English broadcasts so that qualified transcribers can review flagged segments and make formal determinations.
+
+**Acceptance Criteria:**
+- **Given** an active audio stream being transcribed by Sauti
+- **When** the NLP classification layer detects language matching hate speech indicators (ethnic targeting, incitement to violence, dehumanizing language, discriminatory slurs)
+- **Then** a `HateSpeechFlaggedEvent` is emitted within 5 seconds containing: transcript segment, confidence score (0-1), hate speech category (ethnic, religious, gender, political), timestamp, speaker ID, and source metadata
+- **And** the flagged segment is routed to a qualified transcriber review queue
+- **And** the AI acts as a first-pass filter only — humans make the determination
+- **And** false positive rate is below 15% on the evaluation dataset
+
+**User Story 4.4.2:** As a qualified transcriber reviewing flagged content, I want a review dashboard showing the flagged transcript segment with surrounding context (30 seconds before and after), audio playback, speaker identification, and the AI's confidence score so that I can make an informed determination.
+
+**Acceptance Criteria:**
+- **Given** a `HateSpeechFlaggedEvent` in the review queue
+- **When** the qualified transcriber opens the review dashboard
+- **Then** they see: the flagged segment highlighted in full transcript context, the AI's classification (category + confidence), a 60-second audio clip centered on the flagged segment with playback controls, speaker diarization labels, and the original language with English translation
+- **And** the transcriber can mark the segment as: Confirmed Hate Speech, Borderline (escalate to senior reviewer), Dismissed (false positive), or Requires Legal Review
+- **And** every determination is immutably logged in the event store with the transcriber's ID, timestamp, and rationale
+
+**User Story 4.4.3:** As a regulatory compliance officer, I want an audit trail of all hate speech flags, determinations, and escalations so that enforcement actions have evidentiary backing that is legally admissible.
+
+**Acceptance Criteria:**
+- **Given** accumulated hate speech flags and determinations over a reporting period
+- **When** a compliance officer generates a report
+- **Then** the report includes: total flags, confirmation rate, category breakdown, response time from flag to determination, transcriber ID and qualifications for each determination
+- **And** the report includes cryptographic proof of integrity (hash chain) for evidentiary admissibility
+- **And** audio recordings referenced in the report are preserved with chain-of-custody metadata regardless of normal retention policies
+- **And** the report format aligns with National Cohesion and Integration Commission (NCIC) submission requirements
+
 ---
 
 ## 5. Non-Functional Requirements
@@ -166,6 +199,8 @@ Arduino and ESP32-based hardware customizations starting with automotive (car li
 | Webhook delivery latency (P95) | < 30s | Time from call end to first webhook attempt |
 | System throughput | 10,000 concurrent calls | Sustained, across all tenants |
 | Per-call audio ingestion rate | 16kHz mono PCM | 256 kbps streaming |
+| Hate speech detection latency (P95) | < 5s | Time from utterance to HateSpeechFlaggedEvent emission |
+| Hate speech false positive rate | < 15% | Measured against human-labeled evaluation set |
 
 ### 5.2 Availability
 
@@ -287,6 +322,7 @@ This project teaches BFF and event-driven architecture as foundational patterns 
 | DSP | Feature extraction, VAD, audio segmentation | C++ |
 | Transcription | ASR inference (Whisper + fine-tuned adapters) | Rust (calls Python models via PyO3) |
 | Sentiment | Sentiment classification on transcribed text | Rust (calls Python models) |
+| Content Moderation | Hate speech detection, flagging, transcriber review queue, determination tracking | Rust (PyO3 to Python) |
 | Session | Call lifecycle, speaker diarization state | Rust |
 | Compliance | Event store writes, audit retrieval | Rust |
 | Webhook Delivery | External integration push | Rust |
@@ -401,6 +437,8 @@ Each context has its own aggregate root; cross-context communication happens onl
 | BPO customers slow to pay (African B2B sales cycles can be 6-9 months) | High | Medium | Target smaller, faster-moving shops first; consulting/implementation revenue bridges the gap |
 | Google/AWS launch Swahili support and undercut | Medium | High | Moat = on-premises option, custom vocabulary, local support, deeper African language roadmap (not just Swahili) |
 | Model hosting costs exceed revenue | Medium | High | Aggressive model quantization; optimized Rust inference; pricing model includes minute caps to protect margins |
+| Hate speech classifier bias toward specific ethnic groups | Medium | High | Multi-ethnic training data; regular bias audits; community advisory board; human determination requirement prevents AI-only enforcement |
+| Legal liability for hate speech detection false negatives | Medium | High | Clear terms of service: Sauti is a tool assisting qualified transcribers, not a replacement; insurance review; legal counsel on liability framework |
 
 ---
 
@@ -410,6 +448,9 @@ Each context has its own aggregate root; cross-context communication happens onl
 2. How do we handle agent consent for voice cloning from their own calls? (Ethical/legal question — needs privacy policy work before v1.5)
 3. Do we self-host Whisper or use OpenAI's hosted API during the MVP? Lean toward self-hosted for cost + control, even though slower to start.
 4. Should the compliance event store use EventStoreDB or Kafka with a specialized topic? EventStoreDB is purpose-built but less familiar. Decision to be made in Week 1.
+5. What training data sources can be used for the hate speech classifier? Possible sources: NCIC case records, social media monitoring datasets, Kenya Human Rights Commission archives. All require consent and ethical review.
+6. How should Sauti handle code-switching within hate speech — e.g., a speaker using Kikuyu slurs in an otherwise Swahili conversation? The classifier must be multilingual-aware, not language-siloed.
+7. What legal liability does Sauti face for false negatives (hate speech not detected) vs. false positives (non-hate-speech incorrectly flagged)? Legal counsel needed before v1.0 of this feature.
 
 ---
 
@@ -427,6 +468,10 @@ A v1.0 release is shippable when:
 - [ ] On-call rotation defined (even if just Eric rotating with himself for now)
 - [ ] Monitoring + alerting operational; PagerDuty integrated
 - [ ] Legal: Terms of Service, Privacy Policy, Data Processing Agreement drafted
+- [ ] Hate speech classification model trained and evaluated on multilingual Kenyan dataset
+- [ ] Qualified transcriber review dashboard operational with full audit trail
+- [ ] False positive rate below 15% on evaluation set
+- [ ] NCIC-aligned reporting format validated with compliance stakeholders
 
 ---
 

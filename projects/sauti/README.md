@@ -7,6 +7,7 @@
 ![Event-Driven](https://img.shields.io/badge/Pattern-Event--Driven-blue)
 ![Tier 1](https://img.shields.io/badge/Tier-1%20Systems-critical)
 ![Sprint](https://img.shields.io/badge/Sprint-Weeks%201--2-yellow)
+![Hate Speech Detection](https://img.shields.io/badge/Feature-Hate_Speech_Detection-FF4444)
 
 ---
 
@@ -70,6 +71,20 @@ These patterns are introduced in Sauti (Tier 1) and propagate across the entire 
 - **Event-Driven**: Introduced here with Redis Streams. Carries forward as the core integration pattern in every tier -- Kafka (T2: LendStream), CRDT ops (T3: Sherehe), NATS JetStream (T4: Unicorns), OTP messages (T5a: Shamba), core.async channels (T5b: BSD Engine), Azure Service Bus (T6: PayGoHub).
 - **Zero-Copy**: Specific to systems-level work where FFI and memory bandwidth are constraints. Reappears in Tier 4 (Unicorns: Go-Zig FFI for compute-intensive paths).
 
+#### Hate Speech Detection Pipeline (Event-Driven Extension)
+
+**Definition:** An AI-assisted content moderation pipeline that extends Sauti's existing sentiment analysis to detect potential hate speech across Kenya's multilingual landscape. The system acts as a first-pass filter — flagging segments for review by qualified human transcribers who make the legal determination. This directly addresses Daniel Mutegi's call to amend Kenya's National Cohesion and Integration Act to include transcribers qualified to determine hate speech.
+
+**Why it fits Sauti:** Sauti already transcribes and scores sentiment on multilingual Kenyan audio in real-time. Hate speech detection is a natural extension of the sentiment pipeline — same audio stream, same transcription, same multilingual NLP stack. The event-driven architecture means adding a new consumer (`HateSpeechClassifier`) to the existing `TranscriptFragment` event stream requires zero changes to upstream services. The BFF pattern means the qualified transcriber review queue gets its own dedicated BFF, purpose-built for the review workflow.
+
+**Application in Sauti:**
+
+- **Classification Layer:** A fine-tuned multilingual NLP model (built on top of Sauti's existing sentiment infrastructure) classifies transcript segments across hate speech categories: ethnic targeting, incitement to violence, dehumanizing language, discriminatory slurs. Supports code-switching detection (e.g., Kikuyu slurs embedded in Swahili conversation).
+- **Flagging:** When confidence exceeds threshold, emits `HateSpeechFlaggedEvent` with: transcript segment, confidence score, hate speech category, timestamp, speaker ID, surrounding context (30s before/after), and source metadata.
+- **Qualified Transcriber Review Queue:** Flagged segments route to a dedicated review dashboard (new BFF). Qualified transcribers see the flagged text highlighted in full context, hear the audio segment, view speaker diarization, and make a determination: Confirmed, Borderline (escalate), Dismissed (false positive), or Requires Legal Review.
+- **Immutable Audit Trail:** Every flag, every human determination, every escalation is event-sourced — cryptographically hashed for evidentiary admissibility. Audio referenced in confirmed hate speech determinations is preserved with chain-of-custody metadata regardless of normal retention policies.
+- **NCIC Reporting:** Aggregated reports aligned with National Cohesion and Integration Commission submission requirements — total flags, confirmation rates, category breakdown, response times, transcriber qualifications.
+
 #### Event Flow Diagram
 
 ```mermaid
@@ -78,10 +93,14 @@ flowchart LR
     B -->|AudioChunkReceived| C[DSP Pipeline\nC++ FFT/MFCC/VAD]
     C -->|FeaturesExtracted| D[ASR Engine\nWhisper + Fine-tuned]
     D -->|TranscriptFragment| E[Sentiment\nAnalysis]
+    D -->|TranscriptFragment| HS[Hate Speech\nClassifier]
     E -->|SentimentScored| F[Event Store\nRedis Streams]
+    HS -->|HateSpeechFlaggedEvent| F
     F --> G[Agent BFF\nSSE Stream]
     F --> H[Supervisor BFF\nWebSocket]
     F --> I[Partner API BFF\nWebhook]
+    HS -->|Flagged Segments| RQ[Review Queue BFF\nTranscriber Dashboard]
+    RQ -->|DeterminationEvent| F
 ```
 
 #### BFF Architecture Diagram
@@ -92,26 +111,33 @@ flowchart TB
         CA[Call Center Agent\nBrowser]
         CS[QA Supervisor\nDashboard]
         CP[Partner CRM\nSalesforce/Zendesk]
+        CT[Qualified Transcriber\nReview Dashboard]
     end
     subgraph BFFs
         BA[Agent BFF\nSSE, Low-latency]
         BS[Supervisor BFF\nWebSocket, Aggregated]
         BP[Partner API BFF\nREST + Webhooks]
+        BR[Review Queue BFF\nHate Speech Review]
     end
     subgraph Core Services
         ING[Ingestion]
         DSP[DSP Pipeline]
         ASR[ASR Engine]
         SENT[Sentiment]
+        HS[Hate Speech\nClassifier]
         ES[Event Store]
     end
     CA --> BA
     CS --> BS
     CP --> BP
+    CT --> BR
     BA --> ES
     BS --> ES
     BP --> ES
+    BR --> ES
     ING --> DSP --> ASR --> SENT --> ES
+    ASR --> HS --> ES
+    HS --> BR
 ```
 
 #### Zero-Copy FFI Diagram
@@ -132,6 +158,46 @@ flowchart LR
     C3 -->|"cxx: write back\nCxxVector&lt;f32&gt;"| R2
 ```
 
+#### Hate Speech Detection Flow
+
+```mermaid
+sequenceDiagram
+    participant Audio as Audio Stream
+    participant ASR as ASR Engine
+    participant HSC as Hate Speech Classifier
+    participant RQ as Review Queue
+    participant QT as Qualified Transcriber
+    participant ES as Event Store
+    participant NCIC as NCIC Reporting
+
+    Audio->>ASR: Raw audio (16kHz PCM)
+    ASR->>ASR: Transcribe (Whisper)
+    ASR->>HSC: TranscriptFragment event
+    HSC->>HSC: Classify (ethnic, incitement,\ndehumanizing, discriminatory)
+
+    alt Confidence > Threshold
+        HSC->>ES: HateSpeechFlaggedEvent
+        HSC->>RQ: Route to review queue
+        RQ->>QT: Display flagged segment +\n30s context + audio playback
+
+        alt Confirmed Hate Speech
+            QT->>ES: DeterminationEvent(confirmed)
+            ES->>ES: Preserve audio with\nchain-of-custody metadata
+        else Borderline
+            QT->>ES: DeterminationEvent(escalate)
+            ES->>RQ: Route to senior reviewer
+        else Dismissed
+            QT->>ES: DeterminationEvent(false_positive)
+        else Requires Legal Review
+            QT->>ES: DeterminationEvent(legal_review)
+        end
+    else Below Threshold
+        HSC->>HSC: No flag (continue monitoring)
+    end
+
+    ES->>NCIC: Aggregated compliance report\n(on demand)
+```
+
 ### Bounded Contexts
 
 | Context | Responsibility | Language |
@@ -143,6 +209,7 @@ flowchart LR
 | Session | Call lifecycle, speaker diarization state | Rust |
 | Compliance | Event store writes, audit retrieval | Rust |
 | Webhook Delivery | External integration push | Rust |
+| Content Moderation | Hate speech detection, flagging, qualified transcriber review queue | Rust (PyO3 to Python) |
 
 ### Technology Stack
 
@@ -171,6 +238,11 @@ flowchart LR
 | REQ-009 | Automatic retention policy enforcement (auto-delete at 7-year mark) | P1 | Not Started |
 | REQ-010 | Webhook delivery within 30 seconds of call end with HMAC-SHA256 signing | P0 | Not Started |
 | REQ-011 | Webhook retry with exponential backoff up to 24 hours, with idempotency keys | P1 | Not Started |
+| REQ-012 | Hate speech detection on multilingual audio with flagging within 5s (P95) | P0 | Not Started |
+| REQ-013 | Qualified transcriber review dashboard with full context, audio playback, and determination workflow | P0 | Not Started |
+| REQ-014 | False positive rate on hate speech detection below 15% | P1 | Not Started |
+| REQ-015 | Immutable audit trail for all flags and determinations with cryptographic integrity proof | P0 | Not Started |
+| REQ-016 | NCIC-aligned reporting format for hate speech determinations | P1 | Not Started |
 
 ---
 
@@ -200,6 +272,17 @@ flowchart LR
 - [ ] AC-014: Webhook deliveries signed with HMAC-SHA256 for signature validation
 - [ ] AC-015: Failed webhook deliveries retry with exponential backoff up to 24 hours
 - [ ] AC-016: Idempotency key included for deduplication
+
+### Epic: Hate Speech Detection and Flagging
+
+- [ ] AC-017: `HateSpeechFlaggedEvent` emitted within 5 seconds of hate speech utterance (P95)
+- [ ] AC-018: Flagged segments include transcript, confidence score, category, timestamp, speaker ID, and 30s surrounding context
+- [ ] AC-019: Qualified transcriber review dashboard displays flagged segment with audio playback and full transcript context
+- [ ] AC-020: Transcriber can mark determination as: Confirmed, Borderline, Dismissed, or Requires Legal Review
+- [ ] AC-021: Every determination immutably logged with transcriber ID, timestamp, and rationale
+- [ ] AC-022: False positive rate below 15% on multilingual evaluation dataset
+- [ ] AC-023: NCIC-formatted compliance reports generated on demand
+- [ ] AC-024: Audio referenced in confirmed determinations preserved with chain-of-custody metadata
 
 ---
 
@@ -270,6 +353,10 @@ flowchart LR
 - [ ] On-call rotation defined
 - [ ] Monitoring + alerting operational; PagerDuty integrated
 - [ ] Legal: Terms of Service, Privacy Policy, Data Processing Agreement drafted
+- [ ] Hate speech classifier trained on multilingual Kenyan dataset (Swahili, Kikuyu, Luo, Sheng, English)
+- [ ] Qualified transcriber review dashboard operational with immutable audit trail
+- [ ] False positive rate below 15% on evaluation set
+- [ ] NCIC-aligned reporting format validated
 
 ---
 
