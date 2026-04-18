@@ -1,0 +1,120 @@
+# === IDE / Editor ===
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# === Claude Code (LOCAL ONLY) ===
+.claude/
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+*.pyo
+
+# === Rust ===
+target/
+Cargo.lock
+
+# === C / C++ ===
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.out
+build/
+cmake-build-*/
+
+# === Java / Kotlin / Scala (JVM) ===
+*.class
+*.jar
+*.war
+*.ear
+.gradle/
+gradle/
+build/
+out/
+.settings/
+.classpath
+.project
+*.iml
+
+# === JavaScript / TypeScript ===
+node_modules/
+.next/
+.nuxt/
+dist/
+*.tsbuildinfo
+.env
+.env.local
+.env*.local
+
+# === Go ===
+bin/
+vendor/
+
+# === Zig ===
+zig-cache/
+zig-out/
+
+# === Ruby ===
+*.gem
+.bundle/
+vendor/bundle/
+Gemfile.lock
+
+# === PHP ===
+vendor/
+composer.lock
+*.phar
+
+# === Elixir ===
+_build/
+deps/
+*.ez
+erl_crash.dump
+
+# === Clojure ===
+.lein-*
+.nrepl-port
+*.jar
+target/
+classes/
+
+# === C# / F# (.NET) ===
+bin/
+obj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+packages/
+
+# === Docker ===
+docker-compose.override.yml
+
+# === Misc ===
+*.log
+*.tmp
+*.bak
+*.orig
+*.docx
