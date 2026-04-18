@@ -59,9 +59,15 @@ function basics(): void {
     $value ??= 'default';
     echo "Null coalesce assign: $value\n";
 
-    // --- Nullsafe operator ---
-    $user = new class { public ?string $address = null; };
-    echo "Nullsafe: " . ($user->address?->trim() ?? 'no address') . "\n";
+    // --- Nullsafe operator (?->) chains method calls, short-circuiting on null ---
+    // Strings are not objects in PHP — nullsafe requires object methods, not functions.
+    $user = new class {
+        public ?object $profile = null;
+    };
+    $user->profile = new class { public function getDisplayName(): string { return "Alice"; } };
+    echo "Nullsafe: " . ($user->profile?->getDisplayName() ?? 'no profile') . "\n";
+    $user->profile = null;
+    echo "Nullsafe (null): " . ($user->profile?->getDisplayName() ?? 'no profile') . "\n";
 }
 
 // ============================================================

@@ -40,7 +40,9 @@ Console.WriteLine($"int={x}  double={pi}  string={name}  bool={flag}  null={noth
 // --- String interpolation ---
 Console.WriteLine($"Interpolation: {name} version {11}");
 Console.WriteLine($"Expression: {x * 2}  Format: {pi:F4}  Align: {name,10}");
-Console.WriteLine($"Raw string: {"""Hello "World" """.Trim()}");
+// Raw string literals (C# 11+): use """ delimiters to embed unescaped quotes
+var rawStr = """Hello "World" """;
+Console.WriteLine($"Raw string: {rawStr.Trim()}");
 
 // --- Null coalescing ---
 string? maybe = null;

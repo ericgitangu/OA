@@ -303,7 +303,8 @@ public class JavaFundamentals {
         }
 
         // Switch pattern matching (Java 21)
-        List<Object> items = List.of(42, "text", 3.14, new Point(1, 2), null);
+        // List.of() does not allow null — use Arrays.asList() instead
+        List<Object> items = java.util.Arrays.asList(42, "text", 3.14, new Point(1, 2), null);
         for (var item : items) {
             var description = switch (item) {
                 case Integer i when i > 100 -> "large int: " + i;

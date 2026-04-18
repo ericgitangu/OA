@@ -12,9 +12,9 @@ use std::thread;
 use std::borrow::Cow;
 
 fn header(title: &str) {
-    println!("\n{'=':.>60}");
+    println!("\n{}", "=".repeat(60));
     println!("  {title}");
-    println!("{'=':.>60}");
+    println!("{}", "=".repeat(60));
 }
 
 // ─── 1. Basics ──────────────────────────────────────────────
@@ -169,7 +169,7 @@ fn collections() {
 
     let mut map = HashMap::new();
     for &n in &v { *map.entry(n % 3).or_insert(0) += 1; }
-    println!("HashMap (n%%3 -> count): {:?}", map);
+    println!("HashMap (n%3 -> count): {:?}", map);
 
     let set: HashSet<_> = v.iter().copied().collect();
     let set2: HashSet<i32> = [1, 2, 3, 4].iter().copied().collect();
@@ -317,7 +317,7 @@ fn iterators_demo() {
     println!("Fibonacci (12): {:?}", fibs);
 
     // partition
-    let (evens, odds): (Vec<i32>, Vec<i32>) = nums.iter().partition(|&&n| n % 2 == 0);
+    let (evens, odds): (Vec<&i32>, Vec<&i32>) = nums.iter().partition(|&&n| n % 2 == 0);
     println!("Partition — evens: {:?}, odds: {:?}", evens, odds);
 }
 
@@ -455,7 +455,9 @@ fn advanced() {
     header("11. ADVANCED — PhantomData, unsafe, macro_rules!, fmt traits");
 
     // PhantomData — zero-sized type marker
+    #[derive(Debug)]
     struct Meters;
+    #[derive(Debug)]
     struct Seconds;
     #[derive(Debug)]
     struct Quantity<Unit> {

@@ -37,7 +37,7 @@ IO.puts("put_elem: #{inspect(updated)}")
 list = [1, 2, 3, 4, 5]
 IO.puts("List: #{inspect(list)}  hd: #{hd(list)}  tl: #{inspect(tl(list))}")
 IO.puts("Prepend: #{inspect([0 | list])}  Concat: #{inspect(list ++ [6, 7])}")
-IO.puts("Length: #{length(list)}  Flatten: #{inspect(List.flatten([[1, 2], [3, [4]]]))})")
+IO.puts("Length: #{length(list)}  Flatten: #{inspect(List.flatten([[1, 2], [3, [4]]]))}")
 
 # --- Keyword lists ---
 opts = [host: "localhost", port: 5432, ssl: true]
