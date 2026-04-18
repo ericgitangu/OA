@@ -75,6 +75,7 @@ To ensure comprehensive coverage, structure your week by grouping data structure
 ## Getting Started: Day 1 (Tomorrow)
 
 Since you are returning from a hiatus but have a foundation of 200 problems:
+
 1. **Focus:** Arrays and Hashing.
 1. **Phase 1 Problem:** Re-do *Two Sum* and *Valid Anagram* (focus on extreme speed and perfect syntax).
 1. **Phase 2 Problem:** Try *Group Anagrams* and *Top K Frequent Elements*.
