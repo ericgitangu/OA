@@ -119,29 +119,6 @@ leetcode/two_pointers/valid_palindrome.rs
 | Clojure | 1.12 | Installed |
 | .NET | 10.0 | Installed |
 
-## Language Samples
-
-Each tier includes a fundamentals sample demonstrating core language idioms.
-
-| Language | Description | Run |
-|----------|-------------|-----|
-| Python | Async, collections, data classes, functools via stdlib | `python tier_0_python/dsa/samples/python_fundamentals.py` |
-| Rust | Ownership, borrowing, concurrency through variables and threading | `rustc tier_1_systems/rust/samples/rust_fundamentals.rs -o /tmp/rust_fund && /tmp/rust_fund` |
-| C++ | Modern C++20 containers, memory management, threading | `cd tier_1_systems/cpp && cmake -B build && cmake --build build && ./build/cpp_fundamentals` |
-| Java | Records, sealed classes, streams, lambdas (Java 21) | `java tier_2_jvm/java/samples/JavaFundamentals.java` |
-| Kotlin | Sealed classes, data classes, ADTs | `kotlin tier_2_jvm/kotlin/samples/KotlinFundamentals.kt` |
-| Scala | Sealed traits, case classes, functional pattern matching | `scala tier_2_jvm/scala/samples/ScalaFundamentals.scala` |
-| JavaScript | Lexical scoping, destructuring, iterables | `node tier_3_web/javascript/samples/js_fundamentals.js` |
-| TypeScript | Structural typing, interfaces, type safety | `tsc tier_3_web/typescript/samples/ts_fundamentals.ts && node tier_3_web/typescript/samples/ts_fundamentals.js` |
-| Go | Constants, iota enums, goroutines, channels | `go run tier_4_concurrent/go/samples/go_fundamentals.go` |
-| Zig | Explicit conversions, optionals, error unions, no hidden control flow | `zig run tier_4_concurrent/zig/samples/zig_fundamentals.zig` |
-| Ruby | Duck typing, everything-is-an-object, singleton classes | `ruby tier_5a_scripting/ruby/samples/ruby_fundamentals.rb` |
-| PHP | Type safety, enums, fibers (PHP 8.1+) | `php tier_5a_scripting/php/samples/php_fundamentals.php` |
-| Elixir | BEAM concurrency, immutability, structural types | `elixir tier_5a_scripting/elixir/samples/elixir_fundamentals.exs` |
-| Clojure | Immutability, homoiconicity, concurrency primitives on JVM | `clj -M tier_5b_lisp/clojure/samples/clojure_fundamentals.clj` |
-| C# | Value/reference types, multi-paradigm on CLR | `dotnet script tier_6_dotnet/csharp/samples/CSharpFundamentals.cs` |
-| F# | Functional-first, type inference, ADTs on .NET | `dotnet fsi tier_6_dotnet/fsharp/samples/FSharpFundamentals.fs` |
-
 ## Repo Structure
 
 ```text

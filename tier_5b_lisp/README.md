@@ -3,4 +3,12 @@
 **Languages:** Clojure
 **Patterns:** Immutable-First, REPL-Driven Development, Transducers
 
-_Scaffolding will be added at the start of Week 11._
+## Samples
+
+### clojure_fundamentals.clj
+
+Clojure fundamentals on the JVM: persistent data structures (vectors, maps, sets), destructuring, higher-order functions, lazy sequences, atoms for shared state, refs/STM for coordinated state, agents for async state, macros, multimethods, protocols, spec for data validation, and transducers.
+
+```bash
+clj -M clojure/samples/clojure_fundamentals.clj
+```
