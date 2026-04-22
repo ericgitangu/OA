@@ -799,34 +799,12 @@ The example below shows basic node structure and insertion without rotations. Fu
 
 ```python
 
-class AVLNode:
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None
-        self.height = 1
-
-# Full AVL operations including rotations are complex
-# This snippet only shows structure setup for demonstration
-
-```python
-
-    def avl_insert(root, val):
-        # Insert like BST
-        if root is None:
-            return AVLNode(val)
-        if val < root.val:
-            root.left = avl_insert(root.left, val)
-        else:
-            root.right = avl_insert(root.right, val)
-        # Normally update height and balance factor, then rotate if needed
-        return root
-
-    root_avl = None
-    for v in [10, 20, 30]:
-        root_avl = avl_insert(root_avl, v)
-
-    # Here's a complete AVL implementation with rotations:
+    class AVLNode:
+        def __init__(self, val):
+            self.val = val
+            self.left = None
+            self.right = None
+            self.height = 1
 
     def get_height(node):
         """Get height of node, handling None case"""
@@ -1001,6 +979,58 @@ The implementation below shows a simplified node structure, though actual B-Tree
                 self.root = new_root
 
             self._insert_non_full(self.root, k)
+
+        def _split_child(self, parent, i):
+            """Split a full child node into two nodes"""
+            t = self.t
+            full = parent.children[i]
+            new_node = BTreeNode(t)
+            new_node.leaf = full.leaf
+
+            # Move upper half of keys to new node
+            new_node.keys = full.keys[t:]
+            new_node.n = len(new_node.keys)
+
+            # Move upper half of children if internal node
+            if not full.leaf:
+                new_node.children = full.children[t:]
+                full.children = full.children[:t]
+
+            # Trim original node to lower half
+            median_key = full.keys[t - 1]
+            full.keys = full.keys[:t - 1]
+            full.n = len(full.keys)
+
+            # Insert median key and new child into parent
+            parent.children.insert(i + 1, new_node)
+            parent.keys.insert(i, median_key)
+            parent.n += 1
+
+        def _insert_non_full(self, node, k):
+            """Insert key into a node that is known not to be full"""
+            i = node.n - 1
+
+            if node.leaf:
+                # Find position and insert key in sorted order
+                node.keys.append(None)
+                while i >= 0 and k < node.keys[i]:
+                    node.keys[i + 1] = node.keys[i]
+                    i -= 1
+                node.keys[i + 1] = k
+                node.n += 1
+            else:
+                # Find child to recurse into
+                while i >= 0 and k < node.keys[i]:
+                    i -= 1
+                i += 1
+
+                # Split child if full
+                if node.children[i].n == (2 * self.t) - 1:
+                    self._split_child(node, i)
+                    if k > node.keys[i]:
+                        i += 1
+
+                self._insert_non_full(node.children[i], k)
 
     # Example usage
     btree = BTree(t=3)  # Create B-Tree with minimum degree 3
@@ -1573,7 +1603,6 @@ Key Properties:
     print("Original array:", data)
     selection_sort(data)
     print("Sorted array:", data)  # [11, 12, 22, 25, 34, 64, 90]
-    print(data) # [1,2,3]
 
 ```
 
@@ -2011,7 +2040,9 @@ Space Complexity: O(V) for:
                 visited.add(node)
                 print(node)  # Process node
                 # Add unvisited neighbors to stack
-                # Reverse to maintain similar order to recursive
+                # Reversed because stack is LIFO: last-pushed = first-popped,
+                # so reversing makes the first neighbor pop first, matching
+                # the left-to-right order of the recursive version.
                 for neighbor in reversed(graph[node]):
                     if neighbor not in visited:
                         stack.append(neighbor)
@@ -2214,6 +2245,8 @@ Description: The Floyd-Warshall algorithm finds shortest paths between all pairs
 
 ```python
 
+    INF = float('inf')
+
     def floyd_warshall(matrix):
         """
         Finds shortest paths between all pairs of vertices in a weighted graph.
@@ -2227,9 +2260,8 @@ Description: The Floyd-Warshall algorithm finds shortest paths between all pairs
         if any(len(row) != n for row in matrix):
             raise ValueError("Matrix must be square")
 
-        # Initialize distance matrix with copy of input
-        # Using float('inf') for proper infinity handling
-        dist = [[float('inf') if x == INF else x for x in row] for row in matrix]
+        # Initialize distance matrix with deep copy of input
+        dist = [row[:] for row in matrix]
 
         # Floyd-Warshall algorithm
         # For each vertex k as intermediate point
