@@ -115,7 +115,10 @@ fn ownership() {
     // to prove the borrowed data outlives the struct. This is a compile-time contract:
     // `Excerpt` can never outlive the string it references.
     #[derive(Debug)]
-    struct Excerpt<'a> { part: &'a str }
+    struct Excerpt<'a> {
+        #[allow(dead_code)]
+        part: &'a str,
+    }
     let novel = String::from("Call me Ishmael. Some years ago...");
     let first_sentence = novel.split('.').next().unwrap();
     let excerpt = Excerpt { part: first_sentence };
@@ -478,6 +481,7 @@ fn smart_pointers() {
     // 3. Trait objects (Box<dyn Trait>)
     // Box has zero overhead beyond the heap allocation — dereferencing is a single pointer follow.
     #[derive(Debug)]
+    #[allow(dead_code)]
     enum List { Cons(i32, Box<List>), Nil }
     let list = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Cons(3, Box::new(List::Nil))))));
     println!("Boxed linked list: {:?}", list);  // => Boxed linked list: Cons(1, Cons(2, Cons(3, Nil)))
@@ -514,7 +518,7 @@ fn smart_pointers() {
     // borrowed reference (zero-cost) and only allocates a clone when mutation is needed.
     // In production, use Cow for functions that usually return the input unchanged but
     // occasionally need to transform it — avoids allocation in the common path.
-    fn maybe_uppercase(s: &str, upper: bool) -> Cow<str> {
+    fn maybe_uppercase(s: &str, upper: bool) -> Cow<'_, str> {
         if upper { Cow::Owned(s.to_uppercase()) } else { Cow::Borrowed(s) }
     }
     println!("Cow borrowed: {}", maybe_uppercase("hello", false));  // => Cow borrowed: hello
@@ -607,6 +611,7 @@ fn advanced() {
     struct Seconds;
     #[derive(Debug)]
     struct Quantity<Unit> {
+        #[allow(dead_code)]
         value: f64,
         _unit: PhantomData<Unit>,
     }

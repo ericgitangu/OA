@@ -31,6 +31,7 @@ htmlcov/
 # === Rust ===
 target/
 Cargo.lock
+rust_fundamentals
 
 # === C / C++ ===
 *.o
