@@ -29,7 +29,6 @@ htmlcov/
 *.pyo
 
 # === Rust ===
-target/
 Cargo.lock
 rust_fundamentals
 
@@ -98,7 +97,6 @@ erl_crash.dump
 .lein-*
 .nrepl-port
 *.jar
-target/
 classes/
 
 # === C# / F# (.NET) ===
@@ -120,3 +118,4 @@ docker-compose.override.yml
 *.orig
 *.docx
 *.exe
+target/
