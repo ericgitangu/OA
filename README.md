@@ -26,17 +26,21 @@ Pruning the grind leetcode type questions to patterns once you crack you will re
 
 ## Installation
 
-Clone the repository and install the required dependencies:
+Clone the repository and set up the isolated virtual environment:
 
 ```bash
+git clone https://github.com/ericgitangu/OA.git
+cd OA
 
-    git clone https://github.com/your-username/oa-coding-tech-interview-prep.git
-    cd oa-coding-tech-interview-prep
-    python -m venv my_virtual_env
-    source my_virtual_env/bin/activate
-    pip install -r requirements.txt
+# Create and activate the virtual environment
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
+# Install pinned dependencies
+pip install -r requirements.txt
 ```
+
+> The `.venv` directory is gitignored. All scripts require the venv to be active for `termcolor` coloured output.
 
 ## Usage
 

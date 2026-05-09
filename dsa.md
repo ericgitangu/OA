@@ -48,6 +48,8 @@
 
 ### Array (Basic)
 
+> 📁 **Implementation:** [`arrays_hashing.py`](arrays_hashing.py) — Two Sum, Group Anagrams, Top-K Frequent, Product Except Self, Longest Consecutive · [`optimizations.py`](optimizations.py) — sliding window, prefix sum, in-place patterns
+
 *Description:* Arrays are fundamental data structures that store elements in contiguous memory locations. In Python, lists serve as dynamic arrays that automatically resize when needed. Key features:
 
 - Backed by contiguous memory blocks for O(1) random access by index
@@ -97,6 +99,8 @@ Common use cases:
 ```
 
 ### Linked List (Basic)
+
+> 📁 **Implementation:** [`linked_lists.py`](linked_lists.py) · [`double_linked_list.py`](double_linked_list.py) · [`circular_linked_lists.py`](circular_linked_lists.py) · [`optimizations.py`](optimizations.py) — Floyd's cycle detection, in-place reversal
 
 Description: Implementation of a singly linked list demonstrating fundamental linked data structure concepts. Key features:
 
@@ -217,6 +221,8 @@ Common applications:
 
 ### Stack (Basic)
 
+> 📁 **Implementation:** [`stack_queue.py`](stack_queue.py) — Valid Parentheses, Min Stack, Daily Temperatures, Sliding Window Maximum · [`optimizations.py`](optimizations.py) — monotonic stack pattern
+
 Description: A Stack is a fundamental data structure that follows Last-In-First-Out (LIFO) ordering. Key features:
 
 - Uses a Python list internally which provides O(1) amortized append/pop operations
@@ -292,6 +298,8 @@ The implementation below uses a Python list which automatically handles resizing
 ```
 
 ### Queue (Basic)
+
+> 📁 **Implementation:** [`stack_queue.py`](stack_queue.py) — Number of Islands (BFS flood fill), Sliding Window Maximum (monotonic deque)
 
 Description: A Queue is a fundamental data structure that follows First-In-First-Out (FIFO) ordering. While it can be implemented using a regular list, Python's collections.deque (double-ended queue) provides a more efficient implementation because:
 
@@ -373,6 +381,8 @@ The implementation below uses collections.deque which provides all these benefit
 
 ### Hash Table / Hash Map (Intermediate)
 
+> 📁 **Implementation:** [`arrays_hashing.py`](arrays_hashing.py) — Two Sum, Group Anagrams, Top-K Frequent, Longest Consecutive · [`optimizations.py`](optimizations.py) — hash map frequency, subarray sum equals k
+
 Description: A Hash Table (or Hash Map) is a data structure that implements an associative array abstract data type, a structure that can map keys to values. It uses a hash function to compute an index into an array of buckets/slots, from which the desired value can be found. The main features are:
 
 - Uses key-value pairs for storage
@@ -417,6 +427,8 @@ Python's dictionary is a highly optimized hash table implementation that provide
 ```
 
 ### Binary Search Tree (BST) (Intermediate)
+
+> 📁 **Implementation:** [`bst.py`](bst.py) — BST core ops, Validate BST, LCA, Kth Smallest, Sorted Array to BST
 
 Description: A Binary Search Tree (BST) is a hierarchical data structure where each node has at most two children (left and right). The key property is that for any node, all values in its left subtree are less than the node's value, and all values in its right subtree are greater. This ordering enables O(log n) search, insert and delete operations on average when the tree is relatively balanced. However, this implementation shows an unbalanced BST which can degrade to O(n) performance if values are inserted in sorted order (creating a linear chain). The tree uses a node-based structure where each node contains:
 
@@ -509,6 +521,8 @@ This simple structure makes it easy to implement but lacks the self-balancing pr
 
 ### Heap / Priority Queue (Intermediate)
 
+> 📁 **Implementation:** [`min_max-heap.py`](min_max-heap.py) — min/max heap ops · [`shortest_paths.py`](shortest_paths.py) — Dijkstra (heap-driven) · [`mst.py`](mst.py) — Prim's (min-heap frontier)
+
 Description: Implementation of a min-heap (priority queue) using Python's heapq module. Key features:
 
 Data Structures Used:
@@ -577,6 +591,8 @@ Key operations and complexities:
 ```
 
 ### Graph (Adjacency List) (Intermediate)
+
+> 📁 **Implementation:** [`bfs.py`](bfs.py) · [`dfs.py`](dfs.py) · [`graph_traversal.py`](graph_traversal.py) · [`shortest_paths.py`](shortest_paths.py) — Dijkstra, Bellman-Ford, Floyd-Warshall · [`topological_sort.py`](topological_sort.py) · [`mst.py`](mst.py) · [`union_find.py`](union_find.py)
 
 Description: Implementation of a graph data structure using an adjacency list representation. Key features:
 
@@ -673,6 +689,8 @@ Common applications:
 ```
 
 ### Trie (Prefix Tree) (Advanced)
+
+> 📁 **Implementation:** [`trie.py`](trie.py) — Implement Trie, Word Search II, Replace Words, WordDictionary (wildcard '.')
 
 Description: A Trie (also called prefix tree) is an efficient tree-like data structure for storing and retrieving strings. Key features:
 
@@ -1065,6 +1083,8 @@ The implementation below shows a simplified node structure, though actual B-Tree
 
 ### Segment Tree (Advanced)
 
+> 📁 **Implementation:** [`segment_tree.py`](segment_tree.py) — SegmentTree, Range Sum Query Mutable (LC 307), FenwickTree, Count Smaller Numbers (LC 315)
+
 Description: A segment tree is a specialized tree data structure for efficiently performing range queries and updates on an array. Key data structures and design choices:
 
 Data Structures Used:
@@ -1170,6 +1190,8 @@ Key advantages over alternatives:
 ```
 
 ### Fenwick Tree (BIT) (Advanced)
+
+> 📁 **Implementation:** [`segment_tree.py`](segment_tree.py) — `FenwickTree` class, prefix sum queries, Count Smaller Numbers After Self
 
 Description: A Fenwick Tree (Binary Indexed Tree) is a space-efficient data structure that provides efficient methods for calculating prefix sums in a dynamic array.
 
@@ -1289,6 +1311,8 @@ The structure achieves its efficiency by using a clever binary representation te
 ```
 
 ### Disjoint Set (Union-Find) (Advanced)
+
+> 📁 **Implementation:** [`union_find.py`](union_find.py) — UnionFind class, Count Components, Redundant Connection, Accounts Merge · [`mst.py`](mst.py) — Kruskal's uses Union-Find for cycle detection
 
 Description: Union-Find (also known as Disjoint Set) is a data structure that efficiently tracks disjoint (non-overlapping) sets of elements. It uses several key data structures working together:
 
@@ -1415,6 +1439,8 @@ The structure achieves nearly O(1) amortized time complexity for both union and 
 
 ### Bubble Sort (Basic)
 
+> 📁 **Implementation:** [`sorting_algorithms.py`](sorting_algorithms.py) — see Merge Sort and Quick Sort (O(n²) sorts omitted; low interview ROI)
+
 Description: Bubble sort is a simple comparison-based sorting algorithm that demonstrates fundamental sorting concepts. Key features:
 
 Data Structures Used:
@@ -1500,6 +1526,8 @@ The algorithm gets its name from the way smaller elements "bubble up" to their c
 
 ### Insertion Sort (Basic)
 
+> 📁 **Implementation:** [`sorting_algorithms.py`](sorting_algorithms.py) — see Merge Sort and Quick Sort
+
 Description: Insertion sort is a simple sorting algorithm that builds a sorted portion of the array one element at a time. Key features:
 
 Data Structures Used:
@@ -1575,6 +1603,8 @@ Key advantages:
 
 ### Selection Sort (Basic)
 
+> 📁 **Implementation:** [`sorting_algorithms.py`](sorting_algorithms.py) — see Merge Sort and Quick Sort
+
 Description: Selection sort is an in-place comparison sorting algorithm that relies on several key data structures and properties:
 
 Data Structures Used:
@@ -1642,6 +1672,8 @@ Key Properties:
 ```
 
 ### Merge Sort (Intermediate)
+
+> 📁 **Implementation:** [`sorting_algorithms.py`](sorting_algorithms.py) — merge_sort, Sort Colors (Dutch Flag), Merge Intervals, Largest Number
 
 Description: Merge sort is a divide-and-conquer sorting algorithm that relies on several key data structures and properties:
 
@@ -1752,6 +1784,8 @@ Ideal Use Cases:
 
 ### Quick Sort (Intermediate)
 
+> 📁 **Implementation:** [`sorting_algorithms.py`](sorting_algorithms.py) — quick_sort (Lomuto partition), Sort Colors (3-way partition O(n))
+
 Description: Quick sort is a highly efficient, in-place sorting algorithm that uses a divide-and-conquer strategy.
 
 Data Structures Used:
@@ -1844,6 +1878,8 @@ Quick sort is widely used in practice due to its excellent cache performance fro
 
 ### Binary Search (Basic)
 
+> 📁 **Implementation:** [`binary_search.py`](binary_search.py) — Classic, Search Insert Position, Find Min Rotated, Search Rotated Array, Koko Eating Bananas (binary search on answer)
+
 Description: Binary search is an efficient search algorithm that works on sorted arrays by repeatedly dividing the search interval in half.
 
 Data Structures Used:
@@ -1926,6 +1962,8 @@ The key requirement is that the input array must be sorted, as the algorithm rel
 ```
 
 ### Breadth-First Search (BFS) (Intermediate)
+
+> 📁 **Implementation:** [`bfs.py`](bfs.py) · [`stack_queue.py`](stack_queue.py) — Number of Islands · [`topological_sort.py`](topological_sort.py) — Kahn's algorithm · [`shortest_paths.py`](shortest_paths.py) — Network Delay Time
 
 Description: BFS (Breadth-First Search) is a fundamental graph traversal algorithm that uses two key data structures:
 
@@ -2020,6 +2058,8 @@ Space complexity is O(V) for both queue and visited set.
 
 ### Depth-First Search (DFS) (Intermediate)
 
+> 📁 **Implementation:** [`dfs.py`](dfs.py) · [`graph_traversal.py`](graph_traversal.py) · [`bst.py`](bst.py) — tree DFS patterns · [`trie.py`](trie.py) — Word Search II (DFS + backtracking)
+
 Description: DFS (Depth-First Search) is a graph traversal algorithm that explores a graph by going as deep as possible along each branch before backtracking.
 
 Data Structures Used:
@@ -2112,6 +2152,8 @@ Space Complexity: O(V) for:
 
 ### Dijkstra’s Algorithm (Advanced)
 
+> 📁 **Implementation:** [`shortest_paths.py`](shortest_paths.py) — dijkstra(), Network Delay Time (LC 743) · [`shotetest_path_collections_itertools.py`](shotetest_path_collections_itertools.py)
+
 Description: Finds the shortest path from a start node to all others in a weighted graph with no negative edges. Uses a min-heap priority queue to always process the node with smallest current distance first. Maintains a distance dictionary to track shortest paths. The priority queue ensures we process nodes in order of increasing distance, making it more efficient than checking all edges repeatedly. Time complexity is O((V+E)logV) where V is number of vertices and E is number of edges. Space complexity is O(V) for the distance dictionary and priority queue.
 
 ```python
@@ -2184,6 +2226,8 @@ Description: Finds the shortest path from a start node to all others in a weight
 ```
 
 ### Bellman-Ford (Advanced)
+
+> 📁 **Implementation:** [`shortest_paths.py`](shortest_paths.py) — bellman_ford(), Cheapest Flights Within K Stops (LC 787)
 
 Description: The Bellman-Ford algorithm finds shortest paths in a weighted graph that can handle negative edge weights (unlike Dijkstra's), with the constraint that there cannot be negative cycles. Here's a detailed breakdown:
 
@@ -2288,6 +2332,8 @@ The algorithm is especially useful for:
 
 ### Floyd-Warshall (Advanced)
 
+> 📁 **Implementation:** [`shortest_paths.py`](shortest_paths.py) — floyd_warshall()
+
 Description: The Floyd-Warshall algorithm finds shortest paths between all pairs of vertices in a weighted graph, including those with negative edges but no negative cycles. Key features:
 
 - Uses a 2D distance matrix/table to track shortest paths between every vertex pair
@@ -2366,6 +2412,8 @@ Description: The Floyd-Warshall algorithm finds shortest paths between all pairs
 ```
 
 ### Topological Sort (Intermediate)
+
+> 📁 **Implementation:** [`topological_sort.py`](topological_sort.py) — Kahn's BFS, Course Schedule I & II (LC 207/210), Alien Dictionary (LC 269)
 
 Description: Topological sort orders vertices in a Directed Acyclic Graph (DAG) such that all edges point forward in the ordering. Key data structures used:
 
@@ -2475,6 +2523,8 @@ The algorithm is ideal for:
 ```
 
 ### Knuth-Morris-Pratt (KMP) (Intermediate)
+
+> 📁 **Implementation:** [`text_search_algoritms.py`](text_search_algoritms.py)
 
 Description: The Knuth-Morris-Pratt (KMP) algorithm is an efficient string pattern matching algorithm that uses a prefix table (also called failure function or LPS array) to avoid unnecessary character comparisons. Key features:
 
@@ -2587,6 +2637,8 @@ Common Use Cases:
 
 ### Rabin-Karp (Intermediate)
 
+> 📁 **Implementation:** [`text_search_algoritms.py`](text_search_algoritms.py)
+
 Description: The Rabin-Karp algorithm uses rolling hash functions and string matching to efficiently find pattern strings in text. Key features:
 
 - Uses a hash table to store pattern hashes for O(1) lookup
@@ -2683,6 +2735,8 @@ Data structures used:
 ```
 
 ### Dynamic Programming (DP) (Advanced)
+
+> 📁 **Implementation:** [`dp_patterns.py`](dp_patterns.py) — Climbing Stairs, LIS, Coin Change, Knapsack, LCS, Edit Distance, Word Break · [`dynamic_programming_memoization.py`](dynamic_programming_memoization.py) · [`optimizations.py`](optimizations.py) — DP space compression
 
 Description: Dynamic Programming (DP) is a problem-solving technique that breaks down complex problems into simpler subproblems and stores their solutions to avoid redundant computations. Key features:
 
@@ -3052,6 +3106,8 @@ While powerful, suffix trees are complex to implement correctly and have a signi
 
 ### Kruskal’s Algorithm for Minimum Spanning Tree (MST) (Intermediate)
 
+> 📁 **Implementation:** [`mst.py`](mst.py) — kruskal(), Optimize Water Distribution (LC 1168)
+
 Description: Kruskal's algorithm finds a Minimum Spanning Tree (MST) by greedily selecting edges in order of increasing weight while avoiding cycles. Key features:
 
 Data Structures Used:
@@ -3165,6 +3221,8 @@ Space Complexity: O(V) for Union-Find data structure
 ```
 
 ### Prim’s Algorithm for MST (Intermediate)
+
+> 📁 **Implementation:** [`mst.py`](mst.py) — prim(), Min Cost to Connect All Points (LC 1584)
 
 Description: Prim's algorithm finds a Minimum Spanning Tree (MST) by iteratively growing a tree from a starting vertex. Key features:
 
@@ -3445,6 +3503,8 @@ print("Impossible maze path:", path)  # Should print None
 
 ### Dynamic Programming: Longest Increasing Subsequence (LIS) (Intermediate)
 
+> 📁 **Implementation:** [`dp_patterns.py`](dp_patterns.py) — length_of_lis() O(n log n) patience sorting
+
 Description: Dynamic Programming solution for finding the length of the Longest Increasing Subsequence (LIS) in O(n²) time. Key features:
 
 Data Structures Used:
@@ -3542,6 +3602,8 @@ Common applications include:
 
 ### Advanced DP Variation: Minimum Edit Distance (Levenshtein Distance)
 
+> 📁 **Implementation:** [`dp_patterns.py`](dp_patterns.py) — min_distance() Edit Distance (LC 72)
+
 Description: The Minimum Edit Distance (Levenshtein Distance) algorithm calculates the minimum number of operations needed to transform one string into another. Key features:
 
 Data Structures Used:
@@ -3635,6 +3697,8 @@ Below are several additional examples of dynamic programming (DP) solutions, ill
 ---
 
 ### 0/1 Knapsack Problem
+
+> 📁 **Implementation:** [`dp_patterns.py`](dp_patterns.py) — knapsack_01() space-optimised 1D · [`dynamic_programming_knapsack.py`](dynamic_programming_knapsack.py)
 
 The 0/1 Knapsack problem is a classic optimization problem that demonstrates the power of dynamic programming. Given a set of items, each with a weight and a value, and a capacity constraint on the total weight, the goal is to maximize the total value without exceeding the capacity.
 
@@ -3781,6 +3845,8 @@ The binary (0/1) constraint of taking an item completely or not at all makes thi
 ---
 
 ### Coin Change (Minimum Coins)
+
+> 📁 **Implementation:** [`dp_patterns.py`](dp_patterns.py) — coin_change() (LC 322)
 
 The Coin Change problem (minimizing coins) is common in making change problems, currency systems, and combinational optimization tasks. Given a set of denominations and a target amount, we want the fewest coins to make that amount. If it can't be formed exactly, return -1.
 
@@ -3929,6 +3995,8 @@ for coins, amount in test_cases:
 ---
 
 ### Longest Common Subsequence (LCS)
+
+> 📁 **Implementation:** [`dp_patterns.py`](dp_patterns.py) — longest_common_subsequence() space-optimised 1D (LC 1143)
 
 The Longest Common Subsequence (LCS) problem finds the longest sequence of characters that appear in order in both strings. It has important applications in:
 
