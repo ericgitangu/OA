@@ -28,8 +28,8 @@ This routine leverages your past experience (200+ completed problems) to rapidly
    - For **Mediums**: Set a timer for 35 minutes.
    - For **Hards**: Set a timer for 50 minutes.
 1. **Execution Rules:**
-   - Spend the first 10-15 minutes *only* thinking and writing comments/pseudocode. What is the brute force? What are the overlapping subproblems? How can you optimize it using a Hash Map or Heap?
-   - *Do not execute code until you've verified your logic on edge cases.*
+   - Spend the first 10-15 minutes _only_ thinking and writing comments/pseudocode. What is the brute force? What are the overlapping subproblems? How can you optimize it using a Hash Map or Heap?
+   - _Do not execute code until you've verified your logic on edge cases._
    - If the timer runs out and you do not have an optimal passing solution, **STOP**. Move immediately to Phase 3.
 
 ### 🧠 Phase 3: Solution Deconstruction & Hardening (06:15 - 07:15)
@@ -59,15 +59,15 @@ This routine leverages your past experience (200+ completed problems) to rapidly
 
 To ensure comprehensive coverage, structure your week by grouping data structures logically:
 
-| Day | Primary Focus | Secondary Focus (Review) | Suggested `OA` Reference scripts |
-| :---: | :--- | :--- | :--- |
-| **Monday** | Arrays, Hashing, & Strings | None | `longest_palidromic_string.py`, `text_search_algoritms.py` |
-| **Tuesday** | Two Pointers & Sliding Window | Arrays & Strings | - |
-| **Wednesday** | Stacks, Queues, & Linked Lists | Two Pointers | `linked_lists.py`, `circular_linked_lists.py` |
-| **Thursday** | Trees, Tries, & Heaps | Stacks/Queues | `min_max-heap.py` |
-| **Friday** | Graphs & Advanced Traversals | Trees/Heaps | `bfs.py`, `dfs.py`, `graph_traversal.py` |
-| **Saturday** | Dynamic Programming & Greedy | Graphs | `dynamic_programming_knapsack.py` |
-| **Sunday** | *Mock Interview / Contest Simulation* | Global Review | Complete blind 4-question set. |
+|      Day      | Primary Focus                         | Secondary Focus (Review) | Suggested `OA` Reference scripts                           |
+| :-----------: | :------------------------------------ | :----------------------- | :--------------------------------------------------------- |
+|  **Monday**   | Arrays, Hashing, & Strings            | None                     | `longest_palidromic_string.py`, `text_search_algoritms.py` |
+|  **Tuesday**  | Two Pointers & Sliding Window         | Arrays & Strings         | -                                                          |
+| **Wednesday** | Stacks, Queues, & Linked Lists        | Two Pointers             | `linked_lists.py`, `circular_linked_lists.py`              |
+| **Thursday**  | Trees, Tries, & Heaps                 | Stacks/Queues            | `min_max-heap.py`                                          |
+|  **Friday**   | Graphs & Advanced Traversals          | Trees/Heaps              | `bfs.py`, `dfs.py`, `graph_traversal.py`                   |
+| **Saturday**  | Dynamic Programming & Greedy          | Graphs                   | `dynamic_programming_knapsack.py`                          |
+|  **Sunday**   | _Mock Interview / Contest Simulation_ | Global Review            | Complete blind 4-question set.                             |
 
 > [!IMPORTANT]
 > The Sunday Mock Interview is critical. Select a randomized set of 4 problems on Leetcode (1 Easy, 2 Mediums, 1 Hard) and give yourself exactly 1.5 hours without any interruptions to simulate an actual Online Assessment.
@@ -77,7 +77,7 @@ To ensure comprehensive coverage, structure your week by grouping data structure
 Since you are returning from a hiatus but have a foundation of 200 problems:
 
 1. **Focus:** Arrays and Hashing.
-1. **Phase 1 Problem:** Re-do *Two Sum* and *Valid Anagram* (focus on extreme speed and perfect syntax).
-1. **Phase 2 Problem:** Try *Group Anagrams* and *Top K Frequent Elements*.
+1. **Phase 1 Problem:** Re-do _Two Sum_ and _Valid Anagram_ (focus on extreme speed and perfect syntax).
+1. **Phase 2 Problem:** Try _Group Anagrams_ and _Top K Frequent Elements_.
 
 Execute this plan for two weeks consistently. At the end of the two weeks, you will find your OA speed and pattern recognition will have drastically sharpened.

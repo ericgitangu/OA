@@ -29,6 +29,7 @@ Pruning the grind leetcode type questions to patterns once you crack you will re
 Clone the repository and set up the isolated virtual environment:
 
 ```bash
+
 git clone https://github.com/ericgitangu/OA.git
 cd OA
 
@@ -38,6 +39,7 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 # Install dependencies using pyproject.toml
 pip install .
+
 ```
 
 > The `.venv` directory is gitignored. All scripts require the venv to be active for `termcolor` coloured output.
@@ -47,13 +49,19 @@ pip install .
 This project uses [Ruff](https://docs.astral.sh/ruff/) for linting and code formatting, configured via `pyproject.toml`.
 
 To run the linter:
+
 ```bash
+
 ruff check .
+
 ```
 
 To automatically fix issues:
+
 ```bash
+
 ruff check . --fix
+
 ```
 
 ## Usage
@@ -101,6 +109,7 @@ Each script can be run independently. For example:
 1. **dinning_philosophers_with_concurrency.py**: Implements the dining philosophers problem.
 
 ---
+
 More examples in the link in the DSA section
 
 ## DSA

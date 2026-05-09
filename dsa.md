@@ -2,45 +2,45 @@
 
 ## Data Structures Table
 
-| Data Structure                | Description                                                                                                   | Complexity (Common Operations)                                                                 | Best Used For                                          | Not Ideal For                                            | Derived From / Notes                                                      |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------|
-| **Array** (Basic)             | A contiguous block of memory holding elements accessible by index.                                            | Access: O(1), Append: O(1) amortized, Insert/Remove (front/mid): O(n), Search (unsorted): O(n) | Random access, static collections, small lookups        | Frequent insertions/deletions in the middle               | Primitive, forms basis of many structures                  |
-| **Linked List** (Basic)       | A linear collection of nodes where each node points to the next (singly) or both next and previous (doubly).  | Insert/Remove at head or tail: O(1), Search: O(n), Random Access: O(n)                          | Insertions/removals at ends, implementing stacks/queues | Fast random access required scenarios                     | Built from nodes and pointers/references                   |
-| **Stack** (Basic)             | LIFO structure typically backed by an array or linked list.                                                   | Push/Pop: O(1), Peek: O(1)                                                                     | Function call tracking, undo operations, parsing        | Situations needing random access or non-LIFO traversal     | Often implemented using arrays or linked lists            |
-| **Queue** (Basic)             | FIFO structure typically backed by an array or linked list.                                                   | Enqueue/Dequeue: O(1), Peek: O(1)                                                              | Breadth-first search, scheduling tasks                  | Random access or stack-like (LIFO) behaviors              | Often implemented using arrays or linked lists            |
-| **Hash Table / Hash Map** (Intermediate) | Stores key-value pairs with O(1) average lookup/insertion via hashing.                                | Insert/Lookup/Remove: O(1) average, O(n) worst case                                            | Fast lookups by key, caching, dictionaries              | Maintaining sorted order, range queries                   | Built on top of arrays + hashing                          |
-| **Binary Search Tree (BST)** (Intermediate) | A tree where each node’s left child < node < right child, often balanced to achieve good complexity. | Insert/Lookup/Remove: O(log n) average if balanced, O(n) worst                                 | Ordered data, range queries, maintaining sorted structure | Worst-case skewed trees without balancing                 | Derived from basic tree nodes, often balanced (AVL, Red-Black) |
-| **Heap / Priority Queue** (Intermediate) | A binary tree (often represented as an array) that maintains a heap property for quick min/max access. | Get min/max: O(1), Insert: O(log n), Remove top: O(log n)                                      | Priority scheduling, shortest-path algorithms (Dijkstra) | Situations needing full sorting of all elements upfront   | Typically a binary tree represented as an array           |
-| **Graph (Adjacency List)** (Intermediate) | Stores nodes and their edges as lists of adjacent vertices.                                             | Add vertex: O(1), Add edge: O(1), Lookup adjacency: O(deg(v))                                   | Sparse graphs, graph algorithms (DFS, BFS, shortest paths) | Dense graphs (use adjacency matrix)                      | Derived from arrays/lists, flexible representation         |
-| **Trie (Prefix Tree)** (Advanced) | A tree-based structure for storing strings by character prefixes.                                        | Insert/Lookup (m-length string): O(m), Space: potentially large                                 | Autocomplete, prefix queries, fast lookup of words       | Large memory usage if few words share prefixes            | Specialized tree keyed by characters                      |
-| **Balanced BST (AVL/Red-Black)** (Advanced) | Self-balancing BST maintaining O(log n) operations.                                                  | Insert/Lookup/Remove: O(log n)                                                                 | Maintaining sorted data with guaranteed O(log n) ops     | Very simple implementations or constant-time lookups       | Complexity from rotations and balancing strategies         |
-| **B-Tree / B+ Tree** (Advanced) | A tree optimized for disk-based or block-based storage, used in databases and filesystems.                 | Insert/Lookup/Remove: O(log n)                                                                 | Database indexing, file systems                         | Small in-memory data sets                                 | Generalization of BST, multi-way branching                |
-| **Segment Tree** (Advanced)   | A tree structure for efficient range queries and updates (e.g. sum, min, max over a range).                  | Query/Update: O(log n)                                                                         | Range queries (sum, min, max) with updates              | Scenarios without range queries or updates                | Built atop array-based tree representation                |
-| **Fenwick Tree (BIT)** (Advanced) | A structure for cumulative frequencies or prefix sums.                                                  | Update/Prefix query: O(log n)                                                                  | Prefix sum queries, frequency counting                   | Complex operations beyond prefix sums                     | Derived from array, uses clever indexing                  |
-| **Disjoint Set (Union-Find)** (Advanced) | Keeps track of elements partitioned into disjoint sets for fast union/find.                           | Union/Find: O(α(n)) (Inverse Ackermann function, very slow-growing)                            | Kruskal’s MST, clustering problems                       | Not for linear order queries, only connected components    | Linked structure with path compression and union by rank   |
+| Data Structure                              | Description                                                                                                  | Complexity (Common Operations)                                                                 | Best Used For                                              | Not Ideal For                                           | Derived From / Notes                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------- |
+| **Array** (Basic)                           | A contiguous block of memory holding elements accessible by index.                                           | Access: O(1), Append: O(1) amortized, Insert/Remove (front/mid): O(n), Search (unsorted): O(n) | Random access, static collections, small lookups           | Frequent insertions/deletions in the middle             | Primitive, forms basis of many structures                      |
+| **Linked List** (Basic)                     | A linear collection of nodes where each node points to the next (singly) or both next and previous (doubly). | Insert/Remove at head or tail: O(1), Search: O(n), Random Access: O(n)                         | Insertions/removals at ends, implementing stacks/queues    | Fast random access required scenarios                   | Built from nodes and pointers/references                       |
+| **Stack** (Basic)                           | LIFO structure typically backed by an array or linked list.                                                  | Push/Pop: O(1), Peek: O(1)                                                                     | Function call tracking, undo operations, parsing           | Situations needing random access or non-LIFO traversal  | Often implemented using arrays or linked lists                 |
+| **Queue** (Basic)                           | FIFO structure typically backed by an array or linked list.                                                  | Enqueue/Dequeue: O(1), Peek: O(1)                                                              | Breadth-first search, scheduling tasks                     | Random access or stack-like (LIFO) behaviors            | Often implemented using arrays or linked lists                 |
+| **Hash Table / Hash Map** (Intermediate)    | Stores key-value pairs with O(1) average lookup/insertion via hashing.                                       | Insert/Lookup/Remove: O(1) average, O(n) worst case                                            | Fast lookups by key, caching, dictionaries                 | Maintaining sorted order, range queries                 | Built on top of arrays + hashing                               |
+| **Binary Search Tree (BST)** (Intermediate) | A tree where each node’s left child < node < right child, often balanced to achieve good complexity.         | Insert/Lookup/Remove: O(log n) average if balanced, O(n) worst                                 | Ordered data, range queries, maintaining sorted structure  | Worst-case skewed trees without balancing               | Derived from basic tree nodes, often balanced (AVL, Red-Black) |
+| **Heap / Priority Queue** (Intermediate)    | A binary tree (often represented as an array) that maintains a heap property for quick min/max access.       | Get min/max: O(1), Insert: O(log n), Remove top: O(log n)                                      | Priority scheduling, shortest-path algorithms (Dijkstra)   | Situations needing full sorting of all elements upfront | Typically a binary tree represented as an array                |
+| **Graph (Adjacency List)** (Intermediate)   | Stores nodes and their edges as lists of adjacent vertices.                                                  | Add vertex: O(1), Add edge: O(1), Lookup adjacency: O(deg(v))                                  | Sparse graphs, graph algorithms (DFS, BFS, shortest paths) | Dense graphs (use adjacency matrix)                     | Derived from arrays/lists, flexible representation             |
+| **Trie (Prefix Tree)** (Advanced)           | A tree-based structure for storing strings by character prefixes.                                            | Insert/Lookup (m-length string): O(m), Space: potentially large                                | Autocomplete, prefix queries, fast lookup of words         | Large memory usage if few words share prefixes          | Specialized tree keyed by characters                           |
+| **Balanced BST (AVL/Red-Black)** (Advanced) | Self-balancing BST maintaining O(log n) operations.                                                          | Insert/Lookup/Remove: O(log n)                                                                 | Maintaining sorted data with guaranteed O(log n) ops       | Very simple implementations or constant-time lookups    | Complexity from rotations and balancing strategies             |
+| **B-Tree / B+ Tree** (Advanced)             | A tree optimized for disk-based or block-based storage, used in databases and filesystems.                   | Insert/Lookup/Remove: O(log n)                                                                 | Database indexing, file systems                            | Small in-memory data sets                               | Generalization of BST, multi-way branching                     |
+| **Segment Tree** (Advanced)                 | A tree structure for efficient range queries and updates (e.g. sum, min, max over a range).                  | Query/Update: O(log n)                                                                         | Range queries (sum, min, max) with updates                 | Scenarios without range queries or updates              | Built atop array-based tree representation                     |
+| **Fenwick Tree (BIT)** (Advanced)           | A structure for cumulative frequencies or prefix sums.                                                       | Update/Prefix query: O(log n)                                                                  | Prefix sum queries, frequency counting                     | Complex operations beyond prefix sums                   | Derived from array, uses clever indexing                       |
+| **Disjoint Set (Union-Find)** (Advanced)    | Keeps track of elements partitioned into disjoint sets for fast union/find.                                  | Union/Find: O(α(n)) (Inverse Ackermann function, very slow-growing)                            | Kruskal’s MST, clustering problems                         | Not for linear order queries, only connected components | Linked structure with path compression and union by rank       |
 
 ---
 
 ## Algorithms Table
 
-| Algorithm                     | Genre          | Data Structures Commonly Used    | Complexity (Typical)        | Best Used For                                 | Not Ideal For                                         | Notes                                     |
-|-------------------------------|----------------|----------------------------------|-----------------------------|------------------------------------------------|--------------------------------------------------------|-------------------------------------------|
-| **Bubble Sort** (Basic)       | Sorting        | Array                            | O(n²)                       | Very small datasets, educational purposes      | Large datasets, performance-critical tasks              | Simple but inefficient                     |
-| **Insertion Sort** (Basic)    | Sorting        | Array                            | O(n²), O(n) best case       | Small or partially sorted data                 | Large random datasets                                 | Stable, easy to implement                  |
-| **Selection Sort** (Basic)    | Sorting        | Array                            | O(n²)                       | Situations where minimal swaps are needed       | Large datasets                                       | Always O(n²), not stable                   |
-| **Merge Sort** (Intermediate) | Sorting        | Array (often split arrays)       | O(n log n)                 | General-purpose sorting                        | Memory-limited or strictly in-place requirements       | Stable, divide-and-conquer                 |
-| **Quick Sort** (Intermediate) | Sorting        | Array                            | Average O(n log n), worst O(n²) | General-purpose, often very fast in practice | Worst-case scenarios without good pivot choice         | Not stable, often in-place                 |
-| **Binary Search** (Basic)     | Searching      | Sorted Array                     | O(log n)                    | Fast lookups in sorted arrays                  | Unsorted data                                        | Requires sorted data                        |
-| **Breadth-First Search (BFS)** (Intermediate) | Graph Traversal | Queue, Graph (Adjacency List) | O(V + E)                   | Shortest paths in unweighted graphs, level-order traversal | Weighted graphs without unit weights       | Explores neighbors first                    |
-| **Depth-First Search (DFS)** (Intermediate)    | Graph Traversal | Stack (implicit recursion), Graph (Adjacency List) | O(V + E) | Traversing or searching graph/trees, topological sort | Finding shortest paths in weighted graphs  | Explores depth before breadth              |
-| **Dijkstra’s Algorithm** (Advanced) | Shortest Path | Priority Queue (Min-Heap), Graph | O((V+E) log V)             | Single-source shortest paths on weighted graphs | Negative edge weights                              | Efficient with a min-heap                   |
-| **Bellman-Ford** (Advanced)   | Shortest Path  | Array/Adjacency List             | O(VE)                       | Graphs with negative edges (no negative cycles) | Very large or dense graphs due to O(VE) complexity   | More flexible than Dijkstra, handles negatives |
-| **Floyd-Warshall** (Advanced) | Shortest Path  | Matrix                           | O(V³)                       | All-pairs shortest paths, small dense graphs    | Very large graphs                                   | Easy to implement, high complexity          |
-| **Topological Sort** (Intermediate) | Graph Ordering | Graph (Adjacency List), Queue (Kahn’s), Stack (DFS) | O(V + E) | Ordering tasks with dependencies (DAGs)          | Graphs with cycles (not applicable)                 | Requires a DAG                               |
-| **Knuth-Morris-Pratt (KMP)** (Intermediate) | String Searching | Array (prefix function)        | O(n + m) (n: text length, m: pattern length)   | Finding a substring pattern efficiently             | Very short patterns or trivial matches      | Precomputes failure function for pattern    |
-| **Rabin-Karp** (Intermediate) | String Searching | Rolling Hash (Array)            | Average O(n + m), worst O(nm) | Multiple pattern searches, average fast          | Worst case can degrade to O(nm)                     | Uses hashing to speed pattern matching       |
-| **Dynamic Programming (DP)** (Advanced, Family of Techniques) | Optimization/Counting | Arrays/Tables, sometimes Trees/Graphs | Depends on subproblem count and transition cost | Optimal solutions to complex problems via subproblems | Problems without overlapping subproblems or optimal substructure | Approach rather than a single algorithm   |
-| **Greedy Algorithms** (Family) | Optimization   | Often arrays, priority queues, sorting | Problem-specific (varies)   | Selecting local optimum at each step (e.g. Huffman coding, interval scheduling) | Problems requiring a global optimum that isn't achieved by local choices | Not one algorithm, but a strategy           |
+| Algorithm                                                     | Genre                 | Data Structures Commonly Used                       | Complexity (Typical)                            | Best Used For                                                                   | Not Ideal For                                                            | Notes                                          |
+| ------------------------------------------------------------- | --------------------- | --------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------- |
+| **Bubble Sort** (Basic)                                       | Sorting               | Array                                               | O(n²)                                           | Very small datasets, educational purposes                                       | Large datasets, performance-critical tasks                               | Simple but inefficient                         |
+| **Insertion Sort** (Basic)                                    | Sorting               | Array                                               | O(n²), O(n) best case                           | Small or partially sorted data                                                  | Large random datasets                                                    | Stable, easy to implement                      |
+| **Selection Sort** (Basic)                                    | Sorting               | Array                                               | O(n²)                                           | Situations where minimal swaps are needed                                       | Large datasets                                                           | Always O(n²), not stable                       |
+| **Merge Sort** (Intermediate)                                 | Sorting               | Array (often split arrays)                          | O(n log n)                                      | General-purpose sorting                                                         | Memory-limited or strictly in-place requirements                         | Stable, divide-and-conquer                     |
+| **Quick Sort** (Intermediate)                                 | Sorting               | Array                                               | Average O(n log n), worst O(n²)                 | General-purpose, often very fast in practice                                    | Worst-case scenarios without good pivot choice                           | Not stable, often in-place                     |
+| **Binary Search** (Basic)                                     | Searching             | Sorted Array                                        | O(log n)                                        | Fast lookups in sorted arrays                                                   | Unsorted data                                                            | Requires sorted data                           |
+| **Breadth-First Search (BFS)** (Intermediate)                 | Graph Traversal       | Queue, Graph (Adjacency List)                       | O(V + E)                                        | Shortest paths in unweighted graphs, level-order traversal                      | Weighted graphs without unit weights                                     | Explores neighbors first                       |
+| **Depth-First Search (DFS)** (Intermediate)                   | Graph Traversal       | Stack (implicit recursion), Graph (Adjacency List)  | O(V + E)                                        | Traversing or searching graph/trees, topological sort                           | Finding shortest paths in weighted graphs                                | Explores depth before breadth                  |
+| **Dijkstra’s Algorithm** (Advanced)                           | Shortest Path         | Priority Queue (Min-Heap), Graph                    | O((V+E) log V)                                  | Single-source shortest paths on weighted graphs                                 | Negative edge weights                                                    | Efficient with a min-heap                      |
+| **Bellman-Ford** (Advanced)                                   | Shortest Path         | Array/Adjacency List                                | O(VE)                                           | Graphs with negative edges (no negative cycles)                                 | Very large or dense graphs due to O(VE) complexity                       | More flexible than Dijkstra, handles negatives |
+| **Floyd-Warshall** (Advanced)                                 | Shortest Path         | Matrix                                              | O(V³)                                           | All-pairs shortest paths, small dense graphs                                    | Very large graphs                                                        | Easy to implement, high complexity             |
+| **Topological Sort** (Intermediate)                           | Graph Ordering        | Graph (Adjacency List), Queue (Kahn’s), Stack (DFS) | O(V + E)                                        | Ordering tasks with dependencies (DAGs)                                         | Graphs with cycles (not applicable)                                      | Requires a DAG                                 |
+| **Knuth-Morris-Pratt (KMP)** (Intermediate)                   | String Searching      | Array (prefix function)                             | O(n + m) (n: text length, m: pattern length)    | Finding a substring pattern efficiently                                         | Very short patterns or trivial matches                                   | Precomputes failure function for pattern       |
+| **Rabin-Karp** (Intermediate)                                 | String Searching      | Rolling Hash (Array)                                | Average O(n + m), worst O(nm)                   | Multiple pattern searches, average fast                                         | Worst case can degrade to O(nm)                                          | Uses hashing to speed pattern matching         |
+| **Dynamic Programming (DP)** (Advanced, Family of Techniques) | Optimization/Counting | Arrays/Tables, sometimes Trees/Graphs               | Depends on subproblem count and transition cost | Optimal solutions to complex problems via subproblems                           | Problems without overlapping subproblems or optimal substructure         | Approach rather than a single algorithm        |
+| **Greedy Algorithms** (Family)                                | Optimization          | Often arrays, priority queues, sorting              | Problem-specific (varies)                       | Selecting local optimum at each step (e.g. Huffman coding, interval scheduling) | Problems requiring a global optimum that isn't achieved by local choices | Not one algorithm, but a strategy              |
 
 ---
 
@@ -50,7 +50,7 @@
 
 > 📁 **Implementation:** [`arrays_hashing.py`](arrays_hashing.py) — Two Sum, Group Anagrams, Top-K Frequent, Product Except Self, Longest Consecutive · [`optimizations.py`](optimizations.py) — sliding window, prefix sum, in-place patterns
 
-*Description:* Arrays are fundamental data structures that store elements in contiguous memory locations. In Python, lists serve as dynamic arrays that automatically resize when needed. Key features:
+_Description:_ Arrays are fundamental data structures that store elements in contiguous memory locations. In Python, lists serve as dynamic arrays that automatically resize when needed. Key features:
 
 - Backed by contiguous memory blocks for O(1) random access by index
 - Dynamic resizing (typically doubles capacity when full) gives amortized O(1) append
@@ -435,7 +435,7 @@ Description: A Binary Search Tree (BST) is a hierarchical data structure where e
 - A value
 - A left child pointer
 - A right child pointer
-This simple structure makes it easy to implement but lacks the self-balancing properties of more advanced trees like AVL or Red-Black trees. The BST is useful for maintaining a sorted collection of data with reasonably fast operations when the data is randomly distributed.
+  This simple structure makes it easy to implement but lacks the self-balancing properties of more advanced trees like AVL or Red-Black trees. The BST is useful for maintaining a sorted collection of data with reasonably fast operations when the data is randomly distributed.
 
 ```python
 
@@ -553,7 +553,7 @@ The heap data structure is ideal for:
 Key operations and complexities:
 
 - Push: O(log n) - Add element and bubble up
-- Pop: O(log n) - Remove min and bubble down  
+- Pop: O(log n) - Remove min and bubble down
 - Peek: O(1) - Access min element
 - Heapify: O(n) - Build heap from array
 
@@ -565,7 +565,7 @@ Key operations and complexities:
     heap = []
 
     # Push elements - O(log n) per operation
-    heapq.heappush(heap, 5)  
+    heapq.heappush(heap, 5)
     heapq.heappush(heap, 2)
     heapq.heappush(heap, 7)
     heapq.heappush(heap, 1)
@@ -620,7 +620,7 @@ Key advantages over adjacency matrix:
 Common applications:
 
 - Social networks
-- Road/transportation networks  
+- Road/transportation networks
 - Computer networks
 - Web page links
 - Dependency graphs
@@ -1214,7 +1214,7 @@ Data Structures Used:
 Key advantages over other structures:
 
 - More memory efficient than segment trees
-- Simpler implementation than other range query structures  
+- Simpler implementation than other range query structures
 - Cache-friendly array-based storage
 - Fast O(log n) updates and queries
 - No pointer overhead or complex tree maintenance
@@ -1623,7 +1623,6 @@ Data Structures Used:
     - Contains elements in final sorted order
     - Elements never move once placed
     - Size increases by 1 each iteration
-  
   - Unsorted Region (Right Side):
     - Shrinks from right to left
     - Contains remaining elements to sort
@@ -2006,7 +2005,7 @@ Time complexity is O(V + E) since we:
 
 - Visit each vertex once O(V)
 - Explore each edge once O(E)
-Space complexity is O(V) for both queue and visited set.
+  Space complexity is O(V) for both queue and visited set.
 
 ```python
 
@@ -2044,7 +2043,7 @@ Space complexity is O(V) for both queue and visited set.
     # Graph represented as adjacency list
     graph = {
         0: [1, 2],     # Node 0 connected to 1,2
-        1: [2, 3],     # Node 1 connected to 2,3  
+        1: [2, 3],     # Node 1 connected to 2,3
         2: [3, 4],     # Node 2 connected to 3,4
         3: [4],        # Node 3 connected to 4
         4: []          # Node 4 has no outgoing edges
@@ -2778,7 +2777,7 @@ Benefits:
         memo[n] = fib_memoization(n-1, memo) + fib_memoization(n-2, memo)
         return memo[n]
 
-    # Bottom-up tabulation approach  
+    # Bottom-up tabulation approach
     def fib_tabulation(n):
         """Calculate nth Fibonacci number using tabulation (bottom-up DP)
         Time: O(n), Space: O(n)"""
@@ -2848,7 +2847,7 @@ This produces optimal solution in O(n log n) time due to sorting, with O(n) spac
     # Sort intervals by end time in O(n log n)
     # This is the key greedy choice - earliest finishing intervals
     # allow most room for additional intervals
-    intervals.sort(key=lambda x: x[1])  
+    intervals.sort(key=lambda x: x[1])
 
     # Store selected intervals in result list
     # List allows O(1) appends and maintains selection order
@@ -2877,7 +2876,7 @@ This produces optimal solution in O(n log n) time due to sorting, with O(n) spac
 
 ### Suffix Array Construction (Intermediate/Advanced)
 
-*Description:* A suffix array is a space-efficient data structure that holds the starting indexes of all suffixes of a string in sorted lexicographical order. Key features and data structures used:
+_Description:_ A suffix array is a space-efficient data structure that holds the starting indexes of all suffixes of a string in sorted lexicographical order. Key features and data structures used:
 
 - Core data structure is an integer array storing suffix start positions
   - More memory efficient than storing actual suffix strings
@@ -3128,7 +3127,7 @@ The algorithm works by:
    - If not connected, add edge to MST and merge components
 1. Continues until MST has (V-1) edges
 
-Time Complexity: O(E log E) for sort + O(E * α(V)) for Union-Find operations
+Time Complexity: O(E log E) for sort + O(E \* α(V)) for Union-Find operations
 Space Complexity: O(V) for Union-Find data structure
 
 ```python
@@ -3319,9 +3318,9 @@ print(f"Total Weight: {total_weight}")
 
 ```
 
-### A* Search (Advanced)
+### A\* Search (Advanced)
 
-Description: A* is an advanced pathfinding algorithm that combines Dijkstra's shortest path with heuristic guidance to efficiently find optimal paths. Key features:
+Description: A\* is an advanced pathfinding algorithm that combines Dijkstra's shortest path with heuristic guidance to efficiently find optimal paths. Key features:
 
 Data Structures Used:
 
@@ -3711,7 +3710,7 @@ Key Data Structures Used:
   - Memoization: Dictionary mapping (item_index, remaining_capacity) to optimal value
   - Tabulation: 2D array where dp[i][w] represents optimal value for first i items with capacity w
   - Enables O(1) lookup of subproblem solutions
-  - Space complexity O(n*W) where n is number of items and W is capacity
+  - Space complexity O(n\*W) where n is number of items and W is capacity
 
 This problem appears frequently in:
 
@@ -4006,7 +4005,7 @@ Data Structures Used:
   - Tabulation: dp[i][j] represents LCS length for prefixes s1[0:i], s2[0:j]
   - Memoization: Dictionary maps (i,j) positions to optimal LCS length
   - Enables O(1) lookup of subproblem solutions
-  - Space complexity O(m*n) where m,n are string lengths
+  - Space complexity O(m\*n) where m,n are string lengths
 - Strings/Arrays:
   - Input sequences stored as strings/arrays for O(1) character access
   - Output LCS built by backtracking through DP array
@@ -4183,18 +4182,16 @@ Data Structures Used:
   - Stores nodes prioritized by frequency
   - Enables efficient O(log n) selection of minimum frequency nodes
   - Critical for greedy selection of nodes to merge
-  
 - Binary Tree:
   - Internal nodes store merged frequencies
   - Leaf nodes contain characters
   - Left/right edges represent 0/1 bits
   - Path from root to leaf gives character's code
-  
 - Hash Map/Dictionary:
   - Maps characters to frequencies initially
   - Later maps characters to binary codes
   - Provides O(1) lookups
-  
+
 The algorithm works by repeatedly merging the two lowest frequency nodes until a single tree remains. This greedy approach guarantees an optimal prefix-free code that minimizes the weighted path lengths (bits per character). Common applications include:
 
 - Text compression
@@ -4294,11 +4291,11 @@ Below is a code snippet for building the Huffman tree and printing the optimal b
     #         / \    |
     #       (h) (i)  (a)
 
-    print("Original text:", text)  
+    print("Original text:", text)
     # Output:
     # Original text: this is an example for huffman encoding
 
-    print("Huffman Codes:", generate_codes(tree))  
+    print("Huffman Codes:", generate_codes(tree))
     # Output:
     # Huffman Codes: {
     #     'h': '110',    'i': '101',    'a': '011',
