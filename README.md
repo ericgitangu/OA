@@ -70,7 +70,7 @@ Each script can be run independently. For example:
 
 ```bash
 
-    python multiplication_algorithms.py
+    python3 multiplication_algorithms.py
 
 ```
 

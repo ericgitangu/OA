@@ -1,1 +1,2 @@
+ruff>=0.4.13
 termcolor==2.5.0  # coloured stdout across all scripts
