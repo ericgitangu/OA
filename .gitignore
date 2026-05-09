@@ -11,3 +11,6 @@ node_modules/
 *.exe
 target/
 build/
+dist/
+*.egg-info/
+__pycache__/
