@@ -37,10 +37,12 @@ cd OA
 python3 -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
-# Install dependencies using pyproject.toml
-pip3 install .
-
+# Install dependencies in editable mode using pyproject.toml
+pip3 install -e .
 ```
+
+> [!NOTE]
+> We use the `-e` (editable) flag so that any changes you make to the algorithm scripts are reflected immediately without needing to re-install the package.
 
 > The `.venv` directory is gitignored. All scripts require the venv to be active for `termcolor` coloured output.
 
