@@ -7,6 +7,15 @@ dependencies = [
     "ruff",
 ]
 
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# Explicitly allow multiple top-level modules in the root directory
+py-modules = ["bfs", "dfs", "graph_traversal", "linked_lists", "dynamic_programming_memoization", "dynamic_programming_knapsack", "travelling_salesman", "longest_palidromic_string", "chat_room", "circular_linked_lists", "double_linked_list", "dinning_philosophers_with_concurrency", "graph_traversal_itertools", "meeting_scheduler", "min_max-heap", "todo_requests", "text_search_algoritms", "multiplication_algorithms", "shortest_paths", "mst", "union_find", "trie", "sorting_algorithms", "segment_tree", "dp_patterns", "optimizations", "binary_search", "topological_sort", "arrays_hashing", "stack_queue", "shotetest_path_collections_itertools"]
+
+
 [tool.ruff]
 line-length = 100
 
