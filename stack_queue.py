@@ -18,6 +18,7 @@ Patterns covered:
 """
 
 from collections import deque
+
 from termcolor import colored
 
 

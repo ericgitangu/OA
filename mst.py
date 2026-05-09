@@ -21,7 +21,7 @@ Patterns covered:
 """
 
 import heapq
-from collections import defaultdict
+
 from termcolor import colored
 
 

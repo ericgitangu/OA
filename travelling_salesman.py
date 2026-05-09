@@ -1,21 +1,24 @@
 from termcolor import colored
 
+
 class TravellingSalesman:
     """
     Problem Type: Graph, Travelling Salesman Problem (TSP)
-    
+
     Problem Statement:
-    Given a graph represented as an adjacency matrix and a starting node, find the shortest possible route that visits each node exactly once and returns to the starting node.
-    
+    Given a graph represented as an adjacency matrix and a starting node,
+    find the shortest possible route that visits each node exactly once
+    and returns to the starting node.
+
     Parameters:
     graph (List[List[int]]): The graph represented as an adjacency matrix.
     start (int): The starting node for the TSP.
-    
+
     Methods:
     __init__(graph, start): Initializes the TSP with the given graph and starting node.
     __call__(): Solves the TSP and returns the minimum cost and the path.
     __repr__(): Returns a string representation of the TSP instance.
-    
+
     Example:
     graph = [
         [0, 10, 15, 20],
@@ -25,20 +28,20 @@ class TravellingSalesman:
     ]
     tsp = TravellingSalesman(graph, 0)
     tsp() -> (80, [0, 1, 3, 2, 0])
-    
+
     Diagram:
-    
+
         0
        /|\
       10|15
      /  |  \
     1---|---2
-     \  |  /
+     \\  |  /
       25|30
-       \|/
+       \\|/
         3
     """
-    
+
     def __init__(self, graph, start):
         # Initialize the TSP with the given graph and starting node
         self.graph = graph
@@ -62,11 +65,11 @@ class TravellingSalesman:
     def _tsp(self, mask, pos):
         """
         Helper function to solve the TSP using dynamic programming and bit masking.
-        
+
         Parameters:
         mask (int): The bitmask representing the set of visited nodes.
         pos (int): The current node position.
-        
+
         Returns:
         int: The minimum cost to complete the TSP from the current state.
         """
@@ -92,11 +95,11 @@ class TravellingSalesman:
     def _find_path(self, mask, pos):
         """
         Helper function to reconstruct the path of the TSP from the memoization table.
-        
+
         Parameters:
         mask (int): The bitmask representing the set of visited nodes.
         pos (int): The current node position.
-        
+
         Returns:
         List[int]: The path of the TSP from the current state.
         """
@@ -106,7 +109,8 @@ class TravellingSalesman:
         # Reconstruct the path by finding the next node that matches the minimum cost
         for city in range(self.n):
             if mask & (1 << city) == 0:
-                if self.memo[mask][pos] == self.graph[pos][city] + self._tsp(mask | (1 << city), city):
+                if (self.memo[mask][pos] ==
+                        self.graph[pos][city] + self._tsp(mask | (1 << city), city)):
                     return [city] + self._find_path(mask | (1 << city), city)
         return []
 

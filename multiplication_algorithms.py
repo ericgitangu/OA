@@ -1,5 +1,7 @@
-from termcolor import colored
 import time
+
+from termcolor import colored
+
 
 class MultiplicationAlgorithms:
     def __init__(self, num1, num2):
@@ -9,15 +11,20 @@ class MultiplicationAlgorithms:
 
     def __repr__(self):
         # Return a string representation of the MultiplicationAlgorithms instance
-        return f"MultiplicationAlgorithms:\n  - First Number: {self.num1}\n  - Second Number: {self.num2}"
+        return (
+            f"MultiplicationAlgorithms:\n"
+            f"  - First Number: {self.num1}\n"
+            f"  - Second Number: {self.num2}"
+        )
 
     def naive_multiplication(self):
         """
         Naive multiplication algorithm.
-        
+
         Approach:
-        The naive multiplication algorithm multiplies two numbers by adding one number to itself repeatedly.
-        
+        The naive multiplication algorithm multiplies two numbers
+        by adding one number to itself repeatedly.
+
         Time Complexity: O(n)
         Space Complexity: O(1)
         """
@@ -33,17 +40,18 @@ class MultiplicationAlgorithms:
     def python_multiplication(self):
         """
         Python multiplication algorithm.
-        
+
         Approach:
         The Python multiplication algorithm uses the built-in multiplication operator (*).
         This operator is implemented in C for CPython, making it highly optimized for performance.
         It handles both integer and floating-point multiplication, as well as complex numbers.
-        
-        For integers, the multiplication is performed using the Karatsuba algorithm for large numbers,
+
+        For integers, the multiplication is performed using the
+        Karatsuba algorithm for large numbers,
         and a simple O(1) multiplication for small numbers.
-        
+
         For floating-point numbers, the multiplication is performed using the IEEE 754 standard.
-        
+
         Time Complexity: O(1) for small numbers, O(n^1.585) for large integers
         Space Complexity: O(1)
         """
@@ -52,10 +60,10 @@ class MultiplicationAlgorithms:
     def karatsuba_multiplication(self):
         """
         Karatsuba multiplication algorithm.
-        
+
         Approach:
         The Karatsuba algorithm multiplies two numbers using a divide-and-conquer approach.
-        
+
         Time Complexity: O(n^log2(3)) ≈ O(n^1.585)
         Space Complexity: O(n)
         """
@@ -145,12 +153,14 @@ if __name__ == "__main__":
     # Call the main function to execute the test cases
     main()
     """
-    This module provides two multiplication algorithms: Naive Multiplication and Karatsuba Multiplication.
+    This module provides two multiplication algorithms:
+    Naive Multiplication and Karatsuba Multiplication.
 
     Naive Multiplication:
     ---------------------
     The naive multiplication algorithm performs the standard long multiplication method.
-    It iterates through each digit of the first number and multiplies it by each digit of the second number,
+    It iterates through each digit of the first number and
+    multiplies it by each digit of the second number,
     summing the intermediate results to get the final product.
 
     Time Complexity: O(n^2)
@@ -158,12 +168,17 @@ if __name__ == "__main__":
 
     Karatsuba Multiplication:
     -------------------------
-    The Karatsuba multiplication algorithm is a divide-and-conquer algorithm that reduces the multiplication
-    of two n-digit numbers to at most three multiplications of n/2-digit numbers. It achieves this by
-    recursively breaking down the numbers into smaller parts and combining the results using the formula:
+    The Karatsuba multiplication algorithm is a divide-and-conquer
+    algorithm that reduces the multiplication
+    of two n-digit numbers to at most three multiplications of
+    n/2-digit numbers. It achieves this by
+    recursively breaking down the numbers into smaller parts and
+    combining the results using the formula:
 
-    Let x and y be the two numbers to be multiplied, and let m be the number of digits in the larger number.
-    Split x into two parts: x_high and x_low, and y into two parts: y_high and y_low, where each part has m/2 digits.
+    Let x and y be the two numbers to be multiplied, and let m be
+    the number of digits in the larger number.
+    Split x into two parts: x_high and x_low, and y into two parts:
+    y_high and y_low, where each part has m/2 digits.
 
     The product of x and y can be computed as:
     z0 = x_low * y_low

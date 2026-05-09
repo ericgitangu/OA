@@ -1,5 +1,7 @@
-from termcolor import colored
 import time
+
+from termcolor import colored
+
 
 class TextSearchAlgorithms:
     def __init__(self, text, pattern):
@@ -12,11 +14,11 @@ class TextSearchAlgorithms:
     def naive_search(self):
         """
         Naive search algorithm.
-        
+
         Approach:
         The naive search algorithm checks for the pattern at every position in the text.
         It compares the pattern with the substring of the text starting at each position.
-        
+
         Time Complexity: O(mn)
         Space Complexity: O(1)
         """
@@ -34,11 +36,12 @@ class TextSearchAlgorithms:
     def rabin_karp_search(self):
         """
         Rabin-Karp search algorithm.
-        
+
         Approach:
         The Rabin-Karp algorithm uses hashing to find any one of a set of pattern strings in a text.
-        It compares the hash value of the pattern with the hash value of the current substring of the text.
-        
+        It compares the hash value of the pattern with the hash
+        value of the current substring of the text.
+
         Time Complexity: O(n) in average, O(mn) at worst
         Space Complexity: O(1)
         """
@@ -55,11 +58,12 @@ class TextSearchAlgorithms:
     def kmp_search(self):
         """
         Knuth-Morris-Pratt search algorithm.
-        
+
         Approach:
-        The KMP algorithm preprocesses the pattern to create an array of longest proper prefix which is also suffix.
+        The KMP algorithm preprocesses the pattern to create an array
+        of longest proper prefix which is also suffix.
         It uses this array to skip characters while matching.
-        
+
         Time Complexity: O(n)
         Space Complexity: O(m)
         """
@@ -85,7 +89,8 @@ class TextSearchAlgorithms:
 
     def _compute_lps_array(self):
         """
-        Helper function to compute the longest proper prefix which is also suffix array for KMP algorithm.
+        Helper function to compute the longest proper prefix which
+        is also suffix array for KMP algorithm.
         """
         m = len(self.pattern)
         lps = [0] * m
@@ -107,11 +112,13 @@ class TextSearchAlgorithms:
     def boyer_moore_search(self):
         """
         Boyer-Moore search algorithm.
-        
+
         Approach:
-        The Boyer-Moore algorithm preprocesses the pattern to create bad character and good suffix heuristics.
-        It uses these heuristics to skip sections of the text, making it efficient for large alphabets.
-        
+        The Boyer-Moore algorithm preprocesses the pattern to create
+        bad character and good suffix heuristics.
+        It uses these heuristics to skip sections of the text,
+        making it efficient for large alphabets.
+
         Time Complexity: O(n) in average, O(mn) at worst
         Space Complexity: O(k)
         """
@@ -145,7 +152,7 @@ class TextSearchAlgorithms:
         """
         Simple implementation of Two-Way search algorithm.
         This is a placeholder and should be replaced with the actual Two-Way algorithm.
-        
+
         Time Complexity: O(n)
         Space Complexity: O(1)
         """
@@ -194,7 +201,7 @@ def main():
         "A" * 5000 + "B" * 5000 + "C" * 5000,  # Text 7
         "A" * 10000 + "B" * 10000 + "C" * 10000  # Text 8
     ]
-    
+
     # List of patterns to search for
     patterns = [
         "AABA",  # Pattern 1
@@ -203,12 +210,12 @@ def main():
         "ABABABAB",  # Pattern 4
         "ABCDABCD"  # Pattern 5
     ]
-    
+
     # Function to visualize matches in the text
     def visualize_matches(text, pattern, positions):
         """
         Visualizes the matches of the pattern in the text by highlighting the matched positions.
-        
+
         Parameters:
         text (str): The text in which to search for the pattern.
         pattern (str): The pattern to search for.
@@ -217,7 +224,10 @@ def main():
         highlighted_text = list(text)
         for pos in positions:
             for i in range(len(pattern)):
-                highlighted_text[pos + i] = colored(highlighted_text[pos + i], 'red', attrs=['reverse', 'bold'])
+                highlighted_text[pos + i] = colored(
+                    highlighted_text[pos + i],
+                    'red', attrs=['reverse', 'bold'],
+                )
         return ''.join(highlighted_text)
 
     for text, pattern in zip(texts, patterns):
@@ -249,7 +259,11 @@ def main():
             print(colored(f"Time taken: {duration:.6f} seconds", 'yellow'))
             # Visualize and print the matches in the text
             if result:
-                print(colored(f"Visualized Matches:\n{visualize_matches(text, pattern, result)}", 'cyan'))
+                print(colored(
+                    f"Visualized Matches:\n"
+                    f"{visualize_matches(text, pattern, result)}",
+                    'cyan',
+                ))
         print(f"{'-' * 100}")
 
 if __name__ == "__main__":

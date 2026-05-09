@@ -1,4 +1,3 @@
-import itertools
 from termcolor import colored
 
 class GraphTraversal:
@@ -19,18 +18,20 @@ class GraphTraversal:
     def __init__(self, graph):
         self.graph = graph
 
-    def find_paths(self, start, end, path=[]):
+    def find_paths(self, start, end, path=None):
         """
         Find all possible paths from the start node to the end node.
         
         Parameters:
         start (Any): The starting node for the path finding.
         end (Any): The ending node for the path finding.
-        path (List[Any], optional): The current path being traversed. Defaults to an empty list.
+        path (List[Any], optional): The current path being traversed. Defaults to None.
         
         Returns:
         List[List[Any]]: A list of all possible paths from the start node to the end node.
         """
+        if path is None:
+            path = []
         path = path + [start]
         if start == end:
             return [path]

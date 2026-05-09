@@ -18,7 +18,8 @@ Patterns covered:
   4. Alien Dictionary             — LeetCode 269 (build graph from constraints)
 """
 
-from collections import deque, defaultdict
+from collections import deque
+
 from termcolor import colored
 
 

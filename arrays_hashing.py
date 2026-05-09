@@ -17,6 +17,7 @@ Patterns covered:
 """
 
 from collections import defaultdict
+
 from termcolor import colored
 
 

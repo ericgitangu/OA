@@ -11,7 +11,7 @@ def process_file(filepath):
         lines = f.read().splitlines()
 
     out_lines = []
-    
+
     # Pass 1: Trailing spaces, horizontal rules, trailing punctuation in headings, lists
     for i, line in enumerate(lines):
         # Allow 2 spaces for hard breaks, otherwise strip all trailing whitespaces
@@ -30,7 +30,7 @@ def process_file(filepath):
             match = re.search(r'^(#+\s+.*)([\.\:\!\?\;]+)$', line)
             if match:
                 line = match.group(1).rstrip()
-                
+
         # MD029: Ordered list item prefix
         # We enforce "1. " instead of "5. " or "9. "
         match = re.search(r'^(\s*)(\d+)\.\s+(.*)$', line)
@@ -44,13 +44,13 @@ def process_file(filepath):
     # MD022: Headings surrounded by blank lines
     # MD031: Fences surrounded by blank lines
     in_code_block = False
-    
+
     final_lines = []
     for i, line in enumerate(out_lines):
         is_fence = line.startswith("```")
         if is_fence:
             in_code_block = not in_code_block
-            
+
         is_heading = line.startswith("#") and not in_code_block
 
         # Ensure blank line above
@@ -73,7 +73,7 @@ def process_file(filepath):
             if collapsed and collapsed[-1].strip() == "":
                 continue
         collapsed.append(line)
-        
+
     # Write back, ensuring single trailing newline
     with open(filepath, 'w') as f:
         content = "\n".join(collapsed)

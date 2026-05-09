@@ -36,11 +36,25 @@ cd OA
 python3 -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
-# Install pinned dependencies
-pip install -r requirements.txt
+# Install dependencies using pyproject.toml
+pip install .
 ```
 
 > The `.venv` directory is gitignored. All scripts require the venv to be active for `termcolor` coloured output.
+
+## Development
+
+This project uses [Ruff](https://docs.astral.sh/ruff/) for linting and code formatting, configured via `pyproject.toml`.
+
+To run the linter:
+```bash
+ruff check .
+```
+
+To automatically fix issues:
+```bash
+ruff check . --fix
+```
 
 ## Usage
 
@@ -71,8 +85,9 @@ Each script can be run independently. For example:
 ### Dynamic Programming
 
 1. **dynamic_programming_memoization.py**: Solves the "Unique Paths" problem using dynamic programming with memoization.
+1. **dynamic_programming_knapsack.py**: Solves the Knapsack problem. Includes both standard O(n×W) 2D table and space-optimized O(W) 1D rolling array implementations.
 1. **travelling_salesman.py**: Solves the Travelling Salesman Problem using dynamic programming.
-1. **longest_palidromic_string.py**: Finds the longest palindromic substring in a given string.
+1. **longest_palidromic_string.py**: Finds the longest palindromic substring. Includes both O(n²) DP and O(1) space expansion-around-center optimizations.
 
 ### String Processing
 

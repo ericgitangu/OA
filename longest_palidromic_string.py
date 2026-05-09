@@ -7,12 +7,7 @@ class LongestPalindromicSubstring:
         self.longest_palindrome = self._find_longest_palindromic_substring()
 
     def _find_longest_palindromic_substring(self) -> str:
-        """
-        Finds the longest palindromic substring in the given string.
-
-        Returns:
-        str: The longest palindromic substring.
-        """
+        """Standard O(n²) time and space complexity using Dynamic Programming."""
         n = len(self.s)
         if n == 0:
             return ""
@@ -44,8 +39,41 @@ class LongestPalindromicSubstring:
 
         return self.s[start:start + max_length]
 
+    def _find_longest_palindromic_substring_optimized(self) -> str:
+        """Space-optimized O(n²) time and O(1) space complexity using expansion around center."""
+        if not self.s:
+            return ""
+
+        start = 0
+        end = 0
+
+        for i in range(len(self.s)):
+            # Odd length palindromes (e.g., "aba")
+            len1 = self._expand_around_center(i, i)
+            # Even length palindromes (e.g., "abba")
+            len2 = self._expand_around_center(i, i + 1)
+
+            max_len = max(len1, len2)
+            if max_len > (end - start):
+                start = i - (max_len - 1) // 2
+                end = i + max_len // 2
+
+        return self.s[start : end + 1]
+
+    def _expand_around_center(self, left: int, right: int) -> int:
+        while left >= 0 and right < len(self.s) and self.s[left] == self.s[right]:
+            left -= 1
+            right += 1
+        return right - left - 1
+
     def __repr__(self):
-        return f"LongestPalindromicSubstring(s='{self.s}', longest_palindrome='{self.longest_palindrome}', length={len(self.longest_palindrome)})"
+        dp_res = self.longest_palindrome
+        opt_res = self._find_longest_palindromic_substring_optimized()
+        return (
+            f"LongestPalindromicSubstring(s='{self.s}')\n"
+            f"  DP Approach (O(n²)): {dp_res}\n"
+            f"  Optimized (O(1) space): {opt_res}"
+        )
 
     def __contains__(self, item):
         return item in self.longest_palindrome

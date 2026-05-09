@@ -8,6 +8,7 @@ class Knapsack:
         self.dp = self._knapsack()
 
     def _knapsack(self):
+        """Standard O(n*W) space 2D DP table approach."""
         n = len(self.values)
         dp = [[0 for _ in range(self.capacity + 1)] for _ in range(n + 1)]
         
@@ -20,13 +21,29 @@ class Knapsack:
 
         return dp
 
+    def _knapsack_optimized(self):
+        """Space-optimized O(W) 1D rolling array approach."""
+        dp = [0 for _ in range(self.capacity + 1)]
+        for i in range(len(self.values)):
+            # Traverse backwards to avoid using the same item multiple times
+            for w in range(self.capacity, self.weights[i] - 1, -1):
+                dp[w] = max(dp[w], self.values[i] + dp[w - self.weights[i]])
+        return dp
+
     def __repr__(self):
-        result = self.dp[len(self.values)][self.capacity]
+        result = self._knapsack_optimized()[-1]
         dp_table = "\n".join([colored(f"{row}", 'yellow') for row in self.dp])
-        return colored(f"Knapsack Problem:\nWeights: {self.weights}\nValues: {self.values}\nCapacity: {self.capacity}\nDP Table:\n{dp_table}\nMaximum Value: {result}", 'cyan')
+        return colored(
+            f"Knapsack Problem:\nWeights: {self.weights}\nValues: {self.values}\n"
+            f"Capacity: {self.capacity}\n"
+            f"DP Table (2D - Educational): \n{dp_table}\n"
+            f"Optimized DP (1D): {self._knapsack_optimized()}\n"
+            f"Maximum Value: {result}",
+            'cyan'
+        )
 
     def __call__(self):
-        return self.dp[len(self.values)][self.capacity]
+        return self._knapsack_optimized()[-1]
 
 # Example usage:
 weights = [1, 3, 4, 5]
