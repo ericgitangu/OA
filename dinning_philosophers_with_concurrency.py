@@ -7,7 +7,7 @@ import time
 
 
 class DiningPhilosophers:
-    """
+    r"""
     Problem Type: Synchronization, Dining Philosophers Problem
     
     Problem Statement:

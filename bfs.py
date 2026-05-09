@@ -4,7 +4,7 @@ from termcolor import colored
 class Graph:
     def __init__(self, adjacency_list):
         self.graph = adjacency_list
-        """
+        r"""
         Graph Representation:
         
         The graph is represented as an adjacency list, which is a dictionary where the keys are the nodes

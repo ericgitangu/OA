@@ -29,12 +29,12 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 # Legacy scripts — pre-existing style, not reformatting
-"bfs.py"                                    = ["W293", "W291", "W292", "E501", "I001", "W605"]
-"dfs.py"                                    = ["W293", "W291", "W292", "E501", "I001", "W605"]
+"bfs.py"                                    = ["W293", "W291", "W292", "E501", "I001"]
+"dfs.py"                                    = ["W293", "W291", "W292", "E501", "I001"]
 "chat_room.py"                              = ["W293", "E501", "I001"]
 "circular_linked_lists.py"                  = ["W293", "E501", "I001"]
 "double_linked_list.py"                     = ["W293", "W292", "E501", "I001"]
-"dinning_philosophers_with_concurrency.py"  = ["W293", "E501", "I001", "W605"]
+"dinning_philosophers_with_concurrency.py"  = ["W293", "E501", "I001"]
 "dynamic_programming_knapsack.py"           = ["W293", "E501", "I001"]
 "dynamic_programming_memoization.py"        = ["W293", "E501", "I001"]
 "graph_traversal.py"                        = ["W293", "E501", "I001"]
