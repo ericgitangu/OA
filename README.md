@@ -9,16 +9,24 @@ A comprehensive collection of Python scripts designed to help you prepare for te
 
 ## Table of Contents
 
-- [About](#about)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Scripts](#scripts)
-- [DSA](#dsa)
-- [Competitive Programming Routine](#competitive-programming-routine)
-- [Contributing](#contributing)
-- [License](#license)
-- [Author](#author)
-- [PR and Bug Reports](#pr-and-bug-reports)
+- [OA Coding Tech Interview Preparation](#oa-coding-tech-interview-preparation)
+  - [Table of Contents](#table-of-contents)
+  - [About](#about)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Usage](#usage)
+  - [Scripts](#scripts)
+    - [Graph Algorithms](#graph-algorithms)
+    - [Data Structures](#data-structures)
+    - [Dynamic Programming](#dynamic-programming)
+    - [String Processing](#string-processing)
+    - [Concurrency](#concurrency)
+  - [DSA](#dsa)
+  - [Competitive Programming Routine](#competitive-programming-routine)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Author](#author)
+  - [PR and Bug Reports](#pr-and-bug-reports)
 
 ## About
 
@@ -43,7 +51,7 @@ pip3 install -e .
 
 > [!NOTE]
 > We use the `-e` (editable) flag so that any changes you make to the algorithm scripts are reflected immediately without needing to re-install the package.
-
+>
 > The `.venv` directory is gitignored. All scripts require the venv to be active for `termcolor` coloured output.
 
 ## Development
